@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Tue Dec 11 11:44:06 PST 2007
+ScienceTools-scons/site_scons/site_tools
+
+Added Files:
+	addLibrary.py registerObjects.py 
+Log Message:
+Import of the top level SCons data for ScienceTools
+    *
+------------------------------------------------------------
 User: golpa  Tue Dec 11 11:44:05 PST 2007
 ScienceTools-scons
 
