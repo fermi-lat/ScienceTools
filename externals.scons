@@ -1,0 +1,239 @@
+import os,platform
+Import('baseEnv')
+#########################
+#    Helper Functions   #
+#########################
+def includePaths(library,version):
+	if ARGUMENTS.get('with-'+library,'') =='':
+		if ARGUMENTS.get('with-'+library+'-includes','') != '':
+			return ARGUMENTS.get('with-'+library+'-includes','')
+		else:
+			if ARGUMENTS.get('with-GLAST-EXT','') != '':
+				return os.path.join(ARGUMENTS.get('with-GLAST-EXT'),library,version,'include')
+			else:
+				return ''
+	else:
+		return os.path.join(ARGUMENTS.get('with-'+library,''),'include')
+
+def libPaths(library,version):
+	if ARGUMENTS.get('with-'+library,'') == '':
+		if ARGUMENTS.get('with-'+library+'-libraries','') != '':
+			return ARGUMENTS.get('with-'+library+'-libraries','')
+		else:
+			if ARGUMENTS.get('with-GLAST-EXT','') != '':
+				return os.path.join(ARGUMENTS.get('with-GLAST-EXT'),library,version,'lib')
+			else:
+				return ''
+	else:
+		return os.path.join(ARGUMENTS.get('with-'+library,''),'lib')
+
+def binPaths(library,version):
+	if ARGUMENTS.get('with-'+library,'') == '':
+		if ARGUMENTS.get('with-'+library+'-binaries','') != '':
+			return ARGUMENTS.get('with-'+library+'-binaries','')
+		else:
+			if ARGUMENTS.get('with-GLAST-EXT','') != '':
+				return os.path.join(ARGUMENTS.get('with-GLAST-EXT'),library,version,'bin')
+			else:
+				return ''
+	else:
+		return os.path.join(ARGUMENTS.get('with-'+library,''),'bin')
+
+##########
+#  CLHEP #
+##########
+clhepIncludePath = includePaths('CLHEP','1.9.2.2')
+clhepLibPath = libPaths('CLHEP','1.9.2.2')
+baseEnv['clhepLibs']=Split('CLHEP')
+#clhepLibs = Split('CLHEP')
+if clhepLibPath != '':
+	baseEnv.Append(LIBPATH = [clhepLibPath])
+if clhepIncludePath != '':
+	baseEnv.Append(CPPPATH = [clhepIncludePath])
+#Export('clhepLibs')
+helpString="""
+	with-CLHEP:		Location of CLHEP headers/libraries.
+	with-CLHEP-includes:	Location of CLHEP headers.
+	with-CLHEP-libraries:	Location of CLHEP libraries.
+"""
+
+##########
+#  FFTW  #
+##########
+fftwIncludePath = includePaths('fftw','3.1.2')
+fftwLibPath = libPaths('fftw','3.1.2')
+#fftwLibs = Split('fftw3')
+baseEnv['fftwLibs']=Split('fftw3')
+if fftwLibPath != '':
+	baseEnv.Append(LIBPATH = [fftwLibPath])
+if fftwIncludePath != '':
+	baseEnv.Append(CPPPATH = [fftwIncludePath])
+#Export('fftwLibs')
+helpString+="""
+	with-fftw:		Location of FFTW headers/libraries.
+	with-fftw-includes:	Location of FFTW headers.
+	with-fftw-libraries:	Location of FFTW libraries.
+"""
+
+##########
+#  FITS  #
+##########
+cfitsioIncludePath = includePaths('cfitsio','v3006')
+cfitsioLibPath = libPaths('cfitsio','v3006')
+#cfitsioLibs = Split('cfitsio')
+baseEnv['cfitsioLibs']=Split('cfitsio')
+if cfitsioLibPath != '':
+	baseEnv.Append(LIBPATH = [cfitsioLibPath])
+if cfitsioIncludePath != '':
+	baseEnv.Append(CPPPATH = [cfitsioIncludePath])
+#Export('cfitsioLibs')
+helpString+="""
+	with-cfitsio:		Location of FITS headers/libraries.
+	with-cfitsio-includes:	Location of FITS headers.
+	with-cfitsio-libraries:	Location of FITS libraries.
+"""
+
+##########
+#  PIL   #
+##########
+pilIncludePath = includePaths('pil','2.0.1')
+pilLibPath = libPaths('pil','2.0.1')
+#pilLibs = Split('pil termcap readline')
+baseEnv['pilLibs']=Split('pil termcap readline')
+if pilLibPath != '':
+	baseEnv.Append(LIBPATH = [pilLibPath])
+if pilIncludePath != '':
+	baseEnv.Append(CPPPATH = [pilIncludePath])
+#Export('pilLibs')
+helpString+="""
+	with-pil:		Location of PIL headers/libraries.
+	with-pil-includes	Location of PIL headers.
+	with-pil-libraries	Location of PIL libraries.
+"""
+
+##########
+#  ROOT  #
+##########
+rootIncludePath = includePaths('ROOT',os.path.join('v5.14.00d','root'))
+rootLibPath = libPaths('ROOT',os.path.join('v5.14.00d','root'))
+rootBinPath = binPaths('ROOT',os.path.join('v5.14.00d','root'))
+baseEnv['rootLibs'] = Split('Core Cint Tree Matrix Physics pthread m dl')
+baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer Gui HistPainter')
+baseEnv['ENV']['LD_LIBRARY_PATH']=[rootLibPath]
+baseEnv['ENV']['ROOTSYS']=[os.path.abspath(os.path.join(rootIncludePath,'..'))]
+if rootLibPath != '':
+	baseEnv.Append(LIBPATH = [rootLibPath])
+if rootIncludePath != '':
+	baseEnv.Append(CPPPATH = [rootIncludePath])
+def rootcintEmitter(target, source, env):
+           target.append(str(target[0]).replace('.cxx','')+".h")
+           return target, source
+
+def rootcintGenerator(source,target,env,for_signature):
+	buildlocation = Dir(str(target[0].dir)+'/..')
+        root_headers = ''
+        for header in env['includes']:
+		root_headers += ' -I'+str(Dir(header))
+        sources = ''
+        for file in source:
+		sources += ' '+str(buildlocation.rel_path(file))
+	execute = 'cd ${TARGET.dir}/.. ; '
+	execute += os.path.join(rootBinPath, 'rootcint') 
+	execute += ' -f ' 
+	execute += str(buildlocation.rel_path(target[0]))
+	execute += ' -c'
+	execute += root_headers 
+	execute += sources 
+	return execute
+
+rootBuilder = Builder(generator = rootcintGenerator, emitter = rootcintEmitter, suffix = '.cxx')
+baseEnv.Append(BUILDERS = { 'Rootcint' : rootBuilder })
+baseEnv['ENV']['PATH'] = ['/usr/local/bin', '/bin', '/usr/bin', rootBinPath]
+baseEnv['ENV']['ROOTSYS'] = os.path.abspath(os.path.join(rootBinPath,'..'))
+
+helpString+="""
+	with-root:		Location of ROOT headers/libraries.
+	with-root-includes	Location of ROOT headers.
+	with-root-libraries	Location of ROOT libraries.
+	with-root-binaries	Location of ROOT binaries.
+"""
+
+##########
+#  SWIG  #
+##########
+swigBinPath = binPaths('swig','1.3.31')
+swigIncludePath = includePaths('swig','1.3.31')
+baseEnv['SWIG']=os.path.join(swigBinPath,'swig')
+baseEnv.Append(SWIGPATH = [swigIncludePath, swigIncludePath+'/python', baseEnv['INCDIR'], '.'])
+baseEnv.AppendUnique(SWIGFLAGS = ['-w401', '-w402', '-w503', '-w362', '-w389', '-w509', '-python', '-c++'])
+
+##########
+#   Xerces  #
+##########
+xercesIncludePath = includePaths('xerces','2.7.0')
+xercesLibPath = libPaths('xerces','2.7.0')
+if platform.system() == 'Windows':
+	baseEnv['xercesLibs'] = Split('xerces-c')
+#        xmlLibs = Split('xerces-c')
+else:
+	baseEnv['xercesLibs'] = Split('xerces-c pthread')
+#        xmlLibs = Split('xerces-c pthread')
+if xercesLibPath != '':
+	baseEnv.Append(LIBPATH = [xercesLibPath])
+if xercesIncludePath != '':
+	baseEnv.Append(CPPPATH = [xercesIncludePath])
+#Export('xmlLibs')
+helpString+="""
+	with-xerces:		Location of Xerces headers/libraries.
+	with-xerces-includes:	Location of Xerces headers.
+	with-xerces-libraries:	Location of Xerces libraries.
+"""
+
+##########
+# cppunit#
+##########
+cppunitIncludePath = includePaths('cppunit','1.10.2')
+cppunitLibPath = libPaths('cppunit','1.10.2')
+if platform.system() == 'Windows':
+	baseEnv['cppunitLibs'] = Split('CPPUNIT')
+#        cppunitLibs = Split('CPPUNIT')
+else:
+	baseEnv['cppunitLibs'] = Split('cppunit dl')
+#        cppunitLibs = Split('cppunit dl')
+if cppunitLibPath != '':
+	baseEnv.Append(LIBPATH = [cppunitLibPath])
+if cppunitIncludePath != '':
+	baseEnv.Append(CPPPATH = [cppunitIncludePath])
+#baseEnv.Export('cppunitLibs')
+helpString+="""
+	with-cppunit:		Location of cppunit headers/libraries.
+	with-cppunit-includes:	Location of cppunit headers.
+	with-cppunit-libraries:	Location of cppunit libraries.
+"""
+
+##########
+# Python #
+##########
+pythonBinPath = binPaths('python','2.5.1')
+#pythonIncludePath = includePaths('python')+'/python2.5'
+#pythonLibPath = libPaths('python')+'/python2.5/config'
+baseEnv['pythonLibs'] = []
+if pythonBinPath != '':
+	env = Environment()
+	env.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --ldflags')
+	baseEnv['pythonLibs'] = env['LIBS']
+	pythonLibs = env['LIBS']
+	baseEnv.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --includes')
+	baseEnv.Append(LIBPATH = env['LIBPATH'])
+#if pythonLibPath != '':
+#        baseEnv.Append(LIBPATH = [pythonLibPath])
+#if pythonIncludePath != '':
+#        baseEnv.Append(CPPPATH = [pythonIncludePath])
+#baseEnv.Export('pythonLibs')
+helpString+="""
+        with-python:           Location of python-config application.
+
+	with-GLAST-EXT:        Location of all external libraries with GLAST_EXT layout.
+"""
+
+Return('helpString')
