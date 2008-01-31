@@ -94,21 +94,21 @@ helpString+="""
 """
 
 ##########
-#  PIL   #
+#  APE   #
 ##########
-pilIncludePath = includePaths('pil','2.0.1')
-pilLibPath = libPaths('pil','2.0.1')
+apeIncludePath = includePaths('ape','2.3-gl1')
+apeLibPath = libPaths('ape','2.3-gl1')
 #pilLibs = Split('pil termcap readline')
-baseEnv['pilLibs']=Split('pil termcap readline')
-if pilLibPath != '':
-	baseEnv.Append(LIBPATH = [pilLibPath])
-if pilIncludePath != '':
-	baseEnv.Append(CPPPATH = [pilIncludePath])
-#Export('pilLibs')
+baseEnv['apeLibs']=Split('ape termcap readline')
+if apeLibPath != '':
+	baseEnv.Append(LIBPATH = [apeLibPath])
+if apeIncludePath != '':
+	baseEnv.Append(CPPPATH = [apeIncludePath])
+#Export('apeLibs')
 helpString+="""
-	with-pil:		Location of PIL headers/libraries.
-	with-pil-includes	Location of PIL headers.
-	with-pil-libraries	Location of PIL libraries.
+	with-ape:		Location of APE headers/libraries.
+	with-ape-includes	Location of APE headers.
+	with-ape-libraries	Location of APE libraries.
 """
 
 ##########
