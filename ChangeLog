@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Wed Feb 13 13:23:55 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Fix so that path in windows isn't overwritten with unix path
+    *
+------------------------------------------------------------
 User: golpa  Tue Feb 12 21:21:07 PST 2008
 ScienceTools-scons
 
