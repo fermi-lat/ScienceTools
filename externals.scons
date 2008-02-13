@@ -119,7 +119,7 @@ rootLibPath = libPaths('ROOT',os.path.join('v5.14.00d','root'))
 rootBinPath = binPaths('ROOT',os.path.join('v5.14.00d','root'))
 baseEnv['rootLibs'] = Split('Core Cint Tree Matrix Physics pthread m dl')
 baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer Gui HistPainter')
-baseEnv['ENV']['LD_LIBRARY_PATH']=[rootLibPath]
+baseEnv.AppendENVPath('LD_LIBRARY_PATH', rootLibPath)
 baseEnv['ENV']['ROOTSYS']=[os.path.abspath(os.path.join(rootIncludePath,'..'))]
 if rootLibPath != '':
 	baseEnv.Append(LIBPATH = [rootLibPath])
@@ -148,8 +148,7 @@ def rootcintGenerator(source,target,env,for_signature):
 
 rootBuilder = Builder(generator = rootcintGenerator, emitter = rootcintEmitter, suffix = '.cxx')
 baseEnv.Append(BUILDERS = { 'Rootcint' : rootBuilder })
-baseEnv['ENV']['PATH'] = ['/usr/local/bin', '/bin', '/usr/bin', rootBinPath]
-baseEnv['ENV']['ROOTSYS'] = os.path.abspath(os.path.join(rootBinPath,'..'))
+baseEnv.AppendENVPath('PATH', rootBinPath)
 
 helpString+="""
 	with-root:		Location of ROOT headers/libraries.
