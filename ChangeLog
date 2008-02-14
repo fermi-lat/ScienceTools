@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Wed Feb 13 19:59:11 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Added options for enabling debug/opt in windows and detecting OS in windows
+    *
+------------------------------------------------------------
 User: golpa  Wed Feb 13 13:23:55 PST 2008
 ScienceTools-scons
 
