@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Thu Feb 14 13:48:44 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Add define to command line so programs can differentiate between SCons and CMT
+    *
+------------------------------------------------------------
 User: golpa  Wed Feb 13 19:59:11 PST 2008
 ScienceTools-scons
 
