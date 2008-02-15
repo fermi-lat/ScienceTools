@@ -204,8 +204,8 @@ helpString+="""
 # Python #
 ##########
 pythonBinPath = binPaths('python','2.5.1')
-pythonIncludePath = includePaths('python')+'/python2.5'
-pythonLibPath = libPaths('python')+'/python2.5/config'
+pythonIncludePath = includePaths('python','2.5.1')+'/python2.5'
+pythonLibPath = libPaths('python','2.5.1')+'/python2.5/config'
 baseEnv['pythonLibs'] = Split('pthread dl util m python2.5')
 #if pythonBinPath != '':
 #	env = Environment()
