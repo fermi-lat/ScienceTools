@@ -204,9 +204,15 @@ helpString+="""
 # Python #
 ##########
 pythonBinPath = binPaths('python','2.5.1')
-pythonIncludePath = includePaths('python','2.5.1')+'/python2.5'
-pythonLibPath = libPaths('python','2.5.1')+'/python2.5/config'
-baseEnv['pythonLibs'] = Split('pthread dl util m python2.5')
+if platform.system() == "Windows":
+	pythonIncludePath = includePaths('python','2.5.1')
+	baseEnv['pythonLibs'] = Split(File(os.path.join(libPaths('python', '2.5.1')+'s','python25.lib')))
+else:
+	pythonIncludePath = includePaths('python','2.5.1')+'/python2.5'
+	pythonLibPath = libPaths('python','2.5.1')+'/python2.5/config'
+	baseEnv['pythonLibs'] = Split('pthread dl util m python2.5')
+	if pythonLibPath != '':
+        	baseEnv.Append(LIBPATH = [pythonLibPath])
 #if pythonBinPath != '':
 #	env = Environment()
 #	env.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --ldflags')
@@ -214,8 +220,6 @@ baseEnv['pythonLibs'] = Split('pthread dl util m python2.5')
 #	pythonLibs = env['LIBS']
 #	baseEnv.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --includes')
 #	baseEnv.Append(LIBPATH = env['LIBPATH'])
-if pythonLibPath != '':
-        baseEnv.Append(LIBPATH = [pythonLibPath])
 if pythonIncludePath != '':
         baseEnv.Append(CPPPATH = [pythonIncludePath])
 helpString+="""
