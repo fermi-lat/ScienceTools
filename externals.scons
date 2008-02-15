@@ -167,7 +167,7 @@ helpString+="""
 ##########
 xercesIncludePath = includePaths('xerces','2.7.0')
 xercesLibPath = libPaths('xerces','2.7.0')
-if platform.system() == 'Windows':
+if baseEnv['PLATFORM'] == "win32":
 	baseEnv['xercesLibs'] = Split('xerces-c')
 else:
 	baseEnv['xercesLibs'] = Split('xerces-c pthread')
@@ -186,7 +186,7 @@ helpString+="""
 ##########
 cppunitIncludePath = includePaths('cppunit','1.10.2')
 cppunitLibPath = libPaths('cppunit','1.10.2')
-if platform.system() == 'Windows':
+if baseEnv['PLATFORM'] == "win32":
 	baseEnv['cppunitLibs'] = Split('CPPUNIT')
 else:
 	baseEnv['cppunitLibs'] = Split('cppunit dl')
@@ -204,7 +204,7 @@ helpString+="""
 # Python #
 ##########
 pythonBinPath = binPaths('python','2.5.1')
-if platform.system() == "Windows":
+if baseEnv['PLATFORM'] == "win32":
 	pythonIncludePath = includePaths('python','2.5.1')
 	baseEnv['pythonLibs'] = Split(File(os.path.join(libPaths('python', '2.5.1')+'s','python25.lib')))
 else:
