@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Fri Feb 15 13:00:53 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+switched to a more portable way of detecing OS. Added option for windows to chose compiler
+    *
+------------------------------------------------------------
 User: golpa  Thu Feb 14 18:24:18 PST 2008
 ScienceTools-scons
 
