@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Thu Feb 14 17:45:56 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+Fixed some typos
+    *
+------------------------------------------------------------
 User: golpa  Thu Feb 14 17:09:23 PST 2008
 ScienceTools-scons
 
