@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Fri Feb 15 13:56:51 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Allow CC and CXX options for non windows
+    *
+------------------------------------------------------------
 User: golpa  Fri Feb 15 13:00:53 PST 2008
 ScienceTools-scons
 
