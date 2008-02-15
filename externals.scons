@@ -45,12 +45,10 @@ def binPaths(library,version):
 clhepIncludePath = includePaths('CLHEP','1.9.2.2')
 clhepLibPath = libPaths('CLHEP','1.9.2.2')
 baseEnv['clhepLibs']=Split('CLHEP')
-#clhepLibs = Split('CLHEP')
 if clhepLibPath != '':
 	baseEnv.Append(LIBPATH = [clhepLibPath])
 if clhepIncludePath != '':
 	baseEnv.Append(CPPPATH = [clhepIncludePath])
-#Export('clhepLibs')
 helpString="""
 	with-CLHEP:		Location of CLHEP headers/libraries.
 	with-CLHEP-includes:	Location of CLHEP headers.
@@ -62,13 +60,11 @@ helpString="""
 ##########
 fftwIncludePath = includePaths('fftw','3.1.2')
 fftwLibPath = libPaths('fftw','3.1.2')
-#fftwLibs = Split('fftw3')
 baseEnv['fftwLibs']=Split('fftw3')
 if fftwLibPath != '':
 	baseEnv.Append(LIBPATH = [fftwLibPath])
 if fftwIncludePath != '':
 	baseEnv.Append(CPPPATH = [fftwIncludePath])
-#Export('fftwLibs')
 helpString+="""
 	with-fftw:		Location of FFTW headers/libraries.
 	with-fftw-includes:	Location of FFTW headers.
@@ -80,13 +76,11 @@ helpString+="""
 ##########
 cfitsioIncludePath = includePaths('cfitsio','v3006')
 cfitsioLibPath = libPaths('cfitsio','v3006')
-#cfitsioLibs = Split('cfitsio')
 baseEnv['cfitsioLibs']=Split('cfitsio')
 if cfitsioLibPath != '':
 	baseEnv.Append(LIBPATH = [cfitsioLibPath])
 if cfitsioIncludePath != '':
 	baseEnv.Append(CPPPATH = [cfitsioIncludePath])
-#Export('cfitsioLibs')
 helpString+="""
 	with-cfitsio:		Location of FITS headers/libraries.
 	with-cfitsio-includes:	Location of FITS headers.
@@ -98,13 +92,11 @@ helpString+="""
 ##########
 apeIncludePath = includePaths('ape','2.3-gl1')
 apeLibPath = libPaths('ape','2.3-gl1')
-#pilLibs = Split('pil termcap readline')
 baseEnv['apeLibs']=Split('ape termcap readline')
 if apeLibPath != '':
 	baseEnv.Append(LIBPATH = [apeLibPath])
 if apeIncludePath != '':
 	baseEnv.Append(CPPPATH = [apeIncludePath])
-#Export('apeLibs')
 helpString+="""
 	with-ape:		Location of APE headers/libraries.
 	with-ape-includes	Location of APE headers.
@@ -149,7 +141,6 @@ def rootcintGenerator(source,target,env,for_signature):
 rootBuilder = Builder(generator = rootcintGenerator, emitter = rootcintEmitter, suffix = '.cxx')
 baseEnv.Append(BUILDERS = { 'Rootcint' : rootBuilder })
 baseEnv.AppendENVPath('PATH', rootBinPath)
-
 helpString+="""
 	with-root:		Location of ROOT headers/libraries.
 	with-root-includes	Location of ROOT headers.
@@ -165,23 +156,25 @@ swigIncludePath = includePaths('swig','1.3.31')
 baseEnv['SWIG']=os.path.join(swigBinPath,'swig')
 baseEnv.Append(SWIGPATH = [swigIncludePath, swigIncludePath+'/python', baseEnv['INCDIR'], '.'])
 baseEnv.AppendUnique(SWIGFLAGS = ['-w401', '-w402', '-w503', '-w362', '-w389', '-w509', '-python', '-c++'])
+helpString+="""
+	with-swig		Location of SWIG headers/libraries.
+	with-swig-includes	Location of SWIG headers
+	with-swig-libraries	Location of SWIG libraries
+"""
 
 ##########
-#   Xerces  #
+# Xerces #
 ##########
 xercesIncludePath = includePaths('xerces','2.7.0')
 xercesLibPath = libPaths('xerces','2.7.0')
 if platform.system() == 'Windows':
 	baseEnv['xercesLibs'] = Split('xerces-c')
-#        xmlLibs = Split('xerces-c')
 else:
 	baseEnv['xercesLibs'] = Split('xerces-c pthread')
-#        xmlLibs = Split('xerces-c pthread')
 if xercesLibPath != '':
 	baseEnv.Append(LIBPATH = [xercesLibPath])
 if xercesIncludePath != '':
 	baseEnv.Append(CPPPATH = [xercesIncludePath])
-#Export('xmlLibs')
 helpString+="""
 	with-xerces:		Location of Xerces headers/libraries.
 	with-xerces-includes:	Location of Xerces headers.
@@ -195,15 +188,12 @@ cppunitIncludePath = includePaths('cppunit','1.10.2')
 cppunitLibPath = libPaths('cppunit','1.10.2')
 if platform.system() == 'Windows':
 	baseEnv['cppunitLibs'] = Split('CPPUNIT')
-#        cppunitLibs = Split('CPPUNIT')
 else:
 	baseEnv['cppunitLibs'] = Split('cppunit dl')
-#        cppunitLibs = Split('cppunit dl')
 if cppunitLibPath != '':
 	baseEnv.Append(LIBPATH = [cppunitLibPath])
 if cppunitIncludePath != '':
 	baseEnv.Append(CPPPATH = [cppunitIncludePath])
-#baseEnv.Export('cppunitLibs')
 helpString+="""
 	with-cppunit:		Location of cppunit headers/libraries.
 	with-cppunit-includes:	Location of cppunit headers.
@@ -214,23 +204,24 @@ helpString+="""
 # Python #
 ##########
 pythonBinPath = binPaths('python','2.5.1')
-#pythonIncludePath = includePaths('python')+'/python2.5'
-#pythonLibPath = libPaths('python')+'/python2.5/config'
-baseEnv['pythonLibs'] = []
-if pythonBinPath != '':
-	env = Environment()
-	env.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --ldflags')
-	baseEnv['pythonLibs'] = env['LIBS']
-	pythonLibs = env['LIBS']
-	baseEnv.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --includes')
-	baseEnv.Append(LIBPATH = env['LIBPATH'])
-#if pythonLibPath != '':
-#        baseEnv.Append(LIBPATH = [pythonLibPath])
-#if pythonIncludePath != '':
-#        baseEnv.Append(CPPPATH = [pythonIncludePath])
-#baseEnv.Export('pythonLibs')
+pythonIncludePath = includePaths('python')+'/python2.5'
+pythonLibPath = libPaths('python')+'/python2.5/config'
+baseEnv['pythonLibs'] = Split('pthread dl util m python2.5')
+#if pythonBinPath != '':
+#	env = Environment()
+#	env.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --ldflags')
+#	baseEnv['pythonLibs'] = env['LIBS']
+#	pythonLibs = env['LIBS']
+#	baseEnv.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --includes')
+#	baseEnv.Append(LIBPATH = env['LIBPATH'])
+if pythonLibPath != '':
+        baseEnv.Append(LIBPATH = [pythonLibPath])
+if pythonIncludePath != '':
+        baseEnv.Append(CPPPATH = [pythonIncludePath])
 helpString+="""
-        with-python:           Location of python-config application.
+        with-python:		Location of python headers/libraries.
+	with-python-includes:	Location of python headers.
+	with-python-libraries:	Location of python libraries
 
 	with-GLAST-EXT:        Location of all external libraries with GLAST_EXT layout.
 """
