@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Thu Feb 14 18:24:18 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+python behaves differently on windows when linking
+    *
+------------------------------------------------------------
 User: golpa  Thu Feb 14 17:45:56 PST 2008
 ScienceTools-scons
 
