@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Thu Feb 14 17:09:23 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Stop using python-config since it doesn't seem to be portable
+    *
+------------------------------------------------------------
 User: golpa  Thu Feb 14 13:48:44 PST 2008
 ScienceTools-scons
 
