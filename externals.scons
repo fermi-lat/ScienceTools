@@ -111,6 +111,7 @@ rootLibPath = libPaths('ROOT',os.path.join('v5.14.00d','root'))
 rootBinPath = binPaths('ROOT',os.path.join('v5.14.00d','root'))
 baseEnv['rootLibs'] = Split('Core Cint Tree Matrix Physics pthread m dl')
 baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer Gui HistPainter')
+baseEnv['minuitLibs'] = Split('Minuit2')
 baseEnv.AppendENVPath('LD_LIBRARY_PATH', rootLibPath)
 baseEnv['ENV']['ROOTSYS']=[os.path.abspath(os.path.join(rootIncludePath,'..'))]
 if rootLibPath != '':
@@ -229,5 +230,13 @@ helpString+="""
 
 	with-GLAST-EXT:        Location of all external libraries with GLAST_EXT layout.
 """
+
+##########
+#   F2C  #
+##########
+if baseEnv['PLATFORM'] == "win32":
+	baseEnv['f2cLibs'] = Split('libf77mt.lib', 'libi77mt.lib', 'oldnames.lib')
+else:
+	baseEnv['f2cLibs'] = Split('g2c')
 
 Return('helpString')
