@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Wed Feb 20 08:51:14 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+Define WIN32 in windows and set up F2C 'external' library
+    *
+------------------------------------------------------------
 User: golpa  Fri Feb 15 13:56:51 PST 2008
 ScienceTools-scons
 
