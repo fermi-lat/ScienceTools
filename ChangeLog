@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Thu Feb 21 17:49:54 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+F2C libraries are now listed correctly for windows
+    *
+------------------------------------------------------------
 User: heather  Wed Feb 20 13:14:14 PST 2008
 ScienceTools-scons
 
