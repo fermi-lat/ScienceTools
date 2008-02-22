@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Fri Feb 22 13:29:56 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Certain compiler flags should always be set in windows
+    *
+------------------------------------------------------------
 User: golpa  Thu Feb 21 17:49:54 PST 2008
 ScienceTools-scons
 
