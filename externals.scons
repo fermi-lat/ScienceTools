@@ -235,7 +235,7 @@ helpString+="""
 #   F2C  #
 ##########
 if baseEnv['PLATFORM'] == "win32":
-	baseEnv['f2cLibs'] = Split('libf77mt.lib', 'libi77mt.lib', 'oldnames.lib')
+	baseEnv['f2cLibs'] = Split('libf77mt.lib libi77mt.lib oldnames.lib')
 else:
 	baseEnv['f2cLibs'] = Split('g2c')
 
