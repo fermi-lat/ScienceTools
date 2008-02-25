@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Mon Feb 25 11:29:47 PST 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+Change to allow for hierarchical directory structure for the includes
+    *
+------------------------------------------------------------
 User: heather  Sun Feb 24 20:24:57 PST 2008
 ScienceTools-scons
 
