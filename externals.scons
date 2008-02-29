@@ -106,9 +106,14 @@ helpString+="""
 ##########
 #  ROOT  #
 ##########
-rootIncludePath = includePaths('ROOT',os.path.join('v5.14.00d','root'))
-rootLibPath = libPaths('ROOT',os.path.join('v5.14.00d','root'))
-rootBinPath = binPaths('ROOT',os.path.join('v5.14.00d','root'))
+if baseEnv['PLATFORM'] == "win32":
+	rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
+	rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
+	rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
+else:
+	rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','root'))
+	rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','root'))
+	rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','root'))
 baseEnv['rootLibs'] = Split('Core Cint Tree Matrix Physics pthread m dl')
 baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer Gui HistPainter')
 baseEnv['minuitLibs'] = Split('Minuit2')
@@ -142,6 +147,9 @@ def rootcintGenerator(source,target,env,for_signature):
 rootBuilder = Builder(generator = rootcintGenerator, emitter = rootcintEmitter, suffix = '.cxx')
 baseEnv.Append(BUILDERS = { 'Rootcint' : rootBuilder })
 baseEnv.AppendENVPath('PATH', rootBinPath)
+if baseEnv['PLATFORM'] == "win32":
+	baseEnv['SHLINKCOM'] = [os.path.join(rootBinPath, "bindexplib.exe") + " -o ${TARGET.base}.def ${TARGET.file} $SOURCES"] + baseEnv['SHLINKCOM']
+	baseEnv['SHLINKCOM'].list[1].cmd_list += " /def:${TARGET.base}.def"
 helpString+="""
 	with-root:		Location of ROOT headers/libraries.
 	with-root-includes	Location of ROOT headers.
@@ -169,7 +177,7 @@ helpString+="""
 xercesIncludePath = includePaths('xerces','2.7.0')
 xercesLibPath = libPaths('xerces','2.7.0')
 if baseEnv['PLATFORM'] == "win32":
-	baseEnv['xercesLibs'] = Split('xerces-c')
+	baseEnv['xercesLibs'] = Split('xerces-c_2')
 else:
 	baseEnv['xercesLibs'] = Split('xerces-c pthread')
 if xercesLibPath != '':
