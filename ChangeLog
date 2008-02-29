@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Fri Feb 29 08:39:28 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Added extension to SCons to create .def files automatically
+    *
+------------------------------------------------------------
 User: golpa  Mon Feb 25 11:29:47 PST 2008
 ScienceTools-scons/site_scons/site_tools
 
