@@ -64,7 +64,10 @@ helpString="""
 ##########
 fftwIncludePath = includePaths('fftw','3.1.2')
 fftwLibPath = libPaths('fftw','3.1.2')
-baseEnv['fftwLibs']=Split('fftw3')
+if baseEnv['PLATFORM'] == "win32":
+	baseEnv['fftwLibs']=Split('libfftw3')
+else:
+	baseEnv['fftwLibs']=Split('fftw3')
 if fftwLibPath != '':
 	baseEnv.Append(LIBPATH = [fftwLibPath])
 if fftwIncludePath != '':
@@ -96,7 +99,10 @@ helpString+="""
 ##########
 apeIncludePath = includePaths('ape','2.3-gl1')
 apeLibPath = libPaths('ape','2.3-gl1')
-baseEnv['apeLibs']=Split('ape termcap readline')
+if baseEnv['PLATFORM'] == "win32":
+	baseEnv['apeLibs'] = Split('apelib')
+else:
+	baseEnv['apeLibs']=Split('ape termcap readline')
 if apeLibPath != '':
 	baseEnv.Append(LIBPATH = [apeLibPath])
 if apeIncludePath != '':
