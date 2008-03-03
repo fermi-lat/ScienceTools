@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Mon Mar  3 14:38:02 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use the correct names for the fftw and ape libraries in windows
+    *
+------------------------------------------------------------
 User: glast  Mon Mar  3 13:38:12 PST 2008
 ScienceTools-scons
 
