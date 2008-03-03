@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Mon Mar  3 12:39:31 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+Added missing compiler options for windows and fixed link command for shared libraries on windows
+    *
+------------------------------------------------------------
 User: heather  Fri Feb 29 14:44:39 PST 2008
 ScienceTools-scons
 
