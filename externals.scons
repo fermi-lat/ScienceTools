@@ -43,8 +43,8 @@ def binPaths(library,version):
 #  CLHEP #
 ##########
 if baseEnv['PLATFORM'] == "win32":
-        clhepIncludePath = includePaths('CLHEP',os.path.join('1.9.2.2','vcc-7.1'))
-        clhepLibPath = libPaths('CLHEP',os.path.join('1.9.2.2','vcc-7.1'))
+        clhepIncludePath = includePaths('CLHEP','1.9.2.2')
+        clhepLibPath = os.path.join(libPaths('CLHEP',os.path.join('1.9.2.2','vcc-7.1')),'..')
 else:
         clhepIncludePath = includePaths('CLHEP','1.9.2.2')
         clhepLibPath = libPaths('CLHEP','1.9.2.2')
@@ -155,8 +155,13 @@ rootBuilder = Builder(generator = rootcintGenerator, emitter = rootcintEmitter, 
 baseEnv.Append(BUILDERS = { 'Rootcint' : rootBuilder })
 baseEnv.AppendENVPath('PATH', rootBinPath)
 if baseEnv['PLATFORM'] == "win32":
+	def defGenerator(target, source, env, for_signature):
+		return "/def:"+os.path.splitext(str(target[0]))[0]+".def"
+	baseEnv['DEFGENERATOR'] = defGenerator
 	baseEnv['SHLINKCOM'] = [os.path.join(rootBinPath, "bindexplib.exe") + " -o ${TARGET.base}.def ${TARGET.file} $SOURCES"] + baseEnv['SHLINKCOM']
-	baseEnv['SHLINKCOM'].list[1].cmd_list += " /def:${TARGET.base}.def"
+	baseEnv['SHLINKCOM'].list[1].cmd_list = baseEnv['SHLINKCOM'].list[1].cmd_list.rstrip('" )}')
+	baseEnv['SHLINKCOM'].list[1].cmd_list += " $DEFGENERATOR\")}"
+
 helpString+="""
 	with-root:		Location of ROOT headers/libraries.
 	with-root-includes	Location of ROOT headers.
