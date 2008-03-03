@@ -142,7 +142,7 @@ def rootcintGenerator(source,target,env,for_signature):
         sources = ''
         for file in source:
 		sources += ' '+str(buildlocation.rel_path(file))
-	execute = 'cd ${TARGET.dir}/.. ; '
+	execute = 'cd '+os.path.join("${TARGET.dir}","..")+ ' && '
 	execute += os.path.join(rootBinPath, 'rootcint') 
 	execute += ' -f ' 
 	execute += str(buildlocation.rel_path(target[0]))
