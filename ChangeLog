@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Thu Mar  6 10:00:21 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+Changes required for windows compilation to work
+    *
+------------------------------------------------------------
 User: glast  Mon Mar  3 14:38:02 PST 2008
 ScienceTools-scons
 
