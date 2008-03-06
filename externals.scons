@@ -117,19 +117,19 @@ helpString+="""
 #  ROOT  #
 ##########
 if baseEnv['PLATFORM'] == "win32":
-        rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
-        rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
-        rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
-        baseEnv['rootLibs'] = Split('libCore libCint libRIO libNet libTree libHist libGraf libGpad libMatrix libPhysics')
-        baseEnv['rootGuiLibs'] = Split('libHist libGraf libGraf3d libGpad libRint libPostscript libTreePlayer')
-        baseEnv['minuitLibs'] = Split('libMinuit2')
+	rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
+	rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
+	rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
+	baseEnv['rootLibs'] = Split('libCore libCint libRIO libNet libTree libHist libGraf libGpad libMatrix libPhysics')
+	baseEnv['rootGuiLibs'] = Split('libHist libGraf libGraf3d libGpad libRint libPostscript libTreePlayer libGui libHistPainter')
+	baseEnv['minuitLibs'] = Split('libMinuit2')
 else:
 	rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','root'))
 	rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','root'))
 	rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','root'))
-        baseEnv['rootLibs'] = Split('Core Cint RIO Net Tree Hist Graf Gpad Matrix Physics pthread m dl')
-        baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer')
-        baseEnv['minuitLibs'] = Split('Minuit2')
+	baseEnv['rootLibs'] = Split('Core Cint RIO Net Tree Hist Graf Gpad Matrix Physics pthread m dl')
+	baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer Gui HistPainter')
+	baseEnv['minuitLibs'] = Split('Minuit2')
 baseEnv.AppendENVPath('LD_LIBRARY_PATH', rootLibPath)
 baseEnv['ENV']['ROOTSYS']=[os.path.abspath(os.path.join(rootIncludePath,'..'))]
 if rootLibPath != '':
