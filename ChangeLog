@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu Mar  6 11:50:02 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Add permissive flag to linux and mac
+    *
+------------------------------------------------------------
 User: glast  Thu Mar  6 10:00:21 PST 2008
 ScienceTools-scons
 
