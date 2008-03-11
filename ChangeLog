@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Mar 11 11:48:34 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Use different libraries for cfitsio
+    *
+------------------------------------------------------------
 User: glastrm  Tue Mar 11 11:47:23 PDT 2008
 ScienceTools-scons
 
