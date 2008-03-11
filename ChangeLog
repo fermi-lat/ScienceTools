@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Tue Mar 11 13:55:01 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+Fixes for windows
+    *
+------------------------------------------------------------
 User: glastrm  Tue Mar 11 11:53:54 PDT 2008
 ScienceTools-scons
 
