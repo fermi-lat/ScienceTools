@@ -7,7 +7,7 @@ Import('baseEnv')
 externalLibraries = {
 
   'CLHEP'   : {'version' : '1.9.2.2', 'includes' : ['CLHEP/config/CLHEP.h'], 'libraries' : {'clhepLibs'   : ['CLHEP']},
-               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','CLHEP','$VERSION','lib')},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
 
   'fftw'    : {'version' : '3.1.2', 'includes' : ['fftw/fftw3.h'], 'libraries' : {'fftwLibs' : ['fftw3']},
                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
@@ -49,10 +49,17 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['ROOT']['libraries']['rootLibs'] = ['libCore', 'libCint', 'libRIO', 'libNet', 'libTree', 'libHist', 'libGraf', 'libGpad', 'libMatrix', 'libPhysics']
     externalLibraries['ROOT']['libraries']['rootGuiLibs'] = ['libHist', 'libGraf', 'libGraf3d', 'libGpad', 'libRint', 'libPostscript', 'libTreePlayer', 'libGui', 'libHistPainter']
     externalLibraries['ROOT']['libraries']['minuitLibs'] = ['libMinuit2']
+    externalLibraries['ROOT']['include-path'] = os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'vc8', 'include')
+    externalLibraries['ROOT']['lib-path'] = os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'vc8', 'lib')
+    externalLibraries['ROOT']['bin-path'] = os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'vc8', 'bin')
     externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
     externalLibraries['cppunit']['libraries']['cppunitLibs'] = ['CPPUNIT']
     externalLibraries['f2c']['libraries']['f2cLibs'] = ['libf77mt.lib', 'libi77mt.lib', 'oldnames.lib']
     externalLibraries['cfitsio']['libraries']['cfitsioLibs'] = ['cfitsio']
+    externalLibraries['CLHEP']['lib-path']=os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'vcc-7.1')
+    externalLibraries['python']['include-path']=os.path.join('$GLAST-EXT','$NAME','$VERSION','include')
+    externalLibraries['python']['lib-path']  = os.path.join('$GLAST-EXT','$NAME','$VERSION','libs')
+    externalLibraries['python']['libraries']['pythonLibs'] = ['python25']
 
 #############################################################################
 # Add SCons command line options to specify the location of these libraries #
@@ -129,11 +136,13 @@ if not baseEnv.GetOption('help'):
             for include in externalLibraries[lib]['includes']:
                 if not conf.CheckCXXHeader(include):
                     Exit(1)
-        if 'libraries' in externalLibraries[lib] and 'lib-path' in externalLibraries[lob]:
+        if 'libraries' in externalLibraries[lib] and 'lib-path' in externalLibraries[lib]:
             for libGroup in externalLibraries[lib]['libraries'].keys():
                 for library in reversed(externalLibraries[lib]['libraries'][libGroup]):
                     if not conf.CheckLib(library, language = 'C++'):
                         Exit(1)
+        if 'libraries' in externalLibraries[lib]:
+            for libGroup in externalLibraries[lib]['libraries'].keys():
                 baseEnv[libGroup] = externalLibraries[lib]['libraries'][libGroup]
     conf.Finish()
 
