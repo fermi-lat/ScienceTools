@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Mar 11 11:47:23 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Add RM specific output and only check for headers and libraries if include/lib path and libs are specified
+    *
+------------------------------------------------------------
 User: glastrm  Mon Mar 10 22:19:59 PDT 2008
 ScienceTools-scons
 
