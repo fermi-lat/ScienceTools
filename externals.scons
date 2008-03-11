@@ -52,6 +52,8 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
     externalLibraries['cppunit']['libraries']['cppunitLibs'] = ['CPPUNIT']
     externalLibraries['f2c']['libraries']['f2cLibs'] = ['libf77mt.lib', 'libi77mt.lib', 'oldnames.lib']
+    del externalLibraries['cfitsio']['libraries']['cfitsioLibs'][1]
+    del externalLibraries['ROOT']['libraries']['rootLibs'][11]
 
 #############################################################################
 # Add SCons command line options to specify the location of these libraries #
@@ -110,17 +112,25 @@ for lib in externalLibraries.keys():
         if modified:
             baseEnv.AppendUnique(PATH = [externalLibraries[lib]['bin-path']])
 
+###############################################
+# Print out External Library Summary if in RM #
+###############################################
+if baseEnv.GetOption('rm'):
+    for lib in externalLibraries.keys():
+        if 'lib-path' in externalLibraries[lib] and 'version' in externalLibraries[lib]:
+            print 'RM EXT LIB: '+lib+' '+externalLibraries[lib]['version']+' '+externalLibraries[lib]['lib-path']
+
 ###########################################################
 # Check to make sure external libraries and headers exist #
 ###########################################################
 if not baseEnv.GetOption('help'):
     conf = baseEnv.Configure()
     for lib in externalLibraries.keys():
-        if 'includes' in externalLibraries[lib]:
+        if 'includes' in externalLibraries[lib] and 'include-path' in externalLibraries[lib]:
             for include in externalLibraries[lib]['includes']:
                 if not conf.CheckCXXHeader(include):
                     Exit(1)
-        if 'libraries' in externalLibraries[lib]:
+        if 'libraries' in externalLibraries[lib] and 'lib-path' in externalLibraries[lob]:
             for libGroup in externalLibraries[lib]['libraries'].keys():
                 for library in reversed(externalLibraries[lib]['libraries'][libGroup]):
                     if not conf.CheckLib(library, language = 'C++'):
