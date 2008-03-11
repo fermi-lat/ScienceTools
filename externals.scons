@@ -1,272 +1,177 @@
 import os,platform
 Import('baseEnv')
-#########################
-#    Helper Functions   #
-#########################
-def includePaths(library,version):
-	if ARGUMENTS.get('with-'+library,'') =='':
-		if ARGUMENTS.get('with-'+library+'-includes','') != '':
-			return ARGUMENTS.get('with-'+library+'-includes','')
-		else:
-			if ARGUMENTS.get('with-GLAST-EXT','') != '':
-				return os.path.join(ARGUMENTS.get('with-GLAST-EXT'),library,version,'include')
-			else:
-				return ''
-	else:
-		return os.path.join(ARGUMENTS.get('with-'+library,''),'include')
 
-def libPaths(library,version):
-	if ARGUMENTS.get('with-'+library,'') == '':
-		if ARGUMENTS.get('with-'+library+'-libraries','') != '':
-			return ARGUMENTS.get('with-'+library+'-libraries','')
-		else:
-			if ARGUMENTS.get('with-GLAST-EXT','') != '':
-				return os.path.join(ARGUMENTS.get('with-GLAST-EXT'),library,version,'lib')
-			else:
-				return ''
-	else:
-		return os.path.join(ARGUMENTS.get('with-'+library,''),'lib')
+####################################################################
+# Basic data structure to represent the external libraries we need #
+####################################################################
+externalLibraries = {
 
-def binPaths(library,version):
-	if ARGUMENTS.get('with-'+library,'') == '':
-		if ARGUMENTS.get('with-'+library+'-binaries','') != '':
-			return ARGUMENTS.get('with-'+library+'-binaries','')
-		else:
-			if ARGUMENTS.get('with-GLAST-EXT','') != '':
-				return os.path.join(ARGUMENTS.get('with-GLAST-EXT'),library,version,'bin')
-			else:
-				return ''
-	else:
-		return os.path.join(ARGUMENTS.get('with-'+library,''),'bin')
+  'CLHEP'   : {'version' : '1.9.2.2', 'includes' : ['CLHEP/config/CLHEP.h'], 'libraries' : {'clhepLibs'   : ['CLHEP']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','CLHEP','$VERSION','lib')},
 
-##########
-#  CLHEP #
-##########
+  'fftw'    : {'version' : '3.1.2', 'includes' : ['fftw/fftw3.h'], 'libraries' : {'fftwLibs' : ['fftw3']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
+
+  'cfitsio' : {'version' : 'v3006', 'includes' : ['fitsio.h'], 'libraries' : {'cfitsioLibs' : ['cfitsio', 'm']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
+
+  'ape'     : {'version' : '2.3-gl1', 'includes' : ['ape/ape_list.h'], 'libraries' : {'apeLibs' : ['ape', 'readline', 'termcap']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
+
+  'ROOT'    : {'version' : 'v5.16.00-gl1', 'includes' : ['RVersion.h'], 'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
+                                                                                       'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
+                                                                                       'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
+               'binaries' : ['rootcint'], 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','include'), 
+               'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','lib'), 'bin-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','bin')},
+
+  'swig'    : {'version' : '1.3.31', 'binaries' : ['swig'], 'bin-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','bin'),
+               'include-path' : os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'include')},
+
+  'xerces'  : {'version' : '2.7.0', 'includes' : ['xercesc/util/XercesVersion.hpp'], 'libraries' : {'xercesLibs'  : ['xerces-c', 'pthread']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
+
+  'cppunit' : {'version' : '1.10.2', 'includes' : ['cppunit/ui/text/TextTestRunner.h'], 'libraries' : {'cppunitLibs' : ['cppunit', 'dl']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
+
+  'python'  : {'version' : '2.5.1', 'includes' : ['Python.h'], 'libraries' : {'pythonLibs'  : ['pthread', 'dl', 'util', 'm', 'python2.5']},
+               'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include', 'python2.5'),
+               'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib','python2.5','config')},
+
+  'f2c'     : {'version' : '', 'libraries' : {'f2cLibs' : ['g2c']}}
+}
+
+##############################################################
+# Override above default values for platform specific values #
+##############################################################
 if baseEnv['PLATFORM'] == "win32":
-        clhepIncludePath = includePaths('CLHEP','1.9.2.2')
-        clhepLibPath = os.path.join(libPaths('CLHEP',os.path.join('1.9.2.2','vcc-7.1')),'..')
-else:
-        clhepIncludePath = includePaths('CLHEP','1.9.2.2')
-        clhepLibPath = libPaths('CLHEP','1.9.2.2')
-baseEnv['clhepLibs']=Split('CLHEP')
-if clhepLibPath != '':
-	baseEnv.Append(LIBPATH = [clhepLibPath])
-if clhepIncludePath != '':
-	baseEnv.Append(CPPPATH = [clhepIncludePath])
-helpString="""
-	with-CLHEP:		Location of CLHEP headers/libraries.
-	with-CLHEP-includes:	Location of CLHEP headers.
-	with-CLHEP-libraries:	Location of CLHEP libraries.
-"""
+    externalLibraries['fftw']['libraries']['fftwLibs'] = ['libfftw3']
+    externalLibraries['ape']['libraries']['apeLibs'] = ['apelib']
+    externalLibraries['ROOT']['libraries']['rootLibs'] = ['libCore', 'libCint', 'libRIO', 'libNet', 'libTree', 'libHist', 'libGraf', 'libGpad', 'libMatrix', 'libPhysics']
+    externalLibraries['ROOT']['libraries']['rootGuiLibs'] = ['libHist', 'libGraf', 'libGraf3d', 'libGpad', 'libRint', 'libPostscript', 'libTreePlayer', 'libGui', 'libHistPainter']
+    externalLibraries['ROOT']['libraries']['minuitLibs'] = ['libMinuit2']
+    externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
+    externalLibraries['cppunit']['libraries']['cppunitLibs'] = ['CPPUNIT']
+    externalLibraries['f2c']['libraries']['f2cLibs'] = ['libf77mt.lib', 'libi77mt.lib', 'oldnames.lib']
 
-##########
-#  FFTW  #
-##########
-fftwIncludePath = includePaths('fftw','3.1.2')
-fftwLibPath = libPaths('fftw','3.1.2')
-if baseEnv['PLATFORM'] == "win32":
-	baseEnv['fftwLibs']=Split('libfftw3')
-else:
-	baseEnv['fftwLibs']=Split('fftw3')
-if fftwLibPath != '':
-	baseEnv.Append(LIBPATH = [fftwLibPath])
-if fftwIncludePath != '':
-	baseEnv.Append(CPPPATH = [fftwIncludePath])
-helpString+="""
-	with-fftw:		Location of FFTW headers/libraries.
-	with-fftw-includes:	Location of FFTW headers.
-	with-fftw-libraries:	Location of FFTW libraries.
-"""
+#############################################################################
+# Add SCons command line options to specify the location of these libraries #
+# Modify build environment with the answers from those options              #
+#############################################################################
+AddOption('--with-GLAST-EXT', dest = 'GLAST-EXT', nargs=1, type='string', action='store', metavar='DIR', help='location of GLAST-EXT type directory layout for external libraries')
 
-##########
-#  FITS  #
-##########
-cfitsioIncludePath = includePaths('cfitsio','v3006')
-cfitsioLibPath = libPaths('cfitsio','v3006')
-baseEnv['cfitsioLibs']=Split('cfitsio')
-if cfitsioLibPath != '':
-	baseEnv.Append(LIBPATH = [cfitsioLibPath])
-if cfitsioIncludePath != '':
-	baseEnv.Append(CPPPATH = [cfitsioIncludePath])
-helpString+="""
-	with-cfitsio:		Location of FITS headers/libraries.
-	with-cfitsio-includes:	Location of FITS headers.
-	with-cfitsio-libraries:	Location of FITS libraries.
-"""
+for lib in externalLibraries.keys():
+    AddOption('--with-'+lib, dest = lib, nargs=1, type='string', action='store', metavar='DIR', help='location of '+lib+' '+externalLibraries[lib]['version']+' headers/libraries')
+    if 'include-path' in externalLibraries[lib]:
+        modified = False
+        AddOption('--with-'+lib+'-includes', dest = lib+'-includes', nargs=1, type='string', action='store', metavar='DIR', help='location of '+lib+' '+externalLibraries[lib]['version']+' headers')
+        if baseEnv.GetOption(lib):
+            externalLibraries[lib]['include-path'] = os.path.join(baseEnv.GetOption(lib), 'include')
+            modified = True
+        else:
+            if baseEnv.GetOption(lib+'-includes'):
+                externalLibraries[lib]['include-path'] = baseEnv.GetOption(lib+'-includes')
+                modified = True
+            else:
+                if baseEnv.GetOption('GLAST-EXT'):
+                    externalLibraries[lib]['include-path'] = externalLibraries[lib]['include-path'].replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT')).replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
+                    modified = True
+        if modified:
+            baseEnv.AppendUnique(CPPPATH = [externalLibraries[lib]['include-path']])
+    if 'lib-path' in externalLibraries[lib]:
+        modified = False
+        AddOption('--with-'+lib+'-libraries', dest = lib+'-libraries', nargs=1, type='string', action='store', metavar='DIR', help='location of '+lib+' '+externalLibraries[lib]['version']+' libraries')
+        if baseEnv.GetOption(lib):
+            externalLibraries[lib]['lib-path'] = os.path.join(baseEnv.GetOption(lib), 'lib')
+            modified = True
+      	else:
+            if baseEnv.GetOption(lib+'-libraries'):
+                externalLibraries[lib]['lib-path'] = baseEnv.GetOption(lib+'-libaries')
+                modified = True
+            else:
+                if baseEnv.GetOption('GLAST-EXT'):
+      	            externalLibraries[lib]['lib-path'] = externalLibraries[lib]['lib-path'].replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT')).replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
+                    modified = True
+        if modified:
+            baseEnv.AppendUnique(LIBPATH = [externalLibraries[lib]['lib-path']])
+    if 'bin-path' in externalLibraries[lib]:
+        modified = False
+        AddOption('--with-'+lib+'-binaries', dest = lib+'-binaries', nargs=1, type='string', action='store', metavar='DIR', help='location of '+lib+' '+externalLibraries[lib]['version']+' binaries')
+        if baseEnv.GetOption(lib):
+            externalLibraries[lib]['bin-path'] = os.path.join(baseEnv.GetOption(lib), 'bin')
+            modified = True
+      	else:
+      	    if baseEnv.GetOption(lib+'-binaries'):
+                externalLibraries[lib]['bin-path'] = baseEnv.GetOption(lib+'-binaries')
+                modified = True
+      	    else:
+      	        if baseEnv.GetOption('GLAST-EXT'):
+      	            externalLibraries[lib]['bin-path'] = externalLibraries[lib]['bin-path'].replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT')).replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
+                    modified = True
+        if modified:
+            baseEnv.AppendUnique(PATH = [externalLibraries[lib]['bin-path']])
 
-##########
-#  APE   #
-##########
-apeIncludePath = includePaths('ape','2.3-gl1')
-apeLibPath = libPaths('ape','2.3-gl1')
-if baseEnv['PLATFORM'] == "win32":
-	baseEnv['apeLibs'] = Split('apelib')
-else:
-	baseEnv['apeLibs']=Split('ape termcap readline')
-if apeLibPath != '':
-	baseEnv.Append(LIBPATH = [apeLibPath])
-if apeIncludePath != '':
-	baseEnv.Append(CPPPATH = [apeIncludePath])
-helpString+="""
-	with-ape:		Location of APE headers/libraries.
-	with-ape-includes	Location of APE headers.
-	with-ape-libraries	Location of APE libraries.
-"""
+###########################################################
+# Check to make sure external libraries and headers exist #
+###########################################################
+if not baseEnv.GetOption('help'):
+    conf = baseEnv.Configure()
+    for lib in externalLibraries.keys():
+        if 'includes' in externalLibraries[lib]:
+            for include in externalLibraries[lib]['includes']:
+                if not conf.CheckCXXHeader(include):
+                    Exit(1)
+        if 'libraries' in externalLibraries[lib]:
+            for libGroup in externalLibraries[lib]['libraries'].keys():
+                for library in reversed(externalLibraries[lib]['libraries'][libGroup]):
+                    if not conf.CheckLib(library, language = 'C++'):
+                        Exit(1)
+                baseEnv[libGroup] = externalLibraries[lib]['libraries'][libGroup]
+    conf.Finish()
 
-##########
-#  ROOT  #
-##########
-if baseEnv['PLATFORM'] == "win32":
-	rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
-	rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
-	rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','vc8'))
-	baseEnv['rootLibs'] = Split('libCore libCint libRIO libNet libTree libHist libGraf libGpad libMatrix libPhysics')
-	baseEnv['rootGuiLibs'] = Split('libHist libGraf libGraf3d libGpad libRint libPostscript libTreePlayer libGui libHistPainter')
-	baseEnv['minuitLibs'] = Split('libMinuit2')
-else:
-	rootIncludePath = includePaths('ROOT',os.path.join('v5.16.00-gl1','root'))
-	rootLibPath = libPaths('ROOT',os.path.join('v5.16.00-gl1','root'))
-	rootBinPath = binPaths('ROOT',os.path.join('v5.16.00-gl1','root'))
-	baseEnv['rootLibs'] = Split('Core Cint RIO Net Tree Hist Graf Gpad Matrix Physics pthread m dl')
-	baseEnv['rootGuiLibs'] = Split('Hist Graf Graf3d Gpad Rint Postscript TreePlayer Gui HistPainter')
-	baseEnv['minuitLibs'] = Split('Minuit2')
-baseEnv.AppendENVPath('LD_LIBRARY_PATH', rootLibPath)
-baseEnv['ENV']['ROOTSYS']=[os.path.abspath(os.path.join(rootIncludePath,'..'))]
-if rootLibPath != '':
-	baseEnv.Append(LIBPATH = [rootLibPath])
-if rootIncludePath != '':
-	baseEnv.Append(CPPPATH = [rootIncludePath])
+############################
+# Set up rootcint for ROOT #
+############################
+
+baseEnv.AppendENVPath('LD_LIBRARY_PATH', [externalLibraries['ROOT']['lib-path']])
+baseEnv.AppendENVPath('ROOTSYS', [os.path.normpath(os.path.join(externalLibraries['ROOT']['include-path'], '..'))])
+baseEnv.AppendENVPath('PATH', [externalLibraries['ROOT']['bin-path']])
+
 def rootcintEmitter(target, source, env):
-           target.append(str(target[0]).replace('.cxx','')+".h")
-           return target, source
+    target.append(str(target[0]).replace('.cxx','')+".h")
+    return target, source
 
 def rootcintGenerator(source,target,env,for_signature):
-	buildlocation = Dir(str(target[0].dir)+'/..')
-        root_headers = ''
-        for header in env['includes']:
-		root_headers += ' -I'+str(Dir(header))
-        sources = ''
-        for file in source:
-		sources += ' '+str(buildlocation.rel_path(file))
-	execute = 'cd '+os.path.join("${TARGET.dir}","..")+ ' && '
-	execute += os.path.join(rootBinPath, 'rootcint') 
-	execute += ' -f ' 
-	execute += str(buildlocation.rel_path(target[0]))
-	execute += ' -c'
-	execute += root_headers 
-	execute += sources 
-	return execute
+    buildlocation = Dir(str(target[0].dir)+'/..')
+    root_headers = ''
+    for header in env['includes']:
+        root_headers += ' -I'+str(Dir(header))
+    sources = ''
+    for file in source:
+        sources += ' '+str(buildlocation.rel_path(file))
+    execute = 'cd '+os.path.join("${TARGET.dir}","..")+ ' && '
+    execute += os.path.join(externalLibraries['ROOT']['bin-path'], 'rootcint') 
+    execute += ' -f ' 
+    execute += str(buildlocation.rel_path(target[0]))
+    execute += ' -c'
+    execute += root_headers 
+    execute += sources 
+    return execute
 
 rootBuilder = Builder(generator = rootcintGenerator, emitter = rootcintEmitter, suffix = '.cxx')
 baseEnv.Append(BUILDERS = { 'Rootcint' : rootBuilder })
-baseEnv.AppendENVPath('PATH', rootBinPath)
 if baseEnv['PLATFORM'] == "win32":
-	def defGenerator(target, source, env, for_signature):
-		return "/def:"+os.path.splitext(str(target[0]))[0]+".def"
-	baseEnv['DEFGENERATOR'] = defGenerator
-	baseEnv['SHLINKCOM'] = [os.path.join(rootBinPath, "bindexplib.exe") + " -o ${TARGET.base}.def ${TARGET.file} $SOURCES"] + baseEnv['SHLINKCOM']
-	baseEnv['SHLINKCOM'].list[1].cmd_list = baseEnv['SHLINKCOM'].list[1].cmd_list.rstrip('" )}')
-	baseEnv['SHLINKCOM'].list[1].cmd_list += " $DEFGENERATOR\")}"
+    def defGenerator(target, source, env, for_signature):
+        return "/def:"+os.path.splitext(str(target[0]))[0]+".def"
+    baseEnv['DEFGENERATOR'] = defGenerator
+    baseEnv['SHLINKCOM'] = [os.path.join(externalLibraries['ROOT']['bin-path'], "bindexplib.exe") + " -o ${TARGET.base}.def ${TARGET.file} $SOURCES"] + baseEnv['SHLINKCOM']
+    baseEnv['SHLINKCOM'].list[1].cmd_list = baseEnv['SHLINKCOM'].list[1].cmd_list.rstrip('" )}')
+    baseEnv['SHLINKCOM'].list[1].cmd_list += " $DEFGENERATOR\")}"
 
-helpString+="""
-	with-root:		Location of ROOT headers/libraries.
-	with-root-includes	Location of ROOT headers.
-	with-root-libraries	Location of ROOT libraries.
-	with-root-binaries	Location of ROOT binaries.
-"""
 
-##########
-#  SWIG  #
-##########
-swigBinPath = binPaths('swig','1.3.31')
-swigIncludePath = includePaths('swig','1.3.31')
-if baseEnv['PLATFORM'] == "win32":
-	baseEnv.AppendENVPath('PATH', ';'+swigBinPath)
-	baseEnv.Tool('swig')
-baseEnv['SWIG']=os.path.join(swigBinPath,'swig')
-baseEnv.AppendUnique(SWIGPATH = [os.path.join(swigIncludePath, 'python'), swigIncludePath, baseEnv['INCDIR'], '.'])
+##############
+# Setup SWIG #
+##############
+baseEnv.PrependENVPath('PATH', [externalLibraries['swig']['bin-path']])
+baseEnv.Tool('swig')
+baseEnv.AppendUnique(SWIGPATH = [os.path.join(externalLibraries['swig']['include-path'], 'python'), externalLibraries['swig']['include-path'], baseEnv['INCDIR'], '.'])
 baseEnv.AppendUnique(SWIGFLAGS = ['-w401', '-w402', '-w503', '-w362', '-w389', '-w509', '-python', '-c++'])
-helpString+="""
-	with-swig		Location of SWIG headers/libraries.
-	with-swig-includes	Location of SWIG headers
-	with-swig-libraries	Location of SWIG libraries
-"""
-
-##########
-# Xerces #
-##########
-xercesIncludePath = includePaths('xerces','2.7.0')
-xercesLibPath = libPaths('xerces','2.7.0')
-if baseEnv['PLATFORM'] == "win32":
-	baseEnv['xercesLibs'] = Split('xerces-c_2')
-else:
-	baseEnv['xercesLibs'] = Split('xerces-c pthread')
-if xercesLibPath != '':
-	baseEnv.Append(LIBPATH = [xercesLibPath])
-if xercesIncludePath != '':
-	baseEnv.Append(CPPPATH = [xercesIncludePath])
-helpString+="""
-	with-xerces:		Location of Xerces headers/libraries.
-	with-xerces-includes:	Location of Xerces headers.
-	with-xerces-libraries:	Location of Xerces libraries.
-"""
-
-##########
-# cppunit#
-##########
-cppunitIncludePath = includePaths('cppunit','1.10.2')
-cppunitLibPath = libPaths('cppunit','1.10.2')
-if baseEnv['PLATFORM'] == "win32":
-	baseEnv['cppunitLibs'] = Split('CPPUNIT')
-else:
-	baseEnv['cppunitLibs'] = Split('cppunit dl')
-if cppunitLibPath != '':
-	baseEnv.Append(LIBPATH = [cppunitLibPath])
-if cppunitIncludePath != '':
-	baseEnv.Append(CPPPATH = [cppunitIncludePath])
-helpString+="""
-	with-cppunit:		Location of cppunit headers/libraries.
-	with-cppunit-includes:	Location of cppunit headers.
-	with-cppunit-libraries:	Location of cppunit libraries.
-"""
-
-##########
-# Python #
-##########
-pythonBinPath = binPaths('python','2.5.1')
-if baseEnv['PLATFORM'] == "win32":
-	pythonIncludePath = includePaths('python','2.5.1')
-	pythonLibPath = libPaths('python', '2.5.1')+'s'
-	baseEnv['pythonLibs'] = Split(File(os.path.join(libPaths('python', '2.5.1')+'s','python25.lib')))
-else:
-	pythonIncludePath = includePaths('python','2.5.1')+'/python2.5'
-	pythonLibPath = libPaths('python','2.5.1')+'/python2.5/config'
-	baseEnv['pythonLibs'] = Split('pthread dl util m python2.5')
-if pythonLibPath != '':
-	baseEnv.Append(LIBPATH = [pythonLibPath])
-#if pythonBinPath != '':
-#	env = Environment()
-#	env.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --ldflags')
-#	baseEnv['pythonLibs'] = env['LIBS']
-#	pythonLibs = env['LIBS']
-#	baseEnv.ParseConfig(os.path.join(pythonBinPath,'python-config')+' --includes')
-#	baseEnv.Append(LIBPATH = env['LIBPATH'])
-if pythonIncludePath != '':
-        baseEnv.Append(CPPPATH = [pythonIncludePath])
-helpString+="""
-        with-python:		Location of python headers/libraries.
-	with-python-includes:	Location of python headers.
-	with-python-libraries:	Location of python libraries
-
-	with-GLAST-EXT:        Location of all external libraries with GLAST_EXT layout.
-"""
-
-##########
-#   F2C  #
-##########
-if baseEnv['PLATFORM'] == "win32":
-	baseEnv['f2cLibs'] = Split('libf77mt.lib libi77mt.lib oldnames.lib')
-else:
-	baseEnv['f2cLibs'] = Split('g2c')
-
-Return('helpString')
