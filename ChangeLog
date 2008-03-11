@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Mar 10 22:19:59 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+revamp the way external libraries are declared
+    *
+------------------------------------------------------------
 User: glast  Fri Mar  7 16:45:28 PST 2008
 ScienceTools-scons
 
