@@ -52,8 +52,7 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
     externalLibraries['cppunit']['libraries']['cppunitLibs'] = ['CPPUNIT']
     externalLibraries['f2c']['libraries']['f2cLibs'] = ['libf77mt.lib', 'libi77mt.lib', 'oldnames.lib']
-    del externalLibraries['cfitsio']['libraries']['cfitsioLibs'][1]
-    del externalLibraries['ROOT']['libraries']['rootLibs'][11]
+    externalLibraries['cfitsio']['libraries']['cfitsioLibs'] = ['cfitsio']
 
 #############################################################################
 # Add SCons command line options to specify the location of these libraries #
