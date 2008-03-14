@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri Mar 14 14:57:05 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Use GetOption to change output for RM
+    *
+------------------------------------------------------------
 User: glast  Tue Mar 11 22:47:35 PDT 2008
 ScienceTools-scons
 
