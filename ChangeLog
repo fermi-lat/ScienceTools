@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Mar 19 14:33:52 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+rewrote listFiles function, added data directory
+    *
+------------------------------------------------------------
 User: glastrm  Wed Mar 19 13:45:31 PDT 2008
 ScienceTools-scons/site_scons/site_tools
 
