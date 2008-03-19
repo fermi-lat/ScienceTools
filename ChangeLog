@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Mar 19 13:45:31 PDT 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+Added code to install data files
+    *
+------------------------------------------------------------
 User: glastrm  Fri Mar 14 14:57:05 PDT 2008
 ScienceTools-scons
 
