@@ -137,7 +137,9 @@ for lib in externalLibraries.keys():
             baseEnv[libGroup] = externalLibraries[lib]['libraries'][libGroup]
     if 'cppdefines' in externalLibraries[lib]:
         for define in externalLibraries[lib]['cppdefines']:
-            define = define.replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT')).replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
+            if baseEnv.GetOption('GLAST-EXT'):
+                define = define.replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT'))
+            define = define.replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
             baseEnv.AppendUnique(CPPDEFINES = [define])
 
 ###########################################################
@@ -164,6 +166,8 @@ if not baseEnv.GetOption('help') and not baseEnv.GetOption('clean'):
 ############################
 
 baseEnv.AppendENVPath('LD_LIBRARY_PATH', [externalLibraries['ROOT']['lib-path']])
+if baseEnv["PLATFORM"] == 'darwin':
+    baseEnv.AppendENVPath('DYLD_LIBRARY_PATH', [externalLibraries['ROOT']['lib-path']])
 baseEnv.AppendENVPath('ROOTSYS', [os.path.normpath(os.path.join(externalLibraries['ROOT']['include-path'], '..'))])
 baseEnv.AppendENVPath('PATH', [externalLibraries['ROOT']['bin-path']])
 
