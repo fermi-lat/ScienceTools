@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Mar 26 11:31:48 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct externals.scons 
+Log Message:
+export packages found with SConscript files, ignore some well known directories, bug fix in external lib handling
+    *
+------------------------------------------------------------
 User: glastrm  Mon Mar 24 13:16:12 PDT 2008
 ScienceTools-scons
 
