@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Mar 26 17:55:22 PDT 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+Added ability to register python files
+    *
+------------------------------------------------------------
 User: glastrm  Wed Mar 26 17:55:21 PDT 2008
 ScienceTools-scons
 
