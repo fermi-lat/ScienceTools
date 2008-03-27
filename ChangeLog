@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Mar 26 17:55:21 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Added ability to register python files
+    *
+------------------------------------------------------------
 User: glastrm  Wed Mar 26 11:31:48 PDT 2008
 ScienceTools-scons
 
