@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri May  2 15:21:28 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+external library LD_LIBRARY_PATH can now use OS specific paths for windows
+    *
+------------------------------------------------------------
 User: glastrm  Fri May  2 10:29:28 PDT 2008
 ScienceTools-scons
 
