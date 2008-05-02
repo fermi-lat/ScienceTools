@@ -18,9 +18,9 @@ externalLibraries = {
   'ape'      : {'version' : '2.3-gl1', 'includes' : ['ape/ape_list.h'], 'libraries' : {'apeLibs' : ['ape', 'readline', 'termcap']},
                 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'), 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib')},
 
-  'ROOT'     : {'version' : 'v5.16.00-gl1', 'includes' : ['RVersion.h'], 'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
-                                                                                        'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
-                                                                                        'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
+  'ROOT'     : {'version' : 'v5.18.00b', 'includes' : ['RVersion.h'], 'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
+                                                                                     'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
+                                                                                     'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
                 'binaries' : ['rootcint'], 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','include'), 
                 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','lib'), 'bin-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','bin')},
 
