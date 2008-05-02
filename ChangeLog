@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri May  2 10:29:28 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+upgrade root to v5.18.00b
+    *
+------------------------------------------------------------
 User: glastrm  Wed Mar 26 17:55:22 PDT 2008
 ScienceTools-scons/site_scons/site_tools
 
