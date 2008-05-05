@@ -94,7 +94,7 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['ROOT']['ld-path'] = '$BIN-PATH'
 
     externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
-    externalLibraries['xerces']['bin-path'] = os.path.join('$GLAST-EXT','$NAME','$VERSION','root','bin'),
+    externalLibraries['xerces']['bin-path'] = os.path.join('$GLAST-EXT','$NAME','$VERSION','bin')
     externalLibraries['xerces']['ld-path'] = '$BIN-PATH'
 
     externalLibraries['cppunit']['libraries']['cppunitLibs'] = ['CPPUNIT']
