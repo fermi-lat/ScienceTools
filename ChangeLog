@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon May  5 12:45:14 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+define bin directory for xerces in windows
+    *
+------------------------------------------------------------
 User: glastrm  Mon May  5 09:13:14 PDT 2008
 ScienceTools-scons
 
