@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon May  5 13:35:11 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+fixed incorrect path name to xerces bin dir
+    *
+------------------------------------------------------------
 User: glastrm  Mon May  5 12:45:14 PDT 2008
 ScienceTools-scons
 
