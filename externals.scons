@@ -67,7 +67,7 @@ externalLibraries = {
                 'includes' : ['Python.h'],
                 'libraries' : {'pythonLibs'  : ['pthread', 'dl', 'util', 'm', 'python2.5']},
                 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include', 'python2.5'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib','python2.5','config')
+                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib','python2.5','config'),
                 'ld-path' : '$LIB-PATH'},
 
   'f2c'      : {'version' : '',
