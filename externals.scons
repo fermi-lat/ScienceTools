@@ -41,6 +41,7 @@ externalLibraries = {
                                'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
                 'binaries' : ['rootcint'], 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','include'), 
                 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','root','lib'),
+                 'bin-path' : os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'root', 'bin'),
                 'ld-path' : '$LIB-PATH'},
 
   'swig'     : {'version' : '1.3.31',
