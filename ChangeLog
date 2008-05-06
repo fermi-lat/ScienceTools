@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue May  6 12:30:52 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+root's bin path was mistakenly lost
+    *
+------------------------------------------------------------
 User: glastrm  Mon May  5 13:35:11 PDT 2008
 ScienceTools-scons
 
