@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu May  8 08:41:10 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons SConstruct 
+Log Message:
+use SCons' new features to obtain build failures
+    *
+------------------------------------------------------------
 User: glastrm  Tue May  6 12:30:52 PDT 2008
 ScienceTools-scons
 
