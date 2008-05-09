@@ -20,7 +20,7 @@ externalLibraries = {
                 'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','lib'),
                 'ld-path' : '$LIB-PATH'},
 
-  'cfitsio'  : {'version' : 'v3006',
+  'cfitsio'  : {'version' : 'v3060',
                 'includes' : ['fitsio.h'],
                 'libraries' : {'cfitsioLibs' : ['cfitsio', 'm']},
                 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','include'),
