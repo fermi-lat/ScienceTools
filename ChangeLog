@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Fri May  9 14:44:53 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+upgrade cfitsio
+    *
+------------------------------------------------------------
 User: glastrm  Thu May  8 08:41:10 PDT 2008
 ScienceTools-scons
 
