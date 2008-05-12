@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon May 12 11:50:48 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+require SConsc 0.98.3 or above to run
+    *
+------------------------------------------------------------
 User: glast  Fri May  9 14:44:53 PDT 2008
 ScienceTools-scons
 
