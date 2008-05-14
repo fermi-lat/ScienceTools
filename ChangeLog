@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed May 14 07:58:44 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Use new GLAST_EXT dir structure that's more cross platform
+    *
+------------------------------------------------------------
 User: glastrm  Mon May 12 11:50:48 PDT 2008
 ScienceTools-scons
 
