@@ -102,8 +102,6 @@ if baseEnv['PLATFORM'] == "win32":
 
     externalLibraries['cfitsio']['libraries']['cfitsioLibs'] = ['cfitsio']
 
-    externalLibraries['CLHEP']['lib-path']=os.path.join('$GLAST-EXT', '$NAME', '$VERSION', 'vcc-7.1')
-
     externalLibraries['python']['include-path']=os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include')
     externalLibraries['python']['lib-path']  = os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'libs')
     externalLibraries['python']['libraries']['pythonLibs'] = ['python25']
