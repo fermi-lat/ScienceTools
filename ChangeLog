@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed May 28 10:32:48 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+add -fPIC option when building on 64bit
+    *
+------------------------------------------------------------
 User: glast  Thu May 15 14:16:35 PDT 2008
 ScienceTools-scons
 
