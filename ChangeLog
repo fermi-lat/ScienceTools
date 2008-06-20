@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu Jun 19 17:05:56 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Added Author and Version fields
+    *
+------------------------------------------------------------
 User: glastrm  Wed May 28 10:32:48 PDT 2008
 ScienceTools-scons
 
