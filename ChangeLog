@@ -1,5 +1,15 @@
 ------------------------------------------------------------
 TAG
+Tag name: ScienceTools-09-06-03, operation: del
+Package: ScienceTools-scons
+User: glastrm  Wed Sep 17 13:13:17 2008
+Files:
+  ScienceTools-scons/externals.scons  1.33
+  ScienceTools-scons/SConstruct  1.26
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: ScienceTools-09-07-00, operation: del
 Package: ScienceTools-scons
 User: glastrm  Wed Sep 17 13:12:21 2008
