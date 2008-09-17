@@ -2,6 +2,16 @@
 TAG
 Tag name: ScienceTools-09-07-00, operation: del
 Package: ScienceTools-scons
+User: glastrm  Wed Sep 17 13:12:21 2008
+Files:
+  ScienceTools-scons/site_scons/site_tools/registerObjects.py  1.5
+  ScienceTools-scons/site_scons/site_tools/addLibrary.py  1.1
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-07-00, operation: del
+Package: ScienceTools-scons
 User: glastrm  Wed Sep 17 13:11:30 2008
 Files:
   ScienceTools-scons/externals.scons  1.33
