@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri Sep 19 16:15:00 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Add target that performs no action
+    *
+------------------------------------------------------------
 User: glastrm  Fri Sep 19 14:44:14 PDT 2008
 ScienceTools-scons
 
