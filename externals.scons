@@ -207,7 +207,8 @@ for lib in externalLibraries.keys():
 # Check to make sure external libraries and headers exist #
 ###########################################################
 if not baseEnv.GetOption('help') and not baseEnv.GetOption('clean'):
-    conf = baseEnv.Configure()
+    env = baseEnv.Clone()
+    conf = env.Configure()
     for lib in externalLibraries.keys():
         if 'includes' in externalLibraries[lib] and 'include-path' in externalLibraries[lib]:
             for include in externalLibraries[lib]['includes']:
