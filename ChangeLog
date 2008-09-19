@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri Sep 19 14:44:14 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+clone environment before creating configure object
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-06-00, operation: del
 Package: ScienceTools-scons
