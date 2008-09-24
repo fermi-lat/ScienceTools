@@ -1,5 +1,16 @@
 ------------------------------------------------------------
 User: glastrm  Wed Sep 24 14:47:04 PDT 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Added Files:
+	generateScript.py 
+Log Message:
+SCons now produces wrapper scripts
+    *
+------------------------------------------------------------
+User: glastrm  Wed Sep 24 14:47:04 PDT 2008
 ScienceTools-scons
 
 Modified Files:
