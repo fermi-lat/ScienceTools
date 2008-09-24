@@ -1,3 +1,4 @@
+# -*- python -*-
 import os,platform
 Import('baseEnv')
 
@@ -5,77 +6,77 @@ Import('baseEnv')
 # Basic data structure to represent the external libraries we need #
 ####################################################################
 externalLibraries = {
+    
+    'CLHEP'    : {'version' : '1.9.2.2',
+                  'includes' : ['CLHEP/config/CLHEP.h'],
+                  'libraries' : {'clhepLibs'   : ['CLHEP']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'include'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'lib'),
+                  'ld-path' : '$LIB-PATH'},
+    
+    'fftw'     : {'version' : '3.1.2',
+                  'includes' : ['fftw/fftw3.h'],
+                  'libraries' : {'fftwLibs' : ['fftw3']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'include'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','lib'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'CLHEP'    : {'version' : '1.9.2.2',
-                'includes' : ['CLHEP/config/CLHEP.h'],
-                'libraries' : {'clhepLibs'   : ['CLHEP']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'lib'),
-                'ld-path' : '$LIB-PATH'},
+    'cfitsio'  : {'version' : 'v3060',
+                  'includes' : ['fitsio.h'],
+                  'libraries' : {'cfitsioLibs' : ['cfitsio', 'm']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','include'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'lib'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'fftw'     : {'version' : '3.1.2',
-                'includes' : ['fftw/fftw3.h'],
-                'libraries' : {'fftwLibs' : ['fftw3']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER','lib'),
-                'ld-path' : '$LIB-PATH'},
+    'ape'      : {'version' : '2.3-gl1',
+                  'includes' : ['ape/ape_list.h'],
+                  'libraries' : {'apeLibs' : ['ape', 'readline', 'termcap']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'include'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'lib'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'cfitsio'  : {'version' : 'v3060',
-                'includes' : ['fitsio.h'],
-                'libraries' : {'cfitsioLibs' : ['cfitsio', 'm']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER','include'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'lib'),
-                'ld-path' : '$LIB-PATH'},
+    'ROOT'     : {'version' : 'v5.18.00b-gl1',
+                  'includes' : ['RVersion.h'],
+                  'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
+                                 'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
+                                 'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
+                  'binaries' : ['rootcint'], 'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','include'), 
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','lib'),
+                  'bin-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'bin'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'ape'      : {'version' : '2.3-gl1',
-                'includes' : ['ape/ape_list.h'],
-                'libraries' : {'apeLibs' : ['ape', 'readline', 'termcap']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'lib'),
-                'ld-path' : '$LIB-PATH'},
+    'swig'     : {'version' : '1.3.31',
+                  'binaries' : ['swig'],
+                  'bin-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'bin'),
+                  'include-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'include')},
+    
+    'xerces'   : {'version' : '2.7.0',
+                  'includes' : ['xercesc/util/XercesVersion.hpp'],
+                  'libraries' : {'xercesLibs'  : ['xerces-c', 'pthread']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'include'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'lib'),
+                  'bin-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'bin'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'ROOT'     : {'version' : 'v5.18.00b-gl1',
-                'includes' : ['RVersion.h'],
-                'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
-                               'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
-                               'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
-                'binaries' : ['rootcint'], 'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER','include'), 
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER','lib'),
-                 'bin-path' : os.path.join('$GLAST-EXT', '$NAME', '$VERSION', '$COMPILER', 'bin'),
-                'ld-path' : '$LIB-PATH'},
+    'cppunit'  : {'version' : '1.10.2',
+                  'includes' : ['cppunit/ui/text/TextTestRunner.h'],
+                  'libraries' : {'cppunitLibs' : ['cppunit', 'dl']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'include'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','lib'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'swig'     : {'version' : '1.3.31',
-                'binaries' : ['swig'],
-                'bin-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'bin'),
-                'include-path' : os.path.join('$GLAST-EXT', '$NAME', '$VERSION', '$COMPILER', 'include')},
+    'python'   : {'version' : '2.5.1',
+                  'includes' : ['Python.h'],
+                  'libraries' : {'pythonLibs'  : ['pthread', 'dl', 'util', 'm', 'python2.5']},
+                  'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION', '$COMPILER', 'include', 'python2.5'),
+                  'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION', '$COMPILER', 'lib','python2.5','config'),
+                  'ld-path' : '$LIB-PATH'},
 
-  'xerces'   : {'version' : '2.7.0',
-                'includes' : ['xercesc/util/XercesVersion.hpp'],
-                'libraries' : {'xercesLibs'  : ['xerces-c', 'pthread']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'lib'),
-                'bin-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'bin'),
-                'ld-path' : '$LIB-PATH'},
-
-  'cppunit'  : {'version' : '1.10.2',
-                'includes' : ['cppunit/ui/text/TextTestRunner.h'],
-                'libraries' : {'cppunitLibs' : ['cppunit', 'dl']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER','lib'),
-                'ld-path' : '$LIB-PATH'},
-
-  'python'   : {'version' : '2.5.1',
-                'includes' : ['Python.h'],
-                'libraries' : {'pythonLibs'  : ['pthread', 'dl', 'util', 'm', 'python2.5']},
-                'include-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION', '$COMPILER', 'include', 'python2.5'),
-                'lib-path' : os.path.join('$GLAST-EXT','$NAME','$VERSION', '$COMPILER', 'lib','python2.5','config'),
-                'ld-path' : '$LIB-PATH'},
-
-  'f2c'      : {'version' : '',
-                'libraries' : {'f2cLibs' : ['g2c']}},
-
-  'extFiles' : {'version' : 'v0r7',
-                'cppdefines' : ['extFiles=$VERSION']}
+    'f2c'      : {'version' : '',
+                  'libraries' : {'f2cLibs' : ['g2c']}},
+    
+    'extFiles' : {'version' : 'v0r7',
+                  'cppdefines' : ['extFiles=$VERSION']}
 }
 
 ##############################################################
@@ -93,7 +94,7 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['ROOT']['ld-path'] = '$BIN-PATH'
 
     externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
-    externalLibraries['xerces']['bin-path'] = os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'bin')
+    externalLibraries['xerces']['bin-path'] = os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'bin')
     externalLibraries['xerces']['ld-path'] = '$BIN-PATH'
 
     externalLibraries['cppunit']['libraries']['cppunitLibs'] = ['CPPUNIT']
@@ -102,8 +103,8 @@ if baseEnv['PLATFORM'] == "win32":
 
     externalLibraries['cfitsio']['libraries']['cfitsioLibs'] = ['cfitsio']
 
-    externalLibraries['python']['include-path']=os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'include')
-    externalLibraries['python']['lib-path']  = os.path.join('$GLAST-EXT','$NAME','$VERSION','$COMPILER', 'libs')
+    externalLibraries['python']['include-path']=os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'include')
+    externalLibraries['python']['lib-path']  = os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'libs')
     externalLibraries['python']['libraries']['pythonLibs'] = ['python25']
 
 ############################################################################
@@ -119,16 +120,6 @@ for lib in externalLibraries.keys():
             externalLibraries[lib][path] = externalLibraries[lib][path].replace('$COMPILER', compiler)
             externalLibraries[lib][path] = externalLibraries[lib][path].replace('$VERSION', externalLibraries[lib]['version'])
             externalLibraries[lib][path] = externalLibraries[lib][path].replace('$NAME', lib)
-
-########################################
-# Set up GLAST-EXT if it was specified #
-########################################
-AddOption('--with-GLAST-EXT', dest = 'GLAST-EXT', nargs=1, type='string', action='store', metavar='DIR', help='location of GLAST-EXT type directory layout for external libraries')
-if baseEnv.GetOption('GLAST-EXT'):
-    for lib in externalLibraries.keys():
-        for path in ['include-path', 'lib-path', 'bin-path']:
-            if path in externalLibraries[lib]:
-                externalLibraries[lib][path] = externalLibraries[lib][path].replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT'))
 
 ############################################
 # Add options to override paths if desired #
@@ -163,6 +154,28 @@ for lib in externalLibraries.keys():
         if 'bin-path'  in externalLibraries[lib]:
             if baseEnv.GetOption(lib+'-binaries'):
                 externalLibraries[lib]['bin-path'] = baseEnv.GetOption(lib+'-binaries')
+
+#################################################################
+# Register all external libraries to be used in wrapper scripts #
+#################################################################
+for lib in externalLibraries.keys():
+    if 'ld-path' in externalLibraries[lib] and 'version' in externalLibraries[lib]:
+        if 'lib-path' in externalLibraries[lib]:
+            externalLibraries[lib]['ld-path'] = externalLibraries[lib]['ld-path'].replace('$LIB-PATH', externalLibraries[lib]['lib-path'])
+        if 'bin-path' in externalLibraries[lib]:
+            externalLibraries[lib]['ld-path'] = externalLibraries[lib]['ld-path'].replace('$BIN-PATH', externalLibraries[lib]['bin-path'])
+        baseEnv.AppendUnique(WRAPPERLIBS = [externalLibraries[lib]['ld-path']])
+baseEnv['ROOTSYS'] = os.path.normpath(os.path.join(externalLibraries['ROOT']['include-path'], '..'))
+
+########################################
+# Set up GLAST-EXT if it was specified #
+########################################
+AddOption('--with-GLAST-EXT', dest = 'GLAST-EXT', nargs=1, type='string', action='store', metavar='DIR', help='location of GLAST_EXT type directory layout for external libraries')
+if baseEnv.GetOption('GLAST-EXT'):
+    for lib in externalLibraries.keys():
+        for path in ['include-path', 'lib-path', 'bin-path']:
+            if path in externalLibraries[lib]:
+                externalLibraries[lib][path] = externalLibraries[lib][path].replace('$GLAST_EXT', baseEnv.GetOption('GLAST-EXT'))
 
 ######################################
 # Add paths to the compile/link line #
@@ -199,7 +212,7 @@ for lib in externalLibraries.keys():
     if 'cppdefines' in externalLibraries[lib]:
         for define in externalLibraries[lib]['cppdefines']:
             if baseEnv.GetOption('GLAST-EXT'):
-                define = define.replace('$GLAST-EXT', baseEnv.GetOption('GLAST-EXT'))
+                define = define.replace('$GLAST_EXT', baseEnv.GetOption('GLAST-EXT'))
             define = define.replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
             baseEnv.AppendUnique(CPPDEFINES = [define])
 
