@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Sep 24 20:43:14 PDT 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Remove install target and prefix option. Simplify generateScript slightly
+    *
+------------------------------------------------------------
 User: glastrm  Wed Sep 24 14:47:04 PDT 2008
 ScienceTools-scons/site_scons/site_tools
 
