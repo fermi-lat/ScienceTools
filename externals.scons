@@ -35,7 +35,7 @@ externalLibraries = {
                   'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'lib'),
                   'ld-path' : '$LIB-PATH'},
 
-    'ROOT'     : {'version' : 'v5.18.00b-gl1',
+    'ROOT'     : {'version' : 'v5.18.00c-gl1',
                   'includes' : ['RVersion.h'],
                   'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
                                  'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
