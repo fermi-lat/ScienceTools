@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Sep 30 12:17:09 PDT 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Added generic setup script and windows wrapper scripts
+    *
+------------------------------------------------------------
 User: glastrm  Thu Sep 25 14:09:38 PDT 2008
 ScienceTools-scons
 
