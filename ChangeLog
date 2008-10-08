@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Oct  8 11:31:56 PDT 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Fixed bugs in windows wrapper script. Thanks for debugging, Joanne!
+    *
+------------------------------------------------------------
 User: glastrm  Tue Sep 30 12:17:09 PDT 2008
 ScienceTools-scons/site_scons/site_tools
 
