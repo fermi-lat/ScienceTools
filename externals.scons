@@ -39,7 +39,7 @@ externalLibraries = {
                   'includes' : ['RVersion.h'],
                   'libraries' : {'rootLibs' : ['Tree', 'Net', 'Gpad', 'Graf', 'RIO', 'Hist', 'Physics', 'Matrix', 'Core', 'Cint', 'pthread', 'm', 'dl'],
                                  'rootGuiLibs' : ['Rint', 'Postscript', 'TreePlayer', 'Tree', 'Net', 'Graf3d', 'Gui', 'HistPainter', 'Gpad'],
-                                 'minuitLibs'  : ['Minuit2', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
+                                 'minuitLibs'  : ['Minuit2', 'Minuit', 'Graf', 'RIO', 'Hist', 'Matrix', 'Core', 'Cint']},
                   'binaries' : ['rootcint'], 'include-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','include'), 
                   'lib-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','lib'),
                   'bin-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'bin'),
@@ -283,5 +283,5 @@ if baseEnv['PLATFORM'] == "win32":
 ##############
 baseEnv.PrependENVPath('PATH', [externalLibraries['swig']['bin-path']])
 baseEnv.Tool('swig')
-baseEnv.AppendUnique(SWIGPATH = [os.path.join(externalLibraries['swig']['include-path'], 'python'), externalLibraries['swig']['include-path'], baseEnv['INCDIR'], '.'])
+baseEnv.AppendUnique(SWIGPATH = [baseEnv['CPPPATH'], os.path.join(externalLibraries['swig']['include-path'], 'python'), externalLibraries['swig']['include-path'], baseEnv['INCDIR'], '.'])
 baseEnv.AppendUnique(SWIGFLAGS = ['-w401', '-w402', '-w503', '-w362', '-w389', '-w509', '-python', '-c++'])
