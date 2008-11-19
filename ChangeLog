@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Nov 19 13:34:21 PST 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+recursive copy header files into include directory
+    *
+------------------------------------------------------------
 User: glastrm  Wed Nov 19 12:50:18 PST 2008
 ScienceTools-scons
 
