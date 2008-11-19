@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Nov 19 12:50:18 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Added Minuit as an external library and CPPPATH appended to SWIGPATH
+    *
+------------------------------------------------------------
 User: glastrm  Wed Nov 19 12:49:41 PST 2008
 ScienceTools-scons
 
