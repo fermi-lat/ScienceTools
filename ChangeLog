@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Nov 19 21:50:28 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Removed Gaudi Builder
+    *
+------------------------------------------------------------
 User: glastrm  Wed Nov 19 21:45:09 PST 2008
 ScienceTools-scons
 
