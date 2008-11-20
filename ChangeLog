@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Nov 19 21:45:09 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Fixed auto spacing. Added exclude option
+    *
+------------------------------------------------------------
 User: glastrm  Wed Nov 19 13:34:21 PST 2008
 ScienceTools-scons/site_scons/site_tools
 
