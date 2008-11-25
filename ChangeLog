@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Nov 25 11:49:34 PST 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+Added Emmanuel's fixes to allow non File objects to be registered
+    *
+------------------------------------------------------------
 User: glastrm  Tue Nov 25 11:28:57 PST 2008
 ScienceTools-scons
 
