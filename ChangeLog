@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Nov 25 17:23:57 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Move exclude before version decision
+    *
+------------------------------------------------------------
 User: glastrm  Tue Nov 25 11:49:34 PST 2008
 ScienceTools-scons/site_scons/site_tools
 
