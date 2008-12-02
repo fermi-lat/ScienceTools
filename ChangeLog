@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Dec  2 15:35:51 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Added override option
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-08-03, operation: add
 Package: ScienceTools-scons
