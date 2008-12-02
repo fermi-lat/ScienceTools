@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 User: glastrm  Tue Dec  2 15:35:51 PST 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+Added override option
+    *
+------------------------------------------------------------
+User: glastrm  Tue Dec  2 15:35:51 PST 2008
 ScienceTools-scons
 
 Modified Files:
