@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Dec  3 13:55:09 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+revert back to --supersede. --override seems to be already reserved
+    *
+------------------------------------------------------------
 User: glastrm  Tue Dec  2 15:35:51 PST 2008
 ScienceTools-scons/site_scons/site_tools
 
