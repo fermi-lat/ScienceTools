@@ -1,4 +1,17 @@
 ------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-09-00, operation: add
+Package: ScienceTools-scons
+User: glastrm  Thu Dec  4 21:34:25 2008
+Files:
+  ScienceTools-scons/SConstruct  1.37
+  ScienceTools-scons/externals.scons  1.37
+  ScienceTools-scons/site_scons/site_tools/generateScript.py  1.7
+  ScienceTools-scons/site_scons/site_tools/registerObjects.py  1.9
+  ScienceTools-scons/site_scons/site_tools/addLibrary.py  1.1
+
+    *
+------------------------------------------------------------
 User: glastrm  Wed Dec  3 13:55:09 PST 2008
 ScienceTools-scons
 
