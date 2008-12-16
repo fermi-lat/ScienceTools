@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Dec 16 09:55:06 PST 2008
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Log Message:
+bug fix for where xml and data files are put
+    *
+------------------------------------------------------------
 User: glastrm  Tue Dec 16 09:54:44 PST 2008
 ScienceTools-scons
 
