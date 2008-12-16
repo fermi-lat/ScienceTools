@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Dec 16 09:54:44 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+removed debug output form SConstruct
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-09-00, operation: add
 Package: ScienceTools-scons
