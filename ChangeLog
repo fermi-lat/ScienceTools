@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Dec 17 21:58:52 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+store config information in supersede directory
+    *
+------------------------------------------------------------
 User: glastrm  Tue Dec 16 09:55:06 PST 2008
 ScienceTools-scons/site_scons/site_tools
 
