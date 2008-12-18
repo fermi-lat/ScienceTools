@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu Dec 18 15:10:57 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Added option to create user releases of a build
+    *
+------------------------------------------------------------
 User: glastrm  Wed Dec 17 21:58:52 PST 2008
 ScienceTools-scons
 
