@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Dec 22 10:10:44 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Fix for os detection on macs
+    *
+------------------------------------------------------------
 User: glastrm  Thu Dec 18 15:10:57 PST 2008
 ScienceTools-scons
 
