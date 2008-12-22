@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Dec 22 13:04:37 PST 2008
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+don't use reversed() function since it doesn't exist on python2.3 used on the mac. remove util from link line for the mac
+    *
+------------------------------------------------------------
 User: glastrm  Mon Dec 22 10:10:44 PST 2008
 ScienceTools-scons
 
