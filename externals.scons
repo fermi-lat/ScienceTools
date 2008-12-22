@@ -107,6 +107,9 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['python']['lib-path']  = os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'libs')
     externalLibraries['python']['libraries']['pythonLibs'] = ['python25']
 
+if baseEnv['PLATFORM'] == 'darwin':
+    externalLibraries['python']['libraries']['pythonLibs'].remove('util')
+
 ############################################################################
 # Set the correct compiler version, name, and library version in the paths #
 ############################################################################
@@ -230,7 +233,7 @@ if not baseEnv.GetOption('help') and not baseEnv.GetOption('clean'):
                     Exit(1)
         if 'libraries' in externalLibraries[lib] and 'lib-path' in externalLibraries[lib]:
             for libGroup in externalLibraries[lib]['libraries'].keys():
-                for library in reversed(externalLibraries[lib]['libraries'][libGroup]):
+                for library in externalLibraries[lib]['libraries'][libGroup][::-1]:
                     if not conf.CheckLib(library, language = 'C++'):
                         print 'Unable to find a library for '+lib+'. See config.log for more details.'
                         Exit(1)
