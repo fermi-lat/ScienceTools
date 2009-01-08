@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 TAG
+Tag name: GlastRelease-15-49-00, operation: del
+Package: ScienceTools-scons
+User: glastrm  Thu Jan  8 11:54:43 2009
+Files:
+  ScienceTools-scons/SConstruct  1.41
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: GlastRelease-15-49-00, operation: add
 Package: ScienceTools-scons
 User: glastrm  Thu Jan  8 11:07:49 2009
