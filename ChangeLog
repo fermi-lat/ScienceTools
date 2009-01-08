@@ -2,6 +2,15 @@
 TAG
 Tag name: GlastRelease-15-49-00, operation: del
 Package: ScienceTools-scons
+User: glastrm  Thu Jan  8 11:54:50 2009
+Files:
+  ScienceTools-scons/externals.scons  1.38
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: GlastRelease-15-49-00, operation: del
+Package: ScienceTools-scons
 User: glastrm  Thu Jan  8 11:54:43 2009
 Files:
   ScienceTools-scons/SConstruct  1.41
