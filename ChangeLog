@@ -1,4 +1,17 @@
 ------------------------------------------------------------
+TAG
+Tag name: GlastRelease-15-49-00, operation: add
+Package: ScienceTools-scons
+User: glastrm  Thu Jan  8 11:07:49 2009
+Files:
+  ScienceTools-scons/SConstruct  1.41
+  ScienceTools-scons/externals.scons  1.38
+  ScienceTools-scons/site_scons/site_tools/generateScript.py  1.7
+  ScienceTools-scons/site_scons/site_tools/registerObjects.py  1.10
+  ScienceTools-scons/site_scons/site_tools/addLibrary.py  1.1
+
+    *
+------------------------------------------------------------
 User: glastrm  Mon Dec 22 13:04:37 PST 2008
 ScienceTools-scons
 
