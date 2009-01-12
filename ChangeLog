@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Jan 12 13:21:00 PST 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Only set INST_DIR when not creating _setup. Pass arguments to calling executable
+    *
+------------------------------------------------------------
 TAG
 Tag name: GlastRelease-15-50-10, operation: add
 Package: ScienceTools-scons
