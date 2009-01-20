@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Jan 20 11:51:04 PST 2009
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Remove debug output
+    *
+------------------------------------------------------------
 User: glastrm  Tue Jan 20 11:35:21 PST 2009
 ScienceTools-scons
 
