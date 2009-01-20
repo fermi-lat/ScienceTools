@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Jan 20 11:35:21 PST 2009
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+bug fix with supersede having 2 different names for tool directory
+    *
+------------------------------------------------------------
 User: glastrm  Mon Jan 12 13:21:00 PST 2009
 ScienceTools-scons/site_scons/site_tools
 
