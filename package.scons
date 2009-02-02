@@ -1,0 +1,6 @@
+# -*- python -*-
+# $Header$
+
+Import('baseEnv')
+
+baseEnv.AppendUnique(CPPDEFINES = ['ScienceTools'])
