@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Feb  2 10:09:04 PST 2009
+ScienceTools-scons
+
+Added Files:
+	package.scons 
+Log Message:
+Package specific compile options
+    *
+------------------------------------------------------------
 User: glastrm  Tue Jan 20 11:51:04 PST 2009
 ScienceTools-scons
 
