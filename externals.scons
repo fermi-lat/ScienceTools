@@ -109,6 +109,10 @@ if baseEnv['PLATFORM'] == "win32":
 
 if baseEnv['PLATFORM'] == 'darwin':
     externalLibraries['python']['libraries']['pythonLibs'].remove('util')
+    externalLibraries['f2c']['version'] = "3.4"
+    externalLibraries['f2c']['lib-path'] = os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','lib')
+    externalLibraries['f2c']['ld-path'] = '$LIB-PATH'
+    
 
 ############################################################################
 # Set the correct compiler version, name, and library version in the paths #
