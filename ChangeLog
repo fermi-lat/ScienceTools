@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Feb 25 13:45:37 PST 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+mac requires f2c as an external library
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-10-00, operation: add
 Package: ScienceTools-scons
