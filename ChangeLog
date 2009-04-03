@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri Apr  3 08:33:58 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+add TRAP_FPE when in linux
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-11-00, operation: add
 Package: ScienceTools-scons
