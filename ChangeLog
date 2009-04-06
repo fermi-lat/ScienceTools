@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Apr  6 10:35:37 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Add changes required for python on mac
+    *
+------------------------------------------------------------
 User: glastrm  Fri Apr  3 08:33:58 PDT 2009
 ScienceTools-scons
 
