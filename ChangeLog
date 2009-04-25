@@ -1,4 +1,16 @@
 ------------------------------------------------------------
+User: jrb  Fri Apr 24 19:04:02 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+1. Changes so swig works on remote sites
+2. For Windows export set of libraries, swig stuff for use in creating
+   _setup.bat and making solution files
+
+    *
+------------------------------------------------------------
 User: glastrm  Mon Apr  6 10:35:37 PDT 2009
 ScienceTools-scons
 
