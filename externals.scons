@@ -48,7 +48,7 @@ externalLibraries = {
     'swig'     : {'version' : '1.3.31',
                   'binaries' : ['swig'],
                   'bin-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'bin'),
-                  'include-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'include')},
+                  'share-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'share')},
     
     'xerces'   : {'version' : '2.7.0',
                   'includes' : ['xercesc/util/XercesVersion.hpp'],
@@ -93,6 +93,8 @@ if baseEnv['PLATFORM'] == "win32":
     externalLibraries['ROOT']['libraries']['minuitLibs'] = ['libMinuit2']
     externalLibraries['ROOT']['ld-path'] = '$BIN-PATH'
 
+    externalLibraries['swig']['share-path']=os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'include')
+
     externalLibraries['xerces']['libraries']['xercesLibs'] = ['xerces-c_2']
     externalLibraries['xerces']['bin-path'] = os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'bin')
     externalLibraries['xerces']['ld-path'] = '$BIN-PATH'
@@ -126,7 +128,7 @@ if baseEnv['PLATFORM'] == "win32":
 else:
     compiler = 'gcc'+''.join(baseEnv['CXXVERSION'].split('.')[0:2])
 for lib in externalLibraries.keys():
-    for path in ['include-path', 'lib-path', 'bin-path']:
+    for path in ['include-path', 'lib-path', 'bin-path', 'share-path']:
         if path in externalLibraries[lib]:
             externalLibraries[lib][path] = externalLibraries[lib][path].replace('$COMPILER', compiler)
             externalLibraries[lib][path] = externalLibraries[lib][path].replace('$VERSION', externalLibraries[lib]['version'])
@@ -184,7 +186,7 @@ baseEnv['ROOTSYS'] = os.path.normpath(os.path.join(externalLibraries['ROOT']['in
 AddOption('--with-GLAST-EXT', dest = 'GLAST-EXT', nargs=1, type='string', action='store', metavar='DIR', help='location of GLAST_EXT type directory layout for external libraries')
 if baseEnv.GetOption('GLAST-EXT'):
     for lib in externalLibraries.keys():
-        for path in ['include-path', 'lib-path', 'bin-path']:
+        for path in ['include-path', 'lib-path', 'bin-path', 'share-path']:
             if path in externalLibraries[lib]:
                 externalLibraries[lib][path] = externalLibraries[lib][path].replace('$GLAST_EXT', baseEnv.GetOption('GLAST-EXT'))
 
@@ -215,17 +217,26 @@ if baseEnv.GetOption('rm'):
 
 ###########################################################
 # Register various compile options for external libraries #
+# Also (windows only) make set of libraries, needed when  #
+# generating solution files                               #
 ###########################################################
+extlibSet = set()
 for lib in externalLibraries.keys():
     if 'libraries' in externalLibraries[lib]:
         for libGroup in externalLibraries[lib]['libraries'].keys():
             baseEnv[libGroup] = externalLibraries[lib]['libraries'][libGroup]
+            if baseEnv['PLATFORM'] == 'win32':
+                for xlib in baseEnv[libGroup]:
+                    extlibSet.add(xlib)
     if 'cppdefines' in externalLibraries[lib]:
         for define in externalLibraries[lib]['cppdefines']:
             if baseEnv.GetOption('GLAST-EXT'):
                 define = define.replace('$GLAST_EXT', baseEnv.GetOption('GLAST-EXT'))
             define = define.replace('$VERSION', externalLibraries[lib]['version']).replace('$NAME', lib)
             baseEnv.AppendUnique(CPPDEFINES = [define])
+
+if baseEnv['PLATFORM'] == 'win32':
+    baseEnv['extlibSet'] = extlibSet
 
 ###########################################################
 # Check to make sure external libraries and headers exist #
@@ -294,5 +305,15 @@ if baseEnv['PLATFORM'] == "win32":
 ##############
 baseEnv.PrependENVPath('PATH', [externalLibraries['swig']['bin-path']])
 baseEnv.Tool('swig')
-baseEnv.AppendUnique(SWIGPATH = [baseEnv['CPPPATH'], os.path.join(externalLibraries['swig']['include-path'], 'python'), externalLibraries['swig']['include-path'], baseEnv['INCDIR'], '.'])
+
+#Need to make swig defns accessible so generateScript can write
+# them to _setup.bat
+if baseEnv['PLATFORM'] == 'win32':
+    baseEnv['SWIGEXEPATH'] = externalLibraries['swig']['bin-path']
+    bseEnv['SWIG_LIB'] = externalLibraries['swig']['share-path']
+    
+baseEnv.AppendUnique(SWIGPATH = [baseEnv['CPPPATH'], os.path.join(externalLibraries['swig']['share-path'], 'python'), externalLibraries['swig']['share-path'], baseEnv['INCDIR'], '.'])
 baseEnv.AppendUnique(SWIGFLAGS = ['-w401', '-w402', '-w503', '-w362', '-w389', '-w509', '-python', '-c++'])
+
+
+
