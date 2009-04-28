@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Tue Apr 28 14:39:23 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use quotes around definition to force it as a string
+    *
+------------------------------------------------------------
 User: jrb  Fri Apr 24 19:04:02 PDT 2009
 ScienceTools-scons
 
