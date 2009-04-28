@@ -76,7 +76,7 @@ externalLibraries = {
                   'libraries' : {'f2cLibs' : ['g2c']}},
     
     'extFiles' : {'version' : 'v0r7',
-                  'cppdefines' : ['extFiles=$VERSION']}
+                  'cppdefines' : ['extFiles=\\"$VERSIO\\"N']}
 }
 
 ##############################################################
