@@ -310,7 +310,7 @@ baseEnv.Tool('swig')
 # them to _setup.bat
 if baseEnv['PLATFORM'] == 'win32':
     baseEnv['SWIGEXEPATH'] = externalLibraries['swig']['bin-path']
-    bseEnv['SWIG_LIB'] = externalLibraries['swig']['share-path']
+    baseEnv['SWIG_LIB'] = externalLibraries['swig']['share-path']
     
 baseEnv.AppendUnique(SWIGPATH = [baseEnv['CPPPATH'], os.path.join(externalLibraries['swig']['share-path'], 'python'), externalLibraries['swig']['share-path'], baseEnv['INCDIR'], '.'])
 baseEnv.AppendUnique(SWIGFLAGS = ['-w401', '-w402', '-w503', '-w362', '-w389', '-w509', '-python', '-c++'])
