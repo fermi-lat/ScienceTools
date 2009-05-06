@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Tue May  5 18:25:29 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Set correct value for Linux swig share path 
+
+    *
+------------------------------------------------------------
 User: glastrm  Wed Apr 29 12:43:54 PDT 2009
 ScienceTools-scons
 
