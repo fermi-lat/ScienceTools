@@ -48,7 +48,7 @@ externalLibraries = {
     'swig'     : {'version' : '1.3.31',
                   'binaries' : ['swig'],
                   'bin-path' : os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER', 'bin'),
-                  'share-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'share')},
+                  'share-path' : os.path.join('$GLAST_EXT', '$NAME', '$VERSION', '$COMPILER', 'share', 'swig', '$VERSION')},
     
     'xerces'   : {'version' : '2.7.0',
                   'includes' : ['xercesc/util/XercesVersion.hpp'],
