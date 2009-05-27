@@ -118,6 +118,7 @@ if baseEnv['PLATFORM'] == 'darwin':
     externalLibraries['f2c']['version'] = "3.4"
     externalLibraries['f2c']['lib-path'] = os.path.join('$GLAST_EXT','$NAME','$VERSION','$COMPILER','lib')
     externalLibraries['f2c']['ld-path'] = '$LIB-PATH'
+    externalLibraries['xerces']['version'] = "2.7.0-gl1"
     
 
 ############################################################################
