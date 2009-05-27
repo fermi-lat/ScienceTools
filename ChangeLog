@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed May 27 12:04:45 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use bug fixed version of xerces on the mac
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-13-00, operation: add
 Package: ScienceTools-scons
