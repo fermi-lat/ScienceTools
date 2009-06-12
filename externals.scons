@@ -3,26 +3,26 @@ import os,platform
 Import('baseEnv')
 
 usedExternals = []
-usedExternals += { 'name' : 'CLHEP', 'iversion' : '1.9.2.2' }
-usedExternals += { 'name' : 'fftw', 'iversion' : '3.1.2' }
-usedExternals += { 'name' : 'cfitsio', 'iversion' : 'v3060' }
-usedExternals += { 'name' : 'ape', 'iversion' : '2.3-gl1' }
+usedExternals.append({ 'name' : 'CLHEP', 'iversion' : '1.9.2.2' })
+usedExternals.append({ 'name' : 'fftw', 'iversion' : '3.1.2' })
+usedExternals.append({ 'name' : 'cfitsio', 'iversion' : 'v3060' })
+usedExternals.append({ 'name' : 'ape', 'iversion' : '2.3-gl1' })
 
 if baseEnv['PLATFORM'] == 'win32':
-    usedExternals += { 'name' : 'ROOT', 'iversion' : 'v5.18.00b' }
+    usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00b' })
 else:
-    usedExternals += { 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' }
+    usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
 
 if baseEnv['PLATFORM'] == 'darwin':
-    usedExternals += { 'name' : 'xerces', 'iversion' : '2.7.0-gl1' }
-    usedExternals += { 'name' : 'python', 'iversion' : '2.5.1-gl1' }
+    usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0-gl1' })
+    usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1-gl1' })
 else:
-    usedExternals += { 'name' : 'xerces', 'iversion' : '2.7.0' }
-    usedExternals += { 'name' : 'python', 'iversion' : '2.5.1' }
+    usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0' })
+    usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1' })
 
-usedExternals += { 'name' : 'swig', 'iversion' : '1.3.31' }
-usedExternals += { 'name' : 'cppunit', 'iversion' : '1.10.2' }
-usedExternals += { 'name' : 'f2c', 'iversion' : '3.4.-gl1' }
-usedExternlas += { 'name' : 'extFiles', 'iversion' : 'v0r7' }
+usedExternals.append({ 'name' : 'swig', 'iversion' : '1.3.31' })
+usedExternals.append({ 'name' : 'cppunit', 'iversion' : '1.10.2' })
+usedExternals.append({ 'name' : 'f2c', 'iversion' : '3.4-gl1' })
+usedExternals.append({ 'name' : 'extFiles', 'iversion' : 'v0r7' })
 
 Return('usedExternals')
