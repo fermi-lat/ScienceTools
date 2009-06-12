@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Fri Jun 12 12:09:49 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use the new allExternals.scons
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-01, operation: add
 Package: ScienceTools-scons
