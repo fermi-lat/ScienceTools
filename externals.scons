@@ -11,7 +11,10 @@ usedExternals.append({ 'name' : 'ape', 'iversion' : '2.3-gl1' })
 if baseEnv['PLATFORM'] == 'win32':
     usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00b' })
 else:
-    usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
+    if baseEnv['OSNAME'] == 'redhat5' or (baseEnv['OSNAME'] == 'redhat4' and baseEnv['ARCHNAME'] == '64bit'):
+        usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00c-gl1' })
+    else:
+        usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
 
 if baseEnv['PLATFORM'] == 'darwin':
     usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0-gl1' })
