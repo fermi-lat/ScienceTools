@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jun 17 13:35:18 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use g2c for mac for now
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-02, operation: mov
 Package: ScienceTools-scons
