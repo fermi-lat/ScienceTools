@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jun 17 12:32:35 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Use python 2.5.1-gl2 on the mac
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-02, operation: mov
 Package: ScienceTools-scons
