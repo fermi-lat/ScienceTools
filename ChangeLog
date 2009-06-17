@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Jun 16 18:57:38 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+added some comments. Using python 2.5.1 on 64bit rhel4 otherwise using 2.5.1-gl1
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-02, operation: mov
 Package: ScienceTools-scons
