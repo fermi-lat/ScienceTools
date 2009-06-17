@@ -6,8 +6,11 @@ usedExternals = []
 usedExternals.append({ 'name' : 'CLHEP', 'iversion' : '1.9.2.2' })
 usedExternals.append({ 'name' : 'fftw', 'iversion' : '3.1.2' })
 usedExternals.append({ 'name' : 'cfitsio', 'iversion' : 'v3060' })
-usedExternals.append({ 'name' : 'ape', 'iversion' : '2.3-gl1' })
+usedExternals.append({ 'name' : 'ape', 'iversion' : '2.4' })
 
+# On windows use ROOT v5.18.00b
+# On redhat5 or 64bit redhat4 use ROOT v5.18.00c-gl1
+# On all other platforms use ROOT v5.20.00-gl3
 if baseEnv['PLATFORM'] == 'win32':
     usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00b' })
 else:
@@ -16,13 +19,20 @@ else:
     else:
         usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
 
+# On the mac use xerces 2.7.0-gl1
+# On all other platforms use xerces 2.7.0
 if baseEnv['PLATFORM'] == 'darwin':
     usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0-gl1' })
-    usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1-gl1' })
 else:
     usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0' })
-    usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1' })
 
+# On redhat4 64bit use python 2.5.1
+# On all other platforms use python 2.5.1-gl1
+if baseEnv['OSNAME'] == 'redhat4' and baseEnv['ARCHNAME'] == '64bit':
+    usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1' })
+else:
+    usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1-gl1' })
+    
 usedExternals.append({ 'name' : 'swig', 'iversion' : '1.3.31' })
 usedExternals.append({ 'name' : 'cppunit', 'iversion' : '1.10.2' })
 usedExternals.append({ 'name' : 'f2c', 'iversion' : '3.4-gl1' })
