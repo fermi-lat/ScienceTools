@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jun 17 18:30:06 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+on mac use ROOT v5.20.00-gl1
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-02, operation: mov
 Package: ScienceTools-scons
