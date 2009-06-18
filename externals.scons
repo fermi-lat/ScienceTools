@@ -10,6 +10,7 @@ usedExternals.append({ 'name' : 'ape', 'iversion' : '2.4' })
 
 # On windows use ROOT v5.18.00b
 # On redhat5, 64bit redhat4, or tiger use ROOT v5.18.00c-gl1
+# On Mac use ROOT v5.20.00-gl1
 # On all other platforms use ROOT v5.20.00-gl3
 if baseEnv['PLATFORM'] == 'win32':
     usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00b' })
@@ -17,7 +18,10 @@ else:
     if baseEnv['OSNAME'] == 'redhat5' or (baseEnv['OSNAME'] == 'redhat4' and baseEnv['ARCHNAME'] == '64bit') or baseEnv['OSNAME'] == 'tiger':
         usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00c-gl1' })
     else:
-        usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
+        if baseEnv['PLATFORM'] == 'darwin':
+            usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl1' })
+        else:
+            usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
 
 # On the mac use xerces 2.7.0-gl1
 # On all other platforms use xerces 2.7.0
@@ -39,11 +43,13 @@ else:
     
 usedExternals.append({ 'name' : 'swig', 'iversion' : '1.3.31' })
 usedExternals.append({ 'name' : 'cppunit', 'iversion' : '1.10.2' })
+
 # Use libg2c (as version 3.4.6) for mac for now
 if baseEnv['PLATFORM'] == 'darwin':
     usedExternals.append({ 'name' : 'f2c', 'iversion' : '3.4.6' })
 else:
     usedExternals.append({ 'name' : 'f2c', 'iversion' : '3.4-gl1' })
+
 usedExternals.append({ 'name' : 'extFiles', 'iversion' : 'v0r7' })
 
 Return('usedExternals')
