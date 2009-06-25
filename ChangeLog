@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu Jun 25 12:20:11 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use xerces 2.8.0
+    *
+------------------------------------------------------------
 User: glastrm  Thu Jun 25 09:57:55 PDT 2009
 ScienceTools-scons
 
