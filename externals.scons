@@ -23,12 +23,7 @@ else:
         else:
             usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
 
-# On the mac use xerces 2.7.0-gl1
-# On all other platforms use xerces 2.7.0
-if baseEnv['PLATFORM'] == 'darwin':
-    usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0-gl1' })
-else:
-    usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.7.0' })
+usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.8.0-gl1' })
 
 # On redhat4 64bit use python 2.5.1
 # On Mac use python 2.5.1-gl2
