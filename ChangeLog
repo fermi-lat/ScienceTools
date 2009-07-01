@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Wed Jul  1 11:23:44 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+set suffix of loadable modules to .so for non windowns machines
+    *
+------------------------------------------------------------
 User: golpa  Wed Jul  1 10:50:56 PDT 2009
 ScienceTools-scons
 
