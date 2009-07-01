@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Wed Jul  1 10:50:56 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	allExternals.scons 
+Log Message:
+Added python bin directory
+    *
+------------------------------------------------------------
 User: glastrm  Thu Jun 25 12:20:11 PDT 2009
 ScienceTools-scons
 
