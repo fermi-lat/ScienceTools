@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: golpa  Thu Jul  2 14:21:25 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+-bundle_loader option needs to be set during python setup not swig setup
+    *
+------------------------------------------------------------
 User: golpa  Wed Jul  1 11:23:44 PDT 2009
 ScienceTools-scons
 
