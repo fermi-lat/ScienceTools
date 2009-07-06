@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Jul  6 10:43:12 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+loadable module prefix set to blank for swig
+    *
+------------------------------------------------------------
 User: golpa  Thu Jul  2 14:21:25 PDT 2009
 ScienceTools-scons
 
