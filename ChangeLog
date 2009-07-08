@@ -1,4 +1,15 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jul  8 12:28:29 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py 
+Added Files:
+	doxygen.py 
+Log Message:
+Added doxygen builder
+    *
+------------------------------------------------------------
 User: glastrm  Wed Jul  8 12:28:09 PDT 2009
 ScienceTools-scons/Doxygen
 
