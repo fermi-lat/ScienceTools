@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jul  8 12:29:11 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Log Message:
+Added doxygen options
+    *
+------------------------------------------------------------
 User: glastrm  Wed Jul  8 12:28:29 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
