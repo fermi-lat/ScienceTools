@@ -6,7 +6,7 @@ usedExternals = []
 usedExternals.append({ 'name' : 'CLHEP', 'iversion' : '1.9.2.2' })
 usedExternals.append({ 'name' : 'fftw', 'iversion' : '3.1.2' })
 usedExternals.append({ 'name' : 'cfitsio', 'iversion' : 'v3060A' })
-usedExternals.append({ 'name' : 'ape', 'iversion' : '2.4' })
+usedExternals.append({ 'name' : 'ape', 'iversion' : '2.5.1' })
 
 # On windows use ROOT v5.18.00b
 # On redhat5, 64bit redhat4, or tiger use ROOT v5.18.00c-gl1
