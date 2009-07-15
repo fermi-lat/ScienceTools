@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jul 15 13:09:51 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use python 2.5.1 for all variations of os
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-03, operation: add
 Package: ScienceTools-scons
