@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Jul 27 10:50:39 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	doxygen.py registerObjects.py registerTargets.py 
+Log Message:
+Automatically add a .config extension to Doxygen config files
+    *
+------------------------------------------------------------
 User: glastrm  Wed Jul 15 13:09:51 PDT 2009
 ScienceTools-scons
 
