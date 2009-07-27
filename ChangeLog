@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Jul 27 15:01:02 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	setupTarget.scons 
+Log Message:
+ensure the suffix of the wrapper script with the suffix option
+    *
+------------------------------------------------------------
 User: glastrm  Mon Jul 27 10:50:39 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
