@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Jul 28 15:36:28 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	doxygen.py 
+Log Message:
+doxygen project name no longer contains the .config extension
+    *
+------------------------------------------------------------
 User: glastrm  Mon Jul 27 17:23:59 PDT 2009
 ScienceTools-scons
 
