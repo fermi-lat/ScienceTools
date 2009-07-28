@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Mon Jul 27 17:23:59 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	setupTarget.scons 
+Log Message:
+windows was still depending on the _setup being created in top level directory. Fixed
+    *
+------------------------------------------------------------
 User: glastrm  Mon Jul 27 15:01:02 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
