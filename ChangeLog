@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Wed Jul 29 10:33:25 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Use CLHEP 1.9.4.2
+
+    *
+------------------------------------------------------------
 User: glastrm  Tue Jul 28 15:36:28 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
