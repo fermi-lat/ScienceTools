@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Jul 29 18:57:01 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+Added a SwigLibrary builder
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-03, operation: add
 Package: ScienceTools-scons
