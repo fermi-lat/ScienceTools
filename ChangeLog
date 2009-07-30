@@ -2,6 +2,17 @@
 TAG
 Tag name: ScienceTools-09-15-04, operation: add
 Package: ScienceTools-scons
+User: glastrm  Thu Jul 30 16:39:13 2009
+Files:
+  ScienceTools-scons/Doxygen/Default  1.2
+  ScienceTools-scons/allExternals.scons  1.39
+  ScienceTools-scons/processExternals.scons  1.19
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-15-04, operation: add
+Package: ScienceTools-scons
 User: glastrm  Thu Jul 30 10:12:11 2009
 Files:
   ScienceTools-scons/SConstruct  1.18
