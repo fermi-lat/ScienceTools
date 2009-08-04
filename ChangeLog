@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 TAG
+Tag name: ScienceTools-09-15-04, operation: add
+Package: ScienceTools-scons
+User: glastrm  Tue Aug  4 10:34:58 2009
+Files:
+  ScienceTools-scons/setupTarget.scons  1.5
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: ScienceTools-09-15-03, operation: add
 Package: ScienceTools-scons
 User: glastrm  Thu Jul 30 16:41:21 2009
