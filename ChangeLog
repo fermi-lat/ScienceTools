@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu Aug  6 14:21:50 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	registerObjects.py registerTargets.py 
+Log Message:
+doxygen nodes updated so they don't cause errors when run after creating doxygen output
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-04, operation: add
 Package: ScienceTools-scons
