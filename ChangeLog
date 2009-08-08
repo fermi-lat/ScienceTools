@@ -1,5 +1,20 @@
 ------------------------------------------------------------
 TAG
+Tag name: ScienceTools-09-15-00, operation: del
+Package: ScienceTools-scons
+User: glastrm  Fri Aug  7 19:03:31 2009
+Files:
+  ScienceTools-scons/package.scons  1.1
+  ScienceTools-scons/externals.scons  1.46
+  ScienceTools-scons/allExternals.scons  1.41
+  ScienceTools-scons/SConstruct  1.9
+  ScienceTools-scons/processExternals.scons  1.19
+  ScienceTools-scons/setupTarget.scons  1.5
+  ScienceTools-scons/Doxygen/Default  1.2
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: ScienceTools-09-15-00, operation: add
 Package: ScienceTools-scons
 User: glastrm  Fri Aug  7 18:47:46 2009
