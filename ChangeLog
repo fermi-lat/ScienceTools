@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Wed Sep  9 17:42:43 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+On windows don't use LoadableModule for now
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-15-01-02, operation: del
 Package: ScienceTools-scons
