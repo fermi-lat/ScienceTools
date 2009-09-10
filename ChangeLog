@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Wed Sep  9 18:11:02 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+Removed redundant if statement
+    *
+------------------------------------------------------------
 User: glast  Wed Sep  9 17:42:43 PDT 2009
 ScienceTools-scons
 
