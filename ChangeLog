@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Tue Sep 15 14:04:17 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Bug fix in how BASE_DIR is set for linux. Supporting wrapper scripts for windows. Setup script still needs to be done
+    *
+------------------------------------------------------------
 User: glast  Wed Sep  9 18:11:02 PDT 2009
 ScienceTools-scons
 
