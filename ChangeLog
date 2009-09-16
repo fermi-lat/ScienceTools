@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Sep 16 14:41:32 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+small bugfix for linux
+    *
+------------------------------------------------------------
 User: glast  Wed Sep 16 14:09:52 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
