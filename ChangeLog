@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Wed Sep 16 14:09:52 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Windows wrapper scripts should be working now
+    *
+------------------------------------------------------------
 User: glast  Tue Sep 15 14:04:17 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
