@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glast  Thu Sep 17 10:55:08 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Remove redundancy
+    *
+------------------------------------------------------------
 User: glastrm  Thu Sep 17 09:11:43 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
