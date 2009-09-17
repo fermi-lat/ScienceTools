@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Thu Sep 17 15:08:27 PDT 2009
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	generateScript.py 
+Log Message:
+Small bug fixes to setup script for csh
+    *
+------------------------------------------------------------
 User: glast  Thu Sep 17 10:55:08 PDT 2009
 ScienceTools-scons/site_scons/site_tools
 
