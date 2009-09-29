@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Sep 29 09:27:24 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+Use new -gl4 python
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-05, operation: add
 Package: ScienceTools-scons
