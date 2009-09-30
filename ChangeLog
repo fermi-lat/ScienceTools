@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Wed Sep 30 11:19:17 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use root v5.20.00-gl5
+    *
+------------------------------------------------------------
 User: glastrm  Tue Sep 29 09:27:24 PDT 2009
 ScienceTools-scons
 
