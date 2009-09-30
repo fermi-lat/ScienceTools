@@ -7,22 +7,7 @@ usedExternals.append({ 'name' : 'CLHEP', 'iversion' : '1.9.4.2' })
 usedExternals.append({ 'name' : 'fftw', 'iversion' : '3.1.2' })
 usedExternals.append({ 'name' : 'cfitsio', 'iversion' : 'v3060A' })
 usedExternals.append({ 'name' : 'ape', 'iversion' : '2.5.1' })
-
-# On windows use ROOT v5.18.00b
-# On redhat5, 64bit redhat4, or tiger use ROOT v5.18.00c-gl1
-# On Mac use ROOT v5.20.00-gl1
-# On all other platforms use ROOT v5.20.00-gl3
-if baseEnv['PLATFORM'] == 'win32':
-    usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00b' })
-else:
-    if baseEnv['OSNAME'] == 'redhat5' or (baseEnv['OSNAME'] == 'redhat4' and baseEnv['ARCHNAME'] == '64bit') or baseEnv['OSNAME'] == 'tiger':
-        usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.18.00c-gl1' })
-    else:
-        if baseEnv['PLATFORM'] == 'darwin':
-            usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl1' })
-        else:
-            usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl3' })
-
+usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl5' })
 usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.8.0-gl1' })
 usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1-i1' })
 usedExternals.append({ 'name' : 'swig', 'iversion' : '1.3.31' })
