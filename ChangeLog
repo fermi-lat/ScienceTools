@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: glastrm  Tue Oct 13 08:03:38 PDT 2009
+ScienceTools-scons
+
+Modified Files:
+	externals.scons 
+Log Message:
+use ape version 2.5.3
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-15-05, operation: mov
 Package: ScienceTools-scons
