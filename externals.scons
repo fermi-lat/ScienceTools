@@ -6,7 +6,7 @@ usedExternals = []
 usedExternals.append({ 'name' : 'CLHEP', 'iversion' : '1.9.4.2' })
 usedExternals.append({ 'name' : 'fftw', 'iversion' : '3.1.2' })
 usedExternals.append({ 'name' : 'cfitsio', 'iversion' : 'v3060A' })
-usedExternals.append({ 'name' : 'ape', 'iversion' : '2.5.1' })
+usedExternals.append({ 'name' : 'ape', 'iversion' : '2.5.3' })
 usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.20.00-gl5' })
 usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.8.0-gl1' })
 usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1-i1' })
