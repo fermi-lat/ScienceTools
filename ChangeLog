@@ -1,4 +1,15 @@
 ------------------------------------------------------------
+User: glastrm  Wed Nov 11 16:24:02 PST 2009
+ScienceTools-scons
+
+Modified Files:
+	SConstruct 
+Removed Files:
+	externals.scons package.scons 
+Log Message:
+moved package.scons externals.scons into their own package called containerSettings
+    *
+------------------------------------------------------------
 User: glastrm  Wed Nov 11 16:20:27 PST 2009
 ScienceTools-scons/containerSettings
 
