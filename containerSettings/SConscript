@@ -1,0 +1,6 @@
+# -*- python -*-
+# $Id$
+# Authors: J. Bogard <jrb@slac.stanford.edu>, Navid Golpayegani <golpa@slac.stanford.edu>
+# Version: containerSettings-00-00-01
+
+# Dummy file. The real contents is in package.scons and externals.scons
