@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Tue Feb  9 09:31:19 PST 2010
+ScienceTools-scons/containerSettings/doc
+
+Added Files:
+	release.notes 
+Log Message:
+Make this an staggable package
+
+    *
+------------------------------------------------------------
 User: jrb  Tue Feb  9 09:30:10 PST 2010
 ScienceTools-scons/containerSettings
 
