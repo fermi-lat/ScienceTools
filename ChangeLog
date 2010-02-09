@@ -1,4 +1,15 @@
 ------------------------------------------------------------
+User: jrb  Tue Feb  9 09:30:10 PST 2010
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+externals.scons: Upgrade to ape 2.6
+SConscript: spell my name right
+
+    *
+------------------------------------------------------------
 User: jrb  Tue Feb  9 09:26:41 PST 2010
 ScienceTools-scons/containerSettings/doc
 
