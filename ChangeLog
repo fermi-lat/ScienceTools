@@ -1,4 +1,16 @@
 ------------------------------------------------------------
+User: jrb  Mon Jun  7 11:40:38 PDT 2010
+ScienceTools-scons/site_scons/site_tools
+
+Modified Files:
+	doxygen.py generateScript.py makeStudio.py msvs.py 
+	registerTargets.py 
+Added Files:
+	fermidebug.py 
+Log Message:
+add facility to write debug statements to file upon request; use it to replace old debug print statements
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-00-03, operation: add
 Package: ScienceTools-scons
