@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Tue Jun  8 15:56:56 PDT 2010
+ScienceTools-scons
+
+Modified Files:
+	processExternals.scons 
+Log Message:
+Add external include paths, -p option to rootcint command
+    *
+------------------------------------------------------------
 User: jrb  Mon Jun  7 11:40:38 PDT 2010
 ScienceTools-scons/site_scons/site_tools
 
