@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Thu Jun 10 09:50:12 PDT 2010
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+Use extFiles v0r9
+    *
+------------------------------------------------------------
 User: jrb  Tue Jun  8 15:56:56 PDT 2010
 ScienceTools-scons
 
