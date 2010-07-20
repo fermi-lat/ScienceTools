@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Tue Jul 20 14:02:21 PDT 2010
+ScienceTools-scons
+
+Added Files:
+	packageList.txt 
+Log Message:
+used in tag collector record keeping
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-00-05, operation: add
 Package: ScienceTools-scons
