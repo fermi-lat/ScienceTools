@@ -1,81 +1,149 @@
 #  ScienceTools packageList.txt   (from HEAD 827)
+
 # $Id$
 
+
 # in common with GlastRelease
+
 xmlBase xmlBase-05-05-09
+
 astro astro03-11-03
+
 facilities facilities-02-19-06
+
 flux flux-08-40-07
 
+
 # infrastructure
+
 hoops hoops-01-01-07
+
 st_app st_app-02-00-07
+
 tip tip-02-15-08
+
 st_graph st_graph-01-07-08
+
 st_facilities st_facilities-00-14-06
+
 st_stream st_stream-00-06-02
-fitsGen fitsGen-04-05-06
+
+fitsGen fitsGen-05-00-02
 embed_python embed_python-01-05-04
 
+
 # source modeling
+
 celestialSources celestialSources-01-03-05
+
 celestialSources/genericSources  genericSources-01-14-05
+
 celestialSources/Pulsar Pulsar-03-01-01
+
 celestialSources/SpectObj SpectObj-01-03-08
+
 celestialSources/GRB GRB-04-04-05
+
 celestialSources/GRBobs   GRBobs-03-03-04
+
 celestialSources/GRBtemplate GRBtemplate-01-03-03
+
 celestialSources/eblAtten eblAtten-00-08-01
+
 celestialSources/microQuasar microQuasar-01-04-04
 
+
 # instrument response
+
 irfs irfs-00-09-03
+
 irfs/caldb caldb-03-01-00
+
 irfs/caldb_release caldb_release-03-00-01
+
 irfs/irfInterface irfInterface-03-00-04
+
 irfs/irfUtil irfUtil-00-04-04
+
 irfs/dc1Response dc1Response-02-00-05
+
 irfs/dc1aResponse dc1aResponse-02-00-05
+
 irfs/dc2Response dc2Response-03-01-06
+
 irfs/g25Response g25Response-02-00-05
+
 irfs/testResponse testResponse-02-00-05
+
 irfs/handoff_response handoff_response-04-05-05
+
 irfs/latResponse latResponse-02-06-03
+
 irfs/irfLoader irfLoader-01-03-00
+
 irfs/rootIrfLoader rootIrfLoader-01-00-04
+
 irfs/pyIrfLoader pyIrfLoader-00-01-04
 
+
 # simulation
+
 observationSim observationSim-08-04-08
+
 orbitSim orbitSim-02-00-05
 
+
 # analysis
+
 healpix healpix-02-03-03
+
 skymaps skymaps-02-06-00
+
 pointlike pointlike-07-04-04
+
 dataSubselector dataSubselector-07-01-00
+
 evtbin evtbin-02-04-01
+
 rspgen rspgen-03-02-02
+
 burstFit burstFit-02-02-04
+
 map_tools map_tools-07-05-02
+
 optimizers optimizers-02-19-00
-Likelihood Likelihood-16-08-01
+
+Likelihood Likelihood-16-10-00
 pyExposure pyExposure-02-05-08
-pyLikelihood pyLikelihood-01-24-00
+
+pyLikelihood pyLikelihood-01-25-00
 pulsarDb pulsarDb-08-05-09
+
 pulsePhase pulsePhase-08-06-04
+
 periodSearch periodSearch-10-08-05
+
 timeSystem timeSystem-06-04-11
+
 catalogAccess catalogAccess-00-04-03
+
 sourceIdentify sourceIdentify-02-02-04
+
 pgwave pgwave-01-02-01
-sourcelike sourcelike-00-13-01
+
 
 # define analysis environment
+
 sane sane-03-19-04
+
 likeGui likeGui-07-09-03
 
+
 # SCons machinery
+
 SConsFiles SConsFiles-00-05-07
+
 ScienceTools-scons/containerSettings  containerSettings-00-00-05
 
+
+evtUtils evtUtils-00-01-06
