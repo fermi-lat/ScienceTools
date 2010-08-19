@@ -1,5 +1,32 @@
 ------------------------------------------------------------
 TAG
+Tag name: ScienceTools-09-18-01, operation: add
+Package: ScienceTools-scons
+User: glastrm  Thu Aug 19 07:15:20 2010
+Files:
+  ScienceTools-scons/SConstruct  1.74
+  ScienceTools-scons/Doxygen/Default  1.2
+  ScienceTools-scons/allExternals.scons  1.66
+  ScienceTools-scons/processExternals.scons  1.35
+  ScienceTools-scons/containerSettings/package.scons  1.1
+  ScienceTools-scons/containerSettings/externals.scons  1.5
+  ScienceTools-scons/containerSettings/SConscript  1.6
+  ScienceTools-scons/containerSettings/doc/release.notes  1.5
+  ScienceTools-scons/site_scons/site_tools/msvs.py  1.6
+  ScienceTools-scons/site_scons/site_tools/doxygen.py  1.5
+  ScienceTools-scons/site_scons/site_tools/generatePythonWrapper.py  1.3
+  ScienceTools-scons/site_scons/site_tools/.cvsignore  1.1
+  ScienceTools-scons/site_scons/site_tools/fermidebug.py  1.1
+  ScienceTools-scons/site_scons/site_tools/generateScript.py  1.20
+  ScienceTools-scons/site_scons/site_tools/registerObjects.py  1.7
+  ScienceTools-scons/site_scons/site_tools/addLinkDeps.py  1.2
+  ScienceTools-scons/site_scons/site_tools/makeStudio.py  1.3
+  ScienceTools-scons/site_scons/site_tools/registerTargets.py  1.14
+  ScienceTools-scons/site_scons/site_tools/addLibrary.py  1.3
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: ScienceTools-09-18-00, operation: add
 Package: ScienceTools-scons
 User: glastrm  Mon Aug 16 00:49:44 2010
