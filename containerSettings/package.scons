@@ -3,4 +3,7 @@
 
 Import('baseEnv')
 
+# ScienceTools setup includes Pfiles; not needed for other containers
+baseEnv['usePfiles'] = True
+
 baseEnv.AppendUnique(CPPDEFINES = ['ScienceTools'])
