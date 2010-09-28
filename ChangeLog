@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Mon Sep 27 17:45:53 PDT 2010
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	package.scons 
+Log Message:
+let generateScript know this container needs pfiles set up
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-18-03, operation: add
 Package: ScienceTools-scons
