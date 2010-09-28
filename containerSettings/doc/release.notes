@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-00-06 28-Sep-2010    jrb Specify that this container uses pfiles
  containerSettings-00-00-05 30-Jun-2010    jrb upgrade python for all but Studio 2003; upgrade ROOT
  containerSettings-00-00-04 10-Jun-2010    hmk Use extFiles v0r9
  containerSettings-00-00-03 14-Apr-2010    jrb Use ROOT 5.26.00a
