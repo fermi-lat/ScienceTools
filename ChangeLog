@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Wed Feb  2 16:08:18 PST 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+update for HEAD 1.874
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-21-00, operation: add
 Package: ScienceTools-scons
