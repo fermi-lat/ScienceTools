@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Wed Feb 23 16:18:54 PST 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+eliminate extra blank lines and misleading comment
+    *
+------------------------------------------------------------
 User: jchiang  Fri Feb 18 14:26:02 PST 2011
 ScienceTools-scons
 
