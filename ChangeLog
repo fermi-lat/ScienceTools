@@ -1,4 +1,18 @@
 ------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-22-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Sat Mar 19 12:44:37 2011
+Files:
+  ScienceTools-scons/ChangeLog  1.251
+  ScienceTools-scons/packageList.txt  1.10
+  ScienceTools-scons/allExternals.scons  1.73
+  ScienceTools-scons/SConstruct  1.85
+  ScienceTools-scons/processExternals.scons  1.39
+  ScienceTools-scons/Doxygen/Default  1.2
+
+    *
+------------------------------------------------------------
 User: jchiang  Fri Mar 18 22:52:06 PDT 2011
 ScienceTools-scons
 
