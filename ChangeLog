@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Wed Mar 30 18:13:58 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+use new interface version of f2c, 3.4-i1. Real version differs only for snowleopard
+    *
+------------------------------------------------------------
 User: jchiang  Mon Mar 28 17:00:22 PDT 2011
 ScienceTools-scons/catalog/data/1FGL
 
