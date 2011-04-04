@@ -156,7 +156,7 @@ irfs/handoff_response handoff_response-04-05-05
 
 
 
-irfs/latResponse latResponse-02-08-02
+irfs/latResponse latResponse-02-08-03
 
 
 
