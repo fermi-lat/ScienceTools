@@ -194,7 +194,7 @@ healpix healpix-02-03-05
 
 
 
-skymaps skymaps-02-10-03
+skymaps skymaps-02-10-05
 
 
 
