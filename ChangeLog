@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 User: heather  Thu Apr 14 20:44:04 PDT 2011
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+move to new i version of cfitsio lib
+    *
+------------------------------------------------------------
+User: heather  Thu Apr 14 20:44:04 PDT 2011
 ScienceTools-scons/containerSettings
 
 Modified Files:
