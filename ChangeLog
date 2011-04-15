@@ -2,6 +2,27 @@
 TAG
 Tag name: ScienceTools-09-23-01, operation: add
 Package: ScienceTools-scons
+User: jchiang  Fri Apr 15 13:11:47 2011
+Files:
+  ScienceTools-scons/shellscripts/pfiles_setup.sh  1.1
+  ScienceTools-scons/shellscripts/pfiles_setup.csh  1.1
+  ScienceTools-scons/shellscripts/pfiles_setup.bat  1.1
+  ScienceTools-scons/site_scons/site_tools/msvs.py  1.7
+  ScienceTools-scons/site_scons/site_tools/doxygen.py  1.5
+  ScienceTools-scons/site_scons/site_tools/generatePythonWrapper.py  1.3
+  ScienceTools-scons/site_scons/site_tools/.cvsignore  1.1
+  ScienceTools-scons/site_scons/site_tools/fermidebug.py  1.1
+  ScienceTools-scons/site_scons/site_tools/generateScript.py  1.27
+  ScienceTools-scons/site_scons/site_tools/addLinkDeps.py  1.2
+  ScienceTools-scons/site_scons/site_tools/makeStudio.py  1.4
+  ScienceTools-scons/site_scons/site_tools/registerTargets.py  1.16
+  ScienceTools-scons/site_scons/site_tools/addLibrary.py  1.3
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-23-01, operation: add
+Package: ScienceTools-scons
 User: jchiang  Fri Apr 15 13:11:02 2011
 Files:
   ScienceTools-scons/containerSettings/package.scons  1.2
