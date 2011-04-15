@@ -1,4 +1,204 @@
 ------------------------------------------------------------
+User: jchiang  Fri Apr 15 08:21:46 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+TAG
+Tag name: containerSettings-00-00-09, operation: add
+Package: ScienceTools-scons
+User: heather  Fri Apr 15 05:50:35 2011
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.2
+  ScienceTools-scons/containerSettings/externals.scons  1.8
+  ScienceTools-scons/containerSettings/SConscript  1.10
+  ScienceTools-scons/containerSettings/doc/release.notes  1.9
+
+    *
+------------------------------------------------------------
+User: heather  Fri Apr 15 05:50:13 PDT 2011
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+add in catalogProducts and diffuseModels
+    *
+------------------------------------------------------------
+User: heather  Fri Apr 15 05:50:13 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+add in catalogProducts and diffuseModels
+    *
+------------------------------------------------------------
+TAG
+Tag name: containerSettings-00-00-08, operation: add
+Package: ScienceTools-scons
+User: heather  Thu Apr 14 20:44:23 2011
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.2
+  ScienceTools-scons/containerSettings/externals.scons  1.7
+  ScienceTools-scons/containerSettings/SConscript  1.9
+  ScienceTools-scons/containerSettings/doc/release.notes  1.8
+
+    *
+------------------------------------------------------------
+User: heather  Thu Apr 14 20:44:04 PDT 2011
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+move to new i version of cfitsio lib
+    *
+------------------------------------------------------------
+User: heather  Thu Apr 14 20:44:04 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+move to new i version of cfitsio lib
+    *
+------------------------------------------------------------
+User: jchiang  Wed Apr 13 21:43:54 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+User: lande  Wed Apr 13 15:11:26 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+User: jchiang  Wed Apr 13 10:26:09 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+User: lande  Wed Apr 13 08:41:54 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+User: heather  Tue Apr 12 06:13:57 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+User: heather  Thu Apr  7 20:44:30 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-23-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Mon Apr  4 15:25:20 2011
+Files:
+  ScienceTools-scons/shellscripts/pfiles_setup.sh  1.1
+  ScienceTools-scons/shellscripts/pfiles_setup.csh  1.1
+  ScienceTools-scons/shellscripts/pfiles_setup.bat  1.1
+  ScienceTools-scons/site_scons/site_tools/msvs.py  1.6
+  ScienceTools-scons/site_scons/site_tools/doxygen.py  1.5
+  ScienceTools-scons/site_scons/site_tools/generatePythonWrapper.py  1.3
+  ScienceTools-scons/site_scons/site_tools/.cvsignore  1.1
+  ScienceTools-scons/site_scons/site_tools/fermidebug.py  1.1
+  ScienceTools-scons/site_scons/site_tools/generateScript.py  1.27
+  ScienceTools-scons/site_scons/site_tools/addLinkDeps.py  1.2
+  ScienceTools-scons/site_scons/site_tools/makeStudio.py  1.3
+  ScienceTools-scons/site_scons/site_tools/registerTargets.py  1.16
+  ScienceTools-scons/site_scons/site_tools/addLibrary.py  1.3
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-23-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Mon Apr  4 15:24:40 2011
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.2
+  ScienceTools-scons/containerSettings/externals.scons  1.5
+  ScienceTools-scons/containerSettings/SConscript  1.7
+  ScienceTools-scons/containerSettings/doc/release.notes  1.6
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-23-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Mon Apr  4 15:24:23 2011
+Files:
+  ScienceTools-scons/ChangeLog  1.265
+  ScienceTools-scons/packageList.txt  1.13
+  ScienceTools-scons/allExternals.scons  1.79
+  ScienceTools-scons/SConstruct  1.93
+  ScienceTools-scons/processExternals.scons  1.42
+  ScienceTools-scons/Doxygen/Default  1.2
+
+    *
+------------------------------------------------------------
+User: jchiang  Sun Apr  3 22:42:39 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+User: jchiang  Sun Apr  3 21:18:31 PDT 2011
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
+TAG
+Tag name: containerSettings-00-00-07, operation: add
+Package: ScienceTools-scons
+User: jrb  Wed Mar 30 18:16:11 2011
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.2
+  ScienceTools-scons/containerSettings/externals.scons  1.6
+  ScienceTools-scons/containerSettings/SConscript  1.8
+  ScienceTools-scons/containerSettings/doc/release.notes  1.7
+
+    *
+------------------------------------------------------------
 User: jrb  Wed Mar 30 18:16:05 PDT 2011
 ScienceTools-scons/containerSettings/doc
 

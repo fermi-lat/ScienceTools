@@ -18,7 +18,7 @@ xmlBase xmlBase-05-05-10
 astro astro-03-11-11
 
 
-facilities facilities-02-19-13
+facilities facilities-02-20-00
 
 
 
@@ -55,7 +55,7 @@ st_stream st_stream-00-06-02
 
 
 
-fitsGen fitsGen-06-02-04
+fitsGen fitsGen-06-03-00
 
 
 fitsGenApps fitsGenApps-00-03-01
@@ -71,11 +71,11 @@ embed_python embed_python-01-05-05
 
 
 
-celestialSources celestialSources-01-03-05
+celestialSources celestialSources-01-04-00
 
 
 
-celestialSources/genericSources  genericSources-01-14-05
+celestialSources/genericSources genericSources-01-15-00
 
 
 
@@ -116,11 +116,11 @@ irfs irfs-00-09-03
 
 
 
-irfs/caldb caldb-03-03-00
+irfs/caldb caldb-04-00-00
 
 
 
-irfs/caldb_release caldb_release-03-02-00
+irfs/caldb_release caldb_release-03-03-00
 
 
 
@@ -156,7 +156,7 @@ irfs/handoff_response handoff_response-04-05-05
 
 
 
-irfs/latResponse latResponse-02-08-02
+irfs/latResponse latResponse-02-08-03
 
 
 
@@ -177,7 +177,7 @@ irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 
 
-observationSim observationSim-08-04-09
+observationSim observationSim-08-04-10
 
 
 
@@ -194,11 +194,11 @@ healpix healpix-02-03-05
 
 
 
-skymaps skymaps-02-10-03
+skymaps skymaps-02-10-05
 
 
 
-pointlike pointlike-07-07-03
+pointlike pointlike-07-07-12
 
 
 
@@ -226,17 +226,17 @@ map_tools map_tools-07-05-07
 
 
 
-optimizers optimizers-02-21-00
+optimizers optimizers-02-21-01
 
 
 
-Likelihood Likelihood-17-07-05
+Likelihood Likelihood-17-09-04
 
 pyExposure pyExposure-02-05-09
 
 
 
-pyLikelihood pyLikelihood-01-27-04
+pyLikelihood pyLikelihood-01-28-03
 
 
 pulsarDb pulsarDb-08-05-09
@@ -272,7 +272,7 @@ pgwave pgwave-01-02-03
 
 
 
-sane sane-03-21-04
+sane sane-03-21-05
 
 
 likeGui likeGui-07-09-03
@@ -284,11 +284,11 @@ likeGui likeGui-07-09-03
 
 
 
-SConsFiles SConsFiles-00-10-03
+SConsFiles SConsFiles-00-11-02
 
 
 
-ScienceTools-scons/containerSettings  containerSettings-00-00-06
+ScienceTools-scons/containerSettings containerSettings-00-00-07
 
 
 
