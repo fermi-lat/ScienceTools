@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Thu Apr 14 20:44:04 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+move to new i version of cfitsio lib
+    *
+------------------------------------------------------------
 User: jchiang  Wed Apr 13 21:43:54 PDT 2011
 ScienceTools-scons
 
