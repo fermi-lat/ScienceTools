@@ -4,6 +4,8 @@
  *
  *                  EOH
 
+ containerSettings-00-00-08 14-Apr-2011    hmk move to new i version of cfitsio
+    that includes new library name including version
  containerSettings-00-00-07 30-Mar-2011    jrb use new interface version of f2c
  containerSettings-00-00-06 28-Sep-2010    jrb Specify that this container uses pfiles
  containerSettings-00-00-05 30-Jun-2010    jrb upgrade python for all but Studio 2003; upgrade ROOT
