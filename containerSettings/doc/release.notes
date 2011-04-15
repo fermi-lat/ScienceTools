@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-00-09 15-Apr-2011    hmk add catalogProducts and diffuseModels
  containerSettings-00-00-08 14-Apr-2011    hmk move to new i version of cfitsio
     that includes new library name including version
  containerSettings-00-00-07 30-Mar-2011    jrb use new interface version of f2c
