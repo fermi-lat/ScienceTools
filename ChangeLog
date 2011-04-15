@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 User: heather  Fri Apr 15 05:50:13 PDT 2011
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+add in catalogProducts and diffuseModels
+    *
+------------------------------------------------------------
+User: heather  Fri Apr 15 05:50:13 PDT 2011
 ScienceTools-scons/containerSettings
 
 Modified Files:
