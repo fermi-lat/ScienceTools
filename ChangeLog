@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Fri Apr 15 05:50:13 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+add in catalogProducts and diffuseModels
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-00-08, operation: add
 Package: ScienceTools-scons
