@@ -53,7 +53,7 @@ orbitSim orbitSim-02-00-07
 # analysis
 healpix healpix-02-03-05
 skymaps skymaps-02-10-05
-pointlike pointlike-07-07-16
+pointlike pointlike-07-07-17
 dataSubselector dataSubselector-08-01-01
 evtbin evtbin-02-04-01
 evtUtils evtUtils-00-01-10
