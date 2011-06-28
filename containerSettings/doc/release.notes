@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-00-11 27-Jun-2011 jchiang enable TRAP_FPE for all posix builds
  containerSettings-00-00-10 23-May-2011 heather Upgrade CLHEP to 2.1.0.1
  containerSettings-00-00-09 15-Apr-2011    hmk add catalogProducts and diffuseModels
  containerSettings-00-00-08 14-Apr-2011    hmk move to new i version of cfitsio
