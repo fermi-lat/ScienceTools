@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jchiang  Tue Jun 28 10:50:41 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+restore python version to 2.6.5 for non-vc71 builds
+
+    *
+------------------------------------------------------------
 User: lande  Tue Jun 28 00:52:21 PDT 2011
 ScienceTools-scons
 
