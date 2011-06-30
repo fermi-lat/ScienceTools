@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 TAG
+Tag name: ScienceTools-09-24-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Jun 30 09:25:54 2011
+Files:
+  ScienceTools-scons/packageList.txt  1.46
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: containerSettings-00-01-00, operation: add
 Package: ScienceTools-scons
 User: heather  Wed Jun 29 19:04:41 2011
