@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-01-00 29-Jun-2011 heather testing out new python 2.7
  containerSettings-00-00-12 28-Jun-2011 jchiang fix python version in externals.scons that was accidently changed
  containerSettings-00-00-11 27-Jun-2011 jchiang enable TRAP_FPE for all posix builds
  containerSettings-00-00-10 23-May-2011 heather Upgrade CLHEP to 2.1.0.1
