@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Wed Jun 29 19:02:15 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+updating externals to use python 2.7
+    *
+------------------------------------------------------------
 User: jchiang  Wed Jun 29 12:50:57 PDT 2011
 ScienceTools-scons
 
