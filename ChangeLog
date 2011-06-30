@@ -1,4 +1,16 @@
 ------------------------------------------------------------
+TAG
+Tag name: containerSettings-00-01-00, operation: add
+Package: ScienceTools-scons
+User: heather  Wed Jun 29 19:04:41 2011
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.12
+  ScienceTools-scons/containerSettings/SConscript  1.14
+  ScienceTools-scons/containerSettings/doc/release.notes  1.13
+
+    *
+------------------------------------------------------------
 User: heather  Wed Jun 29 19:04:35 PDT 2011
 ScienceTools-scons/containerSettings/doc
 
