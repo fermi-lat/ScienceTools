@@ -20,6 +20,6 @@ usedExternals.append({ 'name' : 'cppunit', 'iversion' : '1.10.2' })
 usedExternals.append({ 'name' : 'f2c', 'iversion' : '3.4-i1' })
 usedExternals.append({ 'name' : 'extFiles', 'iversion' : 'v0r9' })
 usedExternals.append({ 'name' : 'catalogProducts', 'iversion' : 'v0r0' })
-usedExternals.append({ 'name' : 'diffuseModels', 'iversion' : 'v1r0' })
+usedExternals.append({ 'name' : 'diffuseModels', 'iversion' : 'v2r0' })
 
 Return('usedExternals')
