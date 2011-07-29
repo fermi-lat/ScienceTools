@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jchiang  Fri Jul 29 09:54:00 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+use diffuseModels/v2r0 for Pass 7
+
+    *
+------------------------------------------------------------
 User: heather  Mon Jul 25 14:50:43 PDT 2011
 ScienceTools-scons
 
