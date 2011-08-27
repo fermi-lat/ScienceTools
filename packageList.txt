@@ -54,14 +54,14 @@ orbitSim orbitSim-02-00-07
 healpix healpix-02-03-05
 skymaps skymaps-02-10-09
 pointlike pointlike-07-07-42
-dataSubselector dataSubselector-08-02-01
+dataSubselector dataSubselector-08-03-00
 evtbin evtbin-02-04-02
 evtUtils evtUtils-00-01-11
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-05-07
 optimizers optimizers-02-21-01
-Likelihood Likelihood-17-14-04
+Likelihood Likelihood-17-14-05
 
 pyExposure pyExposure-02-05-10
 pyLikelihood pyLikelihood-01-28-03
@@ -76,7 +76,7 @@ sourceIdentify sourceIdentify-02-03-03
 pgwave pgwave-01-02-03
 
 # define analysis environment
-sane sane-03-21-05
+sane sane-03-21-06
 likeGui likeGui-07-09-03
 
 # SCons machinery
