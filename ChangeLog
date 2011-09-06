@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Tue Sep  6 08:33:43 PDT 2011
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+modifiy release.notes for posterity
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-01-02, operation: add
 Package: ScienceTools-scons
