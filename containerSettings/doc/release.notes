@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-01-02 06-Sep-2011 hmk     use python 2.6.5 on darwin
  containerSettings-00-01-01 29-Jul-2011 jchiang use diffuseModels/v2r0
  containerSettings-00-01-00 29-Jun-2011 heather testing out new python 2.7
  containerSettings-00-00-12 28-Jun-2011 jchiang fix python version in externals.scons that was accidently changed

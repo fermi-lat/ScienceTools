@@ -13,6 +13,8 @@ if baseEnv['COMPILERNAME'] == 'vc71':
     usedExternals.append({ 'name' : 'python', 'iversion' : '2.5.1-i1' })    
 elif baseEnv['COMPILERNAME'] == 'gcc34' and baseEnv['ARCHNAME'] == '64bit':
     usedExternals.append({ 'name' : 'python', 'iversion' : '2.6.5-i1' })
+elif baseEnv['PLATFORM'] == 'darwin' :
+    usedExternals.append({ 'name' : 'python', 'iversion' : '2.6.5' })
 else:
     usedExternals.append({ 'name' : 'python', 'iversion' : '2.7' })
 usedExternals.append({ 'name' : 'swig', 'iversion' : '1.3.31' })
