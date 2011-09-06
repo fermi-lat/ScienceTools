@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Tue Sep  6 07:42:13 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+back off to python 2.6.5 on darwin
+    *
+------------------------------------------------------------
 User: jchiang  Sat Aug 27 09:15:27 PDT 2011
 ScienceTools-scons
 
