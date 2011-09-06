@@ -81,7 +81,7 @@ likeGui likeGui-07-09-03
 
 # SCons machinery
 SConsFiles SConsFiles-00-14-02
-ScienceTools-scons/containerSettings containerSettings-00-01-01
+ScienceTools-scons/containerSettings containerSettings-00-01-02
 
 
 
