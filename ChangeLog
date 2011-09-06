@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 User: heather  Tue Sep  6 07:42:13 PDT 2011
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+back off to python 2.6.5 on darwin
+    *
+------------------------------------------------------------
+User: heather  Tue Sep  6 07:42:13 PDT 2011
 ScienceTools-scons/containerSettings
 
 Modified Files:
