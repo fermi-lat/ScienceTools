@@ -14,8 +14,8 @@ tip tip-02-17-01
 st_graph st_graph-01-07-09
 st_facilities st_facilities-00-15-00
 st_stream st_stream-00-06-02
-fitsGen fitsGen-06-04-01
-fitsGenApps fitsGenApps-00-06-00
+fitsGen fitsGen-06-04-02
+fitsGenApps fitsGenApps-00-06-01
 embed_python embed_python-01-05-05
 
 # source modeling
@@ -54,17 +54,17 @@ orbitSim orbitSim-02-00-07
 healpix healpix-02-03-05
 skymaps skymaps-02-10-09
 pointlike pointlike-07-07-45
-dataSubselector dataSubselector-08-03-00
+dataSubselector dataSubselector-08-03-01
 evtbin evtbin-02-04-02
-evtUtils evtUtils-00-01-11
+evtUtils evtUtils-00-01-12
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-05-07
 optimizers optimizers-02-21-01
-Likelihood Likelihood-17-15-00
+Likelihood Likelihood-17-17-01
 
 pyExposure pyExposure-02-05-10
-pyLikelihood pyLikelihood-01-28-03
+pyLikelihood pyLikelihood-01-28-05
 
 pulsarDb pulsarDb-09-00-02
 pulsePhase pulsePhase-09-00-04
@@ -76,7 +76,7 @@ sourceIdentify sourceIdentify-02-03-03
 pgwave pgwave-01-02-03
 
 # define analysis environment
-sane sane-03-21-06
+sane sane-03-21-08
 likeGui likeGui-07-09-03
 
 # SCons machinery
