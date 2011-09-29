@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Thu Sep 29 11:41:50 PDT 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+use catalogProducts v1r1
+    *
+------------------------------------------------------------
 User: jrb  Wed Sep 28 12:10:24 PDT 2011
 ScienceTools-scons
 
