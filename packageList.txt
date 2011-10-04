@@ -23,8 +23,8 @@ celestialSources celestialSources-01-04-00
 celestialSources/genericSources genericSources-01-15-01
 celestialSources/Pulsar Pulsar-03-01-01
 celestialSources/SpectObj SpectObj-01-03-08
-celestialSources/GRB GRB-04-04-07
-celestialSources/GRBobs GRBobs-03-03-05
+celestialSources/GRB GRB-04-04-08
+celestialSources/GRBobs GRBobs-03-03-06
 celestialSources/GRBtemplate GRBtemplate-01-03-06
 celestialSources/eblAtten eblAtten-00-08-01
 celestialSources/microQuasar microQuasar-01-04-04
