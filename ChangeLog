@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 TAG
+Tag name: SConsFiles-00-16-02, operation: add
+Package: ScienceTools-scons
+User: jchiang  Wed Dec 14 21:52:00 2011
+Files:
+  ScienceTools-scons/allExternals.scons  1.98
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: containerSettings-00-01-04, operation: add
 Package: ScienceTools-scons
 User: jchiang  Wed Dec 14 21:50:49 2011
