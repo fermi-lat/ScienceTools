@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Dec 14 21:50:35 PST 2011
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript 
+Log Message:
+increment version
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-01-03, operation: add
 Package: ScienceTools-scons
