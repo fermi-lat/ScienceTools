@@ -59,7 +59,7 @@ evtbin evtbin-02-04-02
 evtUtils evtUtils-00-01-12
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
-map_tools map_tools-07-05-07
+map_tools map_tools-07-06-00
 optimizers optimizers-02-21-01
 Likelihood Likelihood-17-21-03
 
