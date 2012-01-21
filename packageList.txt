@@ -15,7 +15,7 @@ st_graph st_graph-01-07-09
 st_facilities st_facilities-00-15-02
 st_stream st_stream-00-06-02
 fitsGen fitsGen-06-04-03
-fitsGenApps fitsGenApps-00-06-02
+fitsGenApps fitsGenApps-00-06-03
 embed_python embed_python-01-05-05
 
 # source modeling
