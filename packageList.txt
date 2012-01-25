@@ -32,7 +32,7 @@ celestialSources/microQuasar microQuasar-01-04-04
 # instrument response
 irfs irfs-00-09-04
 irfs/caldb caldb-04-01-00
-irfs/caldb_release caldb_release-04-00-00
+irfs/caldb_release caldb_release-04-01-00
 irfs/irfInterface irfInterface-03-00-05
 irfs/irfUtil irfUtil-00-04-04
 irfs/dc1Response dc1Response-02-00-06
