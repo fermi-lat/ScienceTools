@@ -3,7 +3,7 @@
 
 # in common with GlastRelease
 xmlBase xmlBase-05-05-10
-astro astro-03-11-15
+astro astro-03-11-16
 facilities facilities-02-20-04
 flux flux-08-41-00
 
@@ -33,7 +33,7 @@ celestialSources/microQuasar microQuasar-01-04-04
 irfs irfs-00-09-04
 irfs/caldb caldb-04-01-00
 irfs/caldb_release caldb_release-04-01-00
-irfs/irfInterface irfInterface-03-00-05
+irfs/irfInterface irfInterface-03-00-06
 irfs/irfUtil irfUtil-00-04-04
 irfs/dc1Response dc1Response-02-00-06
 irfs/dc1aResponse dc1aResponse-02-00-05
@@ -47,7 +47,7 @@ irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 # simulation
-observationSim observationSim-09-00-01
+observationSim observationSim-09-01-01
 orbitSim orbitSim-02-00-07
 
 # analysis
@@ -61,10 +61,10 @@ rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-06-00
 optimizers optimizers-02-21-02
-Likelihood Likelihood-17-21-09
+Likelihood Likelihood-17-22-02
 
 pyExposure pyExposure-02-05-10
-pyLikelihood pyLikelihood-01-29-02
+pyLikelihood pyLikelihood-01-29-03
 
 pulsarDb pulsarDb-09-00-02
 pulsePhase pulsePhase-09-00-04
