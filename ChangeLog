@@ -1,4 +1,39 @@
 ------------------------------------------------------------
+User: gudlaugu  Fri Feb 10 18:26:40 PST 2012
+ScienceTools-scons/SolarSystemTools
+
+Log Message:
+Initial import
+
+Status:
+
+Vendor Tag:	GJ
+Release Tags:	SolarSystemTools-00-00-00
+		
+N ScienceTools-scons/SolarSystemTools/SConscript
+N ScienceTools-scons/SolarSystemTools/SolarSystemToolsLib.py
+N ScienceTools-scons/SolarSystemTools/pfiles/gtexpcubesun.par
+N ScienceTools-scons/SolarSystemTools/pfiles/gtltcubesun.par
+N ScienceTools-scons/SolarSystemTools/doc/release.notes
+N ScienceTools-scons/SolarSystemTools/data/LivetimeCubeSunTemplate
+N ScienceTools-scons/SolarSystemTools/SolarSystemTools/CosineBinner2D.h
+N ScienceTools-scons/SolarSystemTools/SolarSystemTools/Observation.h
+N ScienceTools-scons/SolarSystemTools/SolarSystemTools/ExposureCubeSun.h
+N ScienceTools-scons/SolarSystemTools/SolarSystemTools/BinnedExposureSun.h
+N ScienceTools-scons/SolarSystemTools/SolarSystemTools/ExposureSun.h
+N ScienceTools-scons/SolarSystemTools/SolarSystemTools/LikeExposureSun.h
+N ScienceTools-scons/SolarSystemTools/src/BinnedExposureSun.cxx
+N ScienceTools-scons/SolarSystemTools/src/ExposureSun.cxx
+N ScienceTools-scons/SolarSystemTools/src/ExposureCubeSun.cxx
+N ScienceTools-scons/SolarSystemTools/src/CosineBinner2D.cxx
+N ScienceTools-scons/SolarSystemTools/src/LikeExposureSun.cxx
+N ScienceTools-scons/SolarSystemTools/src/makeSolarExposureCube/makeSolarExposureCube.cxx
+N ScienceTools-scons/SolarSystemTools/src/gtexpcubesun/gtexpcubesun.cxx
+
+No conflicts created by this import
+
+    *
+------------------------------------------------------------
 User: jchiang  Fri Feb 10 16:41:32 PST 2012
 ScienceTools-scons
 
