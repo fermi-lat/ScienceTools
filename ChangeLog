@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Tue Feb 14 13:24:48 PST 2012
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+moving to cfitsio v3290
+    *
+------------------------------------------------------------
 User: gudlaugu  Fri Feb 10 18:26:40 PST 2012
 ScienceTools-scons/SolarSystemTools
 
