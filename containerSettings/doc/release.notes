@@ -4,6 +4,8 @@
  *
  *                  EOH
 
+ containerSettings-00-01-05 14-Feb-2012 heather move to cfitsio v3290
+ containerSettings-00-01-04 15-Dec-2011 jchiang catalogProduct v1r2
  containerSettings-00-01-03 29-Sep-2011    jrb use catalogProducts v1r1
  containerSettings-00-01-02 06-Sep-2011 hmk     use python 2.6.5 on darwin
   see:  http://mail.python.org/pipermail/cplusplus-sig/2011-March/015905.html
