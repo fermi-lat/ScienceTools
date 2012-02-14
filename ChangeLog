@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 User: heather  Tue Feb 14 13:24:48 PST 2012
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+moving to cfitsio v3290
+    *
+------------------------------------------------------------
+User: heather  Tue Feb 14 13:24:48 PST 2012
 ScienceTools-scons/containerSettings
 
 Modified Files:
