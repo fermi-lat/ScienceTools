@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Sun Mar  4 13:21:30 PST 2012
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-27-01, operation: add
 Package: ScienceTools-scons
