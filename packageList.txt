@@ -54,17 +54,17 @@ orbitSim orbitSim-02-00-07
 healpix healpix-02-03-05
 skymaps skymaps-02-11-00
 pointlike pointlike-07-07-47
-dataSubselector dataSubselector-08-03-01
+dataSubselector dataSubselector-08-03-02
 evtbin evtbin-02-04-02
 evtUtils evtUtils-00-01-12
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-06-00
 optimizers optimizers-02-21-02
-Likelihood Likelihood-17-22-05
+Likelihood Likelihood-17-22-07
 
 pyExposure pyExposure-02-05-10
-pyLikelihood pyLikelihood-01-29-03
+pyLikelihood pyLikelihood-01-29-04
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
