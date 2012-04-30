@@ -19,8 +19,8 @@ fitsGenApps fitsGenApps-00-06-03
 embed_python embed_python-01-05-05
 
 # source modeling
-celestialSources celestialSources-01-04-00
-celestialSources/genericSources genericSources-01-15-01
+celestialSources celestialSources-01-04-01
+celestialSources/genericSources genericSources-01-15-03
 celestialSources/Pulsar Pulsar-03-01-01
 celestialSources/SpectObj SpectObj-01-03-08
 celestialSources/GRB GRB-04-04-08
@@ -60,8 +60,8 @@ evtUtils evtUtils-00-01-12
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-06-00
-optimizers optimizers-02-21-02
-Likelihood Likelihood-17-22-17
+optimizers optimizers-02-21-03
+Likelihood Likelihood-17-23-01
 
 pyExposure pyExposure-02-05-10
 pyLikelihood pyLikelihood-01-29-06
