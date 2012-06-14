@@ -3,7 +3,7 @@
 
 # in common with GlastRelease
 xmlBase xmlBase-05-05-10
-astro astro-03-11-17
+astro astro-03-13-00
 facilities facilities-02-20-04
 flux flux-08-42-00
 
@@ -20,7 +20,7 @@ embed_python embed_python-01-05-05
 
 # source modeling
 celestialSources celestialSources-01-04-01
-celestialSources/genericSources genericSources-01-15-03
+celestialSources/genericSources genericSources-01-15-04
 celestialSources/Pulsar Pulsar-03-01-01
 celestialSources/SpectObj SpectObj-01-03-08
 celestialSources/GRB GRB-04-04-08
@@ -61,10 +61,10 @@ rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-06-00
 optimizers optimizers-02-21-03
-Likelihood Likelihood-17-23-01
+Likelihood Likelihood-17-24-00
 
 pyExposure pyExposure-02-05-10
-pyLikelihood pyLikelihood-01-29-07
+pyLikelihood pyLikelihood-01-30-01
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
