@@ -86,3 +86,4 @@ ScienceTools-scons/containerSettings containerSettings-00-01-05
 
 
 BayesianBlocks BayesianBlocks-04-00-02
+SolarSystemTools SolarSystemTools-01-00-04
