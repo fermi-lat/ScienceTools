@@ -19,7 +19,7 @@ fitsGenApps fitsGenApps-00-06-03
 embed_python embed_python-01-05-05
 
 # source modeling
-celestialSources celestialSources-01-04-01
+celestialSources celestialSources-01-05-00
 celestialSources/genericSources genericSources-01-15-04
 celestialSources/Pulsar Pulsar-03-01-01
 celestialSources/SpectObj SpectObj-01-03-08
@@ -87,3 +87,4 @@ ScienceTools-scons/containerSettings containerSettings-00-01-05
 
 BayesianBlocks BayesianBlocks-04-00-02
 SolarSystemTools SolarSystemTools-01-00-04
+celestialSources/EarthPhenom EarthPhenom-00-01-02
