@@ -10,7 +10,7 @@ flux flux-08-42-00
 # infrastructure
 hoops hoops-01-01-08
 st_app st_app-02-00-07
-tip tip-02-17-01
+tip tip-02-17-04
 st_graph st_graph-01-07-09
 st_facilities st_facilities-00-15-02
 st_stream st_stream-00-06-02
@@ -48,23 +48,23 @@ irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 # simulation
 observationSim observationSim-09-02-00
-orbitSim orbitSim-02-00-07
+orbitSim orbitSim-02-00-08
 
 # analysis
 healpix healpix-02-03-06
 skymaps skymaps-02-12-01
 pointlike pointlike-07-09-06
 dataSubselector dataSubselector-08-03-03
-evtbin evtbin-02-04-02
+evtbin evtbin-02-06-02
 evtUtils evtUtils-00-01-12
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-06-00
 optimizers optimizers-02-21-03
-Likelihood Likelihood-17-24-04
+Likelihood Likelihood-17-24-06
 
 pyExposure pyExposure-02-05-10
-pyLikelihood pyLikelihood-01-30-02
+pyLikelihood pyLikelihood-01-30-03
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
