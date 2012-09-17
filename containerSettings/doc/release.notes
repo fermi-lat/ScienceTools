@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-01-06 17-Sep-2012 jchiang bump extFiles version for leap second update for jplephem
  containerSettings-00-01-05 14-Feb-2012 heather move to cfitsio v3290
  containerSettings-00-01-04 15-Dec-2011 jchiang catalogProduct v1r2
  containerSettings-00-01-03 29-Sep-2011    jrb use catalogProducts v1r1
