@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Mon Sep 17 09:27:48 PDT 2012
+ScienceTools-scons
+
+Modified Files:
+	allExternals.scons 
+Log Message:
+add extFiles v0r10 for leap second updates to jplephem
+    *
+------------------------------------------------------------
 User: jchiang  Mon Sep 17 09:27:21 PDT 2012
 ScienceTools-scons/containerSettings
 
