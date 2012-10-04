@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Thu Oct  4 11:37:21 PDT 2012
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+tagCollector.py updating pkg list
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-01-06, operation: add
 Package: ScienceTools-scons
