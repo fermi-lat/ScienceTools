@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Thu Dec  6 11:05:11 PST 2012
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+updating ROOT and python
+    *
+------------------------------------------------------------
 User: lande  Thu Nov 29 15:02:30 PST 2012
 ScienceTools-scons
 
