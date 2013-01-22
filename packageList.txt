@@ -3,7 +3,7 @@
 
 # in common with GlastRelease
 xmlBase xmlBase-05-06-00
-astro astro-03-15-00
+astro astro-03-15-01
 facilities facilities-02-22-01
 flux flux-08-43-00
 
