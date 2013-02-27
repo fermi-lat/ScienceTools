@@ -47,7 +47,7 @@ irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 # simulation
-observationSim observationSim-09-02-03
+observationSim observationSim-09-02-05
 orbitSim orbitSim-02-00-08
 
 # analysis
@@ -60,8 +60,8 @@ evtUtils evtUtils-00-02-01
 rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-07-00
-optimizers optimizers-02-21-04
-Likelihood Likelihood-17-27-01
+optimizers optimizers-02-22-00
+Likelihood Likelihood-18-00-05
 
 pyExposure pyExposure-02-05-10
 pyLikelihood pyLikelihood-01-31-02
@@ -81,10 +81,10 @@ likeGui likeGui-07-09-03
 
 # SCons machinery
 SConsFiles SConsFiles-01-08-06
-ScienceTools-scons/containerSettings containerSettings-00-01-06
+ScienceTools-scons/containerSettings containerSettings-00-02-00
 
 
 
-BayesianBlocks BayesianBlocks-04-00-03
+BayesianBlocks BayesianBlocks-04-01-01
 SolarSystemTools SolarSystemTools-01-01-01
 celestialSources/EarthPhenom EarthPhenom-00-02-01
