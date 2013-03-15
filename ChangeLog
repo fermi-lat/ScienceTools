@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Fri Mar 15 14:20:27 PDT 2013
+ScienceTools-scons
+
+Modified Files:
+	allExternals.scons 
+Log Message:
+add entry for f2c with no compiler in path
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-31-02, operation: add
 Package: ScienceTools-scons
