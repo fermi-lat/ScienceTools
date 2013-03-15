@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Fri Mar 15 14:22:26 PDT 2013
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+Get rid of all references to externals with compiler in path for Linux
+    *
+------------------------------------------------------------
 User: jrb  Fri Mar 15 14:20:27 PDT 2013
 ScienceTools-scons
 
