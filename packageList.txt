@@ -31,7 +31,7 @@ celestialSources/microQuasar microQuasar-01-05-01
 
 # instrument response
 irfs irfs-00-09-04
-irfs/caldb caldb-05-00-00
+irfs/caldb caldb-05-01-00
 irfs/caldb_release caldb_release-04-03-00
 irfs/irfInterface irfInterface-03-01-00
 irfs/irfUtil irfUtil-01-00-00
@@ -41,7 +41,7 @@ irfs/dc2Response dc2Response-03-01-08
 irfs/g25Response g25Response-02-00-08
 irfs/testResponse testResponse-02-00-05
 irfs/handoff_response handoff_response-04-05-07
-irfs/latResponse latResponse-03-00-00
+irfs/latResponse latResponse-03-00-01
 irfs/irfLoader irfLoader-01-03-03
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
