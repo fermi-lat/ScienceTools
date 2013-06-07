@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Fri Jun  7 08:22:32 PDT 2013
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+pick up latest Likelihood tag
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-32-02, operation: add
 Package: ScienceTools-scons
