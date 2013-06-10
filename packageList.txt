@@ -61,7 +61,7 @@ rspgen rspgen-03-02-02
 burstFit burstFit-02-02-04
 map_tools map_tools-07-07-00
 optimizers optimizers-02-22-00
-Likelihood Likelihood-18-00-09
+Likelihood Likelihood-18-00-10
 
 pyExposure pyExposure-02-05-10
 pyLikelihood pyLikelihood-01-31-05
@@ -76,7 +76,7 @@ sourceIdentify sourceIdentify-02-03-04
 pgwave pgwave-01-02-03
 
 # define analysis environment
-sane sane-03-22-01
+sane sane-03-22-02
 likeGui likeGui-07-09-03
 
 # SCons machinery
