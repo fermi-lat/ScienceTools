@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-02-02 09-Oct-2013 jchiang added diffuseModels v4r0, catalogProducts v2r0
  containerSettings-00-02-01 15-Mar-2013    jrb Only use externals with no compiler component in path on Linux
  containerSettings-00-02-00 06-Dec-2012 heather updating to ROOT v5.34.03 and associated python 2.7.2 for linuxes
     and drop back to python 2.6.5 for Windows and Snow Leopard
