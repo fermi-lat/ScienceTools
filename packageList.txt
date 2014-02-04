@@ -88,3 +88,4 @@ ScienceTools-scons/containerSettings containerSettings-00-02-02
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-01-01
 celestialSources/EarthPhenom EarthPhenom-00-02-01
+pyBurstAnalysisGUI pyBurstAnalysisGUI-01-04-05
