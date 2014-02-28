@@ -12,7 +12,7 @@ usedExternals.append({ 'name' : 'ROOT', 'iversion' : 'v5.34.03-i1' })
 usedExternals.append({ 'name' : 'xerces', 'iversion' : '2.8.0-i1' })
 if baseEnv['COMPILERNAME'] == 'vc90':
     usedExternals.append({ 'name' : 'python', 'iversion' : '2.6.5' })    
-elif baseEnv['PLATFORM'] == 'darwin' :
+elif baseEnv['OSNAME'] == 'snowleopard' :
     usedExternals.append({ 'name' : 'python', 'iversion' : '2.6.5' })
 else:
     usedExternals.append({ 'name' : 'python', 'iversion' : '2.7-i2' })
