@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: tstephen  Fri Feb 28 11:07:02 PST 2014
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+Changed check for PLATFORM==darwin to OSNAME==snowleopard in selection of which python to use.  Only Snow Leopard is using the older version, Mountain Lion is using the up to date 2.7.2 version.
+    *
+------------------------------------------------------------
 User: jchiang  Tue Feb  4 08:19:19 PST 2014
 ScienceTools-scons
 
