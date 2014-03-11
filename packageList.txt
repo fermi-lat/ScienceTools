@@ -3,9 +3,9 @@
 
 # in common with GlastRelease
 xmlBase xmlBase-05-06-01
-astro astro-03-15-02
-facilities facilities-02-22-04
-flux flux-08-43-00
+astro astro-03-15-04
+facilities facilities-02-22-05
+flux flux-08-43-02
 
 # infrastructure
 hoops hoops-01-01-08
@@ -31,8 +31,8 @@ celestialSources/microQuasar microQuasar-01-05-01
 
 # instrument response
 irfs irfs-00-09-04
-irfs/caldb caldb-05-01-00
-irfs/caldb_release caldb_release-04-03-00
+irfs/caldb caldb-05-01-01
+irfs/caldb_release caldb_release-05-00-00
 irfs/irfInterface irfInterface-03-01-00
 irfs/irfUtil irfUtil-01-00-00
 irfs/dc1Response dc1Response-02-00-08
@@ -41,30 +41,30 @@ irfs/dc2Response dc2Response-03-01-08
 irfs/g25Response g25Response-02-00-08
 irfs/testResponse testResponse-02-00-05
 irfs/handoff_response handoff_response-04-06-00
-irfs/latResponse latResponse-03-00-01
+irfs/latResponse latResponse-03-00-02
 irfs/irfLoader irfLoader-01-03-03
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 # simulation
-observationSim observationSim-09-02-06
+observationSim observationSim-09-03-00
 orbitSim orbitSim-02-00-08
 
 # analysis
 healpix healpix-02-03-06
 skymaps skymaps-02-14-01
 pointlike pointlike-08-00-04
-dataSubselector dataSubselector-08-04-07
-evtbin evtbin-02-06-04
+dataSubselector dataSubselector-08-06-02
+evtbin evtbin-02-06-05
 evtUtils evtUtils-00-02-03
-rspgen rspgen-03-02-02
+rspgen rspgen-03-02-03
 burstFit burstFit-02-02-04
 map_tools map_tools-07-07-00
-optimizers optimizers-02-22-00
-Likelihood Likelihood-18-00-12
+optimizers optimizers-02-23-01
+Likelihood Likelihood-18-04-01
 
-pyExposure pyExposure-02-05-10
-pyLikelihood pyLikelihood-01-31-06
+pyExposure pyExposure-02-06-00
+pyLikelihood pyLikelihood-01-34-00
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
@@ -76,15 +76,16 @@ sourceIdentify sourceIdentify-02-03-04
 pgwave pgwave-01-02-03
 
 # define analysis environment
-sane sane-03-22-02
+sane sane-03-23-00
 likeGui likeGui-07-09-03
 
 # SCons machinery
-SConsFiles SConsFiles-01-11-01
-ScienceTools-scons/containerSettings containerSettings-00-02-01
+SConsFiles SConsFiles-01-11-03
+ScienceTools-scons/containerSettings containerSettings-00-02-02
 
 
 
-BayesianBlocks BayesianBlocks-04-01-01
-SolarSystemTools SolarSystemTools-01-01-01
+BayesianBlocks BayesianBlocks-04-02-00
+SolarSystemTools SolarSystemTools-01-01-02
 celestialSources/EarthPhenom EarthPhenom-00-02-01
+pyBurstAnalysisGUI pyBurstAnalysisGUI-01-04-05
