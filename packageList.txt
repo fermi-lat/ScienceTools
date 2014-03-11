@@ -5,7 +5,7 @@
 xmlBase xmlBase-05-06-01
 astro astro-03-15-04
 facilities facilities-02-22-05
-flux flux-08-43-00
+flux flux-08-43-02
 
 # infrastructure
 hoops hoops-01-01-08
@@ -54,17 +54,17 @@ orbitSim orbitSim-02-00-08
 healpix healpix-02-03-06
 skymaps skymaps-02-14-01
 pointlike pointlike-08-00-04
-dataSubselector dataSubselector-08-06-00
-evtbin evtbin-02-06-04
+dataSubselector dataSubselector-08-06-02
+evtbin evtbin-02-06-05
 evtUtils evtUtils-00-02-03
 rspgen rspgen-03-02-03
 burstFit burstFit-02-02-04
 map_tools map_tools-07-07-00
-optimizers optimizers-02-22-00
-Likelihood Likelihood-18-03-01
+optimizers optimizers-02-23-01
+Likelihood Likelihood-18-04-01
 
 pyExposure pyExposure-02-06-00
-pyLikelihood pyLikelihood-01-33-01
+pyLikelihood pyLikelihood-01-34-00
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
@@ -86,6 +86,6 @@ ScienceTools-scons/containerSettings containerSettings-00-02-02
 
 
 BayesianBlocks BayesianBlocks-04-02-00
-SolarSystemTools SolarSystemTools-01-01-01
+SolarSystemTools SolarSystemTools-01-01-02
 celestialSources/EarthPhenom EarthPhenom-00-02-01
 pyBurstAnalysisGUI pyBurstAnalysisGUI-01-04-05
