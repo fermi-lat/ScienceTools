@@ -4,18 +4,18 @@
 # in common with GlastRelease
 xmlBase xmlBase-05-06-01
 astro astro-03-15-04
-facilities facilities-02-22-05
+facilities facilities-02-23-00
 flux flux-08-43-02
 
 # infrastructure
 hoops hoops-01-01-08
 st_app st_app-02-00-08
-tip tip-02-18-01
+tip tip-02-18-04
 st_graph st_graph-01-07-09
-st_facilities st_facilities-00-20-03
+st_facilities st_facilities-00-20-04
 st_stream st_stream-00-06-02
-fitsGen fitsGen-06-06-05
-fitsGenApps fitsGenApps-00-07-01
+fitsGen fitsGen-07-00-01
+fitsGenApps fitsGenApps-00-09-01
 embed_python embed_python-01-07-00
 
 # source modeling
@@ -26,7 +26,7 @@ celestialSources/SpectObj SpectObj-01-04-00
 celestialSources/GRB GRB-04-05-00
 celestialSources/GRBobs GRBobs-03-04-02
 celestialSources/GRBtemplate GRBtemplate-01-04-01
-celestialSources/eblAtten eblAtten-00-09-00
+celestialSources/eblAtten eblAtten-00-10-01
 celestialSources/microQuasar microQuasar-01-05-01
 
 # instrument response
@@ -40,31 +40,31 @@ irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/dc2Response dc2Response-03-01-08
 irfs/g25Response g25Response-02-00-08
 irfs/testResponse testResponse-02-00-05
-irfs/handoff_response handoff_response-04-06-00
-irfs/latResponse latResponse-03-00-02
+irfs/handoff_response handoff_response-05-00-00
+irfs/latResponse latResponse-03-00-03
 irfs/irfLoader irfLoader-01-03-03
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 # simulation
-observationSim observationSim-09-03-00
+observationSim observationSim-09-03-02
 orbitSim orbitSim-02-00-08
 
 # analysis
 healpix healpix-02-03-06
 skymaps skymaps-02-14-01
-pointlike pointlike-08-00-04
-dataSubselector dataSubselector-08-06-02
+pointlike pointlike-09-00-00
+dataSubselector dataSubselector-08-07-01
 evtbin evtbin-02-06-05
 evtUtils evtUtils-00-02-03
 rspgen rspgen-03-02-03
 burstFit burstFit-02-02-04
 map_tools map_tools-07-07-00
-optimizers optimizers-02-23-01
-Likelihood Likelihood-18-04-01
+optimizers optimizers-02-23-02
+Likelihood Likelihood-18-05-00
 
 pyExposure pyExposure-02-06-00
-pyLikelihood pyLikelihood-01-34-00
+pyLikelihood pyLikelihood-01-34-02
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
@@ -80,12 +80,12 @@ sane sane-03-23-00
 likeGui likeGui-07-09-03
 
 # SCons machinery
-SConsFiles SConsFiles-01-11-03
-ScienceTools-scons/containerSettings containerSettings-00-02-02
+SConsFiles SConsFiles-01-15-00
+ScienceTools-scons/containerSettings containerSettings-00-02-03
 
 
 
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-01-02
-celestialSources/EarthPhenom EarthPhenom-00-02-01
+celestialSources/EarthPhenom EarthPhenom-00-02-07
 pyBurstAnalysisGUI pyBurstAnalysisGUI-01-04-05
