@@ -10,13 +10,13 @@ flux flux-08-43-02
 # infrastructure
 hoops hoops-01-01-08
 st_app st_app-02-00-08
-tip tip-02-18-04
+tip tip-02-18-05
 st_graph st_graph-01-07-09
 st_facilities st_facilities-00-20-04
 st_stream st_stream-00-06-02
 fitsGen fitsGen-07-00-01
 fitsGenApps fitsGenApps-00-09-01
-embed_python embed_python-01-07-00
+embed_python embed_python-01-07-01
 
 # source modeling
 celestialSources celestialSources-01-06-00
