@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Fri May 23 12:35:19 PDT 2014
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+update tip and embed_python tags that were not updated automatically by the tagCollector.py script
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-33-02, operation: add
 Package: ScienceTools-scons
