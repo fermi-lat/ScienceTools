@@ -2,6 +2,18 @@
 TAG
 Tag name: ScienceTools-09-33-03, operation: add
 Package: ScienceTools-scons
+User: jchiang  Fri May 23 13:13:05 2014
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.22
+  ScienceTools-scons/containerSettings/SConscript  1.24
+  ScienceTools-scons/containerSettings/doc/release.notes  1.23
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-33-03, operation: add
+Package: ScienceTools-scons
 User: jchiang  Fri May 23 13:02:28 2014
 Files:
   ScienceTools-scons/ChangeLog  1.565
