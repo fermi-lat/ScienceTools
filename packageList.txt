@@ -4,19 +4,19 @@
 # in common with GlastRelease
 xmlBase xmlBase-05-06-01
 astro astro-03-15-04
-facilities facilities-02-23-00
+facilities facilities-02-23-01
 flux flux-08-43-02
 
 # infrastructure
 hoops hoops-01-01-08
 st_app st_app-02-00-08
-tip tip-02-18-05
+tip tip-02-18-04
 st_graph st_graph-01-07-09
 st_facilities st_facilities-00-20-04
 st_stream st_stream-00-06-02
 fitsGen fitsGen-07-00-01
 fitsGenApps fitsGenApps-00-09-01
-embed_python embed_python-01-07-01
+embed_python embed_python-01-07-00
 
 # source modeling
 celestialSources celestialSources-01-06-00
@@ -33,14 +33,14 @@ celestialSources/microQuasar microQuasar-01-05-01
 irfs irfs-00-09-04
 irfs/caldb caldb-05-01-01
 irfs/caldb_release caldb_release-05-00-00
-irfs/irfInterface irfInterface-03-01-00
+irfs/irfInterface irfInterface-03-01-01
 irfs/irfUtil irfUtil-01-00-00
 irfs/dc1Response dc1Response-02-00-08
 irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/dc2Response dc2Response-03-01-08
 irfs/g25Response g25Response-02-00-08
 irfs/testResponse testResponse-02-00-05
-irfs/handoff_response handoff_response-05-00-00
+irfs/handoff_response handoff_response-05-02-01
 irfs/latResponse latResponse-03-00-03
 irfs/irfLoader irfLoader-01-03-03
 irfs/rootIrfLoader rootIrfLoader-01-00-05
@@ -53,18 +53,18 @@ orbitSim orbitSim-02-00-08
 # analysis
 healpix healpix-02-03-06
 skymaps skymaps-02-14-01
-pointlike pointlike-09-00-00
-dataSubselector dataSubselector-08-07-01
+pointlike pointlike-09-00-02
+dataSubselector dataSubselector-08-07-02
 evtbin evtbin-02-06-05
 evtUtils evtUtils-00-02-03
 rspgen rspgen-03-02-03
 burstFit burstFit-02-02-04
-map_tools map_tools-07-07-00
+map_tools map_tools-07-07-01
 optimizers optimizers-02-23-02
-Likelihood Likelihood-18-05-00
+Likelihood Likelihood-18-05-06
 
 pyExposure pyExposure-02-06-00
-pyLikelihood pyLikelihood-01-34-02
+pyLikelihood pyLikelihood-01-34-03
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
@@ -72,7 +72,7 @@ pulsePhase pulsePhase-09-00-04
 periodSearch periodSearch-10-08-07
 timeSystem timeSystem-06-05-01
 catalogAccess catalogAccess-00-04-07
-sourceIdentify sourceIdentify-02-03-04
+sourceIdentify sourceIdentify-02-04-00
 pgwave pgwave-01-02-03
 
 # define analysis environment
@@ -88,4 +88,4 @@ ScienceTools-scons/containerSettings containerSettings-00-02-03
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-01-02
 celestialSources/EarthPhenom EarthPhenom-00-02-07
-pyBurstAnalysisGUI pyBurstAnalysisGUI-01-04-05
+pyBurstAnalysisGUI pyBurstAnalysisGUI-02-00-00
