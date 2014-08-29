@@ -41,19 +41,19 @@ irfs/dc2Response dc2Response-03-01-08
 irfs/g25Response g25Response-02-00-08
 irfs/testResponse testResponse-02-00-05
 irfs/handoff_response handoff_response-05-02-01
-irfs/latResponse latResponse-03-00-03
+irfs/latResponse latResponse-03-01-00
 irfs/irfLoader irfLoader-01-03-03
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
 
 # simulation
 observationSim observationSim-09-03-02
-orbitSim orbitSim-02-00-08
+orbitSim orbitSim-02-00-09
 
 # analysis
 healpix healpix-02-03-06
 skymaps skymaps-02-14-01
-pointlike pointlike-09-00-03
+pointlike pointlike-09-01-00
 dataSubselector dataSubselector-08-07-02
 evtbin evtbin-02-06-05
 evtUtils evtUtils-00-02-03
@@ -61,7 +61,7 @@ rspgen rspgen-03-02-03
 burstFit burstFit-02-02-04
 map_tools map_tools-07-07-01
 optimizers optimizers-02-23-02
-Likelihood Likelihood-18-05-11
+Likelihood Likelihood-18-06-01
 
 pyExposure pyExposure-02-06-00
 pyLikelihood pyLikelihood-01-34-04
@@ -80,10 +80,8 @@ sane sane-03-23-00
 likeGui likeGui-07-09-03
 
 # SCons machinery
-SConsFiles SConsFiles-01-15-00
+SConsFiles SConsFiles-01-15-01
 ScienceTools-scons/containerSettings containerSettings-00-02-03
-
-
 
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-01-02
