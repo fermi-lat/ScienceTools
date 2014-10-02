@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jchiang  Thu Oct  2 15:15:03 PDT 2014
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+use most recent version of orbitSim
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-34-03, operation: add
 Package: ScienceTools-scons
