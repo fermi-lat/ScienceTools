@@ -11,7 +11,7 @@ flux flux-08-43-02
 hoops hoops-01-01-08
 st_app st_app-02-00-08
 tip tip-02-18-05
-st_graph st_graph-01-07-09
+st_graph st_graph-01-07-11
 st_facilities st_facilities-00-20-04
 st_stream st_stream-00-06-02
 fitsGen fitsGen-07-00-01
@@ -40,8 +40,8 @@ irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/dc2Response dc2Response-03-01-08
 irfs/g25Response g25Response-02-00-08
 irfs/testResponse testResponse-02-00-05
-irfs/handoff_response handoff_response-05-02-01
-irfs/latResponse latResponse-03-01-00
+irfs/handoff_response handoff_response-05-03-00
+irfs/latResponse latResponse-03-02-01
 irfs/irfLoader irfLoader-01-03-03
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-04
@@ -64,7 +64,7 @@ optimizers optimizers-02-23-02
 Likelihood Likelihood-18-07-02
 
 pyExposure pyExposure-02-06-00
-pyLikelihood pyLikelihood-01-34-04
+pyLikelihood pyLikelihood-01-34-05
 
 pulsarDb pulsarDb-09-00-03
 pulsePhase pulsePhase-09-00-04
