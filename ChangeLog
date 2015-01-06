@@ -2,6 +2,15 @@
 TAG
 Tag name: ScienceTools-09-35-00, operation: add
 Package: ScienceTools-scons
+User: jchiang  Mon Jan  5 22:40:07 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.588
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-09-35-00, operation: add
+Package: ScienceTools-scons
 User: jchiang  Mon Jan  5 22:40:01 2015
 Files:
   ScienceTools-scons/packageList.txt  1.171
