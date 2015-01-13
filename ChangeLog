@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Mon Jan 12 17:35:20 PST 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+use catalogProducts v2r1 and diffuseModels v4r1
+    *
+------------------------------------------------------------
 User: jchiang  Mon Jan 12 17:34:50 PST 2015
 ScienceTools-scons
 
