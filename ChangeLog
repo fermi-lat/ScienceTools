@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Mon Jan 12 17:42:59 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+remove DC1, DC2, G25 irfs and update containerSettings
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-02-04, operation: add
 Package: ScienceTools-scons
