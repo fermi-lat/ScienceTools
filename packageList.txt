@@ -35,6 +35,9 @@ irfs/caldb caldb-05-01-01
 irfs/caldb_release caldb_release-05-00-00
 irfs/irfInterface irfInterface-03-01-01
 irfs/irfUtil irfUtil-01-00-00
+irfs/dc1Response dc1Response-02-00-09
+irfs/dc2Response dc2Response-03-01-09
+irfs/g25Response g25Response-02-00-09
 irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/testResponse testResponse-02-00-05
 irfs/handoff_response handoff_response-05-03-00
