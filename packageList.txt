@@ -3,7 +3,7 @@
 
 # in common with GlastRelease
 xmlBase xmlBase-05-06-01
-astro astro-03-15-06
+astro astro-03-15-08
 facilities facilities-02-23-01
 flux flux-08-43-02
 
@@ -14,7 +14,7 @@ tip tip-02-18-05
 st_graph st_graph-01-07-11
 st_facilities st_facilities-00-20-04
 st_stream st_stream-00-06-02
-fitsGen fitsGen-07-00-01
+fitsGen fitsGen-07-01-01
 fitsGenApps fitsGenApps-00-09-01
 embed_python embed_python-01-07-01
 
