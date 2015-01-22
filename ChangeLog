@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Thu Jan 22 07:54:39 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+update SConsFiles so that new versions of catalogProducts and diffuseModels are found
+    *
+------------------------------------------------------------
 User: jchiang  Wed Jan 21 18:23:37 PST 2015
 ScienceTools-scons
 
