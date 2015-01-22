@@ -77,7 +77,7 @@ sane sane-03-23-00
 likeGui likeGui-07-09-03
 
 # SCons machinery
-SConsFiles SConsFiles-01-16-01
+SConsFiles SConsFiles-01-16-02
 ScienceTools-scons/containerSettings containerSettings-00-02-04
 
 BayesianBlocks BayesianBlocks-04-02-00
