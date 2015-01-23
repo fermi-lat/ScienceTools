@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Thu Jan 22 16:19:10 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+pre-Pass 8 irfLoader still requires dc1Response et al library builds, so roll back to previous patch versions
+    *
+------------------------------------------------------------
 User: jchiang  Thu Jan 22 15:04:49 PST 2015
 ScienceTools-scons
 
