@@ -4,6 +4,8 @@
  *
  *                  EOH
 
+ containerSettings-00-02-05 09-Feb-2015 heather update to cfitsion v3370 and
+ape 2.7.8
  containerSettings-00-02-04 12-Jan-2015 jchiang catalogProducts v2r1, diffuseModels v4r1
  containerSettings-00-02-03 28-Feb-2014 glastrm Updated files for building on Mountain Lion
  containerSettings-00-02-02 09-Oct-2013 jchiang added diffuseModels v4r0, catalogProducts v2r0
