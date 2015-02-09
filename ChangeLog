@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Mon Feb  9 14:29:59 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+try out cfitsio v3370 and ape 2.7.8
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-02-05, operation: add
 Package: ScienceTools-scons
