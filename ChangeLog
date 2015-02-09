@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Mon Feb  9 14:29:06 PST 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+try out cfitsio v3370 and ape 2.7.8
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-09-35-02, operation: add
 Package: ScienceTools-scons
