@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Mon Feb  9 17:28:26 PST 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript externals.scons 
+Log Message:
+ape 2.8, not 2.7.8
+    *
+------------------------------------------------------------
 User: heather  Mon Feb  9 14:29:59 PST 2015
 ScienceTools-scons
 
