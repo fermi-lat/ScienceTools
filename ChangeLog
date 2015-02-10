@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Mon Feb  9 17:29:01 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+patch ape version
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-02-06, operation: add
 Package: ScienceTools-scons
