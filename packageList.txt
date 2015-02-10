@@ -81,7 +81,7 @@ likeGui likeGui-07-09-03
 
 # SCons machinery
 SConsFiles SConsFiles-01-17-00
-ScienceTools-scons/containerSettings containerSettings-00-02-05
+ScienceTools-scons/containerSettings containerSettings-00-02-06
 
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-01-02
