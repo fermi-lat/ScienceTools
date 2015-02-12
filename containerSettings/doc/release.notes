@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-02-07 11-Feb-2015 jchiang roll back to cfitsio 3.29
  containerSettings-00-02-06 09-Feb-2015 heather patch, it should be ape 2.8 
  containerSettings-00-02-05 09-Feb-2015 heather update to cfitsion v3370 and
 ape 2.7.8
