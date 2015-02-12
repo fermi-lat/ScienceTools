@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Feb 11 21:45:38 PST 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+roll back ape to 2.6
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-02-07, operation: add
 Package: ScienceTools-scons
