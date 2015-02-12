@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Feb 11 18:05:38 PST 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+roll back to cfitsio 3.29
+    *
+------------------------------------------------------------
 User: heather  Mon Feb  9 17:29:01 PST 2015
 ScienceTools-scons
 
