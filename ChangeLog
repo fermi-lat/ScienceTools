@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Fri Feb 13 12:18:20 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote Pass 8-related development to ST HEAD
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-02-08, operation: add
 Package: ScienceTools-scons
