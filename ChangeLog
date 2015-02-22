@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Sat Feb 21 21:37:20 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote bug fixes for ST-10-00-01
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-00-00, operation: add
 Package: ScienceTools-scons
