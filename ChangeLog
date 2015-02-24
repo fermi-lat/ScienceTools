@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Tue Feb 24 14:54:36 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote dataSubselector-09-00-08 to ST HEAD
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-00-01, operation: add
 Package: ScienceTools-scons
