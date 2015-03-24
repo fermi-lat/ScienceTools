@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Tue Mar 24 14:57:22 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+add scaling_file option to xml models for Likelihood and changes to support optimizers::Function hierarchy refactoring
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-00-02, operation: add
 Package: ScienceTools-scons
