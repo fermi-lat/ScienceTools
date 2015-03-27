@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: echarles  Fri Mar 27 13:40:06 PDT 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+Added wcslib and healpix as externals
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-00-03, operation: add
 Package: ScienceTools-scons
