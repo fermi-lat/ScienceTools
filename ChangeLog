@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Mon Apr  6 12:54:51 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+astro IGRF fix plus optimizer package refactoring and wcslib and healpix extlib usage
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-03-00, operation: add
 Package: ScienceTools-scons
