@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Tue Apr  7 16:47:51 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+package tags to address STGEN-153 and LK-97
+    *
+------------------------------------------------------------
 User: jchiang  Mon Apr  6 12:54:51 PDT 2015
 ScienceTools-scons
 
