@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Tue Apr  7 22:15:21 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+use standardized extlib path for healpix
+    *
+------------------------------------------------------------
 User: jchiang  Tue Apr  7 16:47:51 PDT 2015
 ScienceTools-scons
 
