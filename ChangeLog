@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Apr 22 16:56:50 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+new gtselect functionality (STGEN-156)
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-01-00, operation: add
 Package: ScienceTools-scons
