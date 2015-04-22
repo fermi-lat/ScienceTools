@@ -31,8 +31,8 @@ celestialSources/microQuasar microQuasar-01-05-01
 
 # instrument response
 irfs irfs-00-09-05
-irfs/caldb caldb-07-00-02
-irfs/caldb_release caldb_release-07-00-02
+irfs/caldb caldb-07-00-03
+irfs/caldb_release caldb_release-07-00-03
 irfs/irfInterface irfInterface-03-02-00
 irfs/irfUtil irfUtil-02-01-00
 irfs/dc1Response dc1Response-02-00-09
@@ -41,7 +41,7 @@ irfs/g25Response g25Response-02-00-09
 irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/testResponse testResponse-02-00-05
 irfs/handoff_response handoff_response-06-01-02
-irfs/latResponse latResponse-04-02-00
+irfs/latResponse latResponse-04-02-01
 irfs/irfLoader irfLoader-01-03-04
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-05
@@ -54,14 +54,14 @@ orbitSim orbitSim-03-00-00
 healpix healpix-02-04-00
 skymaps skymaps-02-14-02
 pointlike pointlike-09-01-00
-dataSubselector dataSubselector-09-00-09
+dataSubselector dataSubselector-09-01-00
 evtbin evtbin-02-06-06
 evtUtils evtUtils-00-03-01
 rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
 optimizers optimizers-04-00-00
-Likelihood Likelihood-19-01-11
+Likelihood Likelihood-19-01-12
 
 pyExposure pyExposure-02-06-01
 pyLikelihood pyLikelihood-02-00-05
