@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Thu Apr 23 14:30:00 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+ST-10-00-04 release candidate packages with STGEN-156 implementation
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-01-01, operation: add
 Package: ScienceTools-scons
