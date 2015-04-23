@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Apr 22 20:02:54 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+add BackgroundEstimator to ST HEAD
+    *
+------------------------------------------------------------
 User: jchiang  Wed Apr 22 16:56:50 PDT 2015
 ScienceTools-scons
 
