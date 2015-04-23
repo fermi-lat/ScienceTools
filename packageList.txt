@@ -87,3 +87,5 @@ BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-01-02
 celestialSources/EarthPhenom EarthPhenom-00-02-07
 pyBurstAnalysisGUI pyBurstAnalysisGUI-02-01-00
+GRBAnalysis-scons/BackgroundEstimator BackgroundEstimator-01-00-00
+
