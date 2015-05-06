@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed May  6 12:14:55 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote gtselect changes to ST HEAD for FSSC release
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-00-04, operation: add
 Package: ScienceTools-scons
