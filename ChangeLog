@@ -1,4 +1,382 @@
 ------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-05, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu May  7 21:41:29 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.191
+
+    *
+------------------------------------------------------------
+User: jchiang  Thu May  7 13:27:04 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote dataSubselector with gtselect.par fix
+    *
+------------------------------------------------------------
+User: jchiang  Wed May  6 12:14:55 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote gtselect changes to ST HEAD for FSSC release
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-04, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Apr 23 21:24:33 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.27
+  ScienceTools-scons/containerSettings/SConscript  1.29
+  ScienceTools-scons/containerSettings/doc/release.notes  1.28
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-04, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Apr 23 21:15:39 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.656
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-04, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Apr 23 21:15:34 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.189
+
+    *
+------------------------------------------------------------
+User: jchiang  Thu Apr 23 14:30:00 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+ST-10-00-04 release candidate packages with STGEN-156 implementation
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-01-01, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Apr 23 08:55:11 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.28
+  ScienceTools-scons/containerSettings/SConscript  1.30
+  ScienceTools-scons/containerSettings/doc/release.notes  1.29
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-01-01, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Apr 23 08:45:30 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.652
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-01-01, operation: add
+Package: ScienceTools-scons
+User: jchiang  Thu Apr 23 08:45:25 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.188
+
+    *
+------------------------------------------------------------
+User: jchiang  Wed Apr 22 20:02:54 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+add BackgroundEstimator to ST HEAD
+    *
+------------------------------------------------------------
+User: jchiang  Wed Apr 22 16:56:50 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+new gtselect functionality (STGEN-156)
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-01-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Wed Apr  8 07:33:33 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.28
+  ScienceTools-scons/containerSettings/SConscript  1.30
+  ScienceTools-scons/containerSettings/doc/release.notes  1.29
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-01-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Wed Apr  8 07:24:05 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.647
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-01-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Wed Apr  8 07:24:00 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.186
+
+    *
+------------------------------------------------------------
+User: jchiang  Tue Apr  7 22:15:21 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+use standardized extlib path for healpix
+    *
+------------------------------------------------------------
+User: jchiang  Tue Apr  7 16:47:51 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+package tags to address STGEN-153 and LK-97
+    *
+------------------------------------------------------------
+User: jchiang  Mon Apr  6 12:54:51 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+astro IGRF fix plus optimizer package refactoring and wcslib and healpix extlib usage
+    *
+------------------------------------------------------------
+TAG
+Tag name: containerSettings-00-03-00, operation: add
+Package: ScienceTools-scons
+User: echarles  Fri Mar 27 13:56:44 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.28
+  ScienceTools-scons/containerSettings/SConscript  1.30
+  ScienceTools-scons/containerSettings/doc/release.notes  1.29
+
+    *
+------------------------------------------------------------
+User: echarles  Fri Mar 27 13:56:38 PDT 2015
+ScienceTools-scons/containerSettings/doc
+
+Modified Files:
+	release.notes 
+Log Message:
+stag/GoGui_auto-tag
+    *
+------------------------------------------------------------
+User: echarles  Fri Mar 27 13:56:38 PDT 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript 
+Log Message:
+stag/GoGui_auto-tag
+    *
+------------------------------------------------------------
+User: echarles  Fri Mar 27 13:40:06 PDT 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+Added wcslib and healpix as externals
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-03, operation: add
+Package: ScienceTools-scons
+User: jchiang  Tue Mar 24 19:37:30 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.27
+  ScienceTools-scons/containerSettings/SConscript  1.29
+  ScienceTools-scons/containerSettings/doc/release.notes  1.28
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-03, operation: add
+Package: ScienceTools-scons
+User: jchiang  Tue Mar 24 19:28:40 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.637
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-03, operation: add
+Package: ScienceTools-scons
+User: jchiang  Tue Mar 24 19:28:35 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.183
+
+    *
+------------------------------------------------------------
+User: jchiang  Tue Mar 24 14:57:22 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+add scaling_file option to xml models for Likelihood and changes to support optimizers::Function hierarchy refactoring
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-02, operation: add
+Package: ScienceTools-scons
+User: jchiang  Tue Feb 24 22:10:51 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.27
+  ScienceTools-scons/containerSettings/SConscript  1.29
+  ScienceTools-scons/containerSettings/doc/release.notes  1.28
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-02, operation: add
+Package: ScienceTools-scons
+User: jchiang  Tue Feb 24 22:01:11 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.633
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-02, operation: add
+Package: ScienceTools-scons
+User: jchiang  Tue Feb 24 22:01:06 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.182
+
+    *
+------------------------------------------------------------
+User: jchiang  Tue Feb 24 14:54:36 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote dataSubselector-09-00-08 to ST HEAD
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-01, operation: add
+Package: ScienceTools-scons
+User: jchiang  Sun Feb 22 21:51:50 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.27
+  ScienceTools-scons/containerSettings/SConscript  1.29
+  ScienceTools-scons/containerSettings/doc/release.notes  1.28
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-01, operation: add
+Package: ScienceTools-scons
+User: jchiang  Sun Feb 22 21:39:15 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.629
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-01, operation: add
+Package: ScienceTools-scons
+User: jchiang  Sun Feb 22 21:39:10 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.181
+
+    *
+------------------------------------------------------------
+User: jchiang  Sat Feb 21 21:37:20 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote bug fixes for ST-10-00-01
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Fri Feb 13 17:21:04 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.27
+  ScienceTools-scons/containerSettings/SConscript  1.29
+  ScienceTools-scons/containerSettings/doc/release.notes  1.28
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Fri Feb 13 16:43:53 2015
+Files:
+  ScienceTools-scons/ChangeLog  1.625
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-10-00-00, operation: add
+Package: ScienceTools-scons
+User: jchiang  Fri Feb 13 16:31:42 2015
+Files:
+  ScienceTools-scons/packageList.txt  1.180
+
+    *
+------------------------------------------------------------
+User: jchiang  Fri Feb 13 12:18:20 PST 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote Pass 8-related development to ST HEAD
+    *
+------------------------------------------------------------
+TAG
+Tag name: containerSettings-00-02-08, operation: add
+Package: ScienceTools-scons
+User: jchiang  Wed Feb 11 21:47:00 2015
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.27
+  ScienceTools-scons/containerSettings/SConscript  1.29
+  ScienceTools-scons/containerSettings/doc/release.notes  1.28
+
+    *
+------------------------------------------------------------
 User: jchiang  Wed Feb 11 21:46:54 PST 2015
 ScienceTools-scons/containerSettings/doc
 
