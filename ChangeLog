@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Wed Jul 29 13:58:54 PDT 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+finally upgrading cfitsio and ape
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-10-00-05, operation: add
 Package: ScienceTools-scons
