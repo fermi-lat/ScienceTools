@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-04-01 25-Aug-2015 heather move to python 2.7.6-gl1
  containerSettings-00-04-00 29-Jul-2015 heather Upgrading to cfitsio 3.37 and ape 2.8
  containerSettings-00-03-00 27-Mar-2015 echarles added wcslib and healpix to containerSettings/externals.scons
  containerSettings-00-02-08 11-Feb-2015 jchiang roll back to ape 2.6, since 2.8 causes the evtbin test program to fail
