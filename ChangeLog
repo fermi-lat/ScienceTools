@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Tue Aug 25 07:19:38 PDT 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+trying out python 2.7.6-gl1
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-04-00, operation: add
 Package: ScienceTools-scons
