@@ -26,5 +26,6 @@ usedExternals.append({ 'name' : 'catalogProducts', 'iversion' : 'v2r1' })
 usedExternals.append({ 'name' : 'diffuseModels', 'iversion' : 'v4r1' })
 usedExternals.append({ 'name' : 'wcslib', 'iversion' : '4.25.1' })
 usedExternals.append({ 'name' : 'healpix', 'iversion' : '3.20' })
+usedExternals.append({ 'name' : 'gsl', 'iversion' : '1.16' })
 
 Return('usedExternals')
