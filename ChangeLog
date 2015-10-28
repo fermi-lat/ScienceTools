@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Oct 28 11:14:39 PDT 2015
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote optimizers and SolarSystemTools to ST HEAD for catalog group
+    *
+------------------------------------------------------------
 User: jchiang  Wed Oct 28 07:46:25 PDT 2015
 ScienceTools-scons
 
