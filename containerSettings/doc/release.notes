@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-04-02 30-Nov-2015 jchiang tag for gsl-based builds
  containerSettings-00-04-01 25-Aug-2015 heather move to python 2.7.6-gl1
  containerSettings-00-04-00 29-Jul-2015 heather Upgrading to cfitsio 3.37 and ape 2.8
  containerSettings-00-03-00 27-Mar-2015 echarles added wcslib and healpix to containerSettings/externals.scons
