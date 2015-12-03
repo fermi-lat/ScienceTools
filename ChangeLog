@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: echarles  Thu Dec  3 15:10:10 PST 2015
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+Switch to healpix 3.30
+    *
+------------------------------------------------------------
 User: echarles  Thu Dec  3 15:09:29 PST 2015
 ScienceTools-scons
 
