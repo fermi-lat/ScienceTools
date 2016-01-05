@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Tue Jan  5 15:55:18 PST 2016
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	SConscript 
+Log Message:
+stag/GoGui_auto-tag
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-04-03, operation: add
 Package: ScienceTools-scons
