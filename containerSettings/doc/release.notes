@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-04-04 05-Jan-2016 heather forcing a new latest build to test rebuild of Healpix 3.30
  containerSettings-00-04-03 04-Dec-2015 echarles Migrate to healpix 3.30
  containerSettings-00-04-02 30-Nov-2015 jchiang tag for gsl-based builds
  containerSettings-00-04-01 25-Aug-2015 heather move to python 2.7.6-gl1
