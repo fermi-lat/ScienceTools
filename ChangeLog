@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Tue Mar  1 11:54:01 PST 2016
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+preparing externals upgrade JIRA GRINF-67
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-04-04, operation: add
 Package: ScienceTools-scons
