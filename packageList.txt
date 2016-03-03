@@ -4,13 +4,13 @@
 # in common with GlastRelease
 xmlBase xmlBase-05-06-01
 astro astro-03-16-01
-facilities facilities-02-23-01
+facilities facilities-02-23-03
 flux flux-08-44-00
 
 # infrastructure
 hoops hoops-01-01-08
 st_app st_app-02-00-08
-tip tip-02-18-05
+tip tip-02-18-06
 st_graph st_graph-01-07-11
 st_facilities st_facilities-00-20-05
 st_stream st_stream-00-06-02
@@ -80,8 +80,8 @@ sane sane-04-00-01
 likeGui likeGui-07-11-01
 
 # SCons machinery
-SConsFiles SConsFiles-01-20-00
-ScienceTools-scons/containerSettings containerSettings-00-03-00
+SConsFiles SConsFiles-01-23-00
+ScienceTools-scons/containerSettings containerSettings-00-05-00
 
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-03-00
