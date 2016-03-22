@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Tue Mar 22 10:09:31 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+upgrade all packages in HEAD to LATEST versions
+    *
+------------------------------------------------------------
 User: heather  Thu Mar  3 08:00:22 PST 2016
 ScienceTools-scons
 
