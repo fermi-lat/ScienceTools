@@ -2,6 +2,15 @@
 TAG
 Tag name: ScienceTools-11-00-00, operation: add
 Package: ScienceTools-scons
+User: glastrm  Mon Mar 28 21:17:36 2016
+Files:
+  ScienceTools-scons/ChangeLog  1.693
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-11-00-00, operation: add
+Package: ScienceTools-scons
 User: glastrm  Mon Mar 28 21:17:31 2016
 Files:
   ScienceTools-scons/packageList.txt  1.195
