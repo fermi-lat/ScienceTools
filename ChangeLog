@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Mon Apr 18 10:21:49 PDT 2016
+ScienceTools-scons/containerSettings
+
+Modified Files:
+	externals.scons 
+Log Message:
+try out diffuseModels v5r0
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-06-00, operation: add
 Package: ScienceTools-scons
