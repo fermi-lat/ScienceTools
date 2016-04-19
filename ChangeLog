@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Mon Apr 18 18:49:27 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+pick up xerces and diffuseModels updates
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-07-00, operation: add
 Package: ScienceTools-scons
