@@ -2,7 +2,7 @@
 # $Id$
 
 # in common with GlastRelease
-xmlBase xmlBase-05-06-01
+xmlBase xmlBase-05-07-00
 astro astro-04-00-01
 facilities facilities-02-23-03
 flux flux-08-44-00
@@ -80,8 +80,8 @@ sane sane-04-00-01
 likeGui likeGui-07-11-02
 
 # SCons machinery
-SConsFiles SConsFiles-01-23-00
-ScienceTools-scons/containerSettings containerSettings-00-05-00
+SConsFiles SConsFiles-01-25-00
+ScienceTools-scons/containerSettings containerSettings-00-06-00
 
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-03-00
