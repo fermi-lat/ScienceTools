@@ -64,7 +64,7 @@ optimizers optimizers-04-01-01
 Likelihood Likelihood-20-03-00
 
 pyExposure pyExposure-02-06-01
-pyLikelihood pyLikelihood-02-02-04
+pyLikelihood pyLikelihood-02-02-05
 
 pulsarDb pulsarDb-09-00-04
 pulsePhase pulsePhase-09-00-04
