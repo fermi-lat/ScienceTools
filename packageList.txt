@@ -61,10 +61,10 @@ rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
 optimizers optimizers-04-01-01
-Likelihood Likelihood-20-03-00
+Likelihood Likelihood-20-05-00
 
 pyExposure pyExposure-02-06-01
-pyLikelihood pyLikelihood-02-02-05
+pyLikelihood pyLikelihood-02-02-07
 
 pulsarDb pulsarDb-09-00-04
 pulsePhase pulsePhase-09-00-04
