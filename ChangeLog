@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Jul  6 11:16:34 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote SConsFiles and containerSettings
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-08-00, operation: add
 Package: ScienceTools-scons
