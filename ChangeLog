@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: heather  Wed Jul 27 07:01:20 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+testing modifications for LSC-13
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-11-02-00, operation: add
 Package: ScienceTools-scons
