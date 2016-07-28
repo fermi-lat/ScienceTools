@@ -41,7 +41,7 @@ irfs/g25Response g25Response-02-00-09
 irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/testResponse testResponse-02-00-05
 irfs/handoff_response handoff_response-06-01-02
-irfs/latResponse latResponse-04-02-01
+irfs/latResponse latResponse-04-02-02
 irfs/irfLoader irfLoader-01-03-04
 irfs/rootIrfLoader rootIrfLoader-01-00-05
 irfs/pyIrfLoader pyIrfLoader-00-01-06
@@ -60,11 +60,11 @@ evtUtils evtUtils-00-03-01
 rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
-optimizers optimizers-04-01-01
-Likelihood Likelihood-20-05-00
+optimizers optimizers-04-01-02
+Likelihood Likelihood-20-06-01
 
 pyExposure pyExposure-02-06-01
-pyLikelihood pyLikelihood-02-02-07
+pyLikelihood pyLikelihood-02-03-00
 
 pulsarDb pulsarDb-09-00-04
 pulsePhase pulsePhase-09-00-04
