@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Thu Jul 28 13:31:34 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote latResponse, optimizers, Likelihood, and pyLikelihood packages
+    *
+------------------------------------------------------------
 User: heather  Wed Jul 27 07:01:20 PDT 2016
 ScienceTools-scons
 
