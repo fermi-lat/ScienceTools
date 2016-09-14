@@ -4,6 +4,7 @@
  *
  *                  EOH
 
+ containerSettings-00-09-00 14-Sep-2016 heather adding some RH7 externals while preserving behavior for other OSes
  containerSettings-00-08-00 05-Jul-2016 heather move to python 2.7.10
  containerSettings-00-07-00 18-Apr-2016 heather try diffuseModels v5r0
  containerSettings-00-06-00 12-Apr-2016 heather trying out xerces 3.1.3
