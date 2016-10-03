@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Mon Oct  3 09:33:12 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote Likelihood, pyLikelihood, st_facilities, irfs/irfInterface, etc.
+    *
+------------------------------------------------------------
 TAG
 Tag name: containerSettings-00-09-00, operation: add
 Package: ScienceTools-scons
