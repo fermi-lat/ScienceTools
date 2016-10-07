@@ -61,7 +61,7 @@ rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
 optimizers optimizers-04-01-02
-Likelihood Likelihood-20-08-07
+Likelihood Likelihood-20-08-08
 
 pyExposure pyExposure-02-06-01
 pyLikelihood pyLikelihood-02-03-06
