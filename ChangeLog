@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Thu Nov  3 16:12:49 PDT 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote irf and likelihood related packages
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-11-04-00, operation: add
 Package: ScienceTools-scons
