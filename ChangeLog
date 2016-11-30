@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Wed Nov 30 11:30:05 PST 2016
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote Likelihood-20-09-04
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-11-05-00, operation: add
 Package: ScienceTools-scons
