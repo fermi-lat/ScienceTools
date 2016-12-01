@@ -3,7 +3,7 @@
 
 # in common with GlastRelease
 xmlBase xmlBase-05-07-01
-astro astro-04-00-01
+astro astro-04-00-02
 facilities facilities-02-23-03
 flux flux-08-44-00
 
@@ -61,7 +61,7 @@ rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
 optimizers optimizers-04-01-02
-Likelihood Likelihood-20-09-04
+Likelihood Likelihood-20-09-05
 
 pyExposure pyExposure-02-06-01
 pyLikelihood pyLikelihood-02-04-01
