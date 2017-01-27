@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jchiang  Fri Jan 27 12:21:41 PST 2017
+ScienceTools-scons
+
+Modified Files:
+	packageList.txt 
+Log Message:
+promote Likelihood, pointlike, skymaps
+    *
+------------------------------------------------------------
 TAG
 Tag name: ScienceTools-11-05-01, operation: add
 Package: ScienceTools-scons
