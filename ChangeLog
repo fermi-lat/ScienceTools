@@ -2,6 +2,18 @@
 TAG
 Tag name: ScienceTools-11-05-02, operation: add
 Package: ScienceTools-scons
+User: glastrm  Wed Feb  8 11:38:22 2017
+Files:
+  ScienceTools-scons/containerSettings/package.scons  1.3
+  ScienceTools-scons/containerSettings/externals.scons  1.37
+  ScienceTools-scons/containerSettings/SConscript  1.40
+  ScienceTools-scons/containerSettings/doc/release.notes  1.39
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: ScienceTools-11-05-02, operation: add
+Package: ScienceTools-scons
 User: glastrm  Wed Feb  8 11:29:07 2017
 Files:
   ScienceTools-scons/ChangeLog  1.749
