@@ -31,7 +31,7 @@ celestialSources/microQuasar microQuasar-01-05-01
 
 # instrument response
 irfs irfs-00-09-06
-irfs/caldb caldb-07-00-03
+irfs/caldb caldb-07-02-00
 irfs/caldb_release caldb_release-07-00-03
 irfs/irfInterface irfInterface-03-03-02
 irfs/irfUtil irfUtil-02-01-00
@@ -40,7 +40,7 @@ irfs/dc2Response dc2Response-03-01-09
 irfs/g25Response g25Response-02-00-09
 irfs/dc1aResponse dc1aResponse-02-00-05
 irfs/testResponse testResponse-02-00-05
-irfs/handoff_response handoff_response-06-01-02
+irfs/handoff_response handoff_response-06-02-00
 irfs/latResponse latResponse-04-03-01
 irfs/irfLoader irfLoader-01-03-04
 irfs/rootIrfLoader rootIrfLoader-01-00-05
@@ -51,20 +51,20 @@ observationSim observationSim-10-01-02
 orbitSim orbitSim-03-00-01
 
 # analysis
-healpix healpix-02-05-02
+healpix healpix-02-05-03
 skymaps skymaps-02-17-00
 pointlike pointlike-09-05-02
 dataSubselector dataSubselector-09-02-00
-evtbin evtbin-03-00-00
+evtbin evtbin-03-00-01
 evtUtils evtUtils-00-03-01
 rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
-optimizers optimizers-04-01-02
-Likelihood Likelihood-20-09-08
+optimizers optimizers-04-01-03
+Likelihood Likelihood-20-13-03
 
 pyExposure pyExposure-02-06-01
-pyLikelihood pyLikelihood-02-04-01
+pyLikelihood pyLikelihood-02-04-03
 
 pulsarDb pulsarDb-09-00-04
 pulsePhase pulsePhase-09-00-04
@@ -80,7 +80,7 @@ sane sane-04-00-01
 likeGui likeGui-07-11-02
 
 # SCons machinery
-SConsFiles SConsFiles-01-27-00
+SConsFiles SConsFiles-02-00-00
 ScienceTools-scons/containerSettings containerSettings-00-09-00
 
 BayesianBlocks BayesianBlocks-04-02-00
