@@ -31,7 +31,7 @@ celestialSources/microQuasar microQuasar-01-05-01
 
 # instrument response
 irfs irfs-00-09-06
-irfs/caldb caldb-07-01-00
+irfs/caldb caldb-07-02-00
 irfs/caldb_release caldb_release-07-00-03
 irfs/irfInterface irfInterface-03-03-02
 irfs/irfUtil irfUtil-02-01-00
@@ -60,8 +60,8 @@ evtUtils evtUtils-00-03-01
 rspgen rspgen-03-02-03
 burstFit burstFit-02-03-01
 map_tools map_tools-07-07-01
-optimizers optimizers-04-01-02
-Likelihood Likelihood-20-12-03
+optimizers optimizers-04-01-03
+Likelihood Likelihood-20-13-03
 
 pyExposure pyExposure-02-06-01
 pyLikelihood pyLikelihood-02-04-03
@@ -80,7 +80,7 @@ sane sane-04-00-01
 likeGui likeGui-07-11-02
 
 # SCons machinery
-SConsFiles SConsFiles-01-27-00
+SConsFiles SConsFiles-02-00-00
 ScienceTools-scons/containerSettings containerSettings-00-09-00
 
 BayesianBlocks BayesianBlocks-04-02-00
