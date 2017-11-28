@@ -80,7 +80,7 @@ sane sane-04-00-01
 likeGui likeGui-07-11-02
 
 # SCons machinery
-SConsShared SConsShared-01-00-01
+SConsShared SConsShared-02-03-00
 STRcontainerSettings STRcontainerSettings-01-00-00
 
 BayesianBlocks BayesianBlocks-04-02-00
