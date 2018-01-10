@@ -4,14 +4,14 @@
 # Alex Reustle
 
 - test_EarthPhenom
-- test_GRBROOT
-- test_GRBTEMPLATEROOT
-- test_GRBobs
-- test_GRBobsROOT
-- test_GRBtemplate
+# - test_GRBROOT
+# - test_GRBTEMPLATEROOT
+# - test_GRBobs
+# - test_GRBobsROOT
+# - test_GRBtemplate
 # - test_IFile
 - test_Likelihood
-- test_PulsarROOT
+# - test_PulsarROOT
 - test_Util
 - test_astro
 - test_burstFit
