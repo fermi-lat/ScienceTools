@@ -32,7 +32,7 @@
 - test_irfInterface
 - test_irfLoader
 - test_irfUtil
-- test_latResponse
+# - test_latResponse
 - test_map_tools
 - test_mem
 - test_microQuasar
