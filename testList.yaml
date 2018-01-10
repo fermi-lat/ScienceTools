@@ -25,7 +25,7 @@
 - test_evtbin
 - test_fitsGen
 - test_flux
-- test_genericSources
+# - test_genericSources
 - test_handoff_response
 - test_healpix
 - test_hoops
