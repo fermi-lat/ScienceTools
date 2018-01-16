@@ -43,7 +43,7 @@
 - test_pulsarDb
 - test_pulsePhase
 - test_rspgen
-# - test_sane
+- test_sane
 - test_source
 - test_st_app
 - test_st_facilities
