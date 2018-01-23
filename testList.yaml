@@ -1,0 +1,57 @@
+# A list of tests to validate the Sciencetools.
+# Should be replaced with proper test harness.
+# Jan 10 2018.
+# Alex Reustle
+
+- test_EarthPhenom
+# - test_GRBROOT
+# - test_GRBTEMPLATEROOT
+# - test_GRBobs
+# - test_GRBobsROOT
+# - test_GRBtemplate
+# - test_IFile
+- test_Likelihood
+# - test_PulsarROOT
+- test_Util
+- test_astro
+- test_burstFit
+- test_catalogAccess
+- test_celestialSources
+- test_dataSubselector
+- test_dc1aResponse
+- test_eblAtten
+- test_embed_python
+- test_env
+- test_evtbin
+- test_fitsGen
+- test_flux
+# - test_genericSources
+- test_handoff_response
+- test_healpix
+- test_hoops
+- test_irfInterface
+- test_irfLoader
+- test_irfUtil
+# - test_latResponse
+- test_map_tools
+- test_mem
+- test_microQuasar
+- test_observationSim
+- test_optimizers
+- test_parse
+- test_periodSearch
+- test_pulsarDb
+- test_pulsePhase
+- test_rspgen
+- test_sane
+- test_source
+- test_st_app
+- test_st_facilities
+- test_st_graph
+- test_st_stream
+- test_testResponse
+- test_time
+- test_timeSystem
+- test_tip
+- test_write
+- test_xmlBase
