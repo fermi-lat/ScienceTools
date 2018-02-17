@@ -86,5 +86,5 @@ STRcontainerSettings STRcontainerSettings-01-00-00
 BayesianBlocks BayesianBlocks-04-02-00
 SolarSystemTools SolarSystemTools-01-03-00
 celestialSources/EarthPhenom EarthPhenom-00-02-07
-pyBurstAnalysisGUI pyBurstAnalysisGUI-02-01-03
+pyBurstAnalysisGUI pyBurstAnalysisGUI-02-03-00
 # GRBAnalysis-scons/BackgroundEstimator BackgroundEstimator-01-00-02
