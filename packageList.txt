@@ -67,9 +67,9 @@ pyExposure pyExposure-02-06-01
 pyLikelihood pyLikelihood-02-04-03
 
 pulsarDb pulsarDb-09-00-04
-pulsePhase pulsePhase-09-00-04
+#pulsePhase pulsePhase-09-00-04
 
-periodSearch periodSearch-10-08-07
+#periodSearch periodSearch-10-08-07
 timeSystem timeSystem-06-05-01
 catalogAccess catalogAccess-00-04-07
 sourceIdentify sourceIdentify-02-04-00
