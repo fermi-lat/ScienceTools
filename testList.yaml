@@ -39,7 +39,7 @@
 - test_observationSim
 - test_optimizers
 - test_parse
-- test_periodSearch
+#- test_periodSearch
 - test_pulsarDb
 - test_pulsePhase
 - test_rspgen
