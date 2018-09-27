@@ -2,90 +2,90 @@
 # $Id$
 
 # in common with GlastRelease
-xmlBase xmlBase-05-07-01
-astro astro-04-00-02
-facilities facilities-02-23-03
-flux flux-08-44-00
+xmlBase fermitools-11-07-01
+astro fermitools-11-07-01
+facilities fermitools-11-07-01
+flux fermitools-11-07-01
 
 # infrastructure
-hoops hoops-01-01-08
-st_app st_app-02-00-08
-tip tip-02-18-06
-st_graph st_graph-01-07-11
-st_facilities st_facilities-00-22-02
-st_stream st_stream-00-06-02
-fitsGen fitsGen-07-01-03
-fitsGenApps fitsGenApps-00-09-01
-embed_python embed_python-01-07-01
+hoops fermitools-11-07-01
+st_app fermitools-11-07-01
+tip fermitools-11-07-01
+st_graph fermitools-11-07-01
+st_facilities fermitools-11-07-01
+st_stream fermitools-11-07-01
+fitsGen fermitools-11-07-01
+fitsGenApps fermitools-11-07-01
+embed_python fermitools-11-07-01
 
 # source modeling
-celestialSources celestialSources-01-06-00
-celestialSources/genericSources genericSources-01-17-00
-celestialSources/Pulsar Pulsar-03-03-00
-celestialSources/SpectObj SpectObj-01-04-00
-celestialSources/GRB GRB-04-05-00
-celestialSources/GRBobs GRBobs-03-04-02
-celestialSources/GRBtemplate GRBtemplate-01-04-01
-celestialSources/eblAtten eblAtten-00-10-01
-celestialSources/microQuasar microQuasar-01-05-01
+celestialSources fermitools-11-07-01
+celestialSources/genericSources fermitools-11-07-01
+celestialSources/Pulsar fermitools-11-07-01
+celestialSources/SpectObj fermitools-11-07-01
+celestialSources/GRB fermitools-11-07-01
+celestialSources/GRBobs fermitools-11-07-01
+celestialSources/GRBtemplate fermitools-11-07-01
+celestialSources/eblAtten fermitools-11-07-01
+celestialSources/microQuasar fermitools-11-07-01
 
 # instrument response
-irfs irfs-00-09-06
-irfs/caldb caldb-07-02-00
-irfs/caldb_release caldb_release-07-00-03
-irfs/irfInterface irfInterface-03-03-02
-irfs/irfUtil irfUtil-02-01-00
-irfs/dc1Response dc1Response-02-00-09
-irfs/dc2Response dc2Response-03-01-09
-irfs/g25Response g25Response-02-00-09
-irfs/dc1aResponse dc1aResponse-02-00-05
-irfs/testResponse testResponse-02-00-05
-irfs/handoff_response handoff_response-06-02-00
-irfs/latResponse latResponse-04-03-01
-irfs/irfLoader irfLoader-01-03-04
-irfs/rootIrfLoader rootIrfLoader-01-00-05
-irfs/pyIrfLoader pyIrfLoader-00-02-00
+irfs fermitools-11-07-01
+irfs/caldb fermitools-11-07-01
+irfs/caldb_release fermitools-11-07-01
+irfs/irfInterface fermitools-11-07-01
+irfs/irfUtil fermitools-11-07-01
+irfs/dc1Response fermitools-11-07-01
+irfs/dc2Response fermitools-11-07-01
+irfs/g25Response fermitools-11-07-01
+irfs/dc1aResponse fermitools-11-07-01
+irfs/testResponse fermitools-11-07-01
+irfs/handoff_response fermitools-11-07-01
+irfs/latResponse fermitools-11-07-01
+irfs/irfLoader fermitools-11-07-01
+irfs/rootIrfLoader fermitools-11-07-01
+irfs/pyIrfLoader fermitools-11-07-01
 
 # simulation
-observationSim observationSim-10-01-02
-orbitSim orbitSim-03-00-01
+observationSim fermitools-11-07-01
+orbitSim fermitools-11-07-01
 
 # analysis
-healpix healpix-02-05-03
-skymaps skymaps-02-17-00
-pointlike pointlike-09-05-02
-dataSubselector dataSubselector-09-02-00
-evtbin evtbin-03-00-01
-evtUtils evtUtils-00-03-01
-rspgen rspgen-03-02-03
-burstFit burstFit-02-03-01
-map_tools map_tools-07-07-01
-optimizers optimizers-04-01-03
-Likelihood Likelihood-20-13-03
+healpix fermitools-11-07-01
+skymaps fermitools-11-07-01
+pointlike fermitools-11-07-01
+dataSubselector fermitools-11-07-01
+evtbin fermitools-11-07-01
+evtUtils fermitools-11-07-01
+rspgen fermitools-11-07-01
+burstFit fermitools-11-07-01
+map_tools fermitools-11-07-01
+optimizers fermitools-11-07-01
+Likelihood fermitools-11-07-01
 
-pyExposure pyExposure-02-06-01
-pyLikelihood pyLikelihood-02-04-03
+pyExposure fermitools-11-07-01
+pyLikelihood fermitools-11-07-01
 
-pulsarDb pulsarDb-09-00-04
-pulsePhase pulsePhase-09-00-04
+pulsarDb fermitools-11-07-01
+pulsePhase fermitools-11-07-01
 
 #periodSearch periodSearch-10-08-07
-timeSystem timeSystem-06-05-01
-catalogAccess catalogAccess-00-04-07
-sourceIdentify sourceIdentify-02-04-00
-pgwave pgwave-01-02-03
+timeSystem fermitools-11-07-01
+catalogAccess fermitools-11-07-01
+sourceIdentify fermitools-11-07-01
+pgwave fermitools-11-07-01
 
 # define analysis environment
-sane sane-04-00-01
+sane fermitools-11-07-01
 #likeGui likeGui-07-11-02
-modelEditor modelEditor-01-00-00
+modelEditor fermitools-11-07-01
 
 # SCons machinery
-SConsShared SConsShared-01-00-01
-STRcontainerSettings STRcontainerSettings-01-00-00
+SConsShared fermitools-11-07-01
+STRcontainerSettings fermitools-11-07-01
 
-BayesianBlocks BayesianBlocks-04-02-00
-SolarSystemTools SolarSystemTools-01-03-00
-celestialSources/EarthPhenom EarthPhenom-00-02-07
+BayesianBlocks fermitools-11-07-01
+SolarSystemTools fermitools-11-07-01
+celestialSources/EarthPhenom fermitools-11-07-01
 pyBurstAnalysisGUI master
 # GRBAnalysis-scons/BackgroundEstimator BackgroundEstimator-01-00-02
