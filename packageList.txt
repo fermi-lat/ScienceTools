@@ -89,3 +89,6 @@ SolarSystemTools fermitools-11-07-01
 celestialSources/EarthPhenom fermitools-11-07-01
 pyBurstAnalysisGUI master
 # GRBAnalysis-scons/BackgroundEstimator BackgroundEstimator-01-00-02
+
+# fhelp files
+fermitools-fhelp master
