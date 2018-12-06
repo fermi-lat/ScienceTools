@@ -61,7 +61,7 @@ rspgen fermitools-11-07-01
 burstFit fermitools-11-07-01
 map_tools fermitools-11-07-01
 optimizers fermitools-11-07-01
-Likelihood fermitools-11-07-01
+Likelihood LK-140
 
 pyExposure fermitools-11-07-01
 pyLikelihood fermitools-11-07-01
