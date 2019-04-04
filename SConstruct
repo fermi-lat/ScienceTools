@@ -3,7 +3,7 @@
 # Authors: Navid Golpayegani <golpa@slac.stanford.edu>, Joanne Bogart <jrb@slac.stanford.edu>
 # Version: ScienceTools-scons-01-00-00
 
-import os,platform,SCons,glob,re,atexit,sys,traceback,commands,subprocess
+import os,platform,SCons,glob,re,atexit,sys,traceback,subprocess
 #########################
 #   Global Environment  #
 #########################
