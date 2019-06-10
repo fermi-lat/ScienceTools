@@ -43,7 +43,6 @@ irfs/testResponse Fermitools-1.0.1
 irfs/handoff_response Fermitools-1.0.1
 irfs/latResponse Fermitools-1.0.1
 irfs/irfLoader Fermitools-1.0.1
-irfs/rootIrfLoader Fermitools-1.0.1
 irfs/pyIrfLoader Fermitools-1.0.1
 
 # simulation
