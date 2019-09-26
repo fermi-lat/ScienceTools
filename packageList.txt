@@ -78,7 +78,7 @@ pgwave Fermitools-1.0.1
 # define analysis environment
 sane Fermitools-1.0.1
 #likeGui likeGui-07-11-02
-modelEditor Fermitools-1.0.1
+modeleditor Fermitools-1.0.1
 
 # SCons machinery
 SConsShared Fermitools-1.0.1
