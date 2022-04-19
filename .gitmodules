@@ -98,3 +98,11 @@
 	path = tip
 	url = git@github.com:fermi-lat/tip.git
 	branch = cmake-update
+[submodule "irfs"]
+	path = irfs
+	url = git@github.com:fermi-lat/irfs.git
+	branch = cmake-update
+[submodule "celestialSources"]
+	path = celestialSources
+	url = git@github.com:fermi-lat/celestialSources.git
+	branch = cmake-update

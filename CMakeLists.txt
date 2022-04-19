@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 project(
-  Fermitools
+  fermitools
   VERSION 2.1.0
   LANGUAGES CXX C
   DESCRIPTION "Fermi Sciencetools"
@@ -101,5 +101,33 @@ list(
 )
 
 foreach(pkg ${fermi_components})
-  add_subdirectory(../${pkg} ${CMAKE_BINARY_DIR}/${pkg})
+  add_subdirectory(${pkg} ${CMAKE_BINARY_DIR}/${pkg})
 endforeach()
+
+
+# ##############################################################################
+# Specify Installation destinations
+# ##############################################################################
+
+include(GNUInstallDirs)
+set(CONFIG_INSTALLDIR lib/cmake/fermitools)
+set(CONFIG_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR}/fermitools)
+
+# install(DIRECTORY include/fermitools DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#
+# install(FILES include/pil.h include/pil_error.h
+#         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+#
+# install(TARGETS ape
+#                 pcheck
+#                 pget
+#                 plist
+#                 pquery
+#                 pquery2
+#                 pset
+#                 punlearn
+#         EXPORT apeTargets
+#         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+#         LIBRARY DESTINATION lib
+#         ARCHIVE DESTINATION lib
+#         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
