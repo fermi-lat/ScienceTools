@@ -4,3 +4,9 @@ bin
 data
 exe
 sconsTools
+build/
+_build/
+Release/
+Debug/
+RelWithDebInfo/
+compile_commands.json

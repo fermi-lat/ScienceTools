@@ -73,31 +73,31 @@ list(
   APPEND fermi_components
   ape
   facilities
-  # embed_python
-  # hoops
-  # tip
-  # xmlBase
-  # astro
-  # flux
-  # st_facilities
-  # st_stream
-  # st_graph
-  # st_app
-  # healpix
-  # evtbin
-  # timeSystem
-  # catalogAccess
-  # sourceIdentify
-  # optimizers
-  # celestialSources
-  # irfs
-  # dataSubselector
-  # map_tools
-  # Likelihood
-  # pyLikelihood
-  # # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
-  # SolarSystemTools
-  # rspgen
+  embed_python
+  hoops
+  tip
+  xmlBase
+  astro
+  flux
+  st_facilities
+  st_stream
+  st_graph
+  st_app
+  healpix
+  evtbin
+  timeSystem
+  catalogAccess
+  sourceIdentify
+  optimizers
+  celestialSources
+  irfs
+  dataSubselector
+  map_tools
+  Likelihood
+  pyLikelihood
+  # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
+  SolarSystemTools
+  rspgen
 )
 
 foreach(pkg ${fermi_components})
