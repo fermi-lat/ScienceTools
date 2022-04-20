@@ -106,3 +106,7 @@
 	path = celestialSources
 	url = git@github.com:fermi-lat/celestialSources.git
 	branch = cmake-update
+[submodule "fermitools-fhelp"]
+	path = fermitools-fhelp
+	url = git@github.com:fermi-lat/fermitools-fhelp.git
+	branch = cmake-update

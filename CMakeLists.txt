@@ -81,6 +81,7 @@ set(
 )
 set(FERMI_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 set(FERMI_INSTALL_DATADIR share/${PROJECT_NAME}/data)
+set(FERMI_INSTALL_HELPDIR share/${PROJECT_NAME}/help)
 set(FERMI_INSTALL_PFILESDIR share/${PROJECT_NAME}/syspfiles)
 set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml)
 
@@ -90,32 +91,33 @@ set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml)
 list(
   APPEND fermi_components
   ape
-  facilities
-  embed_python
-  hoops
-  tip
-  xmlBase
   astro
+  catalogAccess
+  celestialSources
+  dataSubselector
+  embed_python
+  evtbin
+  facilities
+  fermitools-fhelp
   flux
+  healpix
+  hoops
+  irfs
+  Likelihood
+  map_tools
+  optimizers
+  pyLikelihood
+  rspgen
+  # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
+  sourceIdentify
+  SolarSystemTools
   st_facilities
   st_stream
   st_graph
   st_app
-  healpix
-  evtbin
+  tip
   timeSystem
-  catalogAccess
-  sourceIdentify
-  optimizers
-  celestialSources
-  irfs
-  dataSubselector
-  map_tools
-  Likelihood
-  pyLikelihood
-  # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
-  SolarSystemTools
-  rspgen
+  xmlBase
 )
 
 foreach(pkg ${fermi_components})
@@ -123,8 +125,18 @@ foreach(pkg ${fermi_components})
 endforeach()
 
 ####### Install #######
+
+# Add the init.py file to the installed target python site-packages dir.
 install(CODE "file(TOUCH __init__.py)")
+# Add the fermitools.pth file to lib
+# echo "$PREFIX/lib/${PROJECT_NAME}" > $sitepackagesdir/${PROJECT_NAME}.pth
+# echo "${sitepackagesdir}/${PROJECT_NAME}" >> $sitepackagesdir/${PROJECT_NAME}.pth
+install(CODE "file(WRITE ${PROJECT_NAME}.pth ../../${PROJECT_NAME}\\n)")
+install(CODE "file(APPEND ${PROJECT_NAME}.pth ../../../${PYTHON_SITE_PKGDIR}/${PROJECT_NAME}\\n)")
+
 install(
-  FILES "${CMAKE_BINARY_DIR}/__init__.py"
+  FILES
+  "${CMAKE_BINARY_DIR}/__init__.py"
+  "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
   DESTINATION ${PYTHON_SITE_PKGDIR}
 )
