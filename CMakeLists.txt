@@ -68,6 +68,24 @@ endif()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.in config.h)
 include_directories(${PROJECT_BINARY_PATH})
 
+
+# ##############################################################################
+# Specify Installation destinations
+# ##############################################################################
+
+include(GNUInstallDirs)
+set(CONFIG_INSTALLDIR lib/cmake/${PROJECT_NAME})
+set(
+  PYTHON_SITE_PKGDIR
+  lib/python${Python3_VERSION_MAJOR}.${Python3_VERSION_MINOR}/site-packages
+)
+set(FERMI_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+set(FERMI_INSTALL_DATADIR share/${PROJECT_NAME}/data)
+set(FERMI_INSTALL_PFILESDIR share/${PROJECT_NAME}/syspfiles)
+set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml)
+
+##################################################
+## Targets
 ## The full colleciton of Sciencetools packages.
 list(
   APPEND fermi_components
@@ -103,31 +121,3 @@ list(
 foreach(pkg ${fermi_components})
   add_subdirectory(${pkg} ${CMAKE_BINARY_DIR}/${pkg})
 endforeach()
-
-
-# ##############################################################################
-# Specify Installation destinations
-# ##############################################################################
-
-include(GNUInstallDirs)
-set(CONFIG_INSTALLDIR lib/cmake/fermitools)
-set(CONFIG_INSTALL_INCLUDEDIR ${CMAKE_INSTALL_INCLUDEDIR}/fermitools)
-
-# install(DIRECTORY include/fermitools DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-#
-# install(FILES include/pil.h include/pil_error.h
-#         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-#
-# install(TARGETS ape
-#                 pcheck
-#                 pget
-#                 plist
-#                 pquery
-#                 pquery2
-#                 pset
-#                 punlearn
-#         EXPORT apeTargets
-#         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-#         LIBRARY DESTINATION lib
-#         ARCHIVE DESTINATION lib
-#         INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
