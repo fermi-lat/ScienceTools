@@ -121,3 +121,10 @@ list(
 foreach(pkg ${fermi_components})
   add_subdirectory(${pkg} ${CMAKE_BINARY_DIR}/${pkg})
 endforeach()
+
+####### Install #######
+install(CODE "file(TOUCH __init__.py)")
+install(
+  FILES "${CMAKE_BINARY_DIR}/__init__.py"
+  DESTINATION ${PYTHON_SITE_PKGDIR}
+)

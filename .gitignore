@@ -10,3 +10,4 @@ Release/
 Debug/
 RelWithDebInfo/
 compile_commands.json
+_prefix/
