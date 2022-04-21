@@ -69,9 +69,31 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.in config.h)
 include_directories(${PROJECT_BINARY_PATH})
 
 
-# ##############################################################################
+###############################################################################
+# RPATH management for compiled targets
+###############################################################################
+# use, i.e. don't skip the full RPATH for the build tree
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+# when building, don't use the install RPATH already
+# (but later on when installing)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+# add the automatically determined parts of the RPATH
+# which point to directories outside the build tree to the install RPATH
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+# the RPATH to be used when installing, but only if it's not a system directory
+list(
+  FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES
+  "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir
+)
+if("${isSystemDir}" STREQUAL "-1")
+  set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+endif()
+
+
+###############################################################################
 # Specify Installation destinations
-# ##############################################################################
+###############################################################################
 
 include(GNUInstallDirs)
 set(CONFIG_INSTALLDIR lib/cmake/${PROJECT_NAME})
@@ -129,15 +151,15 @@ endforeach()
 
 # Add the init.py file to the installed target python site-packages dir.
 install(CODE "file(TOUCH __init__.py)")
-# # Add the fermitools.pth file to lib
-# # echo "$PREFIX/lib/${PROJECT_NAME}" > $sitepackagesdir/${PROJECT_NAME}.pth
-# # echo "${sitepackagesdir}/${PROJECT_NAME}" >> $sitepackagesdir/${PROJECT_NAME}.pth
-# install(CODE "file(WRITE ${PROJECT_NAME}.pth ../../${PROJECT_NAME}\\n)")
-# install(CODE "file(APPEND ${PROJECT_NAME}.pth ../../../${PYTHON_SITE_PKGDIR}/${PROJECT_NAME}\\n)")
+install(FILES "${CMAKE_BINARY_DIR}/__init__.py" DESTINATION ${FERMI_INSTALL_PYTHON})
+# Add the fermitools.pth file to lib
+# echo "$PREFIX/lib/${PROJECT_NAME}" > $sitepackagesdir/${PROJECT_NAME}.pth
+# echo "${sitepackagesdir}/${PROJECT_NAME}" >> $sitepackagesdir/${PROJECT_NAME}.pth
 
+install(CODE "file(WRITE ${PROJECT_NAME}.pth ${PROJECT_NAME}\\n)")
+install(CODE "file(APPEND ${PROJECT_NAME}.pth ../../../lib/\\n)")
+install(CODE "file(APPEND ${PROJECT_NAME}.pth ../../../lib/${PROJECT_NAME}\\n)")
 install(
-  FILES
-  "${CMAKE_BINARY_DIR}/__init__.py"
-  # "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
-  DESTINATION ${FERMI_INSTALL_PYTHON}
+  FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
+  DESTINATION ${PYTHON_SITE_PKGDIR}
 )
