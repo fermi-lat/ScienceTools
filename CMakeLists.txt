@@ -64,33 +64,6 @@ if(FERMI_BUILD_ROOT)
   )
 endif()
 
-###############################
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.in config.h)
-include_directories(${PROJECT_BINARY_PATH})
-
-
-###############################################################################
-# RPATH management for compiled targets
-###############################################################################
-# use, i.e. don't skip the full RPATH for the build tree
-set(CMAKE_SKIP_BUILD_RPATH FALSE)
-# when building, don't use the install RPATH already
-# (but later on when installing)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
-# set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-# add the automatically determined parts of the RPATH
-# which point to directories outside the build tree to the install RPATH
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-# the RPATH to be used when installing, but only if it's not a system directory
-list(
-  FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES
-  "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir
-)
-if("${isSystemDir}" STREQUAL "-1")
-  set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-endif()
-
-
 ###############################################################################
 # Specify Installation destinations
 ###############################################################################
@@ -112,7 +85,7 @@ set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml)
 ## Targets
 ## The full colleciton of Sciencetools packages.
 list(
-  APPEND fermi_components
+  APPEND FERMI_COMPONENTS
   ape
   astro
   catalogAccess
@@ -143,7 +116,15 @@ list(
   xmlBase
 )
 
-foreach(pkg ${fermi_components})
+list(JOIN FERMI_COMPONENTS " " FERMI_COMPONENTS_SPACES)
+
+#### Configuration ####
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/config.h.in config.h)
+include_directories(${CMAKE_BINARY_PATH})
+
+
+#######################
+foreach(pkg ${FERMI_COMPONENTS})
   add_subdirectory(${pkg} ${CMAKE_BINARY_DIR}/${pkg})
 endforeach()
 
