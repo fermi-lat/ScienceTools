@@ -110,3 +110,11 @@
 	path = fermitools-fhelp
 	url = git@github.com:fermi-lat/fermitools-fhelp.git
 	branch = cmake-update
+[submodule "pulsarDb"]
+	path = pulsarDb
+	url = git@github.com:fermi-lat/pulsarDb.git
+	branch = cmake-update
+[submodule "burstFit"]
+	path = burstFit
+	url = git@github.com:fermi-lat/burstFit.git
+	branch = cmake-update
