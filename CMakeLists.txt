@@ -39,7 +39,6 @@ find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 ## Pkg-Config Externals ##
 pkg_check_modules(cfitsio REQUIRED IMPORTED_TARGET GLOBAL cfitsio)
 pkg_check_modules(cppunit REQUIRED IMPORTED_TARGET GLOBAL cppunit)
-# pkg_check_modules(f2c REQUIRED IMPORTED_TARGET GLOBAL f2c)
 pkg_check_modules(fftw3 REQUIRED IMPORTED_TARGET GLOBAL fftw3)
 pkg_check_modules(gsl REQUIRED IMPORTED_TARGET GLOBAL gsl)
 pkg_check_modules(wcslib REQUIRED IMPORTED_TARGET GLOBAL wcslib)
@@ -91,6 +90,8 @@ list(
   APPEND FERMI_COMPONENTS
   ape
   astro
+  BayesianBlocks
+  burstFit
   catalogAccess
   celestialSources
   dataSubselector
@@ -105,8 +106,13 @@ list(
   Likelihood
   map_tools
   optimizers
+  pulsarDb
+  pulsePhase
+  pyBurstAnalysisGUI
+  pyExposure
   pyLikelihood
   rspgen
+  sane
   # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
   sourceIdentify
   SolarSystemTools
@@ -117,12 +123,6 @@ list(
   tip
   timeSystem
   xmlBase
-  pulsarDb
-  burstFit
-  pulsePhase
-  pyBurstAnalysisGUI
-  sane
-  BayesianBlocks
 )
 
 list(JOIN FERMI_COMPONENTS " " FERMI_COMPONENTS_SPACES)

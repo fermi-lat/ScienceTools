@@ -134,11 +134,6 @@
 	path = BayesianBlocks
 	url = git@github.com:fermi-lat/BayesianBlocks.git
 	branch = cmake-update
-[submodule "fitsGen"]
-	path = fitsGen
-	url = git@github.com:fermi-lat/fitsGen.git
-	branch = cmake-update
-[submodule "evtUtils"]
-	path = evtUtils
-	url = git@github.com:fermi-lat/evtUtils.git
-	branch = cmake-update
+[submodule "pyExposure"]
+	path = pyExposure
+	url = git@github.com:fermi-lat/pyExposure.git
