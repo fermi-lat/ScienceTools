@@ -118,3 +118,7 @@
 	path = burstFit
 	url = git@github.com:fermi-lat/burstFit.git
 	branch = cmake-update
+[submodule "pulsePhase"]
+	path = pulsePhase
+	url = git@github.com:fermi-lat/pulsePhase.git
+	branch = cmake-update
