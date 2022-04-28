@@ -82,7 +82,7 @@ set(FERMI_INSTALL_DATADIR share/${PROJECT_NAME}/data)
 set(FERMI_INSTALL_REFDATADIR share/${PROJECT_NAME}/refdata/fermi)
 set(FERMI_INSTALL_HELPDIR share/${PROJECT_NAME}/help)
 set(FERMI_INSTALL_PFILESDIR share/${PROJECT_NAME}/syspfiles)
-set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml)
+set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml/fermi)
 
 ##################################################
 ## Targets
@@ -120,6 +120,9 @@ list(
   pulsarDb
   burstFit
   pulsePhase
+  pyBurstAnalysisGUI
+  sane
+  BayesianBlocks
 )
 
 list(JOIN FERMI_COMPONENTS " " FERMI_COMPONENTS_SPACES)

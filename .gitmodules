@@ -122,3 +122,23 @@
 	path = pulsePhase
 	url = git@github.com:fermi-lat/pulsePhase.git
 	branch = cmake-update
+[submodule "pyBurstAnalysisGUI"]
+	path = pyBurstAnalysisGUI
+	url = git@github.com:fermi-lat/pyBurstAnalysisGUI.git
+	branch = cmake-update
+[submodule "sane"]
+	path = sane
+	url = git@github.com:fermi-lat/sane.git
+	branch = cmake-update
+[submodule "BayesianBlocks"]
+	path = BayesianBlocks
+	url = git@github.com:fermi-lat/BayesianBlocks.git
+	branch = cmake-update
+[submodule "fitsGen"]
+	path = fitsGen
+	url = git@github.com:fermi-lat/fitsGen.git
+	branch = cmake-update
+[submodule "evtUtils"]
+	path = evtUtils
+	url = git@github.com:fermi-lat/evtUtils.git
+	branch = cmake-update
