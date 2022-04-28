@@ -119,6 +119,7 @@ list(
   xmlBase
   pulsarDb
   burstFit
+  pulsePhase
 )
 
 list(JOIN FERMI_COMPONENTS " " FERMI_COMPONENTS_SPACES)
