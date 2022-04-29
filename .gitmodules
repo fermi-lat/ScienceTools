@@ -1,139 +1,140 @@
 [submodule "ape"]
 	path = ape
-	url = git@github.com:fermi-lat/ape.git
+	url = https://github.com/fermi-lat/ape.git
 	branch = cmake-update
 [submodule "facilities"]
 	path = facilities
-	url = git@github.com:fermi-lat/facilities.git
+	url = https://github.com/fermi-lat/facilities.git
 	branch = cmake-update
 [submodule "astro"]
 	path = astro
-	url = git@github.com:fermi-lat/astro.git
+	url = https://github.com/fermi-lat/astro.git
 	branch = cmake-update
 [submodule "catalogAccess"]
 	path = catalogAccess
-	url = git@github.com:fermi-lat/catalogAccess.git
+	url = https://github.com/fermi-lat/catalogAccess.git
 	branch = cmake-update
 [submodule "xmlBase"]
 	path = xmlBase
-	url = git@github.com:fermi-lat/xmlBase.git
+	url = https://github.com/fermi-lat/xmlBase.git
 	branch = cmake-update
 [submodule "dataSubselector"]
 	path = dataSubselector
-	url = git@github.com:fermi-lat/dataSubselector.git
+	url = https://github.com/fermi-lat/dataSubselector.git
 	branch = cmake-update
 [submodule "embed_python"]
 	path = embed_python
-	url = git@github.com:fermi-lat/embed_python.git
+	url = https://github.com/fermi-lat/embed_python.git
 	branch = cmake-update
 [submodule "evtbin"]
 	path = evtbin
-	url = git@github.com:fermi-lat/evtbin.git
+	url = https://github.com/fermi-lat/evtbin.git
 	branch = cmake-update
 [submodule "flux"]
 	path = flux
-	url = git@github.com:fermi-lat/flux.git
+	url = https://github.com/fermi-lat/flux.git
 	branch = cmake-update
 [submodule "healpix"]
 	path = healpix
-	url = git@github.com:fermi-lat/healpix.git
+	url = https://github.com/fermi-lat/healpix.git
 	branch = cmake-update
 [submodule "hoops"]
 	path = hoops
-	url = git@github.com:fermi-lat/hoops.git
+	url = https://github.com/fermi-lat/hoops.git
 	branch = cmake-update
 [submodule "Likelihood"]
 	path = Likelihood
-	url = git@github.com:fermi-lat/Likelihood.git
+	url = https://github.com/fermi-lat/Likelihood.git
 	branch = cmake-update
 [submodule "map_tools"]
 	path = map_tools
-	url = git@github.com:fermi-lat/map_tools.git
+	url = https://github.com/fermi-lat/map_tools.git
 	branch = cmake-update
 [submodule "optimizers"]
 	path = optimizers
-	url = git@github.com:fermi-lat/optimizers.git
+	url = https://github.com/fermi-lat/optimizers.git
 	branch = cmake-update
 [submodule "pyLikelihood"]
 	path = pyLikelihood
-	url = git@github.com:fermi-lat/pyLikelihood.git
+	url = https://github.com/fermi-lat/pyLikelihood.git
 	branch = cmake-update
 [submodule "rspgen"]
 	path = rspgen
-	url = git@github.com:fermi-lat/rspgen.git
+	url = https://github.com/fermi-lat/rspgen.git
 	branch = cmake-update
 [submodule "skymaps"]
 	path = skymaps
-	url = git@github.com:fermi-lat/skymaps.git
+	url = https://github.com/fermi-lat/skymaps.git
 	branch = cmake-update
 [submodule "SolarSystemTools"]
 	path = SolarSystemTools
-	url = git@github.com:fermi-lat/SolarSystemTools.git
+	url = https://github.com/fermi-lat/SolarSystemTools.git
 	branch = cmake-update
 [submodule "sourceIdentify"]
 	path = sourceIdentify
-	url = git@github.com:fermi-lat/sourceIdentify.git
+	url = https://github.com/fermi-lat/sourceIdentify.git
 	branch = cmake-update
 [submodule "st_app"]
 	path = st_app
-	url = git@github.com:fermi-lat/st_app.git
+	url = https://github.com/fermi-lat/st_app.git
 	branch = cmake-update
 [submodule "st_facilities"]
 	path = st_facilities
-	url = git@github.com:fermi-lat/st_facilities.git
+	url = https://github.com/fermi-lat/st_facilities.git
 	branch = cmake-update
 [submodule "st_graph"]
 	path = st_graph
-	url = git@github.com:fermi-lat/st_graph.git
+	url = https://github.com/fermi-lat/st_graph.git
 	branch = cmake-update
 [submodule "st_stream"]
 	path = st_stream
-	url = git@github.com:fermi-lat/st_stream.git
+	url = https://github.com/fermi-lat/st_stream.git
 	branch = cmake-update
 [submodule "timeSystem"]
 	path = timeSystem
-	url = git@github.com:fermi-lat/timeSystem.git
+	url = https://github.com/fermi-lat/timeSystem.git
 	branch = cmake-update
 [submodule "tip"]
 	path = tip
-	url = git@github.com:fermi-lat/tip.git
+	url = https://github.com/fermi-lat/tip.git
 	branch = cmake-update
 [submodule "irfs"]
 	path = irfs
-	url = git@github.com:fermi-lat/irfs.git
+	url = https://github.com/fermi-lat/irfs.git
 	branch = cmake-update
 [submodule "celestialSources"]
 	path = celestialSources
-	url = git@github.com:fermi-lat/celestialSources.git
+	url = https://github.com/fermi-lat/celestialSources.git
 	branch = cmake-update
 [submodule "fermitools-fhelp"]
 	path = fermitools-fhelp
-	url = git@github.com:fermi-lat/fermitools-fhelp.git
+	url = https://github.com/fermi-lat/fermitools-fhelp.git
 	branch = cmake-update
 [submodule "pulsarDb"]
 	path = pulsarDb
-	url = git@github.com:fermi-lat/pulsarDb.git
+	url = https://github.com/fermi-lat/pulsarDb.git
 	branch = cmake-update
 [submodule "burstFit"]
 	path = burstFit
-	url = git@github.com:fermi-lat/burstFit.git
+	url = https://github.com/fermi-lat/burstFit.git
 	branch = cmake-update
 [submodule "pulsePhase"]
 	path = pulsePhase
-	url = git@github.com:fermi-lat/pulsePhase.git
+	url = https://github.com/fermi-lat/pulsePhase.git
 	branch = cmake-update
 [submodule "pyBurstAnalysisGUI"]
 	path = pyBurstAnalysisGUI
-	url = git@github.com:fermi-lat/pyBurstAnalysisGUI.git
+	url = https://github.com/fermi-lat/pyBurstAnalysisGUI.git
 	branch = cmake-update
 [submodule "sane"]
 	path = sane
-	url = git@github.com:fermi-lat/sane.git
+	url = https://github.com/fermi-lat/sane.git
 	branch = cmake-update
 [submodule "BayesianBlocks"]
 	path = BayesianBlocks
-	url = git@github.com:fermi-lat/BayesianBlocks.git
+	url = https://github.com/fermi-lat/BayesianBlocks.git
 	branch = cmake-update
 [submodule "pyExposure"]
 	path = pyExposure
-	url = git@github.com:fermi-lat/pyExposure.git
+	url = https://github.com/fermi-lat/pyExposure.git
+	branch = cmake-update
