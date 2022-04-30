@@ -62,7 +62,7 @@ conda activate fermi-build
 For all the runtime and test-time dependencies we have also provided the
 `fermitools-build-run-test.yml` environment.
 
-<detail>
+<details>
 <summary> Generating an environment file. </summary>
 A new environment file candidate can be created from the command line. I say candidate
 because the YAML needs to me modified to actually be installable. You need to remove
@@ -71,7 +71,7 @@ the 'prefix:' seciton and probably add a '-fermi' to the channel list.
 ``` bash
 conda env export -n fermi-build --from-history >  environments/fermitools-build.yml
 ```
-</detail>
+</details>
 
 ### Conda Builds
 
