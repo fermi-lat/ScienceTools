@@ -134,7 +134,7 @@ include_directories(${CMAKE_BINARY_PATH})
 
 #######################
 foreach(pkg ${FERMI_COMPONENTS})
-  add_subdirectory(${pkg} ${CMAKE_BINARY_DIR}/${pkg})
+  add_subdirectory(src/${pkg} ${CMAKE_BINARY_DIR}/${pkg})
 endforeach()
 
 ####### Install #######
