@@ -1,0 +1,24 @@
+name: fermi_build
+channels:
+  - fermi
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - wcslib
+  - compilers
+  - clhep
+  - readline
+  - cppunit
+  - healpix_cxx=3.31
+  - cmake
+  - llvm-openmp
+  - swig
+  - xerces-c
+  - minuit2_standalone
+  - pkg-config
+  - fftw
+  - f2c=0.0.2
+  - make
+  - cfitsio
+  - gsl

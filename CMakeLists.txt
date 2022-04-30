@@ -140,15 +140,13 @@ endforeach()
 ####### Install #######
 
 # Add the init.py file to the installed target python site-packages dir.
-install(CODE "file(TOUCH __init__.py)")
+install(CODE "file(TOUCH ${CMAKE_BINARY_DIR}/__init__.py)")
 install(FILES "${CMAKE_BINARY_DIR}/__init__.py" DESTINATION ${FERMI_INSTALL_PYTHON})
 # Add the fermitools.pth file to lib
-# echo "$PREFIX/lib/${PROJECT_NAME}" > $sitepackagesdir/${PROJECT_NAME}.pth
-# echo "${sitepackagesdir}/${PROJECT_NAME}" >> $sitepackagesdir/${PROJECT_NAME}.pth
 
-install(CODE "file(WRITE ${PROJECT_NAME}.pth ${PROJECT_NAME}\\n)")
-install(CODE "file(APPEND ${PROJECT_NAME}.pth ../../../lib/\\n)")
-install(CODE "file(APPEND ${PROJECT_NAME}.pth ../../../lib/${PROJECT_NAME}\\n)")
+install(CODE "file(WRITE ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth ${PROJECT_NAME}\\n)")
+install(CODE "file(APPEND ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth ../../../lib/\\n)")
+install(CODE "file(APPEND ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth ../../../lib/${PROJECT_NAME}\\n)")
 install(
   FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
   DESTINATION ${PYTHON_SITE_PKGDIR}

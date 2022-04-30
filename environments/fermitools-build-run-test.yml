@@ -1,0 +1,33 @@
+name: fermi-build-run-test
+channels:
+  - fermi
+  - conda-forge
+  - defaults
+dependencies:
+  - compilers
+  - llvm-openmp
+  - cmake
+  - make
+  - pkg-config
+  - python
+  - swig
+  - cfitsio
+  - clhep
+  - cppunit
+  - f2c=0.0.2
+  - fftw
+  - gsl
+  - healpix_cxx=3.31
+  - minuit2_standalone
+  - readline
+  - wcslib
+  - xerces-c
+  - astropy
+  - fermitools-data
+  - fermitools-test-scripts-data
+  - matplotlib
+  - numpy
+  - pmw
+  - pyyaml
+  - scipy
+  - junit-xml
