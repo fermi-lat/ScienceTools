@@ -26,7 +26,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 ## Externals: The dependent packages on which the Sciencetools relies. ##
 find_package(CLHEP REQUIRED)
-find_package(F2C REQUIRED)
+find_package(f2c REQUIRED)
 find_package(Minuit2 REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(PkgConfig REQUIRED)
@@ -48,7 +48,7 @@ pkg_check_modules(xerces-c REQUIRED IMPORTED_TARGET GLOBAL xerces-c)
 ## Make the targets visible in other CMake files.
 set_target_properties(
   CLHEP::CLHEP
-  F2C::F2C
+  f2c::f2c
   Minuit2::Minuit2
   Minuit2::Minuit2Math
   OpenMP::OpenMP_CXX
