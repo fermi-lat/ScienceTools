@@ -1,6 +1,5 @@
 name: fermi_build
 channels:
-  - fermi
   - conda-forge
   - defaults
 dependencies:
@@ -12,13 +11,14 @@ dependencies:
   - cppunit
   - healpix_cxx=3.31
   - cmake
-  - llvm-openmp
+  - libgomp  # [linux]
+  - llvm-openmp  # [osx]
   - swig
   - xerces-c
   - minuit2_standalone
   - pkg-config
   - fftw
-  - f2c=0.0.2
+  - f2c>=1.0
   - make
   - cfitsio
   - gsl

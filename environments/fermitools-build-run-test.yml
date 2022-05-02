@@ -14,7 +14,7 @@ dependencies:
   - cfitsio
   - clhep
   - cppunit
-  - f2c=0.0.2
+  - f2c>=1.0
   - fftw
   - gsl
   - healpix_cxx=3.31
