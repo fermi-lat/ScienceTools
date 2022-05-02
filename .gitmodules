@@ -138,3 +138,7 @@
 	path = src/pyExposure
 	url = https://github.com/fermi-lat/pyExposure.git
 	branch = cmake-update
+[submodule "src/modelEditor"]
+	path = src/modelEditor
+	url = https://github.com/fermi-lat/modelEditor.git
+	branch = cmake-update
