@@ -105,6 +105,7 @@ list(
   irfs
   Likelihood
   map_tools
+  modelEditor
   optimizers
   pulsarDb
   pulsePhase
