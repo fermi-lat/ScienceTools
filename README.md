@@ -16,6 +16,32 @@ The Fermitools has moved to using CMAKE for its build system. When paired with c
 dependency package management this provides robust and well-supported system for
 cross-compliling the tools on differing host and target systems.
 
+### Requirements
+
+With a fully set up conda environment you can install the needed build-time dependencies
+from the provided conda environment file in `environments/fermitools-build.yml`
+
+```bash
+conda env create -n fermi-build -f environments/fermitools-build.yml
+conda activate fermi-build
+```
+
+For all the runtime and test-time dependencies we have also provided the
+`fermitools-build-run-test.yml` environment.
+
+<details>
+<summary> Generating an environment file. </summary>
+A new environment file candidate can be created from the command line. I say candidate
+because the YAML needs to me modified to actually be installable. You need to remove
+the 'prefix:' seciton and probably add a '-fermi' to the channel list.
+
+``` bash
+conda env export -n fermi-build --from-history >  environments/fermitools-build.yml
+```
+</details>
+
+### CMake Builds
+
 The build process is split into two steps. **Generation** is similar to a `configure` step;
 The host system is polled for needed attributes, programs, and libraries and a Makefile
 system is created. The **Build** stage then executes the generated Makefile system to
@@ -48,30 +74,6 @@ Optionally you can install the tools in your `CMAKE_INSTALL_PREFIX` with
 ```bash
 cmake --build RelWithDebInfo --parallel --target=install
 ```
-
-### Dependencies
-
-With a fully set up conda environment you can install the needed build-time dependencies
-from the provided conda environment file in `environments/fermitools-build.yml`
-
-```bash
-conda env create -n fermi-build -f environments/fermitools-build.yml
-conda activate fermi-build
-```
-
-For all the runtime and test-time dependencies we have also provided the
-`fermitools-build-run-test.yml` environment.
-
-<details>
-<summary> Generating an environment file. </summary>
-A new environment file candidate can be created from the command line. I say candidate
-because the YAML needs to me modified to actually be installable. You need to remove
-the 'prefix:' seciton and probably add a '-fermi' to the channel list.
-
-``` bash
-conda env export -n fermi-build --from-history >  environments/fermitools-build.yml
-```
-</details>
 
 ### Conda Builds
 
