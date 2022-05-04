@@ -65,6 +65,11 @@ if(FERMI_BUILD_ROOT)
   )
 endif()
 
+
+if(NOT APPLE)
+  add_compile_definitions(TRAP_FPE)
+endif()
+
 ###############################################################################
 # Specify Installation destinations
 ###############################################################################
