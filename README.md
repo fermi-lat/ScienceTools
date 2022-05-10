@@ -5,7 +5,7 @@ to component packages. A git submodule is another git repository which is linked
 this repo.
 
 To also fetch these submodules on clone run:
-`git clone --recurse-submodules https://github.com/fermi-lat/ScienceTools.git`
+`git clone -b cmake-update --recurse-submodules https://github.com/fermi-lat/ScienceTools.git`
 
 If you have cloned the top level repo already you can also grab all the repositories with:
 `git submodule update --init .`
