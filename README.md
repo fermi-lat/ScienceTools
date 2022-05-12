@@ -18,19 +18,29 @@ cross-compliling the tools on differing host and target systems.
 
 ### Requirements
 
-With a fully set up conda environment you can install the needed build-time dependencies
-from the provided conda environment file in `environments/fermitools-build.yml`
+With a fully set up conda installation you can install the needed development dependencies
+for your operating system from the provided conda environment files in `environments/`.
+
+For example on linux:
 
 ```bash
-conda env create -n fermi-build -f environments/fermitools-build.yml
-conda activate fermi-build
+conda env create -n fermi-dev -f environments/fermitools-develop-linux.yml
+conda activate fermi-dev
 ```
 
-For all the runtime and test-time dependencies we have also provided the
-`fermitools-build-run-test.yml` environment.
+<details>
+<summary> Build-only dependencies. </summary>
+System specific environment files also exist for just building the tools, but neither
+running nor testing them once built.
+
+```bash
+conda env create -n fermi-build -f environments/fermitools-build-linux-x86.yml
+conda activate fermi-build
+```
+</details>
 
 <details>
-<summary> Generating an environment file. </summary>
+<summary> Generating dependency environment files. </summary>
 A new environment file candidate can be created from the command line. I say candidate
 because the YAML needs to me modified to actually be installable. You need to remove
 the 'prefix:' seciton and probably add a '-fermi' to the channel list.
@@ -73,6 +83,18 @@ Optionally you can install the tools in your `CMAKE_INSTALL_PREFIX` with
 
 ```bash
 cmake --build RelWithDebInfo --parallel --target=install
+```
+
+### Shell Environment Setup.
+
+The Fermitools relies on a properly setup shell environment to populate needed path
+information for certain directories. In a conda build this is handled by the `activate`
+function, but as a developer working without conda you can instead you the provided
+`scripts/activate.sh`. Simply source that file with the argument for your cmake build
+directory like so:
+
+```bash
+source scripts/activate.sh RelWithDebInfo
 ```
 
 ### Conda Builds
