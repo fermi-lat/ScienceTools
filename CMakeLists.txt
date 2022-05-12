@@ -104,6 +104,7 @@ list(
   evtbin
   facilities
   fermitools-fhelp
+  fitsGen
   flux
   healpix
   hoops
@@ -111,6 +112,7 @@ list(
   Likelihood
   map_tools
   modelEditor
+  observationSim
   optimizers
   pulsarDb
   pulsePhase

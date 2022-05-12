@@ -106,3 +106,12 @@
 [submodule "src/modelEditor"]
 	path = src/modelEditor
 	url = https://github.com/fermi-lat/modelEditor.git
+[submodule "src/observationSim"]
+	path = src/observationSim
+	url = https://github.com/fermi-lat/observationSim.git
+[submodule "src/fitsGen"]
+	path = src/fitsGen
+	url = https://github.com/fermi-lat/fitsGen.git
+[submodule "src/evtUtils"]
+	path = src/evtUtils
+	url = https://github.com/fermi-lat/evtUtils.git
