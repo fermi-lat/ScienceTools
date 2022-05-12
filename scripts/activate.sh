@@ -18,19 +18,19 @@ echo -e "Parsed INSTALL_PREFIX: $INSTALL_PREFIX"
 
 # This instructs the Fermi ST where to find their data
 
-INST_DIR=$INSTALL_PREFIX/share/fermitools
-FERMI_DIR=$INST_DIR
-FERMI_INST_DIR=$INST_DIR
-BASE_DIR=$INST_DIR
-EXTFILESSYS=$CONDA_PREFIX/share/fermitools/refdata/fermi
-GENERICSOURCESDATAPATH=$CONDA_PREFIX/share/fermitools/data/genericSources
-TIMING_DIR=$CONDA_PREFIX/share/fermitools/refdata/fermi/jplephem
+export INST_DIR=$INSTALL_PREFIX/share/fermitools
+export FERMI_DIR=$INST_DIR
+export FERMI_INST_DIR=$INST_DIR
+export BASE_DIR=$INST_DIR
+export EXTFILESSYS=$CONDA_PREFIX/share/fermitools/refdata/fermi
+export GENERICSOURCESDATAPATH=$CONDA_PREFIX/share/fermitools/data/genericSources
+export TIMING_DIR=$CONDA_PREFIX/share/fermitools/refdata/fermi/jplephem
 
 # Set necessary CALDB variables 
-CALDBALIAS=$FERMI_DIR/data/caldb/software/tools/alias_config.fits
-CALDBCONFIG=$FERMI_DIR/data/caldb/software/tools/caldb.config
-CALDBROOT=$FERMI_DIR/data/caldb
-CALDB=$FERMI_DIR/data/caldb
+export CALDBALIAS=$FERMI_DIR/data/caldb/software/tools/alias_config.fits
+export CALDBCONFIG=$FERMI_DIR/data/caldb/software/tools/caldb.config
+export CALDBROOT=$FERMI_DIR/data/caldb
+export CALDB=$FERMI_DIR/data/caldb
 
 
 # The new path to check or add
