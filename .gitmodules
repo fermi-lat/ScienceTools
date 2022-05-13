@@ -115,3 +115,5 @@
 [submodule "src/evtUtils"]
 	path = src/evtUtils
 	url = https://github.com/fermi-lat/evtUtils.git
+[submodule "src/Likelihood"]
+	branch = lk-90
