@@ -81,8 +81,9 @@ sane Fermitools-1.0.1
 modelEditor Fermitools-1.0.1
 
 # SCons machinery
-SConsShared Fermitools-1.0.1
-STRcontainerSettings Fermitools-1.0.1
+SConsShared SConsShared-02-03-00
+STRcontainerSettings STRcontainerSettings-01-00-00
+
 
 BayesianBlocks Fermitools-1.0.1
 SolarSystemTools Fermitools-1.0.1
