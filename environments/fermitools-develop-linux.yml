@@ -1,0 +1,35 @@
+name: fermi-develop-linux
+channels:
+  - fermi
+  - conda-forge
+  - defaults
+dependencies:
+  # Build dependencies
+  - cfitsio
+  - clhep
+  - cmake
+  - compilers
+  - cppunit
+  - fftw
+  - f2c>=1.0
+  - gsl
+  - healpix_cxx=3.31
+  - libgomp
+  - make
+  - minuit2_standalone
+  - readline
+  - pkg-config
+  - python
+  - swig
+  - wcslib
+  - xerces-c
+  # Runtime and test-time dependencies
+  - astropy
+  - fermitools-data
+  - fermitools-test-scripts-data
+  - matplotlib
+  - numpy
+  - pmw
+  - pyyaml
+  - scipy
+  - junit-xml
