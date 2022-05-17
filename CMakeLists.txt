@@ -34,7 +34,7 @@ find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
 set(Python3_FIND_VIRTUALENV FIRST)
-find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
+find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter NumPy)
 
 ## Pkg-Config Externals ##
 pkg_check_modules(cfitsio REQUIRED IMPORTED_TARGET GLOBAL cfitsio)
@@ -114,6 +114,7 @@ list(
   modelEditor
   observationSim
   optimizers
+  orbitSim
   pulsarDb
   pulsePhase
   pyBurstAnalysisGUI
@@ -121,7 +122,7 @@ list(
   pyLikelihood
   rspgen
   sane
-  # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
+  skymaps
   sourceIdentify
   SolarSystemTools
   st_facilities
