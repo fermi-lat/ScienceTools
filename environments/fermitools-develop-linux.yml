@@ -1,8 +1,7 @@
 name: fermi-develop-linux
 channels:
-  - fermi
   - conda-forge
-  - defaults
+  - fermi
 dependencies:
   # Build dependencies
   - cfitsio
@@ -19,11 +18,10 @@ dependencies:
   - minuit2_standalone
   - readline
   - pkg-config
-  - python
+  - python=3.9
   - swig
   - wcslib
   - xerces-c
-  # Runtime and test-time dependencies
   - astropy
   - fermitools-data
   - fermitools-test-scripts-data
