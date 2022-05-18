@@ -1,8 +1,7 @@
 name: fermi-develop-osx
 channels:
-  - fermi
   - conda-forge
-  - defaults
+  - fermi
 dependencies:
   # Build dependencies
   - cfitsio
@@ -23,7 +22,6 @@ dependencies:
   - swig
   - wcslib
   - xerces-c
-  # Runtime and test-time dependencies
   - astropy
   - fermitools-data
   - fermitools-test-scripts-data
