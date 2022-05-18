@@ -18,7 +18,7 @@ dependencies:
   - minuit2_standalone
   - readline
   - pkg-config
-  - python
+  - python=3.9
   - swig
   - wcslib
   - xerces-c
