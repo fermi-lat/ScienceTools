@@ -14,7 +14,6 @@ dependencies:
   - llvm-openmp
   - swig
   - xerces-c
-  - minuit2_standalone
   - pkg-config
   - fftw
   - f2c>=1.0

@@ -15,7 +15,6 @@ dependencies:
   - healpix_cxx=3.31
   - libgomp
   - make
-  - minuit2_standalone
   - readline
   - pkg-config
   - python=3.9

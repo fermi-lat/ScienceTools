@@ -27,7 +27,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 ## Externals: The dependent packages on which the Sciencetools relies. ##
 find_package(CLHEP REQUIRED)
 find_package(f2c REQUIRED)
-find_package(Minuit2 REQUIRED)
+# find_package(Minuit2 REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(PkgConfig REQUIRED)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
@@ -49,8 +49,8 @@ pkg_check_modules(xerces-c REQUIRED IMPORTED_TARGET GLOBAL xerces-c)
 set_target_properties(
   CLHEP::CLHEP
   f2c::f2c
-  Minuit2::Minuit2
-  Minuit2::Minuit2Math
+  # Minuit2::Minuit2
+  # Minuit2::Minuit2Math
   OpenMP::OpenMP_CXX
   Python3::Python
   PROPERTIES IMPORTED_GLOBAL TRUE
@@ -111,6 +111,7 @@ list(
   irfs
   Likelihood
   map_tools
+  Minuit2
   modelEditor
   observationSim
   optimizers
