@@ -118,3 +118,6 @@
 [submodule "src/orbitSim"]
 	path = src/orbitSim
 	url = https://github.com/fermi-lat/orbitSim.git
+[submodule "src/Minuit2"]
+	path = src/Minuit2
+	url = https://github.com/fermi-lat/Minuit2.git
