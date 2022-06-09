@@ -27,12 +27,10 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 ## Externals: The dependent packages on which the Sciencetools relies. ##
 find_package(CLHEP REQUIRED)
 find_package(f2c REQUIRED)
-# find_package(Minuit2 REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(PkgConfig REQUIRED)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
-
 set(Python3_FIND_VIRTUALENV FIRST)
 find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 
@@ -49,8 +47,6 @@ pkg_check_modules(xerces-c REQUIRED IMPORTED_TARGET GLOBAL xerces-c)
 set_target_properties(
   CLHEP::CLHEP
   f2c::f2c
-  # Minuit2::Minuit2
-  # Minuit2::Minuit2Math
   OpenMP::OpenMP_CXX
   Python3::Python
   PROPERTIES IMPORTED_GLOBAL TRUE
@@ -87,6 +83,16 @@ set(FERMI_INSTALL_REFDATADIR share/${PROJECT_NAME}/refdata/fermi)
 set(FERMI_INSTALL_HELPDIR share/${PROJECT_NAME}/help)
 set(FERMI_INSTALL_PFILESDIR share/${PROJECT_NAME}/syspfiles)
 set(FERMI_INSTALL_XMLDIR share/${PROJECT_NAME}/xml/fermi)
+
+
+set(CMAKE_SKIP_BUILD_RPATH FALSE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+list(FIND CMAKE_PLATFORM_IMPLICIT_LINK_DIRECTORIES "${CMAKE_INSTALL_PREFIX}/lib" isSystemDir)
+if("${isSystemDir}" STREQUAL "-1")
+    set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+endif()
 
 ##################################################
 ## Targets
