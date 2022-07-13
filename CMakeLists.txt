@@ -34,7 +34,7 @@ find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
 set(Python3_FIND_VIRTUALENV FIRST)
-find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
+find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter NumPy)
 
 ## Pkg-Config Externals ##
 pkg_check_modules(cfitsio REQUIRED IMPORTED_TARGET GLOBAL cfitsio)
@@ -53,6 +53,7 @@ set_target_properties(
   # Minuit2::Minuit2Math
   OpenMP::OpenMP_CXX
   Python3::Python
+  Python3::NumPy
   PROPERTIES IMPORTED_GLOBAL TRUE
 )
 
@@ -123,7 +124,7 @@ list(
   pyLikelihood
   rspgen
   sane
-  # skymaps
+  skymaps
   sourceIdentify
   SolarSystemTools
   st_facilities
