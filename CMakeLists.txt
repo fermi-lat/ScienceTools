@@ -27,14 +27,14 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 ## Externals: The dependent packages on which the Sciencetools relies. ##
 find_package(CLHEP REQUIRED)
 find_package(f2c REQUIRED)
-find_package(Minuit2 REQUIRED)
+# find_package(Minuit2 REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(PkgConfig REQUIRED)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
 set(Python3_FIND_VIRTUALENV FIRST)
-find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
+find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter NumPy)
 
 ## Pkg-Config Externals ##
 pkg_check_modules(cfitsio REQUIRED IMPORTED_TARGET GLOBAL cfitsio)
@@ -49,10 +49,11 @@ pkg_check_modules(xerces-c REQUIRED IMPORTED_TARGET GLOBAL xerces-c)
 set_target_properties(
   CLHEP::CLHEP
   f2c::f2c
-  Minuit2::Minuit2
-  Minuit2::Minuit2Math
+  # Minuit2::Minuit2
+  # Minuit2::Minuit2Math
   OpenMP::OpenMP_CXX
   Python3::Python
+  Python3::NumPy
   PROPERTIES IMPORTED_GLOBAL TRUE
 )
 
@@ -111,9 +112,11 @@ list(
   irfs
   Likelihood
   map_tools
+  Minuit2
   modelEditor
   observationSim
   optimizers
+  orbitSim
   pulsarDb
   pulsePhase
   pyBurstAnalysisGUI
@@ -121,7 +124,7 @@ list(
   pyLikelihood
   rspgen
   sane
-  # skymaps # <-- Small ROOT dependence must be optionally removed from the swig module.
+  skymaps
   sourceIdentify
   SolarSystemTools
   st_facilities
