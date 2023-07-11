@@ -1,125 +1,166 @@
 [submodule "ape"]
 	path = src/ape
 	url = https://github.com/fermi-lat/ape.git
+	branch = mp-cpp
 [submodule "facilities"]
 	path = src/facilities
 	url = https://github.com/fermi-lat/facilities.git
+	branch = mp-cpp
 [submodule "astro"]
 	path = src/astro
 	url = https://github.com/fermi-lat/astro.git
+	branch = mp-cpp
 [submodule "catalogAccess"]
 	path = src/catalogAccess
 	url = https://github.com/fermi-lat/catalogAccess.git
+	branch = mp-cpp
 [submodule "xmlBase"]
 	path = src/xmlBase
 	url = https://github.com/fermi-lat/xmlBase.git
+	branch = mp-cpp
 [submodule "dataSubselector"]
 	path = src/dataSubselector
 	url = https://github.com/fermi-lat/dataSubselector.git
+	branch = mp-cpp
 [submodule "embed_python"]
 	path = src/embed_python
 	url = https://github.com/fermi-lat/embed_python.git
+	branch = mp-cpp
 [submodule "evtbin"]
 	path = src/evtbin
 	url = https://github.com/fermi-lat/evtbin.git
+	branch = mp-cpp
 [submodule "flux"]
 	path = src/flux
 	url = https://github.com/fermi-lat/flux.git
+	branch = mp-cpp
 [submodule "healpix"]
 	path = src/healpix
 	url = https://github.com/fermi-lat/healpix.git
+	branch = mp-cpp
 [submodule "hoops"]
 	path = src/hoops
 	url = https://github.com/fermi-lat/hoops.git
+	branch = mp-cpp
 [submodule "Likelihood"]
 	path = src/Likelihood
 	url = https://github.com/fermi-lat/Likelihood.git
+	branch = mp-cpp
 [submodule "map_tools"]
 	path = src/map_tools
 	url = https://github.com/fermi-lat/map_tools.git
+	branch = mp-cpp
 [submodule "optimizers"]
 	path = src/optimizers
 	url = https://github.com/fermi-lat/optimizers.git
+	branch = mp-cpp
 [submodule "pyLikelihood"]
 	path = src/pyLikelihood
 	url = https://github.com/fermi-lat/pyLikelihood.git
+	branch = mp-cpp
 [submodule "rspgen"]
 	path = src/rspgen
 	url = https://github.com/fermi-lat/rspgen.git
+	branch = mp-cpp
 [submodule "skymaps"]
 	path = src/skymaps
 	url = https://github.com/fermi-lat/skymaps.git
+	branch = mp-cpp
 [submodule "SolarSystemTools"]
 	path = src/SolarSystemTools
 	url = https://github.com/fermi-lat/SolarSystemTools.git
+	branch = mp-cpp
 [submodule "sourceIdentify"]
 	path = src/sourceIdentify
 	url = https://github.com/fermi-lat/sourceIdentify.git
+	branch = mp-cpp
 [submodule "st_app"]
 	path = src/st_app
 	url = https://github.com/fermi-lat/st_app.git
+	branch = mp-cpp
 [submodule "st_facilities"]
 	path = src/st_facilities
 	url = https://github.com/fermi-lat/st_facilities.git
+	branch = mp-cpp
 [submodule "st_graph"]
 	path = src/st_graph
 	url = https://github.com/fermi-lat/st_graph.git
+	branch = mp-cpp
 [submodule "st_stream"]
 	path = src/st_stream
 	url = https://github.com/fermi-lat/st_stream.git
+	branch = mp-cpp
 [submodule "timeSystem"]
 	path = src/timeSystem
 	url = https://github.com/fermi-lat/timeSystem.git
+	branch = mp-cpp
 [submodule "tip"]
 	path = src/tip
 	url = https://github.com/fermi-lat/tip.git
+	branch = mp-cpp
 [submodule "irfs"]
 	path = src/irfs
 	url = https://github.com/fermi-lat/irfs.git
+	branch = mp-cpp
 [submodule "celestialSources"]
 	path = src/celestialSources
 	url = https://github.com/fermi-lat/celestialSources.git
+	branch = mp-cpp
 [submodule "fermitools-fhelp"]
 	path = src/fermitools-fhelp
 	url = https://github.com/fermi-lat/fermitools-fhelp.git
+	branch = mp-cpp
 [submodule "pulsarDb"]
 	path = src/pulsarDb
 	url = https://github.com/fermi-lat/pulsarDb.git
+	branch = mp-cpp
 [submodule "burstFit"]
 	path = src/burstFit
 	url = https://github.com/fermi-lat/burstFit.git
+	branch = mp-cpp
 [submodule "pulsePhase"]
 	path = src/pulsePhase
 	url = https://github.com/fermi-lat/pulsePhase.git
+	branch = mp-cpp
 [submodule "pyBurstAnalysisGUI"]
 	path = src/pyBurstAnalysisGUI
 	url = https://github.com/fermi-lat/pyBurstAnalysisGUI.git
+	branch = mp-cpp
 [submodule "sane"]
 	path = src/sane
 	url = https://github.com/fermi-lat/sane.git
+	branch = mp-cpp
 [submodule "BayesianBlocks"]
 	path = src/BayesianBlocks
 	url = https://github.com/fermi-lat/BayesianBlocks.git
+	branch = mp-cpp
 [submodule "pyExposure"]
 	path = src/pyExposure
 	url = https://github.com/fermi-lat/pyExposure.git
+	branch = mp-cpp
 [submodule "src/modelEditor"]
 	path = src/modelEditor
 	url = https://github.com/fermi-lat/modelEditor.git
+	branch = mp-cpp
 [submodule "src/observationSim"]
 	path = src/observationSim
 	url = https://github.com/fermi-lat/observationSim.git
+	branch = mp-cpp
 [submodule "src/fitsGen"]
 	path = src/fitsGen
 	url = https://github.com/fermi-lat/fitsGen.git
+	branch = mp-cpp
 [submodule "src/evtUtils"]
 	path = src/evtUtils
 	url = https://github.com/fermi-lat/evtUtils.git
+	branch = mp-cpp
 [submodule "src/orbitSim"]
 	path = src/orbitSim
 	url = https://github.com/fermi-lat/orbitSim.git
+	branch = mp-cpp
 [submodule "src/Minuit2"]
 	path = src/Minuit2
 	url = https://github.com/fermi-lat/Minuit2.git
+	branch = mp-cpp
 [submodule "src/pyBurstAnalysisGUI/"]
 	branch = master
