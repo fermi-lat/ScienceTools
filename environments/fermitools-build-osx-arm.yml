@@ -9,7 +9,7 @@ dependencies:
   - clhep
   - readline
   - cppunit
-  - healpix_cxx=3.31
+  - healpix_cxx=3.31=h076e04d_1007
   - cmake
   - llvm-openmp
   - swig
