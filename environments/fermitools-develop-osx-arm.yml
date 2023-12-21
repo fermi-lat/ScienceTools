@@ -1,0 +1,32 @@
+name: fermi-develop-osx
+channels:
+  - conda-forge
+  - fermi
+dependencies:
+  # Build dependencies
+  - cfitsio
+  - clhep
+  - cmake
+  - compilers
+  - cppunit
+  - fftw
+  - f2c>=1.0
+  - gsl
+  - healpix_cxx=3.31=h6503426_1007
+  - llvm-openmp
+  - make
+  - readline
+  - pkg-config
+  - python=3.9
+  - swig
+  - wcslib
+  - xerces-c
+  - astropy
+  - fermitools-data
+  - fermitools-test-scripts-data
+  - matplotlib
+  - numpy
+  - pmw
+  - pyyaml
+  - scipy
+  - junit-xml
