@@ -11,6 +11,12 @@ project(
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    message(STATUS "Found ccache in ${CCACHE_PROGRAM}")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+endif()
+
 ## Options. Activate at configure time with `-D<OPTION>=ON`
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
 
