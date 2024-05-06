@@ -16,7 +16,6 @@ dependencies:
   - libgomp
   - make
   - readline
-  - pkg-config
   - python=3.9
   - swig
   - wcslib

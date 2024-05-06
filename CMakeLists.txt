@@ -21,7 +21,6 @@ endif()
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
 
 ## CMake tool support packages. These provide additional funcitons to our Cmake files.
-include(CMakePackageConfigHelpers)
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
 include(GNUInstallDirs)
@@ -31,35 +30,35 @@ include(CTest)
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 ## Externals: The dependent packages on which the Sciencetools relies. ##
+find_package(cfitsio 4.0.0 REQUIRED)
 find_package(CLHEP REQUIRED)
+find_package(CppUnit REQUIRED)
 find_package(f2c REQUIRED)
-# find_package(Minuit2 REQUIRED)
+find_package(FFTW REQUIRED)
+find_package(GSL REQUIRED)
+find_package(healpix_cxx REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
-find_package(PkgConfig REQUIRED)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
-
+# Python3 External development headers and numpy headers.
 set(Python3_FIND_VIRTUALENV FIRST)
-find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter NumPy)
-
-## Pkg-Config Externals ##
-pkg_check_modules(cfitsio REQUIRED IMPORTED_TARGET GLOBAL cfitsio)
-pkg_check_modules(cppunit REQUIRED IMPORTED_TARGET GLOBAL cppunit)
-pkg_check_modules(fftw3 REQUIRED IMPORTED_TARGET GLOBAL fftw3)
-pkg_check_modules(gsl REQUIRED IMPORTED_TARGET GLOBAL gsl)
-pkg_check_modules(wcslib REQUIRED IMPORTED_TARGET GLOBAL wcslib)
-pkg_check_modules(healpix_cxx REQUIRED IMPORTED_TARGET GLOBAL healpix_cxx)
-pkg_check_modules(xerces-c REQUIRED IMPORTED_TARGET GLOBAL xerces-c)
+find_package(Python3 3.7 REQUIRED COMPONENTS NumPy Development Interpreter)
+find_package(WCSlib REQUIRED)
+find_package(XercesC REQUIRED)
 
 ## Make the targets visible in other CMake files.
 set_target_properties(
+  cfitsio::cfitsio
   CLHEP::CLHEP
+  CppUnit::CppUnit
   f2c::f2c
-  # Minuit2::Minuit2
-  # Minuit2::Minuit2Math
-  OpenMP::OpenMP_CXX
+  FFTW::fftw3
+  GSL::gsl
+  healpix_cxx::healpix_cxx
   Python3::Python
   Python3::NumPy
+  WCSlib::WCSlib
+  XercesC::XercesC
   PROPERTIES IMPORTED_GLOBAL TRUE
 )
 
