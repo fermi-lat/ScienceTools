@@ -9,13 +9,11 @@ dependencies:
   - clhep
   - readline
   - cppunit
-  - healpix_cxx=3.31
+  - healpix_cxx=3.31=h076e04d_1007
   - cmake
   - llvm-openmp
   - swig
   - xerces-c
-  - minuit2_standalone
-  - pkg-config
   - fftw
   - f2c>=1.0
   - make

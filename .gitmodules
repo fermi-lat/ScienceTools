@@ -34,6 +34,7 @@
 [submodule "Likelihood"]
 	path = src/Likelihood
 	url = https://github.com/fermi-lat/Likelihood.git
+	branch = lk-90
 [submodule "map_tools"]
 	path = src/map_tools
 	url = https://github.com/fermi-lat/map_tools.git
@@ -115,5 +116,9 @@
 [submodule "src/evtUtils"]
 	path = src/evtUtils
 	url = https://github.com/fermi-lat/evtUtils.git
-[submodule "src/Likelihood"]
-	branch = lk-90
+[submodule "src/orbitSim"]
+	path = src/orbitSim
+	url = https://github.com/fermi-lat/orbitSim.git
+[submodule "src/Minuit2"]
+	path = src/Minuit2
+	url = https://github.com/fermi-lat/Minuit2.git

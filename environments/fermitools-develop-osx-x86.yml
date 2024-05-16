@@ -1,4 +1,4 @@
-name: fermi-develop-linux
+name: fermi-develop-osx
 channels:
   - conda-forge
   - fermi
@@ -12,8 +12,8 @@ dependencies:
   - fftw
   - f2c>=1.0
   - gsl
-  - healpix_cxx=3.31
-  - libgomp
+  - healpix_cxx=3.31=h076e04d_1007
+  - llvm-openmp
   - make
   - readline
   - python=3.9
