@@ -3,9 +3,6 @@
 # Set the minimum required version of CMake
 cmake_minimum_required(VERSION 3.12)
 
-# Define the project for this find module
-project(Findhealpix_cxx)
-
 # Search for HEALPix C++ headers
 find_path(HEALPIX_CXX_INCLUDE_DIR
     NAMES healpix_base.h
