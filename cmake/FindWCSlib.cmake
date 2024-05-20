@@ -3,9 +3,6 @@
 # Set the minimum required version of CMake
 cmake_minimum_required(VERSION 3.12)
 
-# Define the project for this find module
-project(FindWCSlib)
-
 # Optionally specify a minimum version of WCSlib
 set(WCSLIB_MIN_VERSION "" CACHE STRING "Minimum required version of WCSlib")
 

@@ -3,9 +3,6 @@
 # Set a minimum required version for CMake
 cmake_minimum_required(VERSION 3.12)
 
-# Define the project
-project(FindCppUnit)
-
 # Try to find the CppUnit headers
 find_path(CPPUNIT_INCLUDE_DIR
     NAMES cppunit/TestCase.h

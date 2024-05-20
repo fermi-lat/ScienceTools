@@ -8,9 +8,6 @@
 # Define the minimum required version of CMake
 cmake_minimum_required(VERSION 3.12)
 
-# Provide the project name and language
-project(FindCFITSIO NONE)
-
 # Check if a specific version was requested.
 if(NOT cfitsio_FIND_VERSION)
   set(cfitsio_FIND_VERSION "")
