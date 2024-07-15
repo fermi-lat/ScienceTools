@@ -122,3 +122,5 @@
 [submodule "src/Minuit2"]
 	path = src/Minuit2
 	url = https://github.com/fermi-lat/Minuit2.git
+[submodule "src/Likelihood"]
+	branch = lk-90b
