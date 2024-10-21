@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python
+  - python=3.9
   - wcslib
   - compilers
   - clhep
@@ -15,7 +15,7 @@ dependencies:
   - swig
   - xerces-c
   - fftw
-  - numpy=2
+  - numpy
   - f2c>=1.0
   - make
   - cfitsio
