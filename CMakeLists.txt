@@ -19,6 +19,7 @@ endif()
 
 ## Options. Activate at configure time with `-D<OPTION>=ON`
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
+option(CMAKE_CXX_COMPILER "Specify Compiler" clang)
 
 ## CMake tool support packages. These provide additional funcitons to our Cmake files.
 include(CMakeDependentOption)
