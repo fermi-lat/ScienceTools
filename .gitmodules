@@ -123,3 +123,5 @@
 	url = https://github.com/fermi-lat/Minuit2.git
 [submodule "src/pyBurstAnalysisGUI/"]
 	branch = master
+[submodule "src/Likelihood"]
+	branch = cmake-update
