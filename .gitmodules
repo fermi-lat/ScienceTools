@@ -124,4 +124,4 @@
 [submodule "src/pyBurstAnalysisGUI/"]
 	branch = master
 [submodule "src/Likelihood"]
-	branch = cmake-update
+	branch = lk-127
