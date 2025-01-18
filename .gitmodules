@@ -125,3 +125,5 @@
 	branch = master
 [submodule "src/Likelihood"]
 	branch = lk-127
+[submodule "src/pyLikelihood"]
+	branch = lk-127
