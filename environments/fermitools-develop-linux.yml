@@ -16,7 +16,7 @@ dependencies:
   - libgomp
   - make
   - readline
-  - python=3.9
+  - python
   - swig
   - wcslib
   - xerces-c
