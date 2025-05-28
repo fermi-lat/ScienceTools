@@ -16,8 +16,8 @@ dependencies:
   - libgomp
   - make
   - readline
-  - python
-  - swig
+  - python=3.11.*
+  - swig=4.0.2
   - wcslib
   - xerces-c
   - astropy
