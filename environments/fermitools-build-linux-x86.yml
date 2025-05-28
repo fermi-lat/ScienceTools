@@ -3,7 +3,7 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python
+  - python=3.11.*
   - wcslib
   - compilers
   - clhep
@@ -12,7 +12,7 @@ dependencies:
   - healpix_cxx=3.31
   - cmake
   - libgomp
-  - swig
+  - swig=4.0.2
   - xerces-c
   - fftw
   - numpy
