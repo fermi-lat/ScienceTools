@@ -19,3 +19,4 @@ dependencies:
   - make
   - cfitsio
   - gsl
+  - matplotlib
