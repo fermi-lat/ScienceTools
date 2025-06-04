@@ -27,3 +27,4 @@ dependencies:
   - pyyaml
   - scipy
   - junit-xml
+  - matplotlib
