@@ -24,7 +24,6 @@ dependencies:
   - fermitools-data
   - fermitools-test-scripts-data
   - matplotlib
-  - numpy
   - pmw
   - pyyaml
   - scipy
