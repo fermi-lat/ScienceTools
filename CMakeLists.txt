@@ -41,9 +41,9 @@ find_package(healpix_cxx REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
-# Python3 External development headers and numpy headers.
+# Python3 External development headers.
 set(Python3_FIND_VIRTUALENV FIRST)
-find_package(Python3 3.7 REQUIRED COMPONENTS NumPy Development Interpreter)
+find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 find_package(WCSlib REQUIRED)
 find_package(XercesC REQUIRED)
 
@@ -57,7 +57,6 @@ set_target_properties(
   GSL::gsl
   healpix_cxx::healpix_cxx
   Python3::Python
-  Python3::NumPy
   WCSlib::WCSlib
   XercesC::XercesC
   PROPERTIES IMPORTED_GLOBAL TRUE
