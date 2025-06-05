@@ -129,3 +129,6 @@
 [submodule "externals/clhep"]
 	path = externals/clhep
 	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
+[submodule "externals/cppunit"]
+	path = externals/cppunit
+	url = https://github.com/cppunit/cppunit.git
