@@ -31,8 +31,9 @@ include(CTest)
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 ## Externals: The dependent packages on which the Sciencetools relies. ##
-find_package(cfitsio 4.0.0 REQUIRED)
-find_package(CLHEP REQUIRED)
+add_subdirectory(externals)
+# find_package(cfitsio 4.0.0 REQUIRED)
+# find_package(CLHEP REQUIRED)
 find_package(CppUnit REQUIRED)
 find_package(f2c REQUIRED)
 find_package(FFTW REQUIRED)
@@ -49,8 +50,6 @@ find_package(XercesC REQUIRED)
 
 ## Make the targets visible in other CMake files.
 set_target_properties(
-  cfitsio::cfitsio
-  CLHEP::CLHEP
   CppUnit::CppUnit
   f2c::f2c
   FFTW::fftw3

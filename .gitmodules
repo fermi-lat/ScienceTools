@@ -126,3 +126,6 @@
 [submodule "externals/cfitsio"]
 	path = externals/cfitsio
 	url = https://github.com/heasarc/cfitsio.git
+[submodule "externals/clhep"]
+	path = externals/clhep
+	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
