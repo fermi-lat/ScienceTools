@@ -123,3 +123,6 @@
 	url = https://github.com/fermi-lat/Minuit2.git
 [submodule "src/pyBurstAnalysisGUI/"]
 	branch = master
+[submodule "externals/cfitsio"]
+	path = externals/cfitsio
+	url = https://github.com/heasarc/cfitsio.git
