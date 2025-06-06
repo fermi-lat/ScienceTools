@@ -31,10 +31,11 @@ include(CTest)
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 ## Externals: The dependent packages on which the Sciencetools relies. ##
-add_subdirectory(externals)
+find_package(Threads REQUIRED)
+
 # find_package(cfitsio 4.0.0 REQUIRED)
 # find_package(CLHEP REQUIRED)
-find_package(CppUnit REQUIRED)
+# find_package(CppUnit REQUIRED)
 find_package(f2c REQUIRED)
 find_package(FFTW REQUIRED)
 find_package(GSL REQUIRED)
@@ -48,9 +49,9 @@ find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 find_package(WCSlib REQUIRED)
 find_package(XercesC REQUIRED)
 
+add_subdirectory(externals)
 ## Make the targets visible in other CMake files.
 set_target_properties(
-  CppUnit::CppUnit
   f2c::f2c
   FFTW::fftw3
   GSL::gsl
