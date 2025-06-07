@@ -30,6 +30,8 @@ include(CTest)
 ## The local cmake modules path.
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
+add_compile_options(-fdiagnostics-color=always)
+
 ## Externals: The dependent packages on which the Sciencetools relies. ##
 find_package(Threads REQUIRED)
 
@@ -37,7 +39,7 @@ find_package(Threads REQUIRED)
 # find_package(CLHEP REQUIRED)
 # find_package(CppUnit REQUIRED)
 find_package(f2c REQUIRED)
-find_package(FFTW REQUIRED)
+# find_package(FFTW REQUIRED)
 find_package(GSL REQUIRED)
 find_package(healpix_cxx REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
@@ -53,7 +55,6 @@ add_subdirectory(externals)
 ## Make the targets visible in other CMake files.
 set_target_properties(
   f2c::f2c
-  FFTW::fftw3
   GSL::gsl
   healpix_cxx::healpix_cxx
   Python3::Python

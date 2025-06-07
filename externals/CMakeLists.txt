@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 3.14)
 cmake_policy(SET CMP0120 NEW)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
-include(ExternalProject)
+include(FetchContent)
 
 # =========================================================================== #
 # cfitsio
@@ -236,113 +236,6 @@ target_compile_definitions(CLHEP-Matrix PUBLIC
 add_library(CLHEP::Matrix ALIAS CLHEP-Matrix)
 add_library(CLHEP::MatrixS ALIAS CLHEP-Matrix)
 
-# provide tools for other packages to include CLHEP easily
-# function(clhep_project_toolchain)
-#     clhep_toolchain()
-# endfunction()
-# clhep_project_toolchain()
-# set(CLHEP_libraries_all ${CLHEP_libraries})
-# foreach(_lib ${CLHEP_libraries})
-#   list(APPEND CLHEP_libraries_all "${_lib}S")
-# endforeach()
-#
-# # export(TARGETS CLHEP CLHEPS ${CLHEP_libraries_all}
-# #   NAMESPACE "CLHEP::"
-# #   FILE ${CLHEP_BINARY_DIR}/CLHEPLibraryDepends.cmake
-# #   )
-# #
-# # # Now we configure the CLHEPConfig and CLHEPConfigVersion file templates,
-# # # outputting to a directory in the build directory. This is simply a
-# # # placeholder to store them until we install later.  
-# # configure_file(${CLHEP_SOURCE_DIR}/cmake/Templates/CLHEPConfigVersion.cmake.in
-# #   ${CLHEP_BINARY_DIR}/InstallTreeFiles/CLHEPConfigVersion.cmake 
-# #   @ONLY
-# #   )
-# #
-# # set(CLHEP_INCLUDE_DIR include)
-# # configure_package_config_file(${CLHEP_SOURCE_DIR}/cmake/Templates/CLHEPConfig.cmake.in
-# #   ${CLHEP_BINARY_DIR}/InstallTreeFiles/CLHEPConfig.cmake
-# #   INSTALL_DESTINATION lib${LIB_SUFFIX}/CLHEP-${CLHEP_VERSION}
-# #   PATH_VARS CLHEP_INCLUDE_DIR
-# #   )
-# #
-# # install(FILES
-# #   ${CLHEP_BINARY_DIR}/InstallTreeFiles/CLHEPConfigVersion.cmake 
-# #   ${CLHEP_BINARY_DIR}/InstallTreeFiles/CLHEPConfig.cmake 
-# #   DESTINATION lib${LIB_SUFFIX}/CLHEP-${CLHEP_VERSION}
-# #   )
-# #
-# # install(EXPORT CLHEPLibraryDepends 
-# #         NAMESPACE "CLHEP::"
-# #         DESTINATION lib${LIB_SUFFIX}/CLHEP-${CLHEP_VERSION})
-
-# set_target_properties(
-#   CLHEP::Units
-#   CLHEP::Utility
-#   CLHEP::Vector
-#   CLHEP::VectorS
-#   CLHEP::Random
-#   CLHEP::RandomS
-#   CLHEP::Geometry
-#   CLHEP::GeometryS
-#   CLHEP::Matrix
-#   CLHEP::MatrixS
-#   PROPERTIES IMPORTED_GLOBAL TRUE
-# )
-
-
-# Custom Packaging
-# include(ClhepPackaging)
-
-# set(_clhep_src       ${CMAKE_SOURCE_DIR}/externals/clhep)
-# set(_clhep_install   ${CMAKE_BINARY_DIR}/externals/clhep/install)
-#
-# file(STRINGS "${_clhep_src}/CMakeLists.txt" _clhep_ver_line
-#      REGEX "^project\\(CLHEP VERSION [0-9.]+")
-# string(REGEX REPLACE ".*VERSION ([0-9.]+).*" "\\1" _clhep_ver "${_clhep_ver_line}")
-# message(STATUS "CLHEP version detected: ${_clhep_ver}")
-#
-# ExternalProject_Add(clhep_external
-#   SOURCE_DIR          ${_clhep_src}
-#   UPDATE_COMMAND      "" # never auto-update the pinned commit
-#   INSTALL_DIR         ${_clhep_install}
-#   CMAKE_ARGS
-#     -DCMAKE_INSTALL_PREFIX=${_clhep_install}
-#     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
-#     -DBUILD_SHARED_LIBS=OFF
-#     -DBUILD_TESTING=OFF
-# )
-#
-# set(_incs "${_clhep_install}/include")
-# add_library(clhep_headers_ifc INTERFACE)
-# add_dependencies(clhep_headers_ifc clhep_external-install)
-# target_include_directories(clhep_headers_ifc INTERFACE "${_incs}")
-#
-# function(_clhep_make_target pkg)
-#   string(TOLOWER "${pkg}" _lc)
-#   set(_lib "${_clhep_install}/lib/libCLHEP-${pkg}-${_clhep_ver}.a")
-#
-#   add_library(clhep_${_lc}_static STATIC IMPORTED GLOBAL)
-#   set_target_properties(clhep_${_lc}_static PROPERTIES
-#       IMPORTED_LOCATION             "${_lib}")
-#
-#   target_include_directories(clhep_${_lc}_static INTERFACE
-#       $<BUILD_INTERFACE:${_clhep_src}>
-#       $<INSTALL_INTERFACE:include>)
-#
-#   add_dependencies(clhep_${_lc}_static clhep_headers_ifc)
-#   add_dependencies(clhep_${_lc}_static clhep_external-install)
-#   target_link_libraries(clhep_${_lc}_static INTERFACE clhep_headers_ifc)
-#
-#   # Namespaced alias the rest of the project will use
-#   add_library(CLHEP::${pkg} ALIAS clhep_${_lc}_static)
-#   add_library(CLHEP::${pkg}S ALIAS clhep_${_lc}_static)
-# endfunction()
-#
-# # Declare only the packages you actually need
-# foreach(_pkg IN ITEMS Units Utility Vector Geometry Random Matrix)
-#   _clhep_make_target(${_pkg})
-# endforeach()
 
 # ====================================================================== #
 # CppUnit – LibreOffice fork (autotools), static-only                    #
@@ -393,7 +286,7 @@ foreach(sym
   endif()
 endforeach()
 
-# macros that are always true on modern toolchains
+# Always true on modern toolchains
 file(APPEND ${_cfg} "\n#define CPPUNIT_HAVE_STD 1\n")
 file(APPEND ${_cfg} "#define CPPUNIT_HAVE_NAMESPACES 1\n")
 
@@ -415,3 +308,52 @@ PUBLIC "${CMAKE_CURRENT_BINARY_DIR}"
     "${CPPUNIT_SRC_DIR}/src"
 )
 add_library(CppUnit::CppUnit ALIAS cppunit_static)
+
+
+# =========================================================================== #
+# FFTW 3.3.10
+# =========================================================================== #
+
+message(STATUS "Local FFTW3")
+
+# Cache original values
+get_property(_orig_pic CACHE CMAKE_POSITION_INDEPENDENT_CODE PROPERTY VALUE)
+get_property(_orig_shared CACHE BUILD_SHARED_LIBS PROPERTY VALUE)
+get_property(_orig_cflags CACHE CMAKE_C_FLAGS PROPERTY VALUE)
+get_property(_orig_threads CACHE ENABLE_THREADS PROPERTY VALUE)
+get_property(_orig_double CACHE ENABLE_DOUBLE PROPERTY VALUE)
+get_property(_orig_double CACHE ENABLE_DOUBLE PROPERTY VALUE)
+
+set(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+set(ENABLE_THREADS ON CACHE BOOL "" FORCE)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer -fstrict-aliasing -ffast-math" CACHE STRING "" FORCE)
+set(ENABLE_DOUBLE ON CACHE BOOL "" FORCE)
+
+FetchContent_Declare(fftw
+  URL https://www.fftw.org/fftw-3.3.10.tar.gz
+  URL_HASH SHA256=56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
+  DOWNLOAD_EXTRACT_TIMESTAMP true
+  PATCH_COMMAND patch -p1 < ${CMAKE_SOURCE_DIR}/externals/patches/fftw.patch
+)
+
+FetchContent_MakeAvailable(fftw)
+
+set(CMAKE_POSITION_INDEPENDENT_CODE ${_orig_pic} CACHE BOOL "" FORCE)
+set(BUILD_SHARED_LIBS ${_orig_shared} CACHE BOOL "" FORCE)
+set(ENABLE_THREADS ${_orig_threads} CACHE BOOL "" FORCE)
+set(CMAKE_INSTALL_PREFIX ${_orig_install} CACHE PATH "" FORCE)
+set(CMAKE_C_FLAGS "${_orig_cflags}" CACHE STRING "" FORCE)
+set(ENABLE_DOUBLE ${_orig_double} CACHE BOOL "" FORCE)
+
+target_include_directories(fftw3 INTERFACE 
+    "$<INSTALL_INTERFACE:include>"
+    "$<BUILD_INTERFACE:${fftw_SOURCE_DIR}/api>")
+
+add_library(FFTW::fftw3 ALIAS fftw3)
+
+
+# =========================================================================== #
+# F2C 1.0
+# =========================================================================== #
+
