@@ -11,6 +11,7 @@ include(FetchContent)
 # cfitsio
 # =========================================================================== #
 
+message(STATUS "Local External Dependency CppUnit")
 # Set config options for CFITSIO
 # Backup existing cache values
 foreach(_var IN ITEMS USE_CURL BUILD_SHARED_LIBS TESTS)
@@ -43,6 +44,7 @@ add_library(cfitsio::cfitsio ALIAS cfitsio)
 # CLHEP – granular static libraries, namespaced targets                       #
 # =========================================================================== #
 
+message(STATUS "Local External Dependency CppUnit")
 set(CLHEP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/externals/clhep")
 set(CLHEP_INCLUDE_DIR  "externals/clhep/include")
 set(CLHEP_BINARY_INC "${CMAKE_BINARY_DIR}/${CLHEP_INCLUDE_DIR}")
@@ -83,52 +85,19 @@ target_include_directories(CLHEP-Utility INTERFACE
 
 # Random
 add_library(CLHEP-Random STATIC) 
-set(CLHEP_RANDOM_SRC "${CLHEP_SOURCE_DIR}/Random/src")
-target_sources(CLHEP-Random PRIVATE
-    ${CLHEP_RANDOM_SRC}/DoubConv.cc
-	${CLHEP_RANDOM_SRC}/DRand48Engine.cc
-	${CLHEP_RANDOM_SRC}/DualRand.cc
-	${CLHEP_RANDOM_SRC}/EngineFactory.cc
-	${CLHEP_RANDOM_SRC}/engineIDulong.cc
-	${CLHEP_RANDOM_SRC}/erfQ.cc
-	${CLHEP_RANDOM_SRC}/flatToGaussian.cc
-	${CLHEP_RANDOM_SRC}/gammln.cc
-	${CLHEP_RANDOM_SRC}/Hurd160Engine.cc
-	${CLHEP_RANDOM_SRC}/Hurd288Engine.cc
-	${CLHEP_RANDOM_SRC}/JamesRandom.cc
-	${CLHEP_RANDOM_SRC}/MixMaxRng.cc
-	${CLHEP_RANDOM_SRC}/MTwistEngine.cc
-	${CLHEP_RANDOM_SRC}/NonRandomEngine.cc
-	${CLHEP_RANDOM_SRC}/RandBinomial.cc
-	${CLHEP_RANDOM_SRC}/RandBit.cc
-	${CLHEP_RANDOM_SRC}/RandBreitWigner.cc
-	${CLHEP_RANDOM_SRC}/RandChiSquare.cc
-	${CLHEP_RANDOM_SRC}/RandEngine.cc
-	${CLHEP_RANDOM_SRC}/RandExponential.cc
-	${CLHEP_RANDOM_SRC}/RandExpZiggurat.cc
-	${CLHEP_RANDOM_SRC}/RandFlat.cc
-	${CLHEP_RANDOM_SRC}/RandGamma.cc
-	${CLHEP_RANDOM_SRC}/RandGauss.cc
-	${CLHEP_RANDOM_SRC}/RandGaussQ.cc
-	${CLHEP_RANDOM_SRC}/RandGaussT.cc
-	${CLHEP_RANDOM_SRC}/RandGaussZiggurat.cc
-	${CLHEP_RANDOM_SRC}/RandGeneral.cc
-	${CLHEP_RANDOM_SRC}/RandLandau.cc
-	${CLHEP_RANDOM_SRC}/Random.cc
-	${CLHEP_RANDOM_SRC}/RandomEngine.cc
-	${CLHEP_RANDOM_SRC}/RandPoisson.cc
-	${CLHEP_RANDOM_SRC}/RandPoissonQ.cc
-	${CLHEP_RANDOM_SRC}/RandPoissonT.cc
-	${CLHEP_RANDOM_SRC}/RandSkewNormal.cc
-	${CLHEP_RANDOM_SRC}/RandStudentT.cc
-	${CLHEP_RANDOM_SRC}/RanecuEngine.cc
-	${CLHEP_RANDOM_SRC}/Ranlux64Engine.cc
-	${CLHEP_RANDOM_SRC}/RanluxEngine.cc
-	${CLHEP_RANDOM_SRC}/RanluxppEngine.cc
-	${CLHEP_RANDOM_SRC}/RanshiEngine.cc
-	${CLHEP_RANDOM_SRC}/StaticRandomStates.cc
-	${CLHEP_RANDOM_SRC}/TripleRand.cc
-)
+
+set(CLHEP_RANDOM_SRC DoubConv.cc DRand48Engine.cc DualRand.cc EngineFactory.cc
+    engineIDulong.cc erfQ.cc flatToGaussian.cc gammln.cc Hurd160Engine.cc
+    Hurd288Engine.cc JamesRandom.cc MixMaxRng.cc MTwistEngine.cc NonRandomEngine.cc
+    RandBinomial.cc RandBit.cc RandBreitWigner.cc RandChiSquare.cc RandEngine.cc
+    RandExponential.cc RandExpZiggurat.cc RandFlat.cc RandGamma.cc RandGauss.cc
+    RandGaussQ.cc RandGaussT.cc RandGaussZiggurat.cc RandGeneral.cc RandLandau.cc
+    Random.cc RandomEngine.cc RandPoisson.cc RandPoissonQ.cc RandPoissonT.cc
+    RandSkewNormal.cc RandStudentT.cc RanecuEngine.cc Ranlux64Engine.cc RanluxEngine.cc
+    RanluxppEngine.cc RanshiEngine.cc StaticRandomStates.cc TripleRand.cc)
+list(TRANSFORM CLHEP_RANDOM_SRC PREPEND "${CLHEP_SOURCE_DIR}/Random/src/")
+target_sources(CLHEP-Random PRIVATE ${CLHEP_RANDOM_SRC})
+
 target_include_directories(CLHEP-Random PRIVATE
     "$<BUILD_INTERFACE:${CLHEP_BINARY_INC}>"
     "$<BUILD_INTERFACE:${CLHEP_SOURCE_DIR}/Random>"
@@ -146,44 +115,17 @@ add_library(CLHEP::RandomS ALIAS CLHEP-Random)
 
 # Vector
 add_library(CLHEP-Vector STATIC) 
-set(CLHEP_VECTOR_SRC "${CLHEP_SOURCE_DIR}/Vector/src")
-target_sources(CLHEP-Vector
-    PRIVATE
-    ${CLHEP_VECTOR_SRC}/AxisAngle.cc
-    ${CLHEP_VECTOR_SRC}/Boost.cc
-	${CLHEP_VECTOR_SRC}/BoostX.cc
-	${CLHEP_VECTOR_SRC}/BoostY.cc
-	${CLHEP_VECTOR_SRC}/BoostZ.cc
-	${CLHEP_VECTOR_SRC}/EulerAngles.cc
-	${CLHEP_VECTOR_SRC}/LorentzRotation.cc
-	${CLHEP_VECTOR_SRC}/LorentzRotationC.cc
-	${CLHEP_VECTOR_SRC}/LorentzRotationD.cc
-	${CLHEP_VECTOR_SRC}/LorentzVector.cc
-	${CLHEP_VECTOR_SRC}/LorentzVectorB.cc
-	${CLHEP_VECTOR_SRC}/LorentzVectorC.cc
-	${CLHEP_VECTOR_SRC}/LorentzVectorK.cc
-	${CLHEP_VECTOR_SRC}/LorentzVectorL.cc
-	${CLHEP_VECTOR_SRC}/LorentzVectorR.cc
-	${CLHEP_VECTOR_SRC}/Rotation.cc
-	${CLHEP_VECTOR_SRC}/RotationA.cc
-	${CLHEP_VECTOR_SRC}/RotationC.cc
-	${CLHEP_VECTOR_SRC}/RotationE.cc
-	${CLHEP_VECTOR_SRC}/RotationIO.cc
-	${CLHEP_VECTOR_SRC}/RotationInterfaces.cc
-	${CLHEP_VECTOR_SRC}/RotationL.cc
-	${CLHEP_VECTOR_SRC}/RotationP.cc
-	${CLHEP_VECTOR_SRC}/RotationX.cc
-	${CLHEP_VECTOR_SRC}/RotationY.cc
-	${CLHEP_VECTOR_SRC}/RotationZ.cc
-	${CLHEP_VECTOR_SRC}/SpaceVector.cc
-	${CLHEP_VECTOR_SRC}/SpaceVectorD.cc
-	${CLHEP_VECTOR_SRC}/SpaceVectorP.cc
-	${CLHEP_VECTOR_SRC}/SpaceVectorR.cc
-	${CLHEP_VECTOR_SRC}/ThreeVector.cc
-	${CLHEP_VECTOR_SRC}/ThreeVectorR.cc
-	${CLHEP_VECTOR_SRC}/TwoVector.cc
-	${CLHEP_VECTOR_SRC}/ZMinput.cc
-	${CLHEP_VECTOR_SRC}/ZMxpv.cc )
+set(CLHEP_VECTOR_SRC AxisAngle.cc Boost.cc BoostX.cc BoostY.cc BoostZ.cc EulerAngles.cc
+    LorentzRotation.cc LorentzRotationC.cc LorentzRotationD.cc LorentzVector.cc
+    LorentzVectorB.cc LorentzVectorC.cc LorentzVectorK.cc LorentzVectorL.cc
+    LorentzVectorR.cc Rotation.cc RotationA.cc RotationC.cc RotationE.cc RotationIO.cc
+    RotationInterfaces.cc RotationL.cc RotationP.cc RotationX.cc RotationY.cc
+    RotationZ.cc SpaceVector.cc SpaceVectorD.cc SpaceVectorP.cc SpaceVectorR.cc
+    ThreeVector.cc ThreeVectorR.cc TwoVector.cc ZMinput.cc ZMxpv.cc)
+
+list(TRANSFORM CLHEP_VECTOR_SRC PREPEND "${CLHEP_SOURCE_DIR}/Vector/src/")
+target_sources(CLHEP-Vector PRIVATE ${CLHEP_VECTOR_SRC})
+
 target_include_directories(CLHEP-Vector INTERFACE 
   "$<BUILD_INTERFACE:${CLHEP_BINARY_INC}>"
 )
@@ -194,14 +136,11 @@ add_library(CLHEP::VectorS ALIAS CLHEP-Vector)
 # Geometry
 add_library(CLHEP-Geometry STATIC) 
 set(CLHEP_GEOMETRY_SRC "${CLHEP_SOURCE_DIR}/Geometry/src")
-target_sources(CLHEP-Geometry
-    PRIVATE
-    ${CLHEP_GEOMETRY_SRC}/BasicVector3D.cc
-    ${CLHEP_GEOMETRY_SRC}/Normal3D.cc     
-    ${CLHEP_GEOMETRY_SRC}/Plane3D.cc      
-    ${CLHEP_GEOMETRY_SRC}/Point3D.cc      
-    ${CLHEP_GEOMETRY_SRC}/Transform3D.cc  
-    ${CLHEP_GEOMETRY_SRC}/Vector3D.cc)
+target_sources(CLHEP-Geometry PRIVATE
+    ${CLHEP_GEOMETRY_SRC}/BasicVector3D.cc ${CLHEP_GEOMETRY_SRC}/Normal3D.cc     
+    ${CLHEP_GEOMETRY_SRC}/Plane3D.cc      ${CLHEP_GEOMETRY_SRC}/Point3D.cc      
+    ${CLHEP_GEOMETRY_SRC}/Transform3D.cc  ${CLHEP_GEOMETRY_SRC}/Vector3D.cc
+)
 target_include_directories(CLHEP-Geometry INTERFACE 
   "$<BUILD_INTERFACE:${CLHEP_BINARY_INC}>"
 )
@@ -212,17 +151,13 @@ add_library(CLHEP::GeometryS ALIAS CLHEP-Geometry)
 # Matrix
 add_library(CLHEP-Matrix STATIC)
 set(CLHEP_MATRIX_SRC "${CLHEP_SOURCE_DIR}/Matrix/src")
-target_sources(CLHEP-Matrix
-    PRIVATE
-    ${CLHEP_MATRIX_SRC}/DiagMatrix.cc   
-    ${CLHEP_MATRIX_SRC}/GenMatrix.cc
-    ${CLHEP_MATRIX_SRC}/Matrix.cc
-    ${CLHEP_MATRIX_SRC}/MatrixEqRotation.cc
-    ${CLHEP_MATRIX_SRC}/MatrixInvert.cc
-    ${CLHEP_MATRIX_SRC}/MatrixLinear.cc
-    ${CLHEP_MATRIX_SRC}/SymMatrix.cc
-    ${CLHEP_MATRIX_SRC}/SymMatrixInvert.cc
-    ${CLHEP_MATRIX_SRC}/Vector.cc)
+target_sources(CLHEP-Matrix PRIVATE
+    ${CLHEP_MATRIX_SRC}/DiagMatrix.cc   ${CLHEP_MATRIX_SRC}/GenMatrix.cc
+    ${CLHEP_MATRIX_SRC}/Matrix.cc ${CLHEP_MATRIX_SRC}/MatrixEqRotation.cc
+    ${CLHEP_MATRIX_SRC}/MatrixInvert.cc ${CLHEP_MATRIX_SRC}/MatrixLinear.cc
+    ${CLHEP_MATRIX_SRC}/SymMatrix.cc ${CLHEP_MATRIX_SRC}/SymMatrixInvert.cc
+    ${CLHEP_MATRIX_SRC}/Vector.cc
+)
 target_include_directories(CLHEP-Matrix INTERFACE 
   "$<BUILD_INTERFACE:${CLHEP_BINARY_INC}>"
 )
@@ -240,6 +175,8 @@ add_library(CLHEP::MatrixS ALIAS CLHEP-Matrix)
 # ====================================================================== #
 # CppUnit – LibreOffice fork (autotools), static-only                    #
 # ====================================================================== #
+
+message(STATUS "Local External Dependency CppUnit")
 
 set(CPPUNIT_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/cppunit)
 
@@ -314,21 +251,26 @@ add_library(CppUnit::CppUnit ALIAS cppunit_static)
 # FFTW 3.3.10
 # =========================================================================== #
 
-message(STATUS "Local FFTW3")
+message(STATUS "Local External Dependency FFTW3")
 
 # Cache original values
-get_property(_orig_pic CACHE CMAKE_POSITION_INDEPENDENT_CODE PROPERTY VALUE)
-get_property(_orig_shared CACHE BUILD_SHARED_LIBS PROPERTY VALUE)
-get_property(_orig_cflags CACHE CMAKE_C_FLAGS PROPERTY VALUE)
-get_property(_orig_threads CACHE ENABLE_THREADS PROPERTY VALUE)
-get_property(_orig_double CACHE ENABLE_DOUBLE PROPERTY VALUE)
-get_property(_orig_double CACHE ENABLE_DOUBLE PROPERTY VALUE)
+foreach(_var IN ITEMS 
+    CMAKE_POSITION_INDEPENDENT_CODE BUILD_SHARED_LIBS TESTS ENABLE_THREADS
+    CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 )                                          
+if(DEFINED CACHE{${_var}})                 
+  set(_fftw_backup_${_var} "${${_var}}")   
+endif()
+endforeach()
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "" FORCE)
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(ENABLE_THREADS ON CACHE BOOL "" FORCE)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer -fstrict-aliasing -ffast-math" CACHE STRING "" FORCE)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fomit-frame-pointer -fstrict-aliasing -ffast-math" CACHE STRING "" FORCE)
 set(ENABLE_DOUBLE ON CACHE BOOL "" FORCE)
+set(ENABLE_SSE ON CACHE BOOL "" FORCE)
+set(ENABLE_SSE2 ON CACHE BOOL "" FORCE)
+set(ENABLE_AVX ON CACHE BOOL "" FORCE)
+set(ENABLE_AVX2 ON CACHE BOOL "" FORCE)
 
 FetchContent_Declare(fftw
   URL https://www.fftw.org/fftw-3.3.10.tar.gz
@@ -339,21 +281,99 @@ FetchContent_Declare(fftw
 
 FetchContent_MakeAvailable(fftw)
 
-set(CMAKE_POSITION_INDEPENDENT_CODE ${_orig_pic} CACHE BOOL "" FORCE)
-set(BUILD_SHARED_LIBS ${_orig_shared} CACHE BOOL "" FORCE)
-set(ENABLE_THREADS ${_orig_threads} CACHE BOOL "" FORCE)
-set(CMAKE_INSTALL_PREFIX ${_orig_install} CACHE PATH "" FORCE)
-set(CMAKE_C_FLAGS "${_orig_cflags}" CACHE STRING "" FORCE)
-set(ENABLE_DOUBLE ${_orig_double} CACHE BOOL "" FORCE)
-
 target_include_directories(fftw3 INTERFACE 
     "$<INSTALL_INTERFACE:include>"
     "$<BUILD_INTERFACE:${fftw_SOURCE_DIR}/api>")
 
 add_library(FFTW::fftw3 ALIAS fftw3)
 
+# Restore original values
+foreach(_var IN ITEMS 
+    CMAKE_POSITION_INDEPENDENT_CODE BUILD_SHARED_LIBS TESTS ENABLE_THREADS
+    CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 )                                          
+if(DEFINED _fftw_backup_${_var})
+  set(${_var} "${_fftw_backup_${_var}}" CACHE BOOL "" FORCE)
+  unset(_fftw_backup_${_var})
+else()
+  unset(${_var} CACHE)
+endif()
+endforeach()
+
 
 # =========================================================================== #
-# F2C 1.0
+# F2C 
 # =========================================================================== #
 
+message(STATUS "Local External Dependency F2C")
+
+
+FetchContent_Declare(f2c_src
+  URL https://web.archive.org/web/20210322095636/https://netlib.sandia.gov/f2c/libf2c.zip
+  URL_HASH SHA256=ca404070e9ce0a9aaa6a71fc7d5489d014ade952c5d6de7efb88de8e24f2e8e0
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+
+FetchContent_MakeAvailable(f2c_src)
+
+file( WRITE ${f2c_src_SOURCE_DIR}/arith.h
+  "#define IEEE_8087
+#define Arith_Kind_ASL 1
+#define Long int
+#define Intcast (int)(long)
+#define Double_Align
+#define X64_bit_pointers
+#define NANCHECK
+#define QNaN0 0x0
+#define QNaN1 0x7ff80000"
+)
+
+file(WRITE ${f2c_src_SOURCE_DIR}/MAIN_stub.c "int MAIN__(int argc, char *argv[]) { return 0; }")
+file(COPY_FILE ${f2c_src_SOURCE_DIR}/signal1.h0 ${f2c_src_SOURCE_DIR}/signal1.h)
+file(COPY_FILE ${f2c_src_SOURCE_DIR}/sysdep1.h0 ${f2c_src_SOURCE_DIR}/sysdep1.h)
+file(COPY_FILE ${f2c_src_SOURCE_DIR}/f2c.h0 ${f2c_src_SOURCE_DIR}/f2c.h)
+file(READ ${f2c_src_SOURCE_DIR}/f2ch.add F2CHADD)
+file(APPEND ${f2c_src_SOURCE_DIR}/f2c.h "${F2CHADD}")
+file(MAKE_DIRECTORY ${f2c_src_SOURCE_DIR}/f2c)
+file(COPY_FILE ${f2c_src_SOURCE_DIR}/f2c.h ${f2c_src_SOURCE_DIR}/f2c/f2c.h)
+
+#### Source object groups as defined in makefile.u
+set(MISC f77vers.c i77vers.c main.c MAIN_stub.c s_rnge.c abort_.c exit_.c getarg_.c
+    iargc_.c getenv_.c signal_.c s_stop.c s_paus.c system_.c cabs.c ctype.c derf_.c
+    derfc_.c erf_.c erfc_.c sig_die.c uninit.c)
+set(POW pow_ci.c pow_dd.c pow_di.c pow_hh.c pow_ii.c pow_ri.c pow_zi.c pow_zz.c)
+set(CX c_abs.c c_cos.c c_div.c c_exp.c c_log.c c_sin.c c_sqrt.c)
+set(DCX z_abs.c z_cos.c z_div.c z_exp.c z_log.c z_sin.c z_sqrt.c)
+set(REAL r_abs.c r_acos.c r_asin.c r_atan.c r_atn2.c r_cnjg.c r_cos.c r_cosh.c r_dim.c
+    r_exp.c r_imag.c r_int.c r_lg10.c r_log.c r_mod.c r_nint.c r_sign.c r_sin.c
+    r_sinh.c r_sqrt.c r_tan.c r_tanh.c)
+set(DBL d_abs.c d_acos.c d_asin.c d_atan.c d_atn2.c d_cnjg.c d_cos.c d_cosh.c d_dim.c
+    d_exp.c d_imag.c d_int.c d_lg10.c d_log.c d_mod.c d_nint.c d_prod.c d_sign.c
+    d_sin.c d_sinh.c d_sqrt.c d_tan.c d_tanh.c)
+set(INT i_abs.c i_dim.c i_dnnt.c i_indx.c i_len.c i_mod.c i_nint.c i_sign.c lbitbits.c
+    lbitshft.c)
+set(HALF h_abs.c h_dim.c h_dnnt.c h_indx.c h_len.c h_mod.c h_nint.c h_sign.c)
+set(CMP l_ge.c l_gt.c l_le.c l_lt.c hl_ge.c hl_gt.c hl_le.c hl_lt.c)
+set(EFL ef1asc_.c ef1cmc_.c)
+set(CHAR f77_aloc.c s_cat.c s_cmp.c s_copy.c)
+set(I77 backspac.c close.c dfe.c dolio.c due.c endfile.c err.c fmt.c fmtlib.c ftell_.c
+    iio.c ilnw.c inquire.c lread.c lwrite.c open.c rdfmt.c rewind.c rsfe.c rsli.c
+    rsne.c sfe.c sue.c typesize.c uio.c util.c wref.c wrtfmt.c wsfe.c wsle.c wsne.c
+    xwsne.c)
+set(QINT pow_qq.c qbitbits.c qbitshft.c ftell64_.c)
+set(TIME dtime_.c etime_.c)
+set(OFILES ${MISC} ${POW} ${CX} ${DCX} ${REAL} ${DBL} ${INT} ${HALF} ${CMP} ${EFL}
+  ${CHAR} ${I77} ${QINT} ${TIME})
+list(TRANSFORM OFILES PREPEND "${f2c_src_SOURCE_DIR}/")
+
+#### Shared and static library generation
+add_library(f2cobjs OBJECT ${OFILES})
+target_compile_definitions(f2cobjs PUBLIC Skip_f2c_Undefs INTEGER_STAR_8)
+
+add_library(f2c_static STATIC $<TARGET_OBJECTS:f2cobjs>)
+set_target_properties(f2c_static PROPERTIES OUTPUT_NAME f2c POSITION_INDEPENDENT_CODE 1)
+target_include_directories (f2c_static INTERFACE
+  $<BUILD_INTERFACE:${f2c_src_SOURCE_DIR}>
+  $<INSTALL_INTERFACE:>)
+
+target_compile_definitions(f2c_static INTERFACE Skip_f2c_Undefs INTEGER_STAR_8)
+add_library(f2c::f2c ALIAS f2c_static)

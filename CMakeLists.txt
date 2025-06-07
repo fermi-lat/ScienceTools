@@ -38,7 +38,7 @@ find_package(Threads REQUIRED)
 # find_package(cfitsio 4.0.0 REQUIRED)
 # find_package(CLHEP REQUIRED)
 # find_package(CppUnit REQUIRED)
-find_package(f2c REQUIRED)
+# find_package(f2c REQUIRED)
 # find_package(FFTW REQUIRED)
 find_package(GSL REQUIRED)
 find_package(healpix_cxx REQUIRED)
@@ -54,7 +54,6 @@ find_package(XercesC REQUIRED)
 add_subdirectory(externals)
 ## Make the targets visible in other CMake files.
 set_target_properties(
-  f2c::f2c
   GSL::gsl
   healpix_cxx::healpix_cxx
   Python3::Python
