@@ -132,3 +132,6 @@
 [submodule "externals/cppunit"]
 	path = externals/cppunit
 	url = git://anongit.freedesktop.org/libreoffice/cppunit
+[submodule "externals/gsl"]
+	path = externals/gsl
+	url = git://git.savannah.gnu.org/gsl.git

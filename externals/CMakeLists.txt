@@ -5,7 +5,20 @@
 cmake_minimum_required(VERSION 3.14)
 cmake_policy(SET CMP0120 NEW)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
+
 include(FetchContent)
+include(CheckIncludeFile)
+include(CheckIncludeFiles)
+include(CheckIncludeFileCXX)
+include(CheckFunctionExists)
+include(CheckCSourceCompiles)
+include(CheckTypeSize)
+include(CheckSymbolExists)
+include(CheckLibraryExists)
+include(CheckCCompilerFlag)
+include(CheckCSourceRuns)
+include(TestBigEndian)
+
 
 # =========================================================================== #
 # cfitsio
@@ -179,10 +192,6 @@ add_library(CLHEP::MatrixS ALIAS CLHEP-Matrix)
 message(STATUS "Local External Dependency CppUnit")
 
 set(CPPUNIT_SRC_DIR ${CMAKE_CURRENT_LIST_DIR}/cppunit)
-
-include(CheckIncludeFile)
-include(CheckIncludeFileCXX)
-include(CheckSymbolExists)
 
 set(_macros
   CPPUNIT_HAVE_UNISTD_H   "unistd.h"
@@ -377,3 +386,188 @@ target_include_directories (f2c_static INTERFACE
 
 target_compile_definitions(f2c_static INTERFACE Skip_f2c_Undefs INTEGER_STAR_8)
 add_library(f2c::f2c ALIAS f2c_static)
+
+
+# =========================================================================== #
+# Gnu Scientific Library (GSL) 
+# =========================================================================== #
+
+set(GSL_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/gsl")
+set(GSL_VERSION "2.8")
+set(GSL_MAJOR_VERSION 2)
+set(GSL_MINOR_VERSION 8)
+
+# Header checks
+check_include_file(complex.h   HAVE_COMPLEX_H)
+check_include_file(dlfcn.h     HAVE_DLFCN_H)
+check_include_file(ieeefp.h    HAVE_IEEEFP_H)
+check_include_file(inttypes.h  HAVE_INTTYPES_H)
+check_include_file(stdlib.h    HAVE_STDLIB_H)
+check_include_file(stdint.h    HAVE_STDINT_H)
+check_include_file(stdio.h     HAVE_STDIO_H STDC_HEADERS)
+check_include_file(string.h    HAVE_STRING_H)
+check_include_file(strings.h   HAVE_STRINGS_H)
+check_include_file(sys/stat.h  HAVE_SYS_STAT_H)
+check_include_file(sys/types.h HAVE_SYS_TYPES_H)
+check_include_file(unistd.h    HAVE_UNISTD_H)
+
+# Function existence
+check_function_exists(strdup   HAVE_STRDUP)
+check_function_exists(strtol   HAVE_STRTOL)
+check_function_exists(strtoul  HAVE_STRTOUL)
+check_function_exists(memcpy   HAVE_MEMCPY)
+check_function_exists(memmove  HAVE_MEMMOVE)
+check_function_exists(vprintf HAVE_VPRINTF)
+if(NOT HAVE_VPRINTF)
+  check_function_exists(_doprnt HAVE_DOPRNT)
+endif()
+
+# Function declarations
+check_symbol_exists("acosh" "math.h" HAVE_DECL_ACOSH)
+check_symbol_exists("asinh" "math.h" HAVE_DECL_ASINH)
+check_symbol_exists("atanh" "math.h" HAVE_DECL_ATANH)
+check_symbol_exists("expm1" "math.h" HAVE_DECL_EXPM1)
+check_symbol_exists("feenableexcept" "fenv.h" HAVE_DECL_FEENABLEEXCEPT)
+check_symbol_exists("fesettrapenable" "fenv.h" HAVE_DECL_FESETTRAPENABLE)
+check_symbol_exists("finite" "math.h" HAVE_DECL_FINITE)
+check_symbol_exists("frexp_t" "math.h" HAVE_DECL_FREXP_T)
+check_symbol_exists("frexp" "math.h" HAVE_DECL_FREXP)
+check_symbol_exists("hypot" "math.h" HAVE_DECL_HYPOT)
+check_symbol_exists("isfinite" "math.h" HAVE_DECL_ISFINITE)
+check_symbol_exists("isinf" "math.h" HAVE_DECL_ISINF)
+check_symbol_exists("isnan" "math.h" HAVE_DECL_ISNAN)
+check_symbol_exists("ldexp" "math.h" HAVE_DECL_LDEXP)
+check_symbol_exists("log1p" "math.h" HAVE_DECL_LOG1P)
+
+# Library checks
+check_library_exists(m pow "math.h" HAVE_LIBM)
+
+# Type existence
+check_type_size("size_t" SIZEOF_SIZE_T)
+
+# Check for x86 SSE support
+check_cxx_compiler_flag("-msse" HAVE_FPU_X86_SSE)
+
+check_type_size(size_t SIZEOF_SIZE_T)
+check_type_size("long double" SIZEOF_LONG_DOUBLE)
+
+# Check for inline keyword support
+check_c_source_compiles("inline int foo() { return 1; } int main() { return foo(); }" HAVE_INLINE)
+check_c_source_compiles("static inline int foo() { return 1; } int main() { return foo(); }" HAVE_C99_INLINE)
+# Check if EXIT_SUCCESS and EXIT_FAILURE are defined in stdlib.h
+check_c_source_compiles("#include <stdlib.h> int main() { int x = EXIT_SUCCESS; int y = EXIT_FAILURE; return x == 0 && y == 1; }" HAVE_EXIT_SUCCESS_AND_FAILURE)
+# Check for extended precision registers (heuristic for x86 FP stack)
+check_c_source_runs("volatile long double x = 1.0; volatile double y = x; return (x != y);" HAVE_EXTENDED_PRECISION_REGISTERS)
+# IEEE comparisons (NaN != NaN)
+check_c_source_runs(" #include <math.h> int main() { volatile double x = 0.0 / 0.0; return x != x ? 0 : 1; }" HAVE_IEEE_COMPARISONS)
+# IEEE denormals (detect if denormals are preserved)
+check_c_source_runs(" #include <math.h> #include <float.h> int main() { volatile double d = DBL_MIN / 2.0; return d != 0.0 ? 0 : 1; }" HAVE_IEEE_DENORMALS)
+check_c_source_runs(" #include <stdio.h> int main() { long double x = 1.234L; return printf(\"%Lf\\n\", x) < 0; }" HAVE_PRINTF_LONGDOUBLE)
+check_c_source_compiles(" volatile int x; int main() { return x; } " HAVE_VOLATILE)
+
+# Detect platform-specific IEEE floating-point interfaces.
+# These macros are used to enable system-dependent workarounds for
+# differences in IEEE behavior (e.g., NaN comparisons, denormals).
+# Values are inferred using CMake system identifiers or `uname` output.
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
+        set(HAVE_DARWIN86_IEEE_INTERFACE 1)
+    elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "powerpc" OR CMAKE_SYSTEM_PROCESSOR MATCHES "ppc")
+        set(HAVE_DARWIN_IEEE_INTERFACE 1)
+    endif()
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    execute_process(COMMAND uname -m OUTPUT_VARIABLE ARCH OUTPUT_STRIP_TRAILING_WHITESPACE)
+    if(ARCH MATCHES "sparc")
+        set(HAVE_GNUSPARC_IEEE_INTERFACE 1)
+    elseif(ARCH MATCHES "m68k")
+        set(HAVE_GNUM68K_IEEE_INTERFACE 1)
+    elseif(ARCH MATCHES "ppc")
+        set(HAVE_GNUPPC_IEEE_INTERFACE 1)
+    elseif(ARCH MATCHES "i.86" OR ARCH MATCHES "x86_64")
+        set(HAVE_GNUX86_IEEE_INTERFACE 1)
+    endif()
+elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+    set(HAVE_FREEBSD_IEEE_INTERFACE 1)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "NetBSD")
+    set(HAVE_NETBSD_IEEE_INTERFACE 1)
+elseif(CMAKE_SYSTEM_NAME STREQUAL "OpenBSD")
+    set(HAVE_OPENBSD_IEEE_INTERFACE 1)
+endif()
+
+# Configure gsl_version.h
+configure_file(
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/gsl_version.h.in
+  ${CMAKE_CURRENT_BINARY_DIR}/gsl/gsl_version.h
+  @ONLY
+)
+configure_file (${CMAKE_CURRENT_SOURCE_DIR}/cmake/gsl-config.h.in
+                ${CMAKE_CURRENT_BINARY_DIR}/gsl/config.h)
+
+# Ordered list of GSL subdirectories
+set(GSL_SOURES
+ utils/placeholder.c
+ sys/minmax.c sys/prec.c sys/hypot.c sys/log1p.c sys/expm1.c sys/coerce.c sys/invhyp.c sys/pow_int.c sys/infnan.c sys/fdiv.c sys/fcmp.c sys/ldfrexp.c
+ err/error.c err/stream.c err/message.c err/strerror.c
+ bst/avl.c bst/bst.c bst/rb.c bst/trav.c
+ complex/math.c complex/inline.c
+ cheb/deriv.c cheb/eval.c cheb/init.c cheb/integ.c
+ block/init.c block/file.c block/block.c
+ vector/init.c vector/file.c vector/vector.c vector/copy.c vector/swap.c vector/prop.c vector/minmax.c vector/oper.c vector/reim.c vector/subvector.c vector/view.c
+ matrix/init.c matrix/matrix.c matrix/file.c matrix/rowcol.c matrix/swap.c matrix/copy.c matrix/minmax.c matrix/prop.c matrix/oper.c matrix/getset.c matrix/view.c matrix/submatrix.c
+ permutation/init.c permutation/file.c permutation/permutation.c permutation/permute.c permutation/canonical.c permutation/inline.c
+ combination/init.c combination/file.c combination/combination.c combination/inline.c
+ multiset/init.c multiset/file.c multiset/multiset.c multiset/inline.c
+ sort/sort.c sort/sortind.c sort/sortvec.c sort/sortvecind.c sort/subset.c sort/subsetind.c
+ ieee-utils/print.c ieee-utils/make_rep.c ieee-utils/env.c ieee-utils/fp.c ieee-utils/read.c
+ cblas/sasum.c cblas/saxpy.c cblas/scasum.c cblas/scnrm2.c cblas/scopy.c cblas/sdot.c cblas/sdsdot.c cblas/sgbmv.c cblas/sgemm.c cblas/sgemv.c cblas/sger.c cblas/snrm2.c cblas/srot.c cblas/srotg.c cblas/srotm.c cblas/srotmg.c cblas/ssbmv.c cblas/sscal.c cblas/sspmv.c cblas/sspr.c cblas/sspr2.c cblas/sswap.c cblas/ssymm.c cblas/ssymv.c cblas/ssyr.c cblas/ssyr2.c cblas/ssyr2k.c cblas/ssyrk.c cblas/stbmv.c cblas/stbsv.c cblas/stpmv.c cblas/stpsv.c cblas/strmm.c cblas/strmv.c cblas/strsm.c cblas/strsv.c cblas/dasum.c cblas/daxpy.c cblas/dcopy.c cblas/ddot.c cblas/dgbmv.c cblas/dgemm.c cblas/dgemv.c cblas/dger.c cblas/dnrm2.c cblas/drot.c cblas/drotg.c cblas/drotm.c cblas/drotmg.c cblas/dsbmv.c cblas/dscal.c cblas/dsdot.c cblas/dspmv.c cblas/dspr.c cblas/dspr2.c cblas/dswap.c cblas/dsymm.c cblas/dsymv.c cblas/dsyr.c cblas/dsyr2.c cblas/dsyr2k.c cblas/dsyrk.c cblas/dtbmv.c cblas/dtbsv.c cblas/dtpmv.c cblas/dtpsv.c cblas/dtrmm.c cblas/dtrmv.c cblas/dtrsm.c cblas/dtrsv.c cblas/dzasum.c cblas/dznrm2.c cblas/caxpy.c cblas/ccopy.c cblas/cdotc_sub.c cblas/cdotu_sub.c cblas/cgbmv.c cblas/cgemm.c cblas/cgemv.c cblas/cgerc.c cblas/cgeru.c cblas/chbmv.c cblas/chemm.c cblas/chemv.c cblas/cher.c cblas/cher2.c cblas/cher2k.c cblas/cherk.c cblas/chpmv.c cblas/chpr.c cblas/chpr2.c cblas/cscal.c cblas/csscal.c cblas/cswap.c cblas/csymm.c cblas/csyr2k.c cblas/csyrk.c cblas/ctbmv.c cblas/ctbsv.c cblas/ctpmv.c cblas/ctpsv.c cblas/ctrmm.c cblas/ctrmv.c cblas/ctrsm.c cblas/ctrsv.c cblas/zaxpy.c cblas/zcopy.c cblas/zdotc_sub.c cblas/zdotu_sub.c cblas/zdscal.c cblas/zgbmv.c cblas/zgemm.c cblas/zgemv.c cblas/zgerc.c cblas/zgeru.c cblas/zhbmv.c cblas/zhemm.c cblas/zhemv.c cblas/zher.c cblas/zher2.c cblas/zher2k.c cblas/zherk.c cblas/zhpmv.c cblas/zhpr.c cblas/zhpr2.c cblas/zscal.c cblas/zswap.c cblas/zsymm.c cblas/zsyr2k.c cblas/zsyrk.c cblas/ztbmv.c cblas/ztbsv.c cblas/ztpmv.c cblas/ztpsv.c cblas/ztrmm.c cblas/ztrmv.c cblas/ztrsm.c cblas/ztrsv.c cblas/icamax.c cblas/idamax.c cblas/isamax.c cblas/izamax.c cblas/xerbla.c
+ blas/blas.c
+ linalg/cod.c linalg/condest.c linalg/invtri.c linalg/invtri_complex.c linalg/multiply.c linalg/exponential.c linalg/tridiag.c linalg/lu.c linalg/lu_band.c linalg/luc.c linalg/hh.c linalg/ql.c linalg/qr.c linalg/qr_band.c linalg/qrc.c linalg/qrpt.c linalg/qr_ud.c linalg/qr_ur.c linalg/qr_uu.c linalg/qr_uz.c linalg/rqr.c linalg/rqrc.c linalg/lq.c linalg/ptlq.c linalg/svd.c linalg/householder.c linalg/householdercomplex.c linalg/hessenberg.c linalg/hesstri.c linalg/cholesky.c linalg/choleskyc.c linalg/mcholesky.c linalg/pcholesky.c linalg/cholesky_band.c linalg/ldlt.c linalg/ldlt_band.c linalg/symmtd.c linalg/hermtd.c linalg/bidiag.c linalg/balance.c linalg/balancemat.c linalg/inline.c linalg/trimult.c linalg/trimult_complex.c
+ eigen/jacobi.c eigen/symm.c eigen/symmv.c eigen/nonsymm.c eigen/nonsymmv.c eigen/herm.c eigen/hermv.c eigen/gensymm.c eigen/gensymmv.c eigen/genherm.c eigen/genhermv.c eigen/gen.c eigen/genv.c eigen/sort.c eigen/francis.c eigen/schur.c
+ specfunc/airy.c specfunc/airy_der.c specfunc/airy_zero.c specfunc/alf_P.c specfunc/atanint.c specfunc/bessel.c specfunc/bessel_I0.c specfunc/bessel_I1.c specfunc/bessel_In.c specfunc/bessel_Inu.c specfunc/bessel_J0.c specfunc/bessel_J1.c specfunc/bessel_Jn.c specfunc/bessel_Jnu.c specfunc/bessel_K0.c specfunc/bessel_K1.c specfunc/bessel_Kn.c specfunc/bessel_Knu.c specfunc/bessel_Y0.c specfunc/bessel_Y1.c specfunc/bessel_Yn.c specfunc/bessel_Ynu.c specfunc/bessel_amp_phase.c specfunc/bessel_i.c specfunc/bessel_j.c specfunc/bessel_k.c specfunc/bessel_olver.c specfunc/bessel_temme.c specfunc/bessel_y.c specfunc/bessel_zero.c specfunc/bessel_sequence.c specfunc/beta.c specfunc/beta_inc.c specfunc/clausen.c specfunc/coulomb.c specfunc/coupling.c specfunc/coulomb_bound.c specfunc/dawson.c specfunc/debye.c specfunc/dilog.c specfunc/elementary.c specfunc/ellint.c specfunc/elljac.c specfunc/erfc.c specfunc/exp.c specfunc/expint.c specfunc/expint3.c specfunc/fermi_dirac.c specfunc/gegenbauer.c specfunc/gamma.c specfunc/gamma_inc.c specfunc/hermite.c specfunc/hyperg_0F1.c specfunc/hyperg_2F0.c specfunc/hyperg_1F1.c specfunc/hyperg_2F1.c specfunc/hyperg_U.c specfunc/hyperg.c specfunc/inline.c specfunc/laguerre.c specfunc/lambert.c specfunc/legendre_H3d.c specfunc/legendre_P.c specfunc/legendre_Qn.c specfunc/legendre_con.c specfunc/legendre_poly.c specfunc/log.c specfunc/mathieu_angfunc.c specfunc/mathieu_charv.c specfunc/mathieu_coeff.c specfunc/mathieu_radfunc.c specfunc/mathieu_workspace.c specfunc/poch.c specfunc/pow_int.c specfunc/psi.c specfunc/result.c specfunc/shint.c specfunc/sincos_pi.c specfunc/sinint.c specfunc/synchrotron.c specfunc/transport.c specfunc/trig.c specfunc/zeta.c
+ dht/dht.c
+ qrng/qrng.c qrng/niederreiter-2.c qrng/sobol.c qrng/halton.c qrng/reversehalton.c qrng/inline.c
+ rng/borosh13.c rng/cmrg.c rng/coveyou.c rng/default.c rng/file.c rng/fishman18.c rng/fishman20.c rng/fishman2x.c rng/gfsr4.c rng/knuthran2.c rng/knuthran.c rng/knuthran2002.c rng/lecuyer21.c rng/minstd.c rng/mrg.c rng/mt.c rng/r250.c rng/ran0.c rng/ran1.c rng/ran2.c rng/ran3.c rng/rand48.c rng/rand.c rng/random.c rng/randu.c rng/ranf.c rng/ranlux.c rng/ranlxd.c rng/ranlxs.c rng/ranmar.c rng/rng.c rng/slatec.c rng/taus.c rng/taus113.c rng/transputer.c rng/tt.c rng/types.c rng/uni32.c rng/uni.c rng/vax.c rng/waterman14.c rng/zuf.c rng/inline.c
+ randist/bernoulli.c randist/beta.c randist/bigauss.c randist/binomial.c randist/cauchy.c randist/chisq.c randist/dirichlet.c randist/discrete.c randist/erlang.c randist/exponential.c randist/exppow.c randist/fdist.c randist/flat.c randist/gamma.c randist/gauss.c randist/gausszig.c randist/gausstail.c randist/geometric.c randist/gumbel.c randist/hyperg.c randist/laplace.c randist/levy.c randist/logarithmic.c randist/logistic.c randist/lognormal.c randist/multinomial.c randist/mvgauss.c randist/nbinomial.c randist/pareto.c randist/pascal.c randist/poisson.c randist/rayleigh.c randist/shuffle.c randist/sphere.c randist/tdist.c randist/weibull.c randist/landau.c randist/binomial_tpe.c randist/wishart.c
+ fft/dft.c fft/fft.c
+ poly/dd.c poly/eval.c poly/solve_quadratic.c poly/solve_cubic.c poly/zsolve_quadratic.c poly/zsolve_cubic.c poly/zsolve.c poly/zsolve_init.c poly/deriv.c
+ fit/linear.c
+ multifit/gcv.c multifit/multilinear.c multifit/multiwlinear.c multifit/work.c multifit/lmniel.c multifit/lmder.c multifit/fsolver.c multifit/fdfsolver.c multifit/fdfridge.c multifit/fdjac.c multifit/convergence.c multifit/gradient.c multifit/covar.c multifit/multirobust.c multifit/robust_wfun.c multifit/multireg.c
+ multifit_nlinear/cholesky.c multifit_nlinear/convergence.c multifit_nlinear/covar.c multifit_nlinear/dogleg.c multifit_nlinear/fdf.c multifit_nlinear/fdfvv.c multifit_nlinear/fdjac.c multifit_nlinear/lm.c multifit_nlinear/mcholesky.c multifit_nlinear/qr.c multifit_nlinear/scaling.c multifit_nlinear/subspace2D.c multifit_nlinear/svd.c multifit_nlinear/trust.c
+ multilarge/multilarge.c multilarge/normal.c multilarge/tsqr.c
+ multilarge_nlinear/cgst.c multilarge_nlinear/cholesky.c multilarge_nlinear/convergence.c multilarge_nlinear/dogleg.c multilarge_nlinear/dummy.c multilarge_nlinear/fdf.c multilarge_nlinear/lm.c multilarge_nlinear/mcholesky.c multilarge_nlinear/scaling.c multilarge_nlinear/subspace2D.c multilarge_nlinear/trust.c
+ filter/gaussian.c filter/impulse.c filter/median.c filter/rmedian.c
+ movstat/alloc.c movstat/apply.c movstat/fill.c movstat/funcacc.c movstat/madacc.c movstat/medacc.c movstat/mmacc.c movstat/movmad.c movstat/movmean.c movstat/movmedian.c movstat/movminmax.c movstat/movsum.c movstat/movSn.c movstat/movQn.c movstat/movqqr.c movstat/movvariance.c movstat/mvacc.c movstat/qnacc.c movstat/qqracc.c movstat/snacc.c movstat/sumacc.c
+ rstat/rstat.c rstat/rquantile.c
+ statistics/mean.c statistics/variance.c statistics/absdev.c statistics/skew.c statistics/kurtosis.c statistics/lag1.c statistics/p_variance.c statistics/minmax.c statistics/ttest.c statistics/mad.c statistics/median.c statistics/covariance.c statistics/quantiles.c statistics/select.c statistics/Sn.c statistics/Qn.c statistics/gastwirth.c statistics/trmean.c statistics/wmean.c statistics/wvariance.c statistics/wabsdev.c statistics/wskew.c statistics/wkurtosis.c
+ siman/siman.c
+ sum/levin_u.c sum/levin_utrunc.c sum/work_u.c sum/work_utrunc.c
+ integration/qk15.c integration/qk21.c integration/qk31.c integration/qk41.c integration/qk51.c integration/qk61.c integration/qk.c integration/qng.c integration/qag.c integration/qags.c integration/qagp.c integration/workspace.c integration/qcheb.c integration/qawc.c integration/qmomo.c integration/qaws.c integration/qmomof.c integration/qawo.c integration/qawf.c integration/glfixed.c integration/cquad.c integration/fixed.c integration/chebyshev.c integration/chebyshev2.c integration/legendre.c integration/hermite.c integration/laguerre.c integration/gegenbauer.c integration/jacobi.c integration/exponential.c integration/lebedev.c integration/rational.c integration/romberg.c
+ interpolation/accel.c interpolation/akima.c interpolation/cspline.c interpolation/interp.c interpolation/linear.c interpolation/spline.c interpolation/poly.c interpolation/steffen.c interpolation/inline.c interpolation/interp2d.c interpolation/bilinear.c interpolation/bicubic.c interpolation/spline2d.c
+ histogram/add.c histogram/get.c histogram/init.c histogram/params.c histogram/reset.c histogram/file.c histogram/pdf.c histogram/add2d.c histogram/get2d.c histogram/init2d.c histogram/params2d.c histogram/reset2d.c histogram/file2d.c histogram/pdf2d.c histogram/calloc_range.c histogram/calloc_range2d.c histogram/copy.c histogram/copy2d.c histogram/maxval.c histogram/maxval2d.c histogram/oper.c histogram/oper2d.c histogram/stat.c histogram/stat2d.c
+ ode-initval/control.c ode-initval/cstd.c ode-initval/cscal.c ode-initval/evolve.c ode-initval/step.c ode-initval/rk2.c ode-initval/rk2imp.c ode-initval/rk2simp.c ode-initval/rk4.c ode-initval/rk4imp.c ode-initval/rkf45.c ode-initval/rk8pd.c ode-initval/rkck.c ode-initval/bsimp.c ode-initval/gear1.c ode-initval/gear2.c
+ ode-initval2/control.c ode-initval2/cstd.c ode-initval2/cscal.c ode-initval2/evolve.c ode-initval2/step.c ode-initval2/rk2.c ode-initval2/rk2imp.c ode-initval2/rk4.c ode-initval2/rk4imp.c ode-initval2/rkf45.c ode-initval2/rk8pd.c ode-initval2/rkck.c ode-initval2/bsimp.c ode-initval2/rk1imp.c ode-initval2/msadams.c ode-initval2/msbdf.c ode-initval2/driver.c
+ roots/bisection.c roots/brent.c roots/falsepos.c roots/newton.c roots/secant.c roots/steffenson.c roots/convergence.c roots/fsolver.c roots/fdfsolver.c
+ multiroots/fdjac.c multiroots/fsolver.c multiroots/fdfsolver.c multiroots/convergence.c multiroots/newton.c multiroots/gnewton.c multiroots/dnewton.c multiroots/broyden.c multiroots/hybrid.c multiroots/hybridj.c
+ min/fsolver.c min/golden.c min/brent.c min/convergence.c min/bracketing.c min/quad_golden.c
+ multimin/fdfminimizer.c multimin/steepest_descent.c multimin/conjugate_fr.c multimin/conjugate_pr.c multimin/convergence.c multimin/diff.c multimin/vector_bfgs.c multimin/vector_bfgs2.c multimin/fminimizer.c multimin/simplex.c multimin/simplex2.c
+ monte/miser.c monte/plain.c monte/vegas.c
+ ntuple/ntuple.c
+ diff/diff.c
+ deriv/deriv.c
+ cdf/beta.c cdf/betainv.c cdf/cauchy.c cdf/cauchyinv.c cdf/chisq.c cdf/chisqinv.c cdf/exponential.c cdf/exponentialinv.c cdf/exppow.c cdf/fdist.c cdf/fdistinv.c cdf/flat.c cdf/flatinv.c cdf/gamma.c cdf/gammainv.c cdf/gauss.c cdf/gaussinv.c cdf/gumbel1.c cdf/gumbel1inv.c cdf/gumbel2.c cdf/gumbel2inv.c cdf/laplace.c cdf/laplaceinv.c cdf/logistic.c cdf/logisticinv.c cdf/lognormal.c cdf/lognormalinv.c cdf/pareto.c cdf/paretoinv.c cdf/rayleigh.c cdf/rayleighinv.c cdf/tdist.c cdf/tdistinv.c cdf/weibull.c cdf/weibullinv.c cdf/binomial.c cdf/poisson.c cdf/geometric.c cdf/nbinomial.c cdf/pascal.c cdf/hypergeometric.c
+ wavelet/dwt.c wavelet/wavelet.c wavelet/bspline.c wavelet/daubechies.c wavelet/haar.c
+ bspline/bspline.c bspline/eval.c bspline/gram.c bspline/greville.c bspline/integ.c bspline/interp.c bspline/ls.c bspline/old.c bspline/inline.c
+ spblas/spdgemm.c spblas/spdgemv.c
+ spmatrix/compress.c spmatrix/copy.c spmatrix/file.c spmatrix/getset.c spmatrix/init.c spmatrix/minmax.c spmatrix/oper.c spmatrix/prop.c spmatrix/util.c spmatrix/swap.c
+ splinalg/itersolve.c splinalg/gmres.c)
+list(TRANSFORM GSL_SOURES PREPEND "${GSL_SOURCE_DIR}/")
+
+add_library(gsl OBJECT ${GSL_SOURES})
+
+target_compile_definitions(gsl PRIVATE HAVE_CONFIG_H=1)
+target_include_directories(gsl PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}/gsl
+    ${GSL_SOURCE_DIR}
+)
+
+add_library(GSL::gsl ALIAS gsl)
