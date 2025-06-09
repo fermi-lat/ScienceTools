@@ -29,33 +29,33 @@
 #cmakedefine HAVE_DECL_LDEXP @HAVE_DECL_LDEXP@
 #cmakedefine HAVE_DECL_LOG1P @HAVE_DECL_LOG1P@
 
-#cmakedefine HAVE_DLFCN_H 1
-#cmakedefine HAVE_DOPRNT 1
-#cmakedefine HAVE_EXIT_SUCCESS_AND_FAILURE 1
-#cmakedefine HAVE_EXTENDED_PRECISION_REGISTERS 1
-#cmakedefine HAVE_FPU_X86_SSE 1
-#cmakedefine HAVE_IEEEFP_H 1
-#cmakedefine HAVE_IEEE_COMPARISONS 1
-#cmakedefine HAVE_IEEE_DENORMALS 1
-#cmakedefine HAVE_INLINE 1
-#cmakedefine HAVE_INTTYPES_H 1
-#cmakedefine HAVE_LIBM 1
-#cmakedefine HAVE_MEMCPY 1
-#cmakedefine HAVE_MEMMOVE 1
-#cmakedefine HAVE_PRINTF_LONGDOUBLE 1
-#cmakedefine HAVE_STDINT_H 1
-#cmakedefine HAVE_STDIO_H 1
-#cmakedefine HAVE_STDLIB_H 1
-#cmakedefine HAVE_STRDUP 1
+#cmakedefine HAVE_DLFCN_H
+#cmakedefine HAVE_DOPRNT
+#cmakedefine HAVE_EXIT_SUCCESS_AND_FAILURE
+#cmakedefine HAVE_EXTENDED_PRECISION_REGISTERS
+#cmakedefine HAVE_FPU_X86_SSE
+#cmakedefine HAVE_IEEEFP_H
+#cmakedefine HAVE_IEEE_COMPARISONS
+#cmakedefine HAVE_IEEE_DENORMALS
+#cmakedefine HAVE_INLINE
+#cmakedefine HAVE_INTTYPES_H
+#cmakedefine HAVE_LIBM
+#cmakedefine HAVE_MEMCPY
+#cmakedefine HAVE_MEMMOVE
+#cmakedefine HAVE_PRINTF_LONGDOUBLE
+#cmakedefine HAVE_STDINT_H
+#cmakedefine HAVE_STDIO_H
+#cmakedefine HAVE_STDLIB_H
+#cmakedefine HAVE_STRDUP
 #cmakedefine HAVE_STRINGS_H 1
 #cmakedefine HAVE_STRING_H 1
-#cmakedefine HAVE_STRTOL 1
-#cmakedefine HAVE_STRTOUL 1
-#cmakedefine HAVE_SYS_STAT_H 1
-#cmakedefine HAVE_SYS_TYPES_H 1
-#cmakedefine HAVE_UNISTD_H 1
-#cmakedefine HAVE_VPRINTF 1
-#cmakedefine HIDE_INLINE_STATIC 1
+#cmakedefine HAVE_STRTOL
+#cmakedefine HAVE_STRTOUL
+#cmakedefine HAVE_SYS_STAT_H
+#cmakedefine HAVE_SYS_TYPES_H
+#cmakedefine HAVE_UNISTD_H
+#cmakedefine HAVE_VPRINTF
+#cmakedefine HIDE_INLINE_STATIC
 
 #cmakedefine LT_OBJDIR "@LT_OBJDIR@"
 

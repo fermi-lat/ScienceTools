@@ -41,6 +41,12 @@ find_package(Threads REQUIRED)
 # find_package(f2c REQUIRED)
 # find_package(FFTW REQUIRED)
 # find_package(GSL REQUIRED)
+add_subdirectory(externals/cfitsio)
+add_subdirectory(externals/clhep)
+add_subdirectory(externals/cppunit)
+add_subdirectory(externals/f2c)
+add_subdirectory(externals/fftw)
+add_subdirectory(externals/gsl)
 find_package(healpix_cxx REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
@@ -51,7 +57,6 @@ find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 find_package(WCSlib REQUIRED)
 find_package(XercesC REQUIRED)
 
-add_subdirectory(externals)
 ## Make the targets visible in other CMake files.
 set_target_properties(
   healpix_cxx::healpix_cxx

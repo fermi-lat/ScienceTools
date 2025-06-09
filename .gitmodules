@@ -123,15 +123,36 @@
 	url = https://github.com/fermi-lat/Minuit2.git
 [submodule "src/pyBurstAnalysisGUI/"]
 	branch = master
-[submodule "externals/cfitsio"]
-	path = externals/cfitsio
-	url = https://github.com/heasarc/cfitsio.git
-[submodule "externals/clhep"]
-	path = externals/clhep
-	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
 [submodule "externals/cppunit"]
 	path = externals/cppunit
 	url = git://anongit.freedesktop.org/libreoffice/cppunit
 [submodule "externals/gsl"]
 	path = externals/gsl
+	url = git://git.savannah.gnu.org/gsl.git
+[submodule "externals/clhep"]
+	path = externals/clhep
+	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
+[submodule "externals/clhep_module/clhep"]
+	path = externals/clhep_module/clhep
+	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
+[submodule "externals/cfitsio_module/cfitsio"]
+	path = externals/cfitsio_module/cfitsio
+	url = https://github.com/heasarc/cfitsio.git
+[submodule "externals/cppunit_module/cppunit"]
+	path = externals/cppunit_module/cppunit
+	url = git://anongit.freedesktop.org/libreoffice/cppunit
+[submodule "externals/gsl_module/gsl"]
+	path = externals/gsl_module/gsl
+	url = git://git.savannah.gnu.org/gsl.git
+[submodule "externals/cfitsio/cfitsio"]
+	path = externals/cfitsio/cfitsio
+	url = https://github.com/heasarc/cfitsio.git
+[submodule "externals/clhep/clhep"]
+	path = externals/clhep/clhep
+	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
+[submodule "externals/cppunit/cppunit"]
+	path = externals/cppunit/cppunit
+	url = git://anongit.freedesktop.org/libreoffice/cppunit
+[submodule "externals/gsl/gsl"]
+	path = externals/gsl/gsl
 	url = git://git.savannah.gnu.org/gsl.git
