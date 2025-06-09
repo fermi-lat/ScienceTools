@@ -1,0 +1,35 @@
+--- src/cxx/cxxsupport/fitshandle.cc	2014-11-11 08:15:58.000000000 -0500
++++ src/cxx/cxxsupport/fitshandle.cc	2022-04-28 23:30:23.000000000 -0400
+@@ -799,12 +799,28 @@
+       float fitsversion;
+       planck_assert(fits_get_version(&fitsversion),
+         "error calling fits_get_version()");
+-      int v_header  = nearest<int>(1000.*CFITSIO_VERSION),
+-          v_library = nearest<int>(1000.*fitsversion);
++      /* See https://sourceforge.net/p/healpix/bugs/122/
++       * CFITSIO 4.x switched to a three version format (4.00.00), as opposed
++       * to previous two-number versions (3.47). Version 4 defines a new macro
++       * CFITSIO_MICRO to track the patch level in the version. We check if
++       * macro is defined, and fall back to the old behaviour if it is not.
++       * If it is, we adapt to the new value returned by 'fits_get_version'.
++       */
++#ifdef CFITSIO_MICRO
++      int v_header  = nearest<int>(10000*CFITSIO_MAJOR + 100*CFITSIO_MINOR + CFITSIO_MICRO),
++          v_library = nearest<int>(10000*fitsversion);
+       if (v_header!=v_library)
+-        cerr << endl << "WARNING: version mismatch between CFITSIO header (v"
+-             << dataToString(v_header*0.001) << ") and linked library (v"
+-             << dataToString(v_library*0.001) << ")." << endl << endl;
++          cerr << endl << "WARNING: version mismatch between CFITSIO header (v"
++               << dataToString(v_header*1.0E-4) << ") and linked library (v"
++               << dataToString(v_library*1.0E-4) << ")." << endl << endl;
++#else
++      int v_header  = nearest<int>(100*CFITSIO_VERSION),
++          v_library = nearest<int>(100*fitsversion);
++      if (v_header!=v_library)
++          cerr << endl << "WARNING: version mismatch between CFITSIO header (v"
++               << dataToString(v_header*0.01) << ") and linked library (v"
++               << dataToString(v_library*0.01) << ")." << endl << endl;
++#endif
+       }
+   };
