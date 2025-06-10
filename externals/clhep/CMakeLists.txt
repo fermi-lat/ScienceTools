@@ -2,10 +2,6 @@
 # Vendored Externals: CLHEP – granular static libraries, namespaced targets   #
 # ########################################################################### #
 
-cmake_minimum_required(VERSION 3.14)
-cmake_policy(SET CMP0120 NEW)
-set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
-
 include(CheckFunctionExists)
 
 message(STATUS "Local External Dependency CLHEP")

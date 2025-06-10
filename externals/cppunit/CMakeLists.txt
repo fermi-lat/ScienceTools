@@ -2,10 +2,6 @@
 # CppUnit – LibreOffice fork (autotools), static-only                    #
 # ====================================================================== #
 
-cmake_minimum_required(VERSION 3.14)
-cmake_policy(SET CMP0120 NEW)
-set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
-
 include(CheckIncludeFile)
 include(CheckSymbolExists)
 include(CheckIncludeFileCXX)

@@ -156,3 +156,9 @@
 [submodule "externals/gsl/gsl"]
 	path = externals/gsl/gsl
 	url = git://git.savannah.gnu.org/gsl.git
+[submodule "externals/wcslib/wcslib"]
+	path = externals/wcslib/wcslib
+	url = https://github.com/Punzo/wcslib.git
+[submodule "externals/xercesc/xercesc"]
+	path = externals/xercesc/xercesc
+	url = https://github.com/apache/xerces-c.git

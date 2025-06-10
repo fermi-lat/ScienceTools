@@ -1,5 +1,5 @@
 # Fermitools CMAKE build system Author: Alexander Reustle (2022)
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.20)
 
 project(
   fermitools
@@ -8,6 +8,13 @@ project(
   DESCRIPTION "Fermi Sciencetools")
 cmake_policy(SET CMP0120 NEW)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
+
+set(CMAKE_CXX_STANDARD 17 CACHE STRING "Override C++ standard" FORCE)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Optional: forcibly propagate to all targets
+add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
@@ -32,23 +39,15 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 # Externals: The dependent packages on which the Sciencetools relies. ##
 find_package(Threads REQUIRED)
 
-# find_package(cfitsio 4.0.0 REQUIRED)
 add_subdirectory(externals/cfitsio)
-# find_package(CLHEP REQUIRED)
 add_subdirectory(externals/clhep)
-# find_package(CppUnit REQUIRED)
 add_subdirectory(externals/cppunit)
-# find_package(f2c REQUIRED)
 add_subdirectory(externals/f2c)
-# find_package(FFTW REQUIRED)
 add_subdirectory(externals/fftw)
-# find_package(GSL REQUIRED)
 add_subdirectory(externals/gsl)
-# find_package(healpix_cxx REQUIRED)
 add_subdirectory(externals/healpix_cxx)
-
-find_package(WCSlib REQUIRED)
-find_package(XercesC REQUIRED)
+add_subdirectory(externals/wcslib)
+add_subdirectory(externals/xercesc)
 
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
@@ -58,9 +57,7 @@ set(Python3_FIND_VIRTUALENV FIRST)
 find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 
 # Make the targets visible in other CMake files.
-set_target_properties(
-  Python3::Python WCSlib::WCSlib XercesC::XercesC PROPERTIES IMPORTED_GLOBAL
-                                                             TRUE)
+set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
 # Handle root.
 if(FERMI_BUILD_ROOT)
@@ -123,7 +120,6 @@ list(
   pyLikelihood
   rspgen
   sane
-  skymaps
   sourceIdentify
   SolarSystemTools
   st_facilities

@@ -6,11 +6,6 @@ include(FetchContent)
 
 message(STATUS "Local External Dependency Healpix_cxx version 3.31")
 
-# # Cache original values foreach(_var IN ITEMS CMAKE_POSITION_INDEPENDENT_CODE
-# BUILD_SHARED_LIBS TESTS ENABLE_THREADS CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE
-# ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 ) if(DEFINED CACHE{${_var}})
-# set(_fftw_backup_${_var} "${${_var}}") endif() endforeach()
-
 FetchContent_Declare(
   healpix_cxx_src
   URL https://downloads.sourceforge.net/project/healpix/Healpix_3.31/Healpix_3.31_2016Aug26.tar.gz
