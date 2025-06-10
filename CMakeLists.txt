@@ -36,28 +36,57 @@ include(CTest)
 # The local cmake modules path.
 list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
-# Externals: The dependent packages on which the Sciencetools relies. ##
+#######################################################################
+# Externals: The dependent packages on which the Sciencetools relies. #
+#######################################################################
+
 find_package(Threads REQUIRED)
-
-add_subdirectory(externals/cfitsio)
-add_subdirectory(externals/clhep)
-add_subdirectory(externals/cppunit)
-add_subdirectory(externals/f2c)
-add_subdirectory(externals/fftw)
-add_subdirectory(externals/gsl)
-add_subdirectory(externals/healpix_cxx)
-add_subdirectory(externals/wcslib)
-add_subdirectory(externals/xercesc)
-
 find_package(OpenMP REQUIRED COMPONENTS CXX)
+
 find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
+
 # Python3 External development headers.
 set(Python3_FIND_VIRTUALENV FIRST)
+
 find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 
-# Make the targets visible in other CMake files.
 set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
+
+# --------------------------------------------------------------------
+# Allow user to pick system vs vendored for each library:
+option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
+option(USE_SYSTEM_CLHEP       "Use system-installed CLHEP instead of package-provided" OFF)
+option(USE_SYSTEM_CPPUNIT     "Use system-installed CppUnit instead of package-provided" OFF)
+option(USE_SYSTEM_F2C         "Use system-installed f2x instead of package-provided" OFF)
+option(USE_SYSTEM_FFTW        "Use system-installed fftw instead of package-provided" OFF)
+option(USE_SYSTEM_GSL         "Use system-installed gsl instead of package-provided" OFF)
+option(USE_SYSTEM_HEALPIX_CXX "Use system-installed healpix_cxx instead of package-provided" OFF)
+option(USE_SYSTEM_WCSLIB      "Use system-installed WCSlib instead of package-provided" OFF)
+option(USE_SYSTEM_XERCES_C    "Use system-installed XercesC instead of package-provided" OFF)
+
+# --------------------------------------------------------------------
+# Helper macro to switch
+macro(add_or_find lib_name option_var find_module module_target)
+  if(${option_var})
+    find_package(${find_module} REQUIRED)
+    set_target_properties(${module_target} PROPERTIES IMPORTED_GLOBAL TRUE)
+  else()
+    add_subdirectory(externals/${lib_name})
+  endif()
+endmacro()
+
+# --------------------------------------------------------------------
+add_or_find(cfitsio      USE_SYSTEM_CFITSIO      cfitsio      cfitsio::cfitsio)
+add_or_find(clhep        USE_SYSTEM_CLHEP        CLHEP        CLHEP::CLHEP)
+add_or_find(cppunit      USE_SYSTEM_CPPUNIT      CppUnit      CppUnit::CppUnit)
+add_or_find(f2c          USE_SYSTEM_F2C          f2c          f2c::f2c)
+add_or_find(fftw         USE_SYSTEM_FFTW         FFTW         FFTW::fftw3)
+add_or_find(gsl          USE_SYSTEM_GSL          GSL          GSL::gsl)
+add_or_find(healpix_cxx  USE_SYSTEM_HEALPIX_CXX  healpix_cxx  healpix_cxx::healpix_cxx)
+add_or_find(wcslib       USE_SYSTEM_WCSLIB       WCSlib       WCSlib::WCSlib)
+add_or_find(xercesc      USE_SYSTEM_XERCES_C     XercesC      XercesC::XercesC)
+# --------------------------------------------------------------------
 
 # Handle root.
 if(FERMI_BUILD_ROOT)
