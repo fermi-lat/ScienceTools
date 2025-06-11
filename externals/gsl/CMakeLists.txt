@@ -187,8 +187,10 @@ list(APPEND GSL_HEADERS ${HEADERS2})
 list(REMOVE_DUPLICATES GSL_HEADERS)
 
 foreach(header IN LISTS GSL_HEADERS)
-  get_filename_component(hname ${header} NAME)
-  configure_file(${GSL_SOURCE_DIR}/${header} ${CMAKE_CURRENT_BINARY_DIR}/gsl/gsl/${hname} COPYONLY)
+    get_filename_component(hname ${header} NAME)
+    configure_file(${GSL_SOURCE_DIR}/${header}
+                   ${CMAKE_CURRENT_BINARY_DIR}/gsl/gsl/${hname}
+                   COPYONLY)
 endforeach()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/gsl-sources.cmake)

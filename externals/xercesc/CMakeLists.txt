@@ -19,6 +19,10 @@ set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 set(network OFF CACHE BOOL "Network support" FORCE)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON CACHE BOOL "" FORCE)
 
+if(APPLE)
+    set(transcoder "macosunicodeconverter" CACHE STRING "Disable ICU")
+endif()
+
 # --- Wrapper to skip xercesc/{doc,tests,samples} --------------------------
 # Save original function pointer
 function(_safe_add_subdirectory dir)
