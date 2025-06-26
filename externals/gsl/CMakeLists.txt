@@ -74,7 +74,7 @@ check_symbol_exists("log1p" "math.h" HAVE_DECL_LOG1P)
 # Library checks
 check_library_exists(m pow "math.h" HAVE_LIBM)
 set(PREPROCESS_FLAG "-E")
-add_definition(${PREPROCESS_FLAG})
+add_definitions(${PREPROCESS_FLAG})
 
 # Type existence
 check_type_size("size_t" SIZEOF_SIZE_T)
