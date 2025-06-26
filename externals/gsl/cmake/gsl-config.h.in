@@ -33,7 +33,7 @@
 #cmakedefine HAVE_DOPRNT
 #cmakedefine HAVE_EXIT_SUCCESS_AND_FAILURE
 #cmakedefine HAVE_EXTENDED_PRECISION_REGISTERS
-#cmakedefine HAVE_FPU_X86_SSE
+//#cmakedefine HAVE_FPU_X86_SSE
 #cmakedefine HAVE_IEEEFP_H
 #cmakedefine HAVE_IEEE_COMPARISONS
 #cmakedefine HAVE_IEEE_DENORMALS
@@ -42,7 +42,7 @@
 #cmakedefine HAVE_LIBM
 #cmakedefine HAVE_MEMCPY
 #cmakedefine HAVE_MEMMOVE
-#cmakedefine HAVE_PRINTF_LONGDOUBLE
+//#cmakedefine HAVE_PRINTF_LONGDOUBLE
 #cmakedefine HAVE_STDINT_H
 #cmakedefine HAVE_STDIO_H
 #cmakedefine HAVE_STDLIB_H
