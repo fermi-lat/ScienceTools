@@ -9,7 +9,8 @@ include(FetchContent)
 # Cache original values
 foreach(_var IN ITEMS 
     CMAKE_POSITION_INDEPENDENT_CODE BUILD_SHARED_LIBS TESTS ENABLE_THREADS
-    CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 )                                          
+    #CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 )
+    CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX )
 if(DEFINED CACHE{${_var}})                 
   set(_fftw_backup_${_var} "${${_var}}")   
 endif()
@@ -23,7 +24,10 @@ set(ENABLE_DOUBLE ON CACHE BOOL "" FORCE)
 set(ENABLE_SSE ON CACHE BOOL "" FORCE)
 set(ENABLE_SSE2 ON CACHE BOOL "" FORCE)
 set(ENABLE_AVX ON CACHE BOOL "" FORCE)
-set(ENABLE_AVX2 ON CACHE BOOL "" FORCE)
+#set(ENABLE_AVX2 ON CACHE BOOL "" FORCE)
+
+message(ENABLE_AVX2: "${ENABLE_AVX2}")
+message(__GNUC__: "${__GNUC__}")
 
 FetchContent_Declare(fftw
   URL https://www.fftw.org/fftw-3.3.10.tar.gz
@@ -43,7 +47,8 @@ add_library(FFTW::fftw3 ALIAS fftw3)
 # Restore original values
 foreach(_var IN ITEMS 
     CMAKE_POSITION_INDEPENDENT_CODE BUILD_SHARED_LIBS TESTS ENABLE_THREADS
-    CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 )                                          
+    #CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX ENABLE_AVX2 )
+    CMAKE_C_FLAGS ENABLE_DOUBLE ENABLE_SSE ENABLE_SSE2 ENABLE_AVX )
 if(DEFINED _fftw_backup_${_var})
   set(${_var} "${_fftw_backup_${_var}}" CACHE BOOL "" FORCE)
   unset(_fftw_backup_${_var})
