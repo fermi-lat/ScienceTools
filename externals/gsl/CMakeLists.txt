@@ -20,11 +20,18 @@ include(CheckCSourceRuns)
 include(TestBigEndian)
 
 message(STATUS "Local External Dependency GSL")
-
+message(CMAKE_REQUIRED_LIBRARIES: "${CMAKE_REQUIRED_LIBRARIES}")
 set(GSL_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/gsl")
 set(GSL_VERSION "2.8")
 set(GSL_MAJOR_VERSION 2)
 set(GSL_MINOR_VERSION 8)
+
+# Library checks                                                                                                                                                                             
+check_library_exists(m pow "math.h" HAVE_LIBM)
+if(HAVE_LIBM)
+  set(CMAKE_REQUIRED_LIBRARIES m)
+endif()
+
 
 # Header checks
 check_include_file(complex.h   HAVE_COMPLEX_H)
@@ -71,9 +78,6 @@ check_symbol_exists("isnan" "math.h" HAVE_DECL_ISNAN)
 check_symbol_exists("ldexp" "math.h" HAVE_DECL_LDEXP)
 check_symbol_exists("log1p" "math.h" HAVE_DECL_LOG1P)
 
-# Library checks
-check_library_exists(m pow "math.h" HAVE_LIBM)
-
 # Type existence
 check_type_size("size_t" SIZEOF_SIZE_T)
 
@@ -82,7 +86,12 @@ check_cxx_compiler_flag("-msse" HAVE_FPU_X86_SSE)
 
 check_type_size(size_t SIZEOF_SIZE_T)
 check_type_size("long double" SIZEOF_LONG_DOUBLE)
-
+#if (SIZEOF_LONG_DOUBLE)
+#  set(USES_LONGDOUBLE 1)
+#elseif (!SIZEOF_LONG_DOUBLE)
+#  set(USES_LONGDOUBLE 0)
+#endif()
+  
 # Check for inline keyword support
 check_c_source_compiles("inline int foo() { return 1; } int main() { return foo(); }" HAVE_INLINE)
 check_c_source_compiles("static inline int foo() { return 1; } int main() { return foo(); }" HAVE_C99_INLINE)
@@ -171,6 +180,8 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "OpenBSD")
     set(HAVE_OPENBSD_IEEE_INTERFACE 1)
 endif()
 
+unset(CMAKE_REQUIRED_LIBRARIES)
+
 # # Configure gsl_version.h
 # configure_file(
 #   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/gsl_version.h.in
@@ -205,6 +216,6 @@ target_include_directories(gsl
     PUBLIC
     "$<INSTALL_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/gsl>"
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/gsl>"
-)
-
+    )
+  
 add_library(GSL::gsl ALIAS gsl)
