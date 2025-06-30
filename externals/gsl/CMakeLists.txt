@@ -20,7 +20,6 @@ include(CheckCSourceRuns)
 include(TestBigEndian)
 
 message(STATUS "Local External Dependency GSL")
-message(CMAKE_REQUIRED_LIBRARIES: "${CMAKE_REQUIRED_LIBRARIES}")
 set(GSL_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/gsl")
 set(GSL_VERSION "2.8")
 set(GSL_MAJOR_VERSION 2)
