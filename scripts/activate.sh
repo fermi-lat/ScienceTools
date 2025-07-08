@@ -19,6 +19,7 @@ echo -e "Parsed INSTALL_PREFIX: $INSTALL_PREFIX"
 # This instructs the Fermi ST where to find their data
 
 export INST_DIR=$INSTALL_PREFIX/share/fermitools
+export LIB_DIR=$INSTALL_PREFIX/lib
 export FERMI_DIR=$INST_DIR
 export FERMI_INST_DIR=$INST_DIR
 export BASE_DIR=$INST_DIR
@@ -32,6 +33,8 @@ export CALDBCONFIG=$FERMI_DIR/data/caldb/software/tools/caldb.config
 export CALDBROOT=$FERMI_DIR/data/caldb
 export CALDB=$FERMI_DIR/data/caldb
 
+# Set Load Library Path
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LIB_DIR
 
 # The new path to check or add
 NEW_FERMI_PATH=$CONDA_PREFIX/bin/fermitools
