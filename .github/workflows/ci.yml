@@ -17,11 +17,10 @@ jobs:
     - name: checkout the code 
       uses: actions/checkout@v4 # Checkout the repository code
     - name: Get miniforge
-      uses: conda-forge/setup-miniforge@v3 # Use the setup-miniforge action
+      uses: conda-incubator/setup-miniconda@v3
       with:
+        miniforge-variant: Miniforge3
         activate-environment: fermi-dev
-        miniforge-version: 'latest' # Specify Miniforge version (or 'latest')
-        mamba-version: 'latest'    # Optionally specify mamba version
         environment-file: environments/fermitools-develop-linux.yml
 
     - name: Install CMake and Build Tools
