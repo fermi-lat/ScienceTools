@@ -1,0 +1,36 @@
+name: CMake Build
+on:
+  push:
+    branches: [ 'addition_creator_fits' ]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest # Or windows-latest, macos-latest
+
+    steps:
+    - name: checkout the code 
+      uses: actions/checkout@v4 # Checkout the repository code
+    - name: Get miniforge
+      uses: conda-forge/setup-miniforge@v3 # Use the setup-miniforge action
+      with:
+        activate-environment: fermi-dev
+        miniforge-version: 'latest' # Specify Miniforge version (or 'latest')
+        mamba-version: 'latest'    # Optionally specify mamba version
+        environment-file: environments/fermitools-develop-linux.yml
+
+    - name: Install CMake and Build Tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake build-essential # For Ubuntu/Debian
+
+    - name: Configure CMake
+      run: cmake -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+
+    - name: Build Project
+      run: cmake --build RelWithDebInfo --target=install
