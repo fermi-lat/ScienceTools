@@ -11,24 +11,28 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-latest # Or windows-latest, macos-latest
-
+    runs-on: macos-14 # ubuntu-22.04  Or windows-latest, macos-latest
+    defaults:
+     run:
+        shell: bash -el {0}
     steps:
-    - name: Setup curl
-      uses: kordlib/setup-curl@v1.0.2
-    - name: checkout the code 
+    # - name: Setup curl
+    #  uses: kordlib/setup-curl@v1.0.2
+    - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
     - name: Get miniforge
-      uses: conda-incubator/setup-miniconda@v3
+      uses: mamba-org/setup-micromamba@v2
       with:
-        miniforge-variant: Miniforge3
-        activate-environment: fermi-dev
-        environment-file: environments/fermitools-develop-linux.yml
+        environment-file: environments/fermitools-develop-osx-arm64.yml
+        environment-name: fermi-dev
+        init-shell: bash
+        cache-environment: true
+        ## post-cleanup: 'all'
 
     - name: Install CMake and Build Tools
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake build-essential # For Ubuntu/Debian
+        sudo apt-get install -y cmake build-essential curl # For Ubuntu/Debian
 
     - name: Configure CMake
       run: cmake -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
