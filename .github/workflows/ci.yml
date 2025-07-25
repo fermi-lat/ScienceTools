@@ -18,6 +18,9 @@ jobs:
     steps:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
+      with:
+        submodules: 'recursive'
+
     - name: Get miniforge
       uses: mamba-org/setup-micromamba@v2
       with:
