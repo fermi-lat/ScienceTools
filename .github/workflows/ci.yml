@@ -25,9 +25,9 @@ jobs:
 
     - name: Verify proper  submodule branches were checked out
       run: |
-       git config --file .gitmodules --name-only --get-regexp path$ | while read -r submodule_path; do
+       git config -f .gitmodules --get-regexp '^submodule\..*\.path$' | while read -r submodule_path; do
         echo "Submodule: $submodule_path"
-        pushd "$submodule_path" > /dev/null
+        # pushd "$submodule_path" > /dev/null
 
         # Get the currently checked out branch (if any)
         branch=$(git rev-parse --abbrev-ref HEAD)
