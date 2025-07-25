@@ -5,11 +5,11 @@ set(CMAKE_C_COMPILER "/opt/homebrew/opt/llvm/bin/clang" CACHE FILEPATH "C compil
 set(CMAKE_CXX_COMPILER "/opt/homebrew/opt/llvm/bin/clang++" CACHE FILEPATH "C++ compiler")
 
 # Use the macOS SDK path explicitly (instead of relying on $SDKROOT)
-execute_process(
-  COMMAND xcrun --sdk macosx --show-sdk-path
-  OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
-  OUTPUT_STRIP_TRAILING_WHITESPACE
-)
+#execute_process(
+#  COMMAND xcrun --sdk macosx --show-sdk-path
+#  OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
+#  OUTPUT_STRIP_TRAILING_WHITESPACE
+#)
 set(CMAKE_SYSROOT "${CMAKE_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
 
 # Explicitly use libc++ headers and ensure they take precedence
