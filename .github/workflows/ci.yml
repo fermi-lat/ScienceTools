@@ -20,6 +20,7 @@ jobs:
       uses: actions/checkout@v4 # Checkout the repository code
       with:
         submodules: 'recursive'
+        ref: 'addition_creator_fits'
 
     - name: Get miniforge
       uses: mamba-org/setup-micromamba@v2
