@@ -33,9 +33,9 @@ jobs:
       with:
         environment-file: environments/fermitools-develop-linux.yml
         environment-name: fermi-dev
-        init-shell: bash
+        ## init-shell: bash
         ## cache-environment: true
-        ## post-cleanup: 'all'
+        post-cleanup: 'all'
 
     - name: Install CMake and Build Tools
       run: |
