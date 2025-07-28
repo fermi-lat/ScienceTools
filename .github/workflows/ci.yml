@@ -11,7 +11,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-22.04 # Or windows-latest, macos-latest
+    runs-on: ubuntu-latest # Or windows-latest, macos-latest
     defaults:
      run:
         shell: bash -el {0}
@@ -19,8 +19,8 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        submodules: true # 'recursive'
-        ref:  'addition_creator_fits' # ${{ github.ref }}
+        ref: addition_creator_fits
+        submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
     - name: Verify proper  submodule branches were checked out
@@ -53,7 +53,8 @@ jobs:
     - name: Install CMake and Build Tools
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake build-essential curl # For Ubuntu/Debian
+        sudo apt-get install -y cmake cmake-data dh-elpa-helper libjsoncpp25 librhash0 build-essential curl # For Ubuntu/Debian
+        
 
     - name: Configure CMake
       run: |
