@@ -55,7 +55,7 @@ set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
 # --------------------------------------------------------------------
 # Allow user to pick system vs vendored for each library:
-option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
+option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
 option(USE_SYSTEM_CLHEP       "Use system-installed CLHEP instead of package-provided" OFF)
 option(USE_SYSTEM_CPPUNIT     "Use system-installed CppUnit instead of package-provided" OFF)
 option(USE_SYSTEM_F2C         "Use system-installed f2x instead of package-provided" OFF)
