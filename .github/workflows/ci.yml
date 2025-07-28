@@ -19,7 +19,7 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        submodules: 'recursive'
+        submodules: true # 'recursive'
         ref:  'addition_creator_fits' # ${{ github.ref }}
         fetch-depth: 0 # Fetches full history
 
