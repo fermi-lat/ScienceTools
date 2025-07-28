@@ -11,7 +11,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-24.04-arm # Or windows-latest, macos-latest
+    runs-on: macos-latest # Or macos-14, macos-13, macos-12 for specific versions
     defaults:
      run:
         shell: bash -el {0}
@@ -56,11 +56,13 @@ jobs:
         ## cache-environment: true
         post-cleanup: 'all'
 
-    - name: Install CMake and Build Tools
+    - name: Setup environment
+      # Add steps to set up your build environment, e.g., install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y cmake cmake-data dh-elpa-helper libjsoncpp25 librhash0 build-essential curl # For Ubuntu/Debian
-        
+        # Example: Install Homebrew and a package
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        brew install cmake cmake-data curl
+    
 
     - name: Configure CMake
       run: |
