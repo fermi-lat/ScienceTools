@@ -11,7 +11,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-latest # Or windows-latest, macos-latest
+    runs-on: ubuntu-24.04-arm # Or windows-latest, macos-latest
     defaults:
      run:
         shell: bash -el {0}
