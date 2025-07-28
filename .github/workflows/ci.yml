@@ -50,7 +50,7 @@ jobs:
     - name: Get miniforge
       uses: mamba-org/setup-micromamba@v2
       with:
-        environment-file: environments/fermitools-develop-linux.yml
+        environment-file: environments/fermitools-develop-osx-x86.yml
         environment-name: fermi-dev
         ## init-shell: bash
         ## cache-environment: true
