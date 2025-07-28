@@ -4,8 +4,6 @@ channels:
   - fermi
 dependencies:
   # Build dependencies
-  - gcc_linux-64 
-  - binutils_impl_linux-64
   - cfitsio
   - clhep
   - cmake
