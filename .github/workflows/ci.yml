@@ -11,10 +11,20 @@ on:
 
 jobs:
   docker:
-    runs-on: macos-15 # Or macos-14, macos-13, macos-12 for specific versions
+    runs-on: macos-15
     defaults:
      run:
         shell: bash -el {0}
+    strategy:
+      matrix:
+        include:
+          - os: macos
+            arch: amd64
+            env_target_file: "fermitools-develop-osx-x86.yml"
+          - os: macos
+            arch: arm64
+            env_target_file: "fermitools-develop-osx-arm64.yml"
+
     steps:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
@@ -25,6 +35,9 @@ jobs:
 
     # - name: Set up Docker Buildx
     #   uses: docker/setup-buildx-action@v3
+
+    - name: Set ENV_TARGET_FILE variable
+      run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
     - name: Verify proper  submodule branches were checked out
       run: |
@@ -48,7 +61,7 @@ jobs:
       uses: mamba-org/setup-micromamba@v2
       with:
         ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
-        environment-file: environments/fermitools-develop-osx-arm64.yml
+        environment-file: environments/${{ env.ENV_TARGET_FILE }}
         environment-name: fermi-dev
         ## init-shell: bash
         ## cache-environment: true
@@ -63,10 +76,10 @@ jobs:
         brew install curl
     
 
-    - name: Configure CMake
+    - name: Configure CMake  ${{ matrix.arch }}
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
-        cmake -S . -B RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES="arm64" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+        cmake -S . -B RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES=" ${{ matrix.arch }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
 
     - name: Build Project
       run: |
