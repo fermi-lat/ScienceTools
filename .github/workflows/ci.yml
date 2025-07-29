@@ -11,16 +11,13 @@ on:
 
 jobs:
   docker:
-    runs-on: macos-15
+    runs-on: macos-14
     defaults:
      run:
         shell: bash -el {0}
     strategy:
       matrix:
         include:
-          - os: macos
-            arch: amd64
-            env_target_file: "fermitools-develop-osx-x86.yml"
           - os: macos
             arch: arm64
             env_target_file: "fermitools-develop-osx-arm64.yml"
@@ -61,7 +58,7 @@ jobs:
       uses: mamba-org/setup-micromamba@v2
       with:
         ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
-        environment-file: environments/${{ env.ENV_TARGET_FILE }}
+        environment-file: "environments/${{env.ENV_TARGET_FILE}}"
         environment-name: fermi-dev
         ## init-shell: bash
         ## cache-environment: true
@@ -79,7 +76,7 @@ jobs:
     - name: Configure CMake  ${{ matrix.arch }}
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
-        cmake -S . -B RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES=" ${{ matrix.arch }}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+        cmake -S . -B RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
 
     - name: Build Project
       run: |
