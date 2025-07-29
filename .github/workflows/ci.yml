@@ -19,8 +19,8 @@ jobs:
       matrix:
         include:
           - os: macos
-            arch: arm64
-            env_target_file: "fermitools-develop-osx-arm64.yml"
+            arch: amd64
+            env_target_file: "fermitools-develop-osx-x86.yml"
 
     steps:
     - name: checkout the code
