@@ -59,7 +59,8 @@ jobs:
       run: |
         # Example: Install Homebrew and a package
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        brew install cmake cmake-data curl
+        # cmake is already installed on mac runners 
+        brew install curl
     
 
     - name: Configure CMake
