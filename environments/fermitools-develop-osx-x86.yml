@@ -4,6 +4,7 @@ channels:
   - fermi
 dependencies:
   # Build dependencies
+  # healpix_cxx=3.31=h076e04d_1007
   - cfitsio
   - clhep
   - cmake
@@ -12,7 +13,7 @@ dependencies:
   - fftw
   - f2c>=1.0
   - gsl
-  - healpix_cxx=3.31=h076e04d_1007
+  - healpix_cxx=3.31
   - llvm-openmp
   - make
   - readline
