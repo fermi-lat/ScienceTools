@@ -53,9 +53,14 @@ find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 
 set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
+if(NOT APPLE)
+  option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
+else()
+  option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
+endif()
+
 # --------------------------------------------------------------------
 # Allow user to pick system vs vendored for each library:
-option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
 option(USE_SYSTEM_CLHEP       "Use system-installed CLHEP instead of package-provided" OFF)
 option(USE_SYSTEM_CPPUNIT     "Use system-installed CppUnit instead of package-provided" OFF)
 option(USE_SYSTEM_F2C         "Use system-installed f2x instead of package-provided" OFF)
