@@ -1,4 +1,4 @@
-name: CMake Build osx arm64
+name: CMake Build osx arm64 and amd64
 on:
   push:
     branches: [ 'addition_creator_fits' ]
@@ -25,7 +25,7 @@ jobs:
           - os: macos-13
             arch: amd64
             env_target_file: "fermitools-develop-osx-x86.yml"
-          - os: macos-14 # arm64
+          - os: macos-15 # arm64
             arch: arm64
             env_target_file: "fermitools-develop-osx-arm64.yml"
 
@@ -84,7 +84,8 @@ jobs:
     - name: Configure CMake  ${{ matrix.arch }}
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
-        cmake -S . -B RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_CXX_COMPILER="$(which g++)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+        #  -DCMAKE_CXX_COMPILER="$(which g++)"
+        cmake -S . -B RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
 
     - name: Build Project
       run: |
