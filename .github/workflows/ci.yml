@@ -26,10 +26,10 @@ jobs:
             arch: arm64
             env_target_file: "fermitools-develop-linux.yml"
           - os: ubuntu-24.04
-            arch: amd64
+            arch: x86
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
-            arch: amd64
+            arch: x86_64 
             env_target_file: "fermitools-develop-osx-x86.yml"
           - os: macos-15 # arm64
             arch: arm64
