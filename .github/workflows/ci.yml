@@ -1,4 +1,4 @@
-name: CMake Build osx arm64 and amd64
+name: CMake Build arm64 and amd64 for OSX / Linux
 on:
   push:
     branches: [ 'addition_creator_fits' ]
@@ -22,8 +22,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04
+          - os: ubuntu-24.04-arm
             arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04
+            arch: amd64
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
             arch: amd64
@@ -40,8 +43,11 @@ jobs:
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
-    # - name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v3
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
