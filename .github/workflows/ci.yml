@@ -22,9 +22,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # - ubuntu-24.04
-          #   arch: arm64
-          #  env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04
+            arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
             arch: amd64
             env_target_file: "fermitools-develop-osx-x86.yml"
@@ -74,11 +74,11 @@ jobs:
         ## cache-environment: true
         ## post-cleanup: 'all'
 
-    - name: Setup environment
+    ## - name: Setup environment
       # Add steps to set up your build environment, e.g., install dependencies
-      run: |
+      #### run: |
         # Example: Install Homebrew and a package
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        ### /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         # cmake is already installed on mac runners 
         # brew install curl
         # brew reinstall gcc
