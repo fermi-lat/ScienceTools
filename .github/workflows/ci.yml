@@ -43,11 +43,13 @@ jobs:
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v3
+    #  - name: Set up QEMU Linux
+    #   if: runner.os != 'macOS'
+    #  uses: docker/setup-qemu-action@v3
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+    # - name: Set up Docker Buildx Linux
+    #  if: runner.os != 'macOS'
+    #  uses: docker/setup-buildx-action@v3
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
