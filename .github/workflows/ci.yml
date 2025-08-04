@@ -9,6 +9,9 @@ on:
         required: true
         default: 'warning'
 
+env:
+      ACTIONS_STEP_DEBUG: true
+
 jobs:
   docker:
     runs-on: ${{ matrix.os }}
@@ -86,9 +89,9 @@ jobs:
         echo "Current Git Ref: ${{ github.ref }}"
         #  -DCMAKE_CXX_COMPILER="$(which g++)" use arm64-apple-darwin20.0.0-clang++  instead
         # remove  -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" amd64 is erroring out
-        cmake -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+        cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
 
     - name: Build Project
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
-        cmake --build RelWithDebInfo --target=install
+        cmake --build RelWithDebInfo --target=install --verbose
