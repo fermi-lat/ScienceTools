@@ -1,6 +1,6 @@
-# Fermi ScienceTools
+# Fermitools
 
-This meta-package of the user-facing Fermi ScienceTools employs git submodules to link
+This meta-package of the user-facing Fermitools employs git submodules to link
 to component packages. A git submodule is another git repository which is linked to by
 this repo.
 
