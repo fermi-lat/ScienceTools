@@ -4,7 +4,7 @@ channels:
 dependencies:
   - python=3.11.*
   - compilers
-  - cmake >3=.18
+  - cmake >=3.18
   - swig 4.0.2
   - make
   - cfitsio
