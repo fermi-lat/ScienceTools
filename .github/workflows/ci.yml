@@ -39,7 +39,7 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: addition_creator_fits
+        ref: vendor_externals
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
