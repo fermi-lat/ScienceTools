@@ -1,0 +1,105 @@
+name: CMake Build arm64 and amd64 for OSX / Linux
+on:
+  push:
+    branches: [ 'vendor_externals' ]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+env:
+      ACTIONS_STEP_DEBUG: true
+
+jobs:
+  docker:
+    runs-on: ${{ matrix.os }}
+    defaults:
+     run:
+        shell: bash -el {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04-arm
+            arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04
+            arch: x86
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: macos-15 # macos-13
+            arch: x86_64 
+            env_target_file: "fermitools-develop-osx-x86.yml"
+          - os: macos-15 # arm64
+            arch: arm64
+            env_target_file: "fermitools-develop-osx-arm64.yml"
+
+    steps:
+    - name: checkout the code
+      uses: actions/checkout@v4 # Checkout the repository code
+      with:
+        ref: addition_creator_fits
+        submodules: 'recursive' # true
+        fetch-depth: 0 # Fetches full history
+
+    #  - name: Set up QEMU Linux
+    #   if: runner.os != 'macOS'
+    #  uses: docker/setup-qemu-action@v3
+
+    # - name: Set up Docker Buildx Linux
+    #  if: runner.os != 'macOS'
+    #  uses: docker/setup-buildx-action@v3
+
+    - name: Set ENV_TARGET_FILE variable
+      run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
+
+    - name: Verify proper  submodule branches were checked out
+      run: |
+       git submodule status --recursive | awk '{ print $2 }' | while read -r submodule_path; do
+        echo "Submodule: $submodule_path"
+        pushd "$submodule_path" > /dev/null
+
+        # Get the currently checked out branch (if any)
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$branch" == "HEAD" ]; then
+           # If HEAD is detached, get the commit SHA
+           echo "  - Detached HEAD at commit: $(git rev-parse HEAD)"
+        else
+           echo "  - Branch: $branch"
+           echo "  - Commit: $(git rev-parse HEAD)"
+        fi
+        popd > /dev/null
+       done
+
+    - name: Get miniforge
+      uses: mamba-org/setup-micromamba@v2
+      with:
+        ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
+        environment-file: "environments/${{env.ENV_TARGET_FILE}}"
+        environment-name: fermi-dev
+        ## init-shell: bash
+        ## cache-environment: true
+        ## post-cleanup: 'all'
+
+    ## - name: Setup environment
+      # Add steps to set up your build environment, e.g., install dependencies
+      #### run: |
+        # Example: Install Homebrew and a package
+        ### /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # cmake is already installed on mac runners 
+        # brew install curl
+        # brew reinstall gcc
+        # brew reinstall $(brew deps gcc) # Reinstall dependencies
+   
+    - name: Configure CMake  ${{ matrix.arch }}
+      run: |
+        echo "Current Git Ref: ${{ github.ref }}"
+        #  -DCMAKE_CXX_COMPILER="$(which g++)" use arm64-apple-darwin20.0.0-clang++  instead
+        # remove  -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" amd64 is erroring out
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+
+    - name: Build Project
+      run: |
+        echo "Current Git Ref: ${{ github.ref }}"
+        cmake --build RelWithDebInfo --target=install --verbose
