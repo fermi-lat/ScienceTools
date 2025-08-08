@@ -99,7 +99,6 @@ jobs:
    
     - name: Configure CMake  ${{matrix.os}}:${{ matrix.arch }}
       run: |
-        echo "RUNNER_OS: $RUNNER_OS"
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "Configuring for Linux"
           echo "Current Git Ref: ${{ github.ref }}"
