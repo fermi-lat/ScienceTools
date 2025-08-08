@@ -43,6 +43,11 @@ jobs:
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
+    - name: pull branched submodules
+      run: |
+        git submodule foreach 'git checkout vendor_externals ||:'
+        git submodule foreach 'git pull origin vendor_externals ||:'
+
     #  - name: Set up QEMU Linux
     #   if: runner.os != 'macOS'
     #  uses: docker/setup-qemu-action@v3
