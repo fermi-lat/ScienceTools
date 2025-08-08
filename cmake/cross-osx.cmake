@@ -12,6 +12,7 @@ set(CMAKE_FIND_ROOT_PATH $ENV{PREFIX} $ENV{BUILD_PREFIX}/$ENV{HOST}/sysroot)
 
 # Explicitly use libc++ headers and ensure they take precede
 set(CMAKE_CXX_FLAGS_INIT "-isystem ${CMAKE_OSX_SYSROOT}/usr/include/c++/v1" CACHE STRING "")
+set(CMAKE_C_FLAGS_INIT "-isystem ${CMAKE_OSX_SYSROOT}/usr/include" CACHE STRING "")
 
 # search for programs in the build host directories
 set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
