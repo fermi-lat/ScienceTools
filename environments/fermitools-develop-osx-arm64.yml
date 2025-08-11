@@ -2,7 +2,7 @@ name: fermi-develop-osx
 channels:
   - conda-forge
 dependencies:
-  - compilers
+  # - compilers
   - llvm-openmp
   - python=3.11.*
   - cmake >=3.18
