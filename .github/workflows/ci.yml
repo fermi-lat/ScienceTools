@@ -36,10 +36,10 @@ jobs:
           #  env_target_file: "fermitools-develop-osx-arm64.yml"
           - os: macos-15 # macos-13
             arch: x86_64 
-            packages: llvm gcc cfitsio
+            packages: llvm lld gcc cfitsio
           - os: macos-15 # arm64
             arch: arm64
-            packages: llvm gcc cfitsio
+            packages: llvm lld gcc cfitsio
             
     steps:
     - name: checkout the code
@@ -112,6 +112,8 @@ jobs:
           echo "Current Git Ref: ${{ github.ref }}"
           cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
         elif [ "$RUNNER_OS" == "macOS" ]; then
+          echo "Edit PATH for brew compilers"
+          echo 'export PATH="/opt/homebrew/opt/llvm/bin:$PATH"' >> /Users/runner/.bash_profile
           echo "Brew install dependencies"
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
