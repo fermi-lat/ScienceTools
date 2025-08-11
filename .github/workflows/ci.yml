@@ -59,7 +59,9 @@ jobs:
     #  uses: docker/setup-buildx-action@v3
 
     - name: Set ENV_TARGET_FILE variable
-      run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
+      run: |
+       if [ "$RUNNER_OS" != "macOS" ]; then
+         echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
     - name: Verify proper  submodule branches were checked out
       run: |
@@ -79,12 +81,12 @@ jobs:
         popd > /dev/null
        done
 
-    - name: Get miniforge
-      uses: mamba-org/setup-micromamba@v2
-      with:
-        ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
-        environment-file: "environments/${{env.ENV_TARGET_FILE}}"
-        environment-name: fermi-dev
+    #- name: Get miniforge
+    #  uses: mamba-org/setup-micromamba@v2
+    #  with:
+    #    ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
+    #    environment-file: "environments/${{env.ENV_TARGET_FILE}}"
+    #    environment-name: fermi-dev
         ## init-shell: bash
         ## cache-environment: true
         ## post-cleanup: 'all'
