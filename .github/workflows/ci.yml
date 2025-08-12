@@ -36,10 +36,10 @@ jobs:
           #  env_target_file: "fermitools-develop-osx-arm64.yml"
           - os: macos-15 # macos-13
             arch: x86_64 
-            packages: llvm lld gcc cfitsio
+            packages: llvm cfitsio swig
           - os: macos-15 # arm64
             arch: arm64
-            packages: llvm lld gcc cfitsio
+            packages: llvm cfitsio swig
             
     steps:
     - name: checkout the code
