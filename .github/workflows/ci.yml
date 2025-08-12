@@ -59,9 +59,7 @@ jobs:
     #  uses: docker/setup-buildx-action@v3
 
     - name: Set ENV_TARGET_FILE variable
-      run: |
-       if [ "$RUNNER_OS" != "macOS" ]; then
-         echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
+      run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
     - name: Verify proper  submodule branches were checked out
       run: |
