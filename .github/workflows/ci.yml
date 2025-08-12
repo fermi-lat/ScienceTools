@@ -22,23 +22,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          #- os: ubuntu-24.04-arm
-          #  arch: arm64
-          #  env_target_file: "fermitools-develop-linux.yml"
-          #- os: ubuntu-24.04
-          #  arch: x86
-          #  env_target_file: "fermitools-develop-linux.yml"
-          #- os: macos-15 # macos-13
-          #  arch: x86_64 
-          #  env_target_file: "fermitools-develop-osx-x86.yml"
-          #- os: macos-15 # arm64
-          #  arch: arm64
-          #  env_target_file: "fermitools-develop-osx-arm64.yml"
+          - os: ubuntu-24.04-arm
+            arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04
+            arch: x86
+            env_target_file: "fermitools-develop-linux.yml"
           - os: macos-15 # macos-13
             arch: x86_64 
+            env_target_file: "fermitools-develop-osx-x86.yml"
             packages: llvm cfitsio swig
           - os: macos-15 # arm64
             arch: arm64
+            env_target_file: "fermitools-develop-osx-arm64.yml"
             packages: llvm cfitsio swig
             
     steps:
@@ -62,10 +58,10 @@ jobs:
     #  if: runner.os != 'macOS'
     #  uses: docker/setup-buildx-action@v3
 
-    #- name: Set ENV_TARGET_FILE variable
-    #  run: |
-    #   if [ "$RUNNER_OS" != "macOS" ]; then
-    #     echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
+    - name: Set ENV_TARGET_FILE variable
+      run: |
+       if [ "$RUNNER_OS" != "macOS" ]; then
+         echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
     - name: Verify proper  submodule branches were checked out
       run: |
@@ -85,12 +81,12 @@ jobs:
         popd > /dev/null
        done
 
-    #- name: Get miniforge
-    #  uses: mamba-org/setup-micromamba@v2
-    #  with:
-    #    ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
-    #    environment-file: "environments/${{env.ENV_TARGET_FILE}}"
-    #    environment-name: fermi-dev
+    - name: Get miniforge
+      uses: mamba-org/setup-micromamba@v2
+      with:
+        ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
+        environment-file: "environments/${{env.ENV_TARGET_FILE}}"
+        environment-name: fermi-dev
         ## init-shell: bash
         ## cache-environment: true
         ## post-cleanup: 'all'
@@ -112,17 +108,10 @@ jobs:
           echo "Current Git Ref: ${{ github.ref }}"
           cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
         elif [ "$RUNNER_OS" == "macOS" ]; then
-          echo "Edit PATH for brew compilers"
-          #export LDFLAGS="-L/opt/homebrew/opt/llvm/lib/c++ -L/opt/homebrew/opt/llvm/lib/unwind -lunwind"
-          #export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-          #export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
-          #export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
           echo "Brew install dependencies"
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
           echo "Current Git Ref: ${{ github.ref }}"
-          ls cmake/
-          pwd
           cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
         fi
   
