@@ -1,7 +1,7 @@
 name: CMake Build arm64 and amd64 for OSX / Linux
 on:
   push:
-    branches: [ "${GITHUB_REF##*/}" ]
+    branches: [ 'addition_creator_fits' ]
   workflow_dispatch:
     inputs:
       logLevel:
@@ -11,6 +11,9 @@ on:
 
 env:
       ACTIONS_STEP_DEBUG: true
+      MY_BRANCH: 'addition_creator_fits'
+
+
 
 jobs:
   docker:
@@ -41,15 +44,15 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: ${GITHUB_REF##*/}
+        ref: ${{ env.MY_BRANCH }}
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
     - name: pull branched submodules
       run: |
-        echo "Current branch: ${GITHUB_REF##*/}"
-        git submodule foreach "git checkout ${GITHUB_REF##*/} ||:"
-        git submodule foreach "git pull origin ${GITHUB_REF##*/} ||:"
+        echo "Current branch: ${{ env.MY_BRANCH }}"
+        git submodule foreach "git checkout ${{ env.MY_BRANCH }} ||:"
+        git submodule foreach "git pull origin ${{ env.MY_BRANCH }} ||:"
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
