@@ -11,7 +11,7 @@ on:
 
 env:
       ACTIONS_STEP_DEBUG: true
-      MY_BRANCH: 'addition_creator_fits'
+      MY_BRANCH: ${{ github.ref }} 
 
 
 
