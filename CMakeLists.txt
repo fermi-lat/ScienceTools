@@ -4,12 +4,36 @@ cmake_minimum_required(VERSION 3.18)
 
 project(
   fermitools
-  VERSION 2.1.0
+  VERSION 2.4.1
   LANGUAGES CXX C
-  DESCRIPTION "Fermi Sciencetools"
+  DESCRIPTION "Fermitools"
 )
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# Further debugging options
+# set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_EXECUTE_PROCESS_COMMAND_ECHO STDOUT)
+
+# Give Python Tests access to the same PROJECT information via SHELL environment variables.
+set(ENV{PY_PROJECT_NAME} ${PROJECT_NAME})
+set(ENV{PY_PROJECT_VERSION} ${PROJECT_VERSION})
+set(ENV{PY_PROJECT_DESCRIPTION} ${PROJECT_DESCRIPTION})
+
+# This approach updates a list of Templates/tpl files found in 
+execute_process(
+        COMMAND python3 ${CMAKE_CURRENT_SOURCE_DIR}/python/update_template_creator.py ${PROJECT_DESCRIPTION} ${PROJECT_VERSION} 
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        RESULT_VARIABLE script_result
+        OUTPUT_VARIABLE script_output
+        ERROR_VARIABLE script_error
+)
+
+# Results from running update_template_creator.py
+message(STATUS "Execute Process output: ${script_output}")
+message(STATUS "Execute Process err: ${script_error}")
+message(STATUS "Execute Process res: ${script_result}")
+
 
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM)
@@ -71,7 +95,8 @@ if(FERMI_BUILD_ROOT)
   )
 endif()
 
-
+## Floating-point exceptions (like division by zero, overflow, or invalid operations)
+## TRAP_FPE isn't a standard, universally available flag across all compilers or systems.
 if(NOT APPLE)
   add_compile_definitions(TRAP_FPE)
 endif()
@@ -112,6 +137,7 @@ list(
   fermitools-fhelp
   fitsGen
   flux
+  general_util
   healpix
   hoops
   irfs
