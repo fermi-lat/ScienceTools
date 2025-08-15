@@ -11,9 +11,6 @@ on:
 
 env:
       ACTIONS_STEP_DEBUG: true
-      MY_BRANCH: ${{ github.ref }} 
-
-
 
 jobs:
   docker:
@@ -28,31 +25,31 @@ jobs:
           - os: ubuntu-24.04-arm
             arch: arm64
             env_target_file: "fermitools-develop-linux.yml"
-          - os: ubuntu-24.04
-            arch: x86
-            env_target_file: "fermitools-develop-linux.yml"
+          # - os: ubuntu-24.04
+          #  arch: x86
+          #  env_target_file: "fermitools-develop-linux.yml"
           - os: macos-15 # macos-13
             arch: x86_64 
             env_target_file: "fermitools-develop-osx-x86.yml"
-            packages: llvm cfitsio swig
           - os: macos-15 # arm64
             arch: arm64
             env_target_file: "fermitools-develop-osx-arm64.yml"
-            packages: llvm cfitsio swig
-            
+
     steps:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: ${{ env.MY_BRANCH }}
+        ref: addition_creator_fits
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
-    - name: pull branched submodules
-      run: |
-        echo "Current branch: ${{ env.MY_BRANCH }}"
-        git submodule foreach "git checkout ${{ env.MY_BRANCH }} ||:"
-        git submodule foreach "git pull origin ${{ env.MY_BRANCH }} ||:"
+    #  - name: Set up QEMU Linux
+    #   if: runner.os != 'macOS'
+    #  uses: docker/setup-qemu-action@v3
+
+    # - name: Set up Docker Buildx Linux
+    #  if: runner.os != 'macOS'
+    #  uses: docker/setup-buildx-action@v3
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
@@ -78,27 +75,30 @@ jobs:
     - name: Get miniforge
       uses: mamba-org/setup-micromamba@v2
       with:
-        ## Currently using fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
+        ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
         environment-file: "environments/${{env.ENV_TARGET_FILE}}"
         environment-name: fermi-dev
-        ## Hope to use these to improve performance 
+        ## init-shell: bash
         ## cache-environment: true
         ## post-cleanup: 'all'
 
-    - name: Configure CMake  ${{matrix.os}}:${{ matrix.arch }}
+    ## - name: Setup environment
+      # Add steps to set up your build environment, e.g., install dependencies
+      #### run: |
+        # Example: Install Homebrew and a package
+        ### /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # cmake is already installed on mac runners 
+        # brew install curl
+        # brew reinstall gcc
+        # brew reinstall $(brew deps gcc) # Reinstall dependencies
+   
+    - name: Configure CMake  ${{ matrix.arch }}
       run: |
-        if [ "$RUNNER_OS" == "Linux" ]; then
-          echo "Configuring for Linux"
-          echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
-        elif [ "$RUNNER_OS" == "macOS" ]; then
-          echo "Brew install dependencies"
-          brew install ${{ matrix.packages }} 
-          echo "Configuring for macOS"
-          echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
-        fi
-  
+        echo "Current Git Ref: ${{ github.ref }}"
+        #  -DCMAKE_CXX_COMPILER="$(which g++)" use arm64-apple-darwin20.0.0-clang++  instead
+        # remove  -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" amd64 is erroring out
+        cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+
     - name: Build Project
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
