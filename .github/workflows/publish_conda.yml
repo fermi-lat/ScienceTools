@@ -53,6 +53,6 @@ jobs:
       - name: Build and upload the conda packages
         uses: uibcdf/action-build-and-upload-conda-packages@v2.0.0
         with:
-          meta_yaml_dir: recipe/meta.yaml/directory # Replace with the path to your meta.yaml directory
+          meta_yaml_dir: recipe/ # Replace with the path to your meta.yaml directory
           user: jasercion # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
