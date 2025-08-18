@@ -9,6 +9,7 @@ if [ "$(uname)" == "Darwin" ]; then
     export CXXFLAGS="-std=c++17 ${CXXFLAGS}" 
     export LDFLAGS="${LDFLAGS}  -lstdc++ -headerpad_max_install_names"
     export TOOLCHAIN_FILE="cmake/cross-osx.cmake"
+    brew install llvm
 else
     export TOOLCHAIN_FILE="cmake/cross-linux.cmake"
 fi
