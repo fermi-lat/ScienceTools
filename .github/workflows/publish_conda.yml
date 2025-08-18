@@ -55,5 +55,6 @@ jobs:
         with:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           python-version: 3.11
-          user: jasercion # Replace with your Anaconda username (or an Anaconda organization username)
+          user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
+          label: dev
