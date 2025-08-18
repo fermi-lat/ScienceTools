@@ -33,14 +33,14 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: vendor_externals
+          ref: 38-add-automatic-build-uploading-to-the-github-actions-pipeline
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
       - name: pull branched submodules
         run: |
-          git submodule foreach 'git checkout vendor_externals ||:'
-          git submodule foreach 'git pull origin vendor_externals ||:'
+          git submodule foreach 'git checkout 38-add-automatic-build-uploading-to-the-github-actions-pipeline ||:'
+          git submodule foreach 'git pull origin 38-add-automatic-build-uploading-to-the-github-actions-pipeline ||:'
           
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
