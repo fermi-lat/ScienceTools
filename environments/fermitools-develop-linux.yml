@@ -2,6 +2,8 @@ name: fermi-develop-linux
 channels:
   - conda-forge
 dependencies:
+  - anaconda-client
+  - conda-build
   - compilers
   - libgomp
   - python=3.11.*
