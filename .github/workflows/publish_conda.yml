@@ -1,0 +1,60 @@
+name: Build and upload conda packages
+
+on:
+  push:
+    branches: 38-add-automatic-build-uploading-to-the-github-actions-pipeline
+
+jobs:
+  conda_deployment:
+    name: Conda deployment
+    runs-on: ${{ matrix.os }}
+    defaults:
+     run:
+        shell: bash -el {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04-arm
+            arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04
+            arch: x86
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: macos-15 # macos-13
+            arch: x86_64 
+            env_target_file: "fermitools-develop-osx-x86.yml"
+            packages: llvm cfitsio swig
+          - os: macos-15 # arm64
+            arch: arm64
+            env_target_file: "fermitools-develop-osx-arm64.yml"
+            packages: llvm cfitsio swig
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4 # Checkout the repository code
+        with:
+          ref: 38-add-automatic-build-uploading-to-the-github-actions-pipeline
+          submodules: 'recursive' # true
+          fetch-depth: 0 # Fetches full history
+          
+      - name: pull branched submodules
+        run: |
+          git submodule foreach 'git checkout 38-add-automatic-build-uploading-to-the-github-actions-pipeline ||:'
+          git submodule foreach 'git pull origin 38-add-automatic-build-uploading-to-the-github-actions-pipeline ||:'
+          
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: 3.11
+          environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+      - name: Build and upload the conda packages
+        uses: uibcdf/action-build-and-upload-conda-packages@v1.3.0
+        with:
+          meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
+          python-version: 3.11
+          user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
+          token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
+          label: dev
