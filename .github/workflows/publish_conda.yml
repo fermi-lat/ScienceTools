@@ -2,8 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: 38-add-automatic-build-uploading-to-the-github-actions-pipeline
-
+    branches: vendor_externals
 jobs:
   conda_deployment:
     name: Conda deployment
@@ -33,7 +32,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: 38-add-automatic-build-uploading-to-the-github-actions-pipeline
+          ref: vendor_externals
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
