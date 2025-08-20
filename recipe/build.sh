@@ -57,10 +57,24 @@ echo $PREFIX
 #fi
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
-    cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE="$TOOLCHAIN_FILE" -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+    cmake -DCMAKE_BUILD_TYPE=Debug -S . \
+    -B RelWithDebInfo \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+    -DCMAKE_VERBOSE_MAKEFILE=ON  \
+    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+    -DCMAKE_PREFIX_PATH="${PREFIX}"
+    ${CMAKE_ARGS}
 else
     echo "Configuring for Linux"
-    cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+    cmake -DCMAKE_BUILD_TYPE=Debug -S . \
+    -B RelWithDebInfo \
+    -DCMAKE_C_COMPILER="$(which gcc)" \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_VERBOSE_MAKEFILE=ON  \
+    -DCMAKE_INSTALL_PREFIX="${PREFIX} \
+    -DCMAKE_PREFIX_PATH="${PREFIX}" \
+    ${CMAKE_ARGS}
 fi
 
 #cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
