@@ -104,7 +104,8 @@ jobs:
         echo "Current Git Ref: ${{ github.ref }}"
         cmake --build RelWithDebInfo --target=install --verbose
 
-    - name: Post a message in a channel
+    - name: Post a Build status in a Slack's fermitools-pipeline channel.
+      if: always()
       uses: slackapi/slack-github-action@v2.1.1
       with:
          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
