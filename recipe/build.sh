@@ -26,10 +26,10 @@ echo $PREFIX
 
 ######
 #echo "Install conda-forge cxx compiler directly:"
-if [ "$(uname)" != "Darwin"]; then
-    echo "Installing conda forge cxx compiler"
-    conda install --yes conda-forge::cxx-compiler
-fi
+#if [ "$(uname)" != "Darwin"]; then
+echo "Installing conda forge cxx compiler"
+conda install --yes conda-forge::cxx-compiler
+#fi
 
 git submodule foreach 'git checkout vendor_externals ||:'
 git submodule foreach 'git pull origin vendor_externals ||:'
