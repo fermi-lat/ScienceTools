@@ -118,12 +118,12 @@ jobs:
         echo "Current Git Ref: ${{ github.ref }}"
         cmake --build RelWithDebInfo --target=install --verbose
 
-    - name: Send Slack Notification
-      uses: slackapi/slack-github-action@v2.1.1
-      with:
-        payload: |
-         {
-          "text": "GitHub Actions workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
-         }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #- name: Send Slack Notification
+    #  uses: slackapi/slack-github-action@v2.1.1
+    #  with:
+    #    payload: |
+    #     {
+    #      "text": "GitHub Actions workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
+    #     }
+    #  env:
+    #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
