@@ -40,9 +40,6 @@ jobs:
         run: |
           git submodule foreach 'git checkout vendor_externals ||:'
           git submodule foreach 'git pull origin vendor_externals ||:'
-
-      - name: increment version
-        run: source recipe/increment_fermi_version.sh
         
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
