@@ -111,8 +111,12 @@ jobs:
          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
          webhook-type: incoming-webhook
          payload: |
-           text: "GHA workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
-           blocks: 
+           text: "This line is ignored, find a title option..."
+           blocks:
+             - type: "section"
+               text:
+                 type: "mrkdwn"
+                 text: "GHA workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
              - type: "section"
                text:
                  type: "mrkdwn"
