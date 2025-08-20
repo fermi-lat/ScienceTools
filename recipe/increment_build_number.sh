@@ -1,4 +1,4 @@
-export FERMITOOLS_VERSION=$(cat meta.yaml | \
+export FERMITOOLS_VERSION=$(cat $RECIPE_DIR/meta.yaml | \
   grep '{% set version =' | awk '{ print $5 }' | tr -d \")
 
 echo -e "Fermitools Version: ${FERMITOOLS_VERSION}"
