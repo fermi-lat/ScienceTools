@@ -2,8 +2,8 @@
 
 # export RECIPE_DIR=${RECIPE_DIR:-$1}
 #
-echo "Script Dir: $(dirname "$(which "$0")")"
-export RECIPE_DIR="$(dirname "$(which "$0")")"
+echo "Script Dir: $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+export RECIPE_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source $RECIPE_DIR/increment_version.sh
 source $RECIPE_DIR/version_lessthan.sh
 
