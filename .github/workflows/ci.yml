@@ -113,16 +113,16 @@ jobs:
          payload: |
            text: "This line is ignored, find a title option..."
            blocks:
+             - type: "header"
+               text:
+                 type: "mrkdwn"
+                 text: "GHA workflow for repo ${{ github.repository }} branch ${{ github.ref_name }} has completed. Status: ${{ job.status }}"
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "GHA workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
+                 text: "Build URL for ${{ runner.os }} ${{ runner.arch }} : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}"
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "Current GitHub Actions build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-             - type: "section"
-               text:
-                 type: "mrkdwn"
-                 text: "${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                 text: "Last Commit : ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
 
