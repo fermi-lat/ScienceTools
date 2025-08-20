@@ -119,7 +119,7 @@ jobs:
         cmake --build RelWithDebInfo --target=install --verbose
 
     - name: Send Slack Notification
-      uses: slackapi/slack-github-action@v1.2.4
+      uses: slackapi/slack-github-action@v2.1.1
       with:
         payload: |
          {
