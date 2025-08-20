@@ -115,12 +115,12 @@ jobs:
            blocks:
              - type: "header"
                text:
-                 type: "mrkdwn"
+                 type: "plain_text"
                  text: "GHA workflow for repo ${{ github.repository }} branch ${{ github.ref_name }} has completed. Status: ${{ job.status }}"
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "Build URL for ${{ runner.os }} ${{ runner.arch }} : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.job }}"
+                 text: "Build URL for ${{ runner.os }} ${{ runner.arch }} : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.run_id }}"
              - type: "section"
                text:
                  type: "mrkdwn"
