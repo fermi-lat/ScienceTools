@@ -46,7 +46,6 @@ else
     echo "Configuring for Linux"
     cmake -S . \
         -B RelWithDebInfo \
-        -DCMAKE_C_COMPILER="$(which gcc)" \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
