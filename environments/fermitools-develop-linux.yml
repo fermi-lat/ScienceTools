@@ -4,3 +4,5 @@ channels:
 dependencies:
   - anaconda-client
   - conda-build
+  - {{ compiler('cxx') }}
+  - {{ compiler('c') }}
