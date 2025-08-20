@@ -2,8 +2,9 @@
 
 # export RECIPE_DIR=${RECIPE_DIR:-$1}
 #
-source increment_version.sh
-source version_lessthan.sh
+export RECIPE_DIR="$(dirname "$(which "$0")")"
+source $RECIPE_DIR/increment_version.sh
+source $RECIPE_DIR/version_lessthan.sh
 
 export META_VERSION=$(cat meta.yaml | \
   grep '{% set version =' | awk '{ print $5 }' | tr -d \")
