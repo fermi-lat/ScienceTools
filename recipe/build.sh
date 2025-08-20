@@ -39,15 +39,15 @@ echo $PREFIX
 #  ${CMAKE_ARGS}
 
 cmake -S . \
-  -B Release \
-  -DCMAKE_BUILD_TYPE=Release \
+  -B RelWithDebInfo \
+  -DCMAKE_BUILD_TYPE=Debug \
   -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
   -DCMAKE_PREFIX_PATH="${PREFIX}" \
   -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
   ${CMAKE_ARGS}
 
 #cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
-cmake --build Release --clean-first --target=install --verbose
+cmake --build RelWithDebInfo --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
 mkdir -p $PREFIX/etc/conda/deactivate.d
