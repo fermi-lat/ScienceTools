@@ -36,6 +36,7 @@ jobs:
             env_target_file: "fermitools-develop-osx-arm64.yml"
 
     steps:
+    - uses: qoomon/actions--context@v4.0.3
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
@@ -106,7 +107,7 @@ jobs:
 
     - name: Post a Build status in a Slack's fermitools-pipeline channel.
       if: always()
-      uses: slackapi/slack-github-action@v2.1.1 qoomon/actions--context@v4.0.3
+      uses: slackapi/slack-github-action@v2.1.1
       with:
          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
          webhook-type: incoming-webhook
