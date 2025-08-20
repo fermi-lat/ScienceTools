@@ -38,8 +38,8 @@ jobs:
           
       - name: pull branched submodules
         run: |
-          git submodule foreach 'git checkout 38-add-automatic-build-uploading-to-the-github-actions-pipeline ||:'
-          git submodule foreach 'git pull origin 38-add-automatic-build-uploading-to-the-github-actions-pipeline ||:'
+          git submodule foreach 'git checkout vendor_externals ||:'
+          git submodule foreach 'git pull origin vendor_externals ||:'
           
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
