@@ -106,7 +106,7 @@ jobs:
 
     - name: Post a Build status in a Slack's fermitools-pipeline channel.
       if: always()
-      uses: slackapi/slack-github-action@v2.1.1
+      uses: slackapi/slack-github-action@v2.1.1 qoomon/actions--context@v4.0.3
       with:
          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
          webhook-type: incoming-webhook
@@ -120,7 +120,7 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "Build URL for ${{ runner.os }} ${{ runner.arch }} : ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ github.run_id }}"
+                 text: "Build URL for ${{ runner.os }} ${{ matrix.arch }} : ${GITHUB_JOB_URL}"
              - type: "section"
                text:
                  type: "mrkdwn"
