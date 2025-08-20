@@ -38,13 +38,23 @@ echo $PREFIX
 #  -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
 #  ${CMAKE_ARGS}
 
-cmake -S . \
-  -B RelWithDebInfo \
-  -DCMAKE_BUILD_TYPE=Debug \
-  -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
-  -DCMAKE_PREFIX_PATH="${PREFIX}" \
-  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-  ${CMAKE_ARGS}
+if [ "$OSTYPE" == "linux-gnu"* ]; then
+  cmake -S . \
+    -B RelWithDebInfo \
+    -DCMAKE_C_COMPILER="$(which gcc)" \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DCMAKE_PREFIX_PATH="${PREFIX}" \
+    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+    ${CMAKE_ARGS}
+elif [ "$OSTYPE" == "darwin" ]; then
+  cmake -S . \
+    -B RelWithDebInfo \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+    -DCMAKE_PREFIX_PATH="${PREFIX}" \
+    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+    ${CMAKE_ARGS}
+fi
 
 #cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 cmake --build RelWithDebInfo --clean-first --target=install --verbose
