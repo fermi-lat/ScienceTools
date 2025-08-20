@@ -6,7 +6,7 @@ export RECIPE_DIR="$(dirname "$(which "$0")")"
 source $RECIPE_DIR/increment_version.sh
 source $RECIPE_DIR/version_lessthan.sh
 
-export META_VERSION=$(cat meta.yaml | \
+export META_VERSION=$(cat $RECIPE_DIR/meta.yaml | \
   grep '{% set version =' | awk '{ print $5 }' | tr -d \")
 
 echo -e "Fermitools meta.yaml Version: ${META_VERSION}"
