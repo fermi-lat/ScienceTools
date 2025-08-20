@@ -38,22 +38,35 @@ echo $PREFIX
 #  -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
 #  ${CMAKE_ARGS}
 
-if [ "$OSTYPE" == "linux-gnu"* ]; then
-  cmake -S . \
-    -B RelWithDebInfo \
-    -DCMAKE_C_COMPILER="$(which gcc)" \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_PREFIX_PATH="${PREFIX}" \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    ${CMAKE_ARGS}
-elif [ "$OSTYPE" == "darwin" ]; then
-  cmake -S . \
-    -B RelWithDebInfo \
-    -DCMAKE_BUILD_TYPE=Debug \
-    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
-    -DCMAKE_PREFIX_PATH="${PREFIX}" \
-    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-    ${CMAKE_ARGS}
+#if [ "$OSTYPE" == "linux-gnu"* ]; then
+#  cmake -S . \
+#    -B RelWithDebInfo \
+#    -DCMAKE_C_COMPILER="$(which gcc)" \
+#    -DCMAKE_BUILD_TYPE=Debug \
+#    -DCMAKE_PREFIX_PATH="${PREFIX}" \
+#    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+#    ${CMAKE_ARGS}
+#elif [ "$OSTYPE" == "darwin" ]; then
+#  cmake -S . \
+#    -B RelWithDebInfo \
+#    -DCMAKE_BUILD_TYPE=Debug \
+#    -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+#    -DCMAKE_PREFIX_PATH="${PREFIX}" \
+#    -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+#    ${CMAKE_ARGS}
+#fi
+echo "Runner_OS: $RUNNER_OS"
+echo "OSTYPE: $OSTYPE"
+if [ "$RUNNER_OS" == "Linux" ]; then
+    echo "Configuring for Linux"
+    echo "Current Git Ref: ${{ github.ref }}"
+    cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+elif [ "$RUNNER_OS" == "macOS" ]; then
+    echo "Brew install dependencies"
+    brew install ${{ matrix.packages }} 
+    echo "Configuring for macOS"
+    echo "Current Git Ref: ${{ github.ref }}"
+    cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
 fi
 
 #cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
