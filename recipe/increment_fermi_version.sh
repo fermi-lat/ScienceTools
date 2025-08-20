@@ -2,6 +2,7 @@
 
 # export RECIPE_DIR=${RECIPE_DIR:-$1}
 #
+echo "Script Dir: $(dirname "$(which "$0")")"
 export RECIPE_DIR="$(dirname "$(which "$0")")"
 source $RECIPE_DIR/increment_version.sh
 source $RECIPE_DIR/version_lessthan.sh
