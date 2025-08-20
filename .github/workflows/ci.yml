@@ -111,12 +111,12 @@ jobs:
          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
          webhook-type: incoming-webhook
          payload: |
-           text: “GHA workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}”
+           text: "GHA workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
            blocks: 
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "Current GitHub Actions build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}”
+                 text: "Current GitHub Actions build URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
              - type: "section"
                text:
                  type: "mrkdwn"
