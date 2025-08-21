@@ -53,7 +53,7 @@ jobs:
           auto-activate-base: false
           show-channel-urls: true
       - name: Build and upload the conda packages
-        uses: uibcdf/action-build-and-upload-conda-packages@v1.3.0
+        uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           python-version: 3.11
