@@ -60,4 +60,5 @@ jobs:
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
+          anaconda_upload_args: -t ${{ secrets.ANACONDA_TOKEN }} # Pass token as argument 
           upload: true
