@@ -52,7 +52,7 @@ jobs:
 
       - name: Set environment-specific variables
         run: |
-          if [ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]; then
+          if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86">> "$GITHUB_ENV"
           fi
