@@ -125,11 +125,11 @@ jobs:
              - type: "header"
                text:
                  type: "plain_text"
-                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run number ${{github.run_number}} completed." 
+                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed." 
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Status*: ${{ job.status }}\n**OS**: ${{ runner.os }}\n**Architecture**: ${{ matrix.arch }}\n"
+                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n"
              - type: "section"
                text:
                  type: "mrkdwn"
