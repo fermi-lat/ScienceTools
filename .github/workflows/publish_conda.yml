@@ -42,7 +42,7 @@ jobs:
           git submodule foreach 'git pull origin vendor_externals ||:'
 
       - name: increment version number
-        run: source ${{ github.workspace }}/ScienceTools/recipe/increment_fermi_version.sh
+        run: source ${{ github.workspace }}/recipe/increment_fermi_version.sh
         
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
