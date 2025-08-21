@@ -4,6 +4,11 @@ set(CMAKE_PLATFORM Darwin)
 #this one not so much
 #set(CMAKE_SYSTEM_VERSION 10.15)
 
+set(MACOS_ARCH $ENV{MACOS_ARCH})
+if(MACOS_ARCH STREQUAL "x86")
+  set(CMAKE_OSX_ARCHITECTURES "x86_64")
+endif()
+
 # specify the cross compiler
 set(CMAKE_C_COMPILER $ENV{CC})
 
