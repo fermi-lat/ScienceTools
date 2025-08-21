@@ -4,6 +4,12 @@
 set(CMAKE_C_COMPILER "/opt/homebrew/opt/llvm/bin/clang" CACHE FILEPATH "C compiler")
 set(CMAKE_CXX_COMPILER "/opt/homebrew/opt/llvm/bin/clang++" CACHE FILEPATH "C++ compiler")
 
+# Explicitly set x86_64 architecture for macOS
+set(MACOS_ARCH $ENV{MACOS_ARCH})
+if(MACOS_ARCH STREQUAL "x86")
+  set(CMAKE_OSX_ARCHITECTURES "x86_64")
+endif()
+
 # Use the macOS SDK path explicitly (instead of relying on $SDKROOT)
 #execute_process(
 #  COMMAND xcrun --sdk macosx --show-sdk-path
