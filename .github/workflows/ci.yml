@@ -1,4 +1,4 @@
-name: CMake Build arm64 and amd64 for OSX / Linux
+name: CMake Build  arm64/amd64 for OSX / Linux
 on:
   push:
     branches: [ 'addition_creator_fits' ]
@@ -37,6 +37,14 @@ jobs:
 
     steps:
     - uses: qoomon/actions--context@v4.0.3
+    - run: |
+          echo "Job Id:         ${GITHUB_JOB_ID}"
+          echo "Job Name:       ${GITHUB_JOB_NAME}"
+          echo "Job Log URL:    ${GITHUB_JOB_URL}"
+          echo "Environment:    ${GITHUB_ENVIRONMENT}"
+          echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
+
+
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
@@ -117,13 +125,12 @@ jobs:
              - type: "header"
                text:
                  type: "plain_text"
-                 text: "GHA workflow for repo ${{ github.repository }} branch ${{ github.ref_name }} has completed. Status: ${{ job.status }}"
+                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} for ${{ github.repository }} -branch ${{ github.ref_name }} complete." 
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "Build URL for ${{ runner.os }} ${{ matrix.arch }} : ${GITHUB_JOB_URL}"
+                 text: "**Status**: ${{ job.status }}\n**OS**: ${{ runner.os }}\n**Architecture**: ${{ matrix.arch }}\n"
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "Last Commit : ${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-
+                 text: "**Build URL**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
