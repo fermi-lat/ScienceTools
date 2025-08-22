@@ -153,9 +153,6 @@
 [submodule "externals/cppunit/cppunit"]
 	path = externals/cppunit/cppunit
 	url = git://anongit.freedesktop.org/libreoffice/cppunit
-[submodule "externals/gsl/gsl"]
-	path = externals/gsl/gsl
-	url = git://git.savannah.gnu.org/gsl.git
 [submodule "externals/wcslib/wcslib"]
 	path = externals/wcslib/wcslib
 	url = https://github.com/Punzo/wcslib.git
