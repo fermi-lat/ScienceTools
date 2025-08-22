@@ -3,6 +3,8 @@
 export condaname="fermitools"
 
 echo "MACOS_ARCH - Build.sh: $MACOS_ARCH"
+echo "architecture:"
+uname -m
 
 if [ "$(uname)" == "Darwin" ]; then
     # If Mac OSX then set sysroot flag (see conda_build_config.yaml)
