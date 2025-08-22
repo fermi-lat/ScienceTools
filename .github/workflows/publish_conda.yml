@@ -93,7 +93,7 @@ jobs:
             eval "$command"
             paths+=($package_path)
           done
-          echo "paths=${paths[@]}" >
+          echo "paths=${paths[@]}" >> $GITHUB_OUTPUT 
 
           
 
