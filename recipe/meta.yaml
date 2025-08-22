@@ -60,7 +60,7 @@ requirements:
     #- {{ compiler('cxx') }}
     #- {{ compiler('c') }}
     - libgomp  # [linux]
-    - llvm-openmp  # [osx]
+    #- llvm-openmp  # [osx]
     - cmake >=3.18
     - make
     - pkg-config
