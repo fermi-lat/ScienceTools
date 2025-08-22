@@ -50,12 +50,12 @@ jobs:
           auto-activate-base: false
           show-channel-urls: true
 
-      - name: Set environment-specific variables
-        run: |
-          if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
-            echo "Setting MacOS x86 env var" # debug
-            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-          fi
+      #- name: Set environment-specific variables
+      #  run: |
+      #    if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
+      #      echo "Setting MacOS x86 env var" # debug
+      #      echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+      #    fi
 
       - name: Increment version number
         run: |
@@ -75,6 +75,11 @@ jobs:
         id: packages-compilation
         working-directory: recipe
         run: |
+          if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+            export MACOS_ARCH="x86" 
+          fi
           out_dir=`mktemp -d -t compilation-XXXXXXXXXX`
           echo "out_dir=$out_dir" >> $GITHUB_OUTPUT
           conda_build_command="conda build . --no-anaconda-upload --output-folder $out_dir"
