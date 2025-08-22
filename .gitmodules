@@ -159,3 +159,6 @@
 [submodule "externals/xercesc/xercesc"]
 	path = externals/xercesc/xercesc
 	url = https://github.com/apache/xerces-c.git
+[submodule "externals/gsl/gsl"]
+	path = externals/gsl/gsl
+	url = https://github.com/fermi-lat/gsl.git
