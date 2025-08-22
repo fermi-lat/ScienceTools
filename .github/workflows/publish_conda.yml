@@ -20,7 +20,7 @@ jobs:
           - os: ubuntu-24.04
             arch: x86
             env_target_file: "fermitools-develop-linux.yml"
-          - os: macos-13
+          - os: macos-15
             arch: x86_64 
             env_target_file: "fermitools-develop-osx-x86.yml"
             packages: llvm cfitsio swig
