@@ -85,7 +85,7 @@ jobs:
       - name: Package Upload
         run: |
           export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
-          package_paths=$(find ${{ steps.packages-compilation.outputs.out_dir }} -type f -name $(basename ${{ steps.packages-compilation.outputs)
+          package_paths=$(find ${{ steps.packages-compilation.outputs.out_dir }} -type f -name $(basename ${{ steps.packages-compilation.outputs }})
           for package_path in $package_paths; do
             command="anaconda upload --user fermi --label dev $package_path"
             echo "$command"
