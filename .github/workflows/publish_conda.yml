@@ -78,7 +78,7 @@ jobs:
           if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-            export MACOS_ARCH="x86" 
+            MACOS_ARCH="x86" 
           fi
           out_dir=`mktemp -d -t compilation-XXXXXXXXXX`
           echo "out_dir=$out_dir" >> $GITHUB_OUTPUT
