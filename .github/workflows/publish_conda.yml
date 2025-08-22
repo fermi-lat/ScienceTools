@@ -80,6 +80,7 @@ jobs:
           conda_build_command="conda build . --no-anaconda-upload --output-folder $out_dir"
           echo "$conda_build_command"
           eval "$conda_build_command"
+          HOST_PACKAGE=$(eval "$conda_build_command --output")
           echo "HOST_PACKAGE=$HOST_PACKAGE" >> $GITHUB_OUTPUT
 
       - name: Package Upload
