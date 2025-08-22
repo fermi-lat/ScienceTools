@@ -12,6 +12,8 @@ source:
 build:
   number: {{ environ.get('BUILD_NUMBER', 0)}}
   skip: true  # [win]
+  script_env:
+    - MACOS_ARCH # [osx]
   run_exports:
     - {{ pin_compatible('cfitsio', max_pin='x.x.x') }}
     - {{ pin_compatible('clhep', max_pin='x.x.x.x') }}
