@@ -6,7 +6,7 @@ set(CMAKE_CXX_COMPILER "/opt/homebrew/opt/llvm/bin/clang++" CACHE FILEPATH "C++ 
 
 # Explicitly set x86_64 architecture for macOS
 set(MACOS_ARCH $ENV{MACOS_ARCH})
-message(MACOS_ARCH="${MACOS_ARCH}")
+message(MACOS_ARCH="$ENV{MACOS_ARCH}")
 if(MACOS_ARCH STREQUAL "x86")
   set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE INTERNAL "" FORCE)
 endif()
