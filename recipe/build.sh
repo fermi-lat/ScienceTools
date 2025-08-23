@@ -8,11 +8,11 @@ if [ "$(uname)" == "Darwin" ]; then
     export CXXFLAGS="-std=c++17 ${CXXFLAGS}" 
     export LDFLAGS="${LDFLAGS}  -lstdc++ -headerpad_max_install_names"
     export TOOLCHAIN_FILE="cmake/toolchain-homebrew-llvm.cmake"
-    if [ "$MACOS_ARCH" == "x86" ]; then 
-        arch -x86_64 brew install llvm
-    else
-        brew install llvm
-    fi
+    #if [ "$MACOS_ARCH" == "x86" ]; then 
+    #    arch -x86_64 brew install llvm
+    #else
+    brew install llvm
+    #fi
 else
     export TOOLCHAIN_FILE="cmake/cross-linux.cmake"
 fi
