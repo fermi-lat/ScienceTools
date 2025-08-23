@@ -55,6 +55,8 @@ jobs:
           if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+            arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            #arch -x86_64 /usr/local/bin/brew install llvm 
           fi
 
       - name: Increment version number
