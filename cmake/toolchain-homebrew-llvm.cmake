@@ -4,6 +4,7 @@ message("Loading macOS Toolchain...")
 set(BREW_PATH "/opt/homebrew")
 # Explicitly set x86_64 architecture for macOS
 set(MACOS_ARCH $ENV{MACOS_ARCH})
+message("MacOS Arch Value: ${MACOS_ARCH}")
 if(MACOS_ARCH STREQUAL "x86")
   message("Applying x86 compiler settings...")
   set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE INTERNAL "" FORCE)
