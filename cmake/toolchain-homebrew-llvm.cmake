@@ -1,7 +1,6 @@
 # toolchain-clang-libcxx.cmake
 
-
-
+message("Loading macOS Toolchain...")
 set(BREW_PATH "/opt/homebrew")
 # Explicitly set x86_64 architecture for macOS
 set(MACOS_ARCH $ENV{MACOS_ARCH})
