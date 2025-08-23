@@ -20,7 +20,7 @@ jobs:
           - os: ubuntu-24.04
             arch: x86
             env_target_file: "fermitools-develop-linux.yml"
-          - os: macos-15
+          - os: macos-13
             arch: x86_64 
             env_target_file: "fermitools-develop-osx-x86.yml"
             packages: llvm cfitsio swig
@@ -55,7 +55,7 @@ jobs:
           if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-            arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            #arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
             #arch -x86_64 /usr/local/bin/brew install llvm 
           fi
 
