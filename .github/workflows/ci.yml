@@ -28,7 +28,7 @@ jobs:
           - os: ubuntu-24.04
             arch: x86
             env_target_file: "fermitools-develop-linux.yml"
-          - os: macos-15 # macos-13
+          - os: macos-13 # macos-13
             arch: x86_64 
             env_target_file: "fermitools-develop-osx-x86.yml"
             packages: llvm cfitsio swig
@@ -88,7 +88,16 @@ jobs:
         ## init-shell: bash
         ## cache-environment: true
         ## post-cleanup: 'all'
-
+        
+     - name: Set environment-specific variables
+        run: |
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+            #arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            #arch -x86_64 /usr/local/bin/brew install llvm 
+          fi
+          
     ## - name: Setup environment
       # Add steps to set up your build environment, e.g., install dependencies
       #### run: |
@@ -110,7 +119,7 @@ jobs:
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -DCMAKE_OSX_ARCHITECTURES="${{matrix.arch}}" -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
+          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
         fi
   
     - name: Build Project
