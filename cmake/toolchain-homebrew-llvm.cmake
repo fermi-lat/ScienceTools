@@ -1,14 +1,18 @@
 # toolchain-clang-libcxx.cmake
 
-# Explicitly set the compiler paths
-set(CMAKE_C_COMPILER "/opt/homebrew/opt/llvm/bin/clang" CACHE FILEPATH "C compiler")
-set(CMAKE_CXX_COMPILER "/opt/homebrew/opt/llvm/bin/clang++" CACHE FILEPATH "C++ compiler")
 
+
+set(BREW_PATH "/opt/homebrew")
 # Explicitly set x86_64 architecture for macOS
 set(MACOS_ARCH $ENV{MACOS_ARCH})
 if(MACOS_ARCH STREQUAL "x86")
   set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE INTERNAL "" FORCE)
+  set(BREW_PATH "/usr/local")
 endif()
+
+# Explicitly set the compiler paths
+set(CMAKE_C_COMPILER "${BREW_PATH}/opt/llvm/bin/clang" CACHE FILEPATH "C compiler")
+set(CMAKE_CXX_COMPILER "${BREW_PATH}/opt/llvm/bin/clang++" CACHE FILEPATH "C++ compiler")
 
 # Use the macOS SDK path explicitly (instead of relying on $SDKROOT)
 #execute_process(
@@ -19,10 +23,10 @@ endif()
 set(CMAKE_SYSROOT "${CMAKE_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
 
 # Explicitly use libc++ headers and ensure they take precedence
-set(CMAKE_CXX_FLAGS_INIT "-isystem /opt/homebrew/opt/llvm/include/c++/v1" CACHE STRING "")
+set(CMAKE_CXX_FLAGS_INIT "-isystem ${BREW_PATH}/opt/llvm/include/c++/v1" CACHE STRING "")
 
 # # Also ensure the linker uses the correct libc++ runtime
-# set(CMAKE_EXE_LINKER_FLAGS_INIT "-L/opt/homebrew/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
+# set(CMAKE_EXE_LINKER_FLAGS_INIT "-L${BREW_PATH}/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
 
 # Invoke with
 # cmake -S . -B DebugBrewLLVM -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=toolchain-homebrew-llvm.cmake -DPython3_EXECUTABLE=$(which python)
