@@ -89,14 +89,14 @@ jobs:
         ## cache-environment: true
         ## post-cleanup: 'all'
         
-     - name: Set environment-specific variables
-        run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
-            echo "Setting MacOS x86 env var" # debug
-            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-            #arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-            #arch -x86_64 /usr/local/bin/brew install llvm 
-          fi
+    - name: Set environment-specific variables
+      run: |
+        if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          echo "Setting MacOS x86 env var" # debug
+          echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          #arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+          #arch -x86_64 /usr/local/bin/brew install llvm 
+        fi
           
     ## - name: Setup environment
       # Add steps to set up your build environment, e.g., install dependencies
