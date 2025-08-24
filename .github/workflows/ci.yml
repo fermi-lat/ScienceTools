@@ -133,12 +133,12 @@ jobs:
         python3 ../recipe/tests/ST-unit-test
 
     - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/linux@2
+      uses: EnricoMi/publish-unit-test-result-action/linux@2.20.0
       if: runner.os == 'Linux'
       with:
         files: test-results/*.xml
     - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/macos@2
+      uses: EnricoMi/publish-unit-test-result-action/macos@2.20.0
       if: runner.os == 'macOS'
       with:
         files: test-results/*.xml
