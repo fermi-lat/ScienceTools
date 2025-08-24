@@ -43,7 +43,6 @@ jobs:
           echo "Job Log URL:    ${GITHUB_JOB_URL}"
           echo "Environment:    ${GITHUB_ENVIRONMENT}"
           echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
-          echo "RUNNER_URL = ${GITHUB_DEPLOYMENT_URL}" >> "$GITHUB_ENV"
 
     - name: Set CI_ENVIRONMENT_TIER with default
       run: |
@@ -131,7 +130,7 @@ jobs:
       run: |
         echo "Running unit tests in the testing environment..."
         cd  test-results/
-        micromamba env fermi-dev 
+        micromamba activate fermi-dev 
         micromamba install fermi::fermitools-test-scripts
         python3 ../recipe/tests/ST-unit-test
 
@@ -167,4 +166,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n${{ env.RUNNER_URL }}\n${GITHUB_DEPLOYMENT_URL}"
+                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n${{ env.GITHUB_DEPLOYMENT_URL }}"
