@@ -43,6 +43,7 @@ jobs:
           echo "Job Log URL:    ${GITHUB_JOB_URL}"
           echo "Environment:    ${GITHUB_ENVIRONMENT}"
           echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
+          echo "RUNNER_URL=${GITHUB_DEPLOYMENT_URL}" >> "$GITHUB_ENV"
 
     - name: Set CI_ENVIRONMENT_TIER with default
       run: |
@@ -164,4 +165,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n${{ env.RUNNER_URL }}"
