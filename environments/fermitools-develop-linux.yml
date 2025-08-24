@@ -28,4 +28,3 @@ dependencies:
   - pyyaml
   - scipy
   - junit-xml
-  - fermitools-test-scripts

@@ -29,4 +29,3 @@ dependencies:
   - scipy
   - junit-xml
   - matplotlib
-  - fermitools-test-scripts
