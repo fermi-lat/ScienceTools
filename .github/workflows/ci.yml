@@ -132,7 +132,7 @@ jobs:
         echo "Running unit tests in the testing environment..."
         cd  test-results/
         micromamba activate fermi-dev 
-        source ../scripts/activate.sh RelWithDebInfo 
+        source ../scripts/activate.sh ../RelWithDebInfo 
         micromamba install --no-deps fermi::fermitools-test-scripts
         python3 ../recipe/tests/ST-unit-test
 
@@ -172,4 +172,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Runner Build URL*: ${{ env.GITHUB_JOB_URL }} ${{ env.GJU }} ${{ steps.context-extractor.outputs.job_log_url }}"
+                 text: "*Runner Build URL*: ${{ env.GITHUB_JOB_URL }} " # ${{ env.GJU }} ${{ steps.context-extractor.outputs.job_log_url }}
