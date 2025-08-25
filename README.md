@@ -74,7 +74,7 @@ cmake -S . \
 -DCMAKE_INSTALL_PREFIX="</install/destination/path>" \
 -DCMAKE_PREFIX_PATH="</dependency/search/path/>"
 ```
-where `<os>` is either `linux` or `macos`, depending on what operating system you are building thetools on. 
+where `<os>` is either `linux` or `macos`, depending on what operating system you are building the tools on. 
 
 If your `CMAKE_INSTALL_PREFIX` is the location of your dependencies you can optionally
 exclude `CMAKE_PREFIX_PATH`.
