@@ -1,29 +1,35 @@
-# this one is important
-set(CMAKE_SYSTEM_NAME Darwin)
-set(CMAKE_PLATFORM Darwin)
-#this one not so much
-#set(CMAKE_SYSTEM_VERSION 10.15)
+# toolchain-clang-libcxx.cmake
 
+set(BREW_PATH "/opt/homebrew")
+
+# Explicitly set x86_64 architecture for macOS
 set(MACOS_ARCH $ENV{MACOS_ARCH})
 if(MACOS_ARCH STREQUAL "x86")
-  set(CMAKE_OSX_ARCHITECTURES "x86_64")
+  message("Applying x86 compiler settings...")
+  set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE INTERNAL "" FORCE)
+  set(BREW_PATH "/usr/local")
 endif()
 
-# specify the cross compiler
-set(CMAKE_C_COMPILER $ENV{CC})
+# Explicitly set the compiler paths
+set(CMAKE_C_COMPILER "${BREW_PATH}/opt/llvm/bin/clang" CACHE FILEPATH "C compiler")
+set(CMAKE_CXX_COMPILER "${BREW_PATH}/opt/llvm/bin/clang++" CACHE FILEPATH "C++ compiler")
 
-# where is the target environment
-set(CMAKE_FIND_ROOT_PATH $ENV{PREFIX} $ENV{BUILD_PREFIX}/$ENV{HOST}/sysroot)
+# Use the macOS SDK path explicitly (instead of relying on $SDKROOT)
+#execute_process(
+#  COMMAND xcrun --sdk macosx --show-sdk-path
+#  OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
+#  OUTPUT_STRIP_TRAILING_WHITESPACE
+#)
+set(CMAKE_SYSROOT "${CMAKE_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
 
-# Explicitly use libc++ headers and ensure they take precede
-set(CMAKE_CXX_FLAGS_INIT "-isystem ${CMAKE_OSX_SYSROOT}/usr/include/c++/v1" CACHE STRING "")
-set(CMAKE_C_FLAGS_INIT "-isystem ${CMAKE_OSX_SYSROOT}/usr/include" CACHE STRING "")
+# Explicitly use libc++ headers and ensure they take precedence
+set(CMAKE_CXX_FLAGS_INIT "-isystem ${BREW_PATH}/opt/llvm/include/c++/v1" CACHE STRING "")
 
-# search for programs in the build host directories
-set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
-# for libraries and headers in the target directories
-set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+# # Also ensure the linker uses the correct libc++ runtime
+# set(CMAKE_EXE_LINKER_FLAGS_INIT "-L${BREW_PATH}/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
 
-# god-awful hack because it seems to not run correct tests to determine this:
-set(__CHAR_UNSIGNED___EXITCODE 1)
+# Invoke with
+# cmake -S . -B DebugBrewLLVM -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=osx-toolchain.cmake -DPython3_EXECUTABLE=$(which python)
+
+# Hopefully Equivalent (near equivalent) command line call
+# cmake -S . -B Debug -DCMAKE_BUILD_TYPE=Debug -DPython3_EXECUTABLE=$(which python) -DCMAKE_C_COMPILER=$(brew --prefix llvm)/bin/clang -DCMAKE_CXX_COMPILER=$(brew --prefix llvm)/bin/clang++ -DCMAKE_PREFIX_PATH="$(brew --prefix libomp);$(brew --prefix llvm)" -DCMAKE_OSX_SYSROOT="$(xcrun --sdk macosx --show-sdk-path)" -DCMAKE_CXX_FLAGS="-stdlib=libc++ -isystem $(brew --prefix llvm)/include/c++/v1" -DCMAKE_COLOR_DIAGNOSTICS=ON -G Ninja
