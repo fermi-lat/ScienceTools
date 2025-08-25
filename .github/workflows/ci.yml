@@ -15,6 +15,7 @@ env:
 jobs:
   docker:
     runs-on: ${{ matrix.os }}
+    environment: safespace
     defaults:
      run:
         shell: bash -el {0}
@@ -22,9 +23,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # - os: ubuntu-24.04-arm
-          #  arch: arm64
-          #  env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04-arm
+            arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
           # - os: ubuntu-24.04
           #  arch: x86
           #  env_target_file: "fermitools-develop-linux.yml"
@@ -44,6 +45,15 @@ jobs:
     - name: Use CI_ENVIRONMENT_TIER
       run: |
        echo "The environment tier is: ${{ env.CI_ENVIRONMENT_TIER }}"
+
+    - name: Get job context
+      id: context-extractor
+      uses: qoomon/actions--context@v4.0.3
+          
+    - run: |
+          echo "Job Log URL:    ${GITHUB_JOB_URL}"
+          echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
+          run: echo "RUNNER_URL=${{ steps.context-extractor.outputs.GITHUB_DEPLOYMENT_URL }}" >> "$GITHUB_ENV"
 
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
@@ -125,24 +135,17 @@ jobs:
         micromamba install fermi::fermitools-test-scripts
         python3 ../recipe/tests/ST-unit-test
 
-    - name: Publish Test Results
+    - name: Publish Test Results for Linux
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
       if: runner.os == 'Linux'
       with:
         files: test-results/ST-unit-test-Output.xml
 
-    - name: Publish Test Results
+    - name: Publish Test Results for Mac
       uses: EnricoMi/publish-unit-test-result-action/macos@v2
       if: runner.os == 'macOS'
       with:
         files: test-results/ST-unit*.xml
-
-    - name: Get job context
-      uses: qoomon/actions--context@v4.0.3
-
-    - run: |
-          echo "Job Log URL:    ${GITHUB_JOB_URL}"
-          echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
 
     - name: Post a Build status in a Slack's fermitools-pipeline channel.
       if: always()
@@ -164,4 +167,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{env.GITHUB_DEPLOYMENT_URL}}\n ${{ env.JOB_LOG_URL }} "
+                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{env.RUNNER_URL}}"
