@@ -66,7 +66,12 @@ jobs:
     #  uses: docker/setup-buildx-action@v3
 
     - name: Set ENV_TARGET_FILE variable
-      run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
+      run: |
+        { 
+        echo "ENV_TARGET_FILE=${{matrix.env_target_file}}";
+        echo "RUNNER_URL=${{ steps.context-extractor.outputs.job_log_url }}"; 
+        echo "GJU= ${{ env.GITHUB_JOB_URL }}";
+        } >> "$GITHUB_ENV"
 
     - name: Verify proper  submodule branches were checked out
       run: |
@@ -127,6 +132,7 @@ jobs:
         echo "Running unit tests in the testing environment..."
         cd  test-results/
         micromamba activate fermi-dev 
+        source ../scripts/activate.sh RelWithDebInfo 
         micromamba install --no-deps fermi::fermitools-test-scripts
         python3 ../recipe/tests/ST-unit-test
 
@@ -162,4 +168,8 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{ steps.context-extractor.outputs.job_log_url }}"
+                 text: "*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+             - type: "section"
+               text:
+                 type: "mrkdwn"
+                 text: "*Runner Build URL*: ${{ env.GITHUB_JOB_URL }} ${{ env.GJU }} ${{ steps.context-extractor.outputs.job_log_url }}"
