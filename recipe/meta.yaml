@@ -57,10 +57,7 @@ build:
 
 requirements:
   build:
-    #- {{ compiler('cxx') }}
-    #- {{ compiler('c') }}
     - libgomp  # [linux]
-    #- llvm-openmp  # [osx]
     - cmake >=3.18
     - make
     - pkg-config
@@ -73,9 +70,6 @@ requirements:
     - zlib
 
   run:
-#    - pip:
-#      - git+https://github.com/jasercion/pyregion.git
-#    - aplpy >=2
     - cfitsio
     - python 3.11.*
 

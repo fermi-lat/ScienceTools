@@ -55,8 +55,6 @@ jobs:
           if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-            #arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-            #arch -x86_64 /usr/local/bin/brew install llvm 
           fi
 
       - name: Increment version number
@@ -72,35 +70,5 @@ jobs:
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
           upload: true
-
-      #- name: Build the conda package
-      #  id: packages-compilation
-      #  working-directory: recipe
-      #  run: |
-      #    if [[ "${{ matrix.os }}" == "macos-15" && "${{ matrix.arch }}" == "x86_64" ]]; then
-      #      echo "Setting MacOS x86 env var" # debug
-      #      echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-      #      MACOS_ARCH="x86" 
-      #    fi
-      #    out_dir=`mktemp -d -t compilation-XXXXXXXXXX`
-      #    echo "out_dir=$out_dir" >> $GITHUB_OUTPUT
-      #    conda_build_command="conda build . --no-anaconda-upload --output-folder $out_dir"
-      #    echo "$conda_build_command"
-      #    eval "$conda_build_command"
-      #    HOST_PACKAGE=$(eval "$conda_build_command --output")
-      #    echo "HOST_PACKAGE=$HOST_PACKAGE" >> $GITHUB_OUTPUT
-
-      #- name: Package Upload
-      #  run: |
-      #    export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
-      #    package_paths=$(find ${{ steps.packages-compilation.outputs.out_dir }} -type f -name $(basename ${{ steps.packages-compilation.outputs.HOST_PACKAGE }}))
-      #    for package_path in $package_paths; do
-      #      command="anaconda upload --user fermi --label dev $package_path"
-      #      echo "$command"
-      #      eval "$command"
-      #      paths+=($package_path)
-      #    done
-      #    echo "paths=${paths[@]}" >> $GITHUB_OUTPUT 
-
           
 

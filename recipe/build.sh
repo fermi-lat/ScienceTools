@@ -3,39 +3,19 @@
 export condaname="fermitools"
 
 if [ "$(uname)" == "Darwin" ]; then
-    # If Mac OSX then set sysroot flag (see conda_build_config.yaml)
-    #export CXXFLAGS="-mmacosx-version-min=${MACOSX_DEPLOYMENT_TARGET} -std=c++17 ${CXXFLAGS}" 
     export CXXFLAGS="-std=c++17 ${CXXFLAGS}" 
     export LDFLAGS="${LDFLAGS}  -lstdc++ -headerpad_max_install_names"
     export TOOLCHAIN_FILE="cmake/toolchain-homebrew-llvm.cmake"
-    #if [ "$MACOS_ARCH" == "x86" ]; then 
-    #    arch -x86_64 brew install llvm
-    #else
     brew install llvm
-    #fi
 else
     export TOOLCHAIN_FILE="cmake/cross-linux.cmake"
 fi
 
-######
-echo "PYTHONPATH: "
-echo $PYTHONPATH
-echo "which python: "
-which python
-echo "python version: "
-python --version
-echo "PREFIX: "
-echo $PREFIX
-
-######
-#echo "Install conda-forge cxx compiler directly:"
-#if [ "$(uname)" != "Darwin"]; then
 echo "Installing conda forge cxx compiler"
 conda install --yes conda-forge::cxx-compiler
-#fi
 
-git submodule foreach 'git checkout vendor_externals ||:'
-git submodule foreach 'git pull origin vendor_externals ||:'
+#git submodule foreach 'git checkout vendor_externals ||:'
+#git submodule foreach 'git pull origin vendor_externals ||:'
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
@@ -60,8 +40,8 @@ else
         ${CMAKE_ARGS}
 fi
 
-#cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
-cmake --build RelWithDebInfo --clean-first --target=install --verbose
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+#cmake --build RelWithDebInfo --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
 mkdir -p $PREFIX/etc/conda/deactivate.d
@@ -77,10 +57,10 @@ rm -rf Release
 
 # Determine which conda env we are in. If it's base than we could "exit" conda.
 echo "Conda env $CONDA_PREFIX"
-# activate.sh:export INST_DIR=$CONDA_PREFIX/share/${condaname}
+
 echo "List Conda env"
 conda env list --json
 # Play it safe
 conda deactivate
-# Don't do any conda clean here
-# conda clean -ap
+
+

@@ -45,19 +45,6 @@ jobs:
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
-    - name: pull branched submodules
-      run: |
-        git submodule foreach 'git checkout vendor_externals ||:'
-        git submodule foreach 'git pull origin vendor_externals ||:'
-
-    #  - name: Set up QEMU Linux
-    #   if: runner.os != 'macOS'
-    #  uses: docker/setup-qemu-action@v3
-
-    # - name: Set up Docker Buildx Linux
-    #  if: runner.os != 'macOS'
-    #  uses: docker/setup-buildx-action@v3
-
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
@@ -82,32 +69,16 @@ jobs:
     - name: Get miniforge
       uses: mamba-org/setup-micromamba@v2
       with:
-        ## fermitools-develop-osx-arm64.yml fermitools-develop-osx-x86.yml
         environment-file: "environments/${{env.ENV_TARGET_FILE}}"
         environment-name: fermi-dev
-        ## init-shell: bash
-        ## cache-environment: true
-        ## post-cleanup: 'all'
         
     - name: Set environment-specific variables
       run: |
         if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
           echo "Setting MacOS x86 env var" # debug
           echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-          #arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-          #arch -x86_64 /usr/local/bin/brew install llvm 
         fi
           
-    ## - name: Setup environment
-      # Add steps to set up your build environment, e.g., install dependencies
-      #### run: |
-        # Example: Install Homebrew and a package
-        ### /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        # cmake is already installed on mac runners 
-        # brew install curl
-        # brew reinstall gcc
-        # brew reinstall $(brew deps gcc) # Reinstall dependencies
-
     - name: Configure CMake  ${{matrix.os}}:${{ matrix.arch }}
       run: |
         if [ "$RUNNER_OS" == "Linux" ]; then
