@@ -1,0 +1,114 @@
+name: CMake Build arm64 and amd64 for OSX / Linux
+on:
+  push:
+    branches: [ 'vendor_externals' ]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+env:
+      ACTIONS_STEP_DEBUG: true
+
+jobs:
+  docker:
+    runs-on: ${{ matrix.os }}
+    defaults:
+     run:
+        shell: bash -el {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04-arm
+            arch: arm64
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: ubuntu-24.04
+            arch: x86
+            env_target_file: "fermitools-develop-linux.yml"
+          - os: macos-13 # macos-13
+            arch: x86_64 
+            env_target_file: "fermitools-develop-osx-x86.yml"
+            packages: llvm cfitsio swig
+          - os: macos-15 # arm64
+            arch: arm64
+            env_target_file: "fermitools-develop-osx-arm64.yml"
+            packages: llvm cfitsio swig
+            
+    steps:
+    - name: checkout the code
+      uses: actions/checkout@v4 # Checkout the repository code
+      with:
+        ref: vendor_externals
+        submodules: 'recursive' # true
+        fetch-depth: 0 # Fetches full history
+
+    - name: pull branched submodules
+      run: |
+        git submodule foreach 'git checkout vendor_externals ||:'
+        git submodule foreach 'git pull origin vendor_externals ||:'
+
+    - name: Set ENV_TARGET_FILE variable
+      run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
+
+    - name: Verify proper  submodule branches were checked out
+      run: |
+       git submodule status --recursive | awk '{ print $2 }' | while read -r submodule_path; do
+        echo "Submodule: $submodule_path"
+        pushd "$submodule_path" > /dev/null
+
+        # Get the currently checked out branch (if any)
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        if [ "$branch" == "HEAD" ]; then
+           # If HEAD is detached, get the commit SHA
+           echo "  - Detached HEAD at commit: $(git rev-parse HEAD)"
+        else
+           echo "  - Branch: $branch"
+           echo "  - Commit: $(git rev-parse HEAD)"
+        fi
+        popd > /dev/null
+       done
+
+    - name: Get miniforge
+      uses: mamba-org/setup-micromamba@v2
+      with:
+        environment-file: "environments/${{env.ENV_TARGET_FILE}}"
+        environment-name: fermi-dev
+        
+    - name: Set environment-specific variables
+      run: |
+        if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          echo "Setting MacOS x86 env var" # debug
+          echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+        fi
+          
+    - name: Configure CMake  ${{matrix.os}}:${{ matrix.arch }}
+      run: |
+        if [ "$RUNNER_OS" == "Linux" ]; then
+          echo "Configuring for Linux"
+          echo "Current Git Ref: ${{ github.ref }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+        elif [ "$RUNNER_OS" == "macOS" ]; then
+          echo "Brew install dependencies"
+          brew install ${{ matrix.packages }} 
+          echo "Configuring for macOS"
+          echo "Current Git Ref: ${{ github.ref }}"
+          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
+        fi
+  
+    - name: Build Project
+      run: |
+        echo "Current Git Ref: ${{ github.ref }}"
+        cmake --build RelWithDebInfo --target=install --verbose
+
+    #- name: Send Slack Notification
+    #  uses: slackapi/slack-github-action@v2.1.1
+    #  with:
+    #    payload: |
+    #     {
+    #      "text": "GitHub Actions workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
+    #     }
+    #  env:
+    #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

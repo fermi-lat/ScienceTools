@@ -1,0 +1,163 @@
+#ifndef GSL_CONFIG_H
+#define GSL_CONFIG_H
+
+/* Generated from CMake configuration */
+
+/* Disable deprecated functions and enums while building */
+#cmakedefine GSL_DISABLE_DEPRECATED 1
+
+/* Define if you have inline with C99 behavior */
+#cmakedefine HAVE_C99_INLINE 1
+
+/* Define if the <complex.h> header is available */
+#cmakedefine HAVE_COMPLEX_H 1
+
+/* Example: check for individual declarations */
+#cmakedefine HAVE_DECL_ACOSH @HAVE_DECL_ACOSH@
+#cmakedefine HAVE_DECL_ASINH @HAVE_DECL_ASINH@
+#cmakedefine HAVE_DECL_ATANH @HAVE_DECL_ATANH@
+#cmakedefine HAVE_DECL_EXPM1 @HAVE_DECL_EXPM1@
+#cmakedefine HAVE_DECL_FEENABLEEXCEPT @HAVE_DECL_FEENABLEEXCEPT@
+#cmakedefine HAVE_DECL_FESETTRAPENABLE @HAVE_DECL_FESETTRAPENABLE@
+#cmakedefine HAVE_DECL_FINITE @HAVE_DECL_FINITE@
+#cmakedefine HAVE_DECL_FPRND_T @HAVE_DECL_FPRND_T@
+#cmakedefine HAVE_DECL_FREXP @HAVE_DECL_FREXP@
+#cmakedefine HAVE_DECL_HYPOT @HAVE_DECL_HYPOT@
+#cmakedefine HAVE_DECL_ISFINITE @HAVE_DECL_ISFINITE@
+#cmakedefine HAVE_DECL_ISINF @HAVE_DECL_ISINF@
+#cmakedefine HAVE_DECL_ISNAN @HAVE_DECL_ISNAN@
+#cmakedefine HAVE_DECL_LDEXP @HAVE_DECL_LDEXP@
+#cmakedefine HAVE_DECL_LOG1P @HAVE_DECL_LOG1P@
+
+#cmakedefine HAVE_DLFCN_H
+#cmakedefine HAVE_DOPRNT
+#cmakedefine HAVE_EXIT_SUCCESS_AND_FAILURE
+#cmakedefine HAVE_EXTENDED_PRECISION_REGISTERS
+//#cmakedefine HAVE_FPU_X86_SSE
+#cmakedefine HAVE_IEEEFP_H
+#cmakedefine HAVE_IEEE_COMPARISONS
+#cmakedefine HAVE_IEEE_DENORMALS
+#cmakedefine HAVE_INLINE
+#cmakedefine HAVE_INTTYPES_H
+#cmakedefine HAVE_LIBM
+#cmakedefine HAVE_MEMCPY
+#cmakedefine HAVE_MEMMOVE
+//#cmakedefine HAVE_PRINTF_LONGDOUBLE
+#cmakedefine HAVE_STDINT_H
+#cmakedefine HAVE_STDIO_H
+#cmakedefine HAVE_STDLIB_H
+#cmakedefine HAVE_STRDUP
+#cmakedefine HAVE_STRINGS_H 1
+#cmakedefine HAVE_STRING_H 1
+#cmakedefine HAVE_STRTOL
+#cmakedefine HAVE_STRTOUL
+#cmakedefine HAVE_SYS_STAT_H
+#cmakedefine HAVE_SYS_TYPES_H
+#cmakedefine HAVE_UNISTD_H
+#cmakedefine HAVE_VPRINTF
+#cmakedefine HIDE_INLINE_STATIC
+
+#cmakedefine LT_OBJDIR "@LT_OBJDIR@"
+
+#cmakedefine PACKAGE "@PACKAGE@"
+#cmakedefine PACKAGE_BUGREPORT "@PACKAGE_BUGREPORT@"
+#cmakedefine PACKAGE_NAME "@PACKAGE_NAME@"
+#cmakedefine PACKAGE_STRING "@PACKAGE_STRING@"
+#cmakedefine PACKAGE_TARNAME "@PACKAGE_TARNAME@"
+#cmakedefine PACKAGE_URL "@PACKAGE_URL@"
+#cmakedefine PACKAGE_VERSION "@PACKAGE_VERSION@"
+#cmakedefine RELEASED
+#cmakedefine STDC_HEADERS 1
+#cmakedefine VERSION "@VERSION@"
+
+/* Architecture-specific IEEE support macros */
+#cmakedefine HAVE_GNUSPARC_IEEE_INTERFACE 1
+#cmakedefine HAVE_GNUM68K_IEEE_INTERFACE 1
+#cmakedefine HAVE_GNUPPC_IEEE_INTERFACE 1
+#cmakedefine HAVE_GNUX86_IEEE_INTERFACE 1
+#cmakedefine HAVE_SUNOS4_IEEE_INTERFACE 1
+#cmakedefine HAVE_SOLARIS_IEEE_INTERFACE 1
+#cmakedefine HAVE_HPUX11_IEEE_INTERFACE 1
+#cmakedefine HAVE_HPUX_IEEE_INTERFACE 1
+#cmakedefine HAVE_TRU64_IEEE_INTERFACE 1
+#cmakedefine HAVE_IRIX_IEEE_INTERFACE 1
+#cmakedefine HAVE_AIX_IEEE_INTERFACE 1
+#cmakedefine HAVE_FREEBSD_IEEE_INTERFACE 1
+#cmakedefine HAVE_OS2EMX_IEEE_INTERFACE 1
+#cmakedefine HAVE_NETBSD_IEEE_INTERFACE 1
+#cmakedefine HAVE_OPENBSD_IEEE_INTERFACE 1
+#cmakedefine HAVE_DARWIN_IEEE_INTERFACE 1
+#cmakedefine HAVE_DARWIN86_IEEE_INTERFACE 1
+
+/* Define to '__inline__' or '__inline' if that's what the C compiler calls it */
+#ifndef __cplusplus
+#cmakedefine inline @inline@
+#endif
+
+/* Define as 'unsigned int' if <stddef.h> doesn't define. */
+#cmakedefine size_t @size_t@
+
+/* Define to empty if the keyword 'volatile' does not work. */
+#cmakedefine volatile @volatile@
+
+#if !HAVE_EXIT_SUCCESS_AND_FAILURE
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
+#endif
+
+#if HAVE_EXTENDED_PRECISION_REGISTERS
+#define GSL_COERCE_DBL(x) (gsl_coerce_double(x))
+#else
+#define GSL_COERCE_DBL(x) (x)
+#endif
+
+#if !HAVE_DECL_HYPOT
+#define hypot gsl_hypot
+#endif
+#if !HAVE_DECL_LOG1P
+#define log1p gsl_log1p
+#endif
+#if !HAVE_DECL_EXPM1
+#define expm1 gsl_expm1
+#endif
+#if !HAVE_DECL_ACOSH
+#define acosh gsl_acosh
+#endif
+#if !HAVE_DECL_ASINH
+#define asinh gsl_asinh
+#endif
+#if !HAVE_DECL_ATANH
+#define atanh gsl_atanh
+#endif
+#if !HAVE_DECL_LDEXP
+#define ldexp gsl_ldexp
+#endif
+#if !HAVE_DECL_FREXP
+#define frexp gsl_frexp
+#endif
+#if !HAVE_DECL_ISINF
+#define isinf gsl_isinf
+#endif
+#if !HAVE_DECL_ISFINITE
+#define isfinite gsl_finite
+#endif
+#if !HAVE_DECL_FINITE
+#define finite gsl_finite
+#endif
+#if !HAVE_DECL_ISNAN
+#define isnan gsl_isnan
+#endif
+
+#ifdef __GNUC__
+#define DISCARD_POINTER(p) do { ; } while(p ? 0 : 0)
+#else
+#define DISCARD_POINTER(p) /* ignoring discarded pointer */
+#endif
+
+#if defined(GSL_RANGE_CHECK_OFF) || !defined(GSL_RANGE_CHECK)
+#define GSL_RANGE_CHECK 0
+#endif
+
+#define RETURN_IF_NULL(x) if (!(x)) { return; }
+
+#endif /* GSL_CONFIG_H */

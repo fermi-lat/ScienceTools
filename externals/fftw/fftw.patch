@@ -1,0 +1,60 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Ryan Volz <ryan.volz@gmail.com>
+Date: Thu, 6 Apr 2023 13:06:45 -0400
+Subject: [PATCH] cmake: Set SIMD flags on appropriate source files only.
+
+Doing this matches the behavior of the configure script and makefiles.
+
+Previously, enabling a set of SIMD instructions with the CMake build
+would build the whole library with that flag enabled, allowing the
+compiler to optimize by using that set of instructions anywhere. That
+would then require that any SIMD instructions enabled at build time
+would have to be present at run time. This change enables the intended
+behavior of using SIMD instructions only when they are detected at run
+time.
+---
+ CMakeLists.txt | 20 +++++++++++++++-----
+ 1 file changed, 15 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b6e46667..aaf618ee 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -314,19 +314,29 @@ if (MSVC AND NOT (CMAKE_C_COMPILER_ID STREQUAL "Intel"))
+   target_compile_definitions (${fftw3_lib} PRIVATE /bigobj)
+ endif ()
+ if (HAVE_SSE)
+-  target_compile_options (${fftw3_lib} PRIVATE ${SSE_FLAG})
++  set_source_files_properties (${fftw_dft_simd_sse2_SOURCE}
++                               ${fftw_rdft_simd_sse2_SOURCE}
++                               PROPERTIES COMPILE_FLAGS "${SSE_FLAG}")
+ endif ()
+ if (HAVE_SSE2)
+-  target_compile_options (${fftw3_lib} PRIVATE ${SSE2_FLAG})
++  set_source_files_properties (${fftw_dft_simd_sse2_SOURCE}
++                               ${fftw_rdft_simd_sse2_SOURCE}
++                               PROPERTIES COMPILE_FLAGS "${SSE2_FLAG}")
+ endif ()
+ if (HAVE_AVX)
+-  target_compile_options (${fftw3_lib} PRIVATE ${AVX_FLAG})
++  set_source_files_properties (${fftw_dft_simd_avx_SOURCE}
++                               ${fftw_rdft_simd_avx_SOURCE}
++                               PROPERTIES COMPILE_FLAGS "${AVX_FLAG}")
+ endif ()
+ if (HAVE_AVX2)
+-  target_compile_options (${fftw3_lib} PRIVATE ${AVX2_FLAG})
++  set_source_files_properties (${fftw_dft_simd_avx2_SOURCE}
++                               ${fftw_rdft_simd_avx2_SOURCE}
++                               PROPERTIES COMPILE_FLAGS "${AVX2_FLAG}")
+ endif ()
+ if (HAVE_FMA)
+-  target_compile_options (${fftw3_lib} PRIVATE ${FMA_FLAG})
++  set_source_files_properties (${fftw_dft_simd_avx2_SOURCE}
++                               ${fftw_rdft_simd_avx2_SOURCE}
++                               PROPERTIES COMPILE_FLAGS "${FMA_FLAG}")
+ endif ()
+ if (HAVE_LIBM)
+   target_link_libraries (${fftw3_lib} m)
+-- 
+2.39.2
+

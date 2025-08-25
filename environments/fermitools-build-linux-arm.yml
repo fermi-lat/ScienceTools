@@ -1,22 +1,13 @@
 name: fermi_build
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  - python=3.11.*
-  - wcslib
   - compilers
-  - clhep
-  - readline
-  - cppunit
-  - healpix_cxx=3.31
-  - cmake
   - libgomp
-  - swig=4.0.2
-  - xerces-c
-  - fftw
-  - f2c>=1.0
+  - python=3.11.*
+  - cmake >=3.18
+  - swig 4.0.2
   - make
   - cfitsio
-  - gsl
-  - matplotlib
+  - pkg-config
+  - zlib
