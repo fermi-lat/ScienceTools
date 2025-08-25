@@ -70,7 +70,7 @@ the ScienceTools directory:
 cmake -S . \
 -B RelWithDebInfo \
 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
--DCMAKE_TOOLCAHIN_FILE=cmake/<os>_toolchain.cmake \
+-DCMAKE_TOOLCHAIN_FILE=cmake/<os>_toolchain.cmake \
 -DCMAKE_INSTALL_PREFIX="</install/destination/path>" \
 -DCMAKE_PREFIX_PATH="</dependency/search/path/>"
 ```
