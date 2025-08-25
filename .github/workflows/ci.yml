@@ -51,8 +51,8 @@ jobs:
       uses: qoomon/actions--context@v4.0.3
           
     - run: |
-          echo "Job Log URL:    ${GITHUB_JOB_URL}"
-          echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
+          # echo "Job Log URL:    ${GITHUB_JOB_URL}"
+          # echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
           run: echo "RUNNER_URL=${{ steps.context-extractor.outputs.GITHUB_DEPLOYMENT_URL }}" >> "$GITHUB_ENV"
 
     - name: checkout the code
