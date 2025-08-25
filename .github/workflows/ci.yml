@@ -50,11 +50,6 @@ jobs:
       id: context-extractor
       uses: qoomon/actions--context@v4.0.3
           
-    - run: |
-          # echo "Job Log URL:    ${GITHUB_JOB_URL}"
-          # echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
-          run: echo "RUNNER_URL=${{ steps.context-extractor.outputs.GITHUB_DEPLOYMENT_URL }}" >> "$GITHUB_ENV"
-
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
@@ -167,4 +162,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{env.RUNNER_URL}}"
+                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{ steps.context-extractor.outputs.GITHUB_DEPLOYMENT_URL }}"
