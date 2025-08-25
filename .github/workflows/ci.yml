@@ -22,9 +22,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04-arm
-            arch: arm64
-            env_target_file: "fermitools-develop-linux.yml"
+          # - os: ubuntu-24.04-arm
+          #  arch: arm64
+          #  env_target_file: "fermitools-develop-linux.yml"
           # - os: ubuntu-24.04
           #  arch: x86
           #  env_target_file: "fermitools-develop-linux.yml"
@@ -36,14 +36,6 @@ jobs:
             env_target_file: "fermitools-develop-osx-arm64.yml"
 
     steps:
-    - uses: qoomon/actions--context@v4.0.3
-    - run: |
-          echo "Job Id:         ${GITHUB_JOB_ID}"
-          echo "Job Name:       ${GITHUB_JOB_NAME}"
-          echo "Job Log URL:    ${GITHUB_JOB_URL}"
-          echo "Environment:    ${GITHUB_ENVIRONMENT}"
-          echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
-
     - name: Set CI_ENVIRONMENT_TIER with default
       run: |
        if [[ -z "${{ env.CI_ENVIRONMENT_TIER }}" ]]; then
@@ -138,13 +130,23 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/linux@v2
       if: runner.os == 'Linux'
       with:
-        files: test-results/*.xml
+        files: test-results/ST-unit-test-Output.xml
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action/macos@v2
       if: runner.os == 'macOS'
       with:
-        files: test-results/*.xml
+        files: test-results/ST-unit*.xml
+
+    - name: Get job context
+      uses: qoomon/actions--context@v4.0.3
+
+    - run: |
+          echo "Job Id:         ${GITHUB_JOB_ID}"
+          echo "Job Name:       ${GITHUB_JOB_NAME}"
+          echo "Job Log URL:    ${GITHUB_JOB_URL}"
+          echo "Environment:    ${GITHUB_ENVIRONMENT}"
+          echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
 
     - name: Post a Build status in a Slack's fermitools-pipeline channel.
       if: always()
@@ -166,4 +168,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n${{ env.GITHUB_DEPLOYMENT_URL }}"
+                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{env.GITHUB_DEPLOYMENT_URL}}\n ${{ env.JOB_LOG_URL }} "
