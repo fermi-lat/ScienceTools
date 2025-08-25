@@ -116,7 +116,6 @@ jobs:
     - name: Create test results directory
       run: mkdir -p test-results 
 
-
     - name: Run unit tests
       ### if: env.CI_ENVIRONMENT_TIER == 'testing'
       run: |
@@ -142,10 +141,7 @@ jobs:
       uses: qoomon/actions--context@v4.0.3
 
     - run: |
-          echo "Job Id:         ${GITHUB_JOB_ID}"
-          echo "Job Name:       ${GITHUB_JOB_NAME}"
           echo "Job Log URL:    ${GITHUB_JOB_URL}"
-          echo "Environment:    ${GITHUB_ENVIRONMENT}"
           echo "Deployment URL: ${GITHUB_DEPLOYMENT_URL}"
 
     - name: Post a Build status in a Slack's fermitools-pipeline channel.
