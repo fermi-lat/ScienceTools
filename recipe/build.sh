@@ -5,10 +5,10 @@ export condaname="fermitools"
 if [ "$(uname)" == "Darwin" ]; then
     export CXXFLAGS="-std=c++17 ${CXXFLAGS}" 
     export LDFLAGS="${LDFLAGS}  -lstdc++ -headerpad_max_install_names"
-    export TOOLCHAIN_FILE="cmake/toolchain-homebrew-llvm.cmake"
+    export TOOLCHAIN_FILE="cmake/macos-toolchain.cmake"
     brew install llvm
 else
-    export TOOLCHAIN_FILE="cmake/cross-linux.cmake"
+    export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
 fi
 
 echo "Installing conda forge cxx compiler"
