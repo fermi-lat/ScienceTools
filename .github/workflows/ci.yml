@@ -13,9 +13,9 @@ env:
       ACTIONS_STEP_DEBUG: true
 
 jobs:
-  docker:
+  build_baseline:
     runs-on: ${{ matrix.os }}
-    environment: safespace
+    ### environment: safespace
     defaults:
      run:
         shell: bash -el {0}
@@ -127,7 +127,6 @@ jobs:
         echo "Running unit tests in the testing environment..."
         cd  test-results/
         micromamba activate fermi-dev 
-        micromamba depends --recursive fermi::fermitools-test-scripts
         micromamba install --no-deps fermi::fermitools-test-scripts
         python3 ../recipe/tests/ST-unit-test
 
@@ -163,4 +162,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{ steps.context-extractor.outputs.GITHUB_JOB_URL }}"
+                 text: "*Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n ${{ steps.context-extractor.outputs.job_log_url }}"
