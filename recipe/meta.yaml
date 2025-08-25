@@ -58,6 +58,7 @@ build:
 requirements:
   build:
     - libgomp  # [linux]
+    - cfitsio
     - cmake >=3.18
     - make
     - pkg-config
