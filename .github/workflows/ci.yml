@@ -13,7 +13,7 @@ env:
       ACTIONS_STEP_DEBUG: true
 
 jobs:
-  build:
+  docker:
     runs-on: ${{ matrix.os }}
     defaults:
      run:
@@ -38,29 +38,12 @@ jobs:
             packages: llvm cfitsio swig
             
     steps:
-    - name: Set CI_ENVIRONMENT_TIER with default
-      run: |
-       if [[ -z "${{ env.CI_ENVIRONMENT_TIER }}" ]]; then
-         echo "CI_ENVIRONMENT_TIER=development" >> "$GITHUB_ENV"
-       fi
-    - name: Use CI_ENVIRONMENT_TIER
-      run: |
-       echo "The environment tier is: ${{ env.CI_ENVIRONMENT_TIER }}"
-
-    - name: Get job context
-      id: context-extractor
-      uses: qoomon/actions--context@v4.0.3
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: testing_gha # Add ref branch here
+        ref: test_gha # Add ref branch here
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
-
-    - name: pull branched submodules
-      run: |
-        git submodule foreach 'git checkout testing_gha ||:' # Add ref branch here
-        git submodule foreach 'git pull origin testing_gha ||:' # Add ref branch here
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
@@ -83,34 +66,17 @@ jobs:
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "Configuring for Linux"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+          cmake -DCMAKE_BUILD_TYPE=Release -S . -B Release -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "Brew install dependencies"
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
+          cmake -DCMAKE_BUILD_TYPE=Release -S . -B Release -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
         fi
   
     - name: Build Project
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
-        cmake --build RelWithDebInfo --target=install --verbose
+        cmake --build Release --target=install --verbose
 
-    - name: Post a Build status in a Slack's fermitools-pipeline channel.
-      if: always()
-      uses: slackapi/slack-github-action@v2.1.1
-      with:
-         webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-         webhook-type: incoming-webhook
-         payload: |
-           text: "This line is ignored, find a title option..."
-           blocks:
-             - type: "header"
-               text:
-                 type: "plain_text"
-                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
-             - type: "section"
-               text:
-                 type: "mrkdwn"
-                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"
