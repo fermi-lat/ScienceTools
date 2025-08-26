@@ -14,6 +14,7 @@ fi
 echo "Installing conda forge cxx compiler"
 conda install --yes conda-forge::cxx-compiler
 
+# Run test build
 git submodule foreach 'git checkout vendor_externals ||:'
 git submodule foreach 'git pull origin vendor_externals ||:'
 
