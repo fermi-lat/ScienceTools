@@ -29,7 +29,7 @@ set(CMAKE_CXX_FLAGS_INIT "-isystem ${BREW_PATH}/opt/llvm/include/c++/v1" CACHE S
 # set(CMAKE_EXE_LINKER_FLAGS_INIT "-L${BREW_PATH}/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
 
 # Invoke with
-# cmake -S . -B DebugBrewLLVM -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=toolchain-homebrew-llvm.cmake -DPython3_EXECUTABLE=$(which python)
+# cmake -S . -B DebugBrewLLVM -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=osx-toolchain.cmake -DPython3_EXECUTABLE=$(which python)
 
 # Hopefully Equivalent (near equivalent) command line call
 # cmake -S . -B Debug -DCMAKE_BUILD_TYPE=Debug -DPython3_EXECUTABLE=$(which python) -DCMAKE_C_COMPILER=$(brew --prefix llvm)/bin/clang -DCMAKE_CXX_COMPILER=$(brew --prefix llvm)/bin/clang++ -DCMAKE_PREFIX_PATH="$(brew --prefix libomp);$(brew --prefix llvm)" -DCMAKE_OSX_SYSROOT="$(xcrun --sdk macosx --show-sdk-path)" -DCMAKE_CXX_FLAGS="-stdlib=libc++ -isystem $(brew --prefix llvm)/include/c++/v1" -DCMAKE_COLOR_DIAGNOSTICS=ON -G Ninja

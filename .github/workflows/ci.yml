@@ -1,7 +1,7 @@
 name: CMake Build arm64 and amd64 for OSX / Linux
 on:
   push:
-    branches: [ 'vendor_externals' ]
+    branches: [ '' ] # Enter trigger branch here
   workflow_dispatch:
     inputs:
       logLevel:
@@ -41,14 +41,14 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: vendor_externals
+        ref: # Add ref branch here
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
     - name: pull branched submodules
       run: |
-        git submodule foreach 'git checkout vendor_externals ||:'
-        git submodule foreach 'git pull origin vendor_externals ||:'
+        git submodule foreach 'git checkout ||:' # Add ref branch here
+        git submodule foreach 'git pull origin ||:' # Add ref branch here
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
@@ -95,7 +95,7 @@ jobs:
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-homebrew-llvm.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
+          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
         fi
   
     - name: Build Project

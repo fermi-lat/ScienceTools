@@ -39,6 +39,12 @@ conda activate fermi-build
 ```
 </details>
 
+**MacOS:** If you are building the Fermitools on a MacOS machine you will need to install llvm via Homebrew if you have not done so already with the command
+
+```bash
+brew install llvm
+```
+
 <details>
 <summary> Generating dependency environment files. </summary>
 A new environment file candidate can be created from the command line. I say candidate
@@ -57,17 +63,18 @@ The host system is polled for needed attributes, programs, and libraries and a M
 system is created. The **Build** stage then executes the generated Makefile system to
 compile all the Fermitools targets.
 
-Assuming your dependencies are installed and system compilers are all in the local
-`$PATH` you can generate a build system by executing the following command from within
+Assuming your dependencies are installed you can generate a build system by executing the following command from within
 the ScienceTools directory:
 
 ```bash
 cmake -S . \
 -B RelWithDebInfo \
 -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+-DCMAKE_TOOLCHAIN_FILE=cmake/<os>_toolchain.cmake \
 -DCMAKE_INSTALL_PREFIX="</install/destination/path>" \
 -DCMAKE_PREFIX_PATH="</dependency/search/path/>"
 ```
+where `<os>` is either `linux` or `macos`, depending on what operating system you are building the tools on. 
 
 If your `CMAKE_INSTALL_PREFIX` is the location of your dependencies you can optionally
 exclude `CMAKE_PREFIX_PATH`.
