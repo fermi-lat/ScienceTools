@@ -45,11 +45,6 @@ jobs:
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
-    # - name: pull branched submodules
-    #  run: |
-    #    git submodule foreach 'git checkout master ||:' # Add ref branch here
-    #    git submodule foreach 'git pull origin master ||:' # Add ref branch here
-
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
@@ -89,19 +84,19 @@ jobs:
         if [ "$RUNNER_OS" == "Linux" ]; then
           echo "Configuring for Linux"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
+          cmake -DCMAKE_BUILD_TYPE=Release -S . -B Release -DCMAKE_C_COMPILER="$(which gcc)" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX"
         elif [ "$RUNNER_OS" == "macOS" ]; then
           echo "Brew install dependencies"
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B RelWithDebInfo -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
+          cmake -DCMAKE_BUILD_TYPE=Release -S . -B Release -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
         fi
   
     - name: Build Project
       run: |
         echo "Current Git Ref: ${{ github.ref }}"
-        cmake --build RelWithDebInfo --target=install --verbose
+        cmake --build Release --target=install --verbose
 
     #- name: Send Slack Notification
     #  uses: slackapi/slack-github-action@v2.1.1
