@@ -131,7 +131,9 @@ jobs:
       run: |
         set -x
         echo "Running unit tests in the testing environment..."
+        pip install -e .
         source scripts/activate.sh RelWithDebInfo 
+        conda list
         micromamba install --no-deps fermi::fermitools-test-scripts
         cd  test-results/
         python3 ../recipe/tests/ST-unit-test
