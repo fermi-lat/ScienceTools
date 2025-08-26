@@ -2,7 +2,11 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: vendor_externals
+    branches: testing_gha
+
+env:
+    branch_name: ${{ github.ref }}
+
 jobs:
   conda_deployment:
     name: Conda deployment
@@ -32,14 +36,14 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: vendor_externals
+          ref: ${{ env.branch_name }}
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
       - name: pull branched submodules
         run: |
-          git submodule foreach 'git checkout vendor_externals ||:'
-          git submodule foreach 'git pull origin vendor_externals ||:'
+          git submodule foreach 'git checkout ${{ env.branch_name }} ||:'
+          git submodule foreach 'git pull origin ${{ env.branch_name }} ||:'
         
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
@@ -52,7 +56,7 @@ jobs:
 
       - name: Set environment-specific variables
         run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          if [[ runner.os == 'macOS' && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
@@ -70,5 +74,22 @@ jobs:
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
           upload: true
-          
 
+
+      - name: Post a Build status in a Slack's fermitools-pipeline channel.
+        if: always()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "This line is ignored, find a title option..."
+            blocks:
+              - type: "header"
+                text:
+                  type: "plain_text"
+                  text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"
