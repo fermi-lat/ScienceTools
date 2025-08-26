@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: master
+    branches: vendor_externals
 jobs:
   conda_deployment:
     name: Conda deployment
