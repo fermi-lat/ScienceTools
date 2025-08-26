@@ -11,6 +11,8 @@ else
     export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
 fi
 
+echo "Toolchain file: ${TOOLCHAIN_FILE}"
+
 echo "Installing conda forge cxx compiler"
 conda install --yes conda-forge::cxx-compiler
 
