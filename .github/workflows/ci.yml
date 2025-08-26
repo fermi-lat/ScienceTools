@@ -41,7 +41,7 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: test_gha # Add ref branch here
+        ref: testing_gha # Add ref branch here
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
