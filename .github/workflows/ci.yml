@@ -53,7 +53,7 @@ jobs:
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
 
-    - name: Verify proper  submodule branches were checked out
+    - name: Verify proper submodule branches were checked out
       run: |
        git submodule status --recursive | awk '{ print $2 }' | while read -r submodule_path; do
         echo "Submodule: $submodule_path"
