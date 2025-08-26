@@ -11,6 +11,7 @@ on:
 
 env:
       ACTIONS_STEP_DEBUG: true
+      ACTIONS_RUNNER_DEBUG: true
 
 jobs:
   build_baseline:
@@ -163,12 +164,4 @@ jobs:
              - type: "section"
                text:
                  type: "mrkdwn"
-                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n"
-             - type: "section"
-               text:
-                 type: "mrkdwn"
-                 text: "*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-             - type: "section"
-               text:
-                 type: "mrkdwn"
-                 text: "*Runner Build URL*: ${{ env.GITHUB_JOB_URL }} " # ${{ env.GJU }} ${{ steps.context-extractor.outputs.job_log_url }}
+                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"
