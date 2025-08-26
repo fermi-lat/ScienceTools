@@ -36,11 +36,6 @@ jobs:
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
-     # - name: pull branched submodules
-     #   run: |
-     #     git submodule foreach 'git checkout master ||:'
-     #     git submodule foreach 'git pull origin master ||:'
-        
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
