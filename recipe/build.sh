@@ -11,20 +11,15 @@ else
     export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
 fi
 
-echo "Toolchain file: ${TOOLCHAIN_FILE}"
-
 echo "Installing conda forge cxx compiler"
 conda install --yes conda-forge::cxx-compiler
-
-git submodule foreach 'git checkout master ||:'
-git submodule foreach 'git pull origin master ||:'
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" \
+        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         -DPython3_EXECUTABLE="${BUILD_PREFIX}/bin/python3" \
@@ -36,7 +31,7 @@ else
         -B Release \
         -DCMAKE_C_COMPILER="$(which gcc)" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_TOOLCHAIN_FILE="${TOOLCHAIN_FILE}" \
+        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         ${CMAKE_ARGS}
@@ -64,5 +59,3 @@ echo "List Conda env"
 conda env list --json
 # Play it safe
 conda deactivate
-
-
