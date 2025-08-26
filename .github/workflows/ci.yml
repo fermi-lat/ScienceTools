@@ -45,10 +45,10 @@ jobs:
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
-    - name: pull branched submodules
-      run: |
-        git submodule foreach 'git checkout master ||:' # Add ref branch here
-        git submodule foreach 'git pull origin master ||:' # Add ref branch here
+    # - name: pull branched submodules
+    #  run: |
+    #    git submodule foreach 'git checkout master ||:' # Add ref branch here
+    #    git submodule foreach 'git pull origin master ||:' # Add ref branch here
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
