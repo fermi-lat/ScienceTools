@@ -20,8 +20,8 @@ git submodule foreach 'git pull origin master ||:'
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
-        -B RelWithDebInfo \
-        -DCMAKE_BUILD_TYPE=Debug \
+        -B Release \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -31,17 +31,17 @@ if [ "$(uname)" == "Darwin" ]; then
 else
     echo "Configuring for Linux"
     cmake -S . \
-        -B RelWithDebInfo \
+        -B Release \
         -DCMAKE_C_COMPILER="$(which gcc)" \
-        -DCMAKE_BUILD_TYPE=Debug \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         ${CMAKE_ARGS}
 fi
 
-#cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
-cmake --build RelWithDebInfo --clean-first --target=install --verbose
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+#cmake --build RelWithDebInfo --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
 mkdir -p $PREFIX/etc/conda/deactivate.d
