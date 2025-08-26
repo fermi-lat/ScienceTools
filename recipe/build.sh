@@ -14,9 +14,6 @@ fi
 echo "Installing conda forge cxx compiler"
 conda install --yes conda-forge::cxx-compiler
 
-#git submodule foreach 'git checkout master ||:'
-#git submodule foreach 'git pull origin master ||:'
-
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
