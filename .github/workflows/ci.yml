@@ -129,8 +129,8 @@ jobs:
     - name: Run unit tests
       ### if: env.CI_ENVIRONMENT_TIER == 'testing'
       run: |
+        set -x
         echo "Running unit tests in the testing environment..."
-        micromamba activate fermi-dev 
         source scripts/activate.sh RelWithDebInfo 
         micromamba install --no-deps fermi::fermitools-test-scripts
         cd  test-results/
