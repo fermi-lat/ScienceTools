@@ -6,3 +6,4 @@ dependencies:
   - anaconda-client
   - conda-build
   - cfitsio
+  - cmake
