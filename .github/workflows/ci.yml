@@ -1,7 +1,7 @@
 name: CMake Build arm64 and amd64 for OSX / Linux
 on:
   push:
-    branches: [ 'master' ] # Enter trigger branch here
+    branches: [ 'master_testing' ] # Enter trigger branch here
   workflow_dispatch:
     inputs:
       logLevel:
@@ -38,33 +38,28 @@ jobs:
             packages: llvm cfitsio swig
             
     steps:
+    - name: Set CI_ENVIRONMENT_TIER with default
+      run: |
+       if [[ -z "${{ env.CI_ENVIRONMENT_TIER }}" ]]; then
+         echo "CI_ENVIRONMENT_TIER=development" >> "$GITHUB_ENV"
+       fi
+    - name: Use CI_ENVIRONMENT_TIER
+      run: |
+       echo "The environment tier is: ${{ env.CI_ENVIRONMENT_TIER }}"
+
+    - name: Get job context
+      id: context-extractor
+      uses: qoomon/actions--context@v4.0.3
+
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: master # Add ref branch here
+        ref: master_testing # Add ref branch here
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
     - name: Set ENV_TARGET_FILE variable
       run: echo "ENV_TARGET_FILE=${{matrix.env_target_file}}" >> "$GITHUB_ENV"
-
-    #- name: Verify proper  submodule branches were checked out
-    #  run: |
-    #   git submodule status --recursive | awk '{ print $2 }' | while read -r submodule_path; do
-    #    echo "Submodule: $submodule_path"
-    #    pushd "$submodule_path" > /dev/null
-
-        # Get the currently checked out branch (if any)
-    #    branch=$(git rev-parse --abbrev-ref HEAD)
-    #    if [ "$branch" == "HEAD" ]; then
-    #       # If HEAD is detached, get the commit SHA
-    #       echo "  - Detached HEAD at commit: $(git rev-parse HEAD)"
-    #    else
-    #       echo "  - Branch: $branch"
-    #       echo "  - Commit: $(git rev-parse HEAD)"
-    #    fi
-    #    popd > /dev/null
-    #   done
 
     - name: Get miniforge
       uses: mamba-org/setup-micromamba@v2
@@ -98,12 +93,46 @@ jobs:
         echo "Current Git Ref: ${{ github.ref }}"
         cmake --build Release --target=install --verbose
 
-    #- name: Send Slack Notification
-    #  uses: slackapi/slack-github-action@v2.1.1
-    #  with:
-    #    payload: |
-    #     {
-    #      "text": "GitHub Actions workflow for ${{ github.repository }} has completed. Status: ${{ job.status }}"
-    #     }
-    #  env:
-    #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    - name: Create test results directory
+      run: mkdir -p test-results
+
+    - name: Run unit tests
+      ### if: env.CI_ENVIRONMENT_TIER == 'testing'
+      run: |
+        set -x
+        echo "Running unit tests in the testing environment..."
+        source scripts/activate.sh RelWithDebInfo
+        conda list
+        micromamba install --no-deps fermi::fermitools-test-scripts
+        cd  test-results/
+        python3 ../recipe/tests/ST-unit-test
+
+    - name: Publish Test Results for Linux
+      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+      if: runner.os == 'Linux'
+      with:
+        files: test-results/ST-unit-test-Output.xml
+
+    - name: Publish Test Results for Mac
+      uses: EnricoMi/publish-unit-test-result-action/macos@v2
+      if: runner.os == 'macOS'
+      with:
+        files: test-results/ST-unit*.xml
+
+    - name: Post a Build status in a Slack's fermitools-pipeline channel.
+      if: always()
+      uses: slackapi/slack-github-action@v2.1.1
+      with:
+         webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+         webhook-type: incoming-webhook
+         payload: |
+           text: "This line is ignored, find a title option..."
+           blocks:
+             - type: "header"
+               text:
+                 type: "plain_text"
+                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
+             - type: "section"
+               text:
+                 type: "mrkdwn"
+                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"
