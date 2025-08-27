@@ -73,6 +73,7 @@ requirements:
   run:
     - cfitsio
     - python 3.11.*
+    - fermitools-data
 
 
 
