@@ -6,4 +6,7 @@ dependencies:
   - anaconda-client
   - conda-build
   - cfitsio
-  - cmake >=3.18
+  - cmake
+  - make
+  - pkg-config
+  - swig 4.0.2
