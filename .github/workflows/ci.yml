@@ -85,7 +85,7 @@ jobs:
           brew install ${{ matrix.packages }} 
           echo "Configuring for macOS"
           echo "Current Git Ref: ${{ github.ref }}"
-          cmake -DCMAKE_BUILD_TYPE=Release -S . -B Release -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
+          cmake -DCMAKE_BUILD_TYPE=Debug -S . -B Release -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=cmake/macos-toolchain.cmake DCMAKE_VERBOSE_MAKEFILE=ON  -DCMAKE_INSTALL_PREFIX="$CONDA_PREFIX" -DCMAKE_PREFIX_PATH="$CONDA_PREFIX "
         fi
   
     - name: Build Project
@@ -101,7 +101,7 @@ jobs:
       run: |
         set -x
         echo "Running unit tests in the testing environment..."
-        source scripts/activate.sh RelWithDebInfo
+        micromamba activate fermi-dev 
         conda list
         micromamba install --no-deps fermi::fermitools-test-scripts
         cd  test-results/
