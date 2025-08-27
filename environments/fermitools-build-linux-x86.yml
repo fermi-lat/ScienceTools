@@ -1,6 +1,7 @@
 name: fermi_build
 channels:
   - conda-forge
+  - fermi
 dependencies:
   - compilers
   - libgomp
