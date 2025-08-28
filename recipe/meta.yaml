@@ -81,8 +81,9 @@ test:
     - pyLikelihood
 
   requires:
-    - fermitools-test-scripts-data
     - junit-xml
+    - astropy
+    - fermitools-test-scripts-data
 
   files:
     - tests/ST-unit-test
