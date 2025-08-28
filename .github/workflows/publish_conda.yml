@@ -47,7 +47,7 @@ jobs:
 
       - name: Set environment-specific variables
         run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          if [[ runner.os != 'macOS' && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
@@ -66,4 +66,42 @@ jobs:
           label: dev
           upload: true
           
+      - name: Get Conda package name
+        id: get_package_name
+        run: |
+          PACKAGE_NAME=$(yq '.package.name' conda-recipe/meta.yaml)
+          echo "PACKAGE_NAME_CONDA=$PACKAGE_NAME" >> "$GITHUB_ENV"   
 
+      - name: Upload Conda package
+        run: |
+          echo "Uploaded package: ${{ env.PACKAGE_NAME_CONDA }}"
+     
+      - name: Publish Test Results for Linux
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: runner.os == 'Linux'
+        with:
+          files: test-results/ST-unit-test-Output.xml
+    
+      - name: Publish Test Results for Mac
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: runner.os == 'macOS'
+        with: 
+          files: test-results/ST-unit*.xml
+        
+      - name: Post a Build status in a Slack's fermitools-pipeline channel.
+        if: always()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "This line is ignored, find a title option..."
+            blocks:
+             - type: "header"
+               text:
+                 type: "plain_text"
+                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
+             - type: "section"
+               text:
+                 type: "mrkdwn"
+                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"

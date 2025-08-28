@@ -75,14 +75,12 @@ requirements:
     - python 3.11.*
     - fermitools-data
 
-
-
-#test:
-#  imports:
-#    - py_facilities
-#    - pyLikelihood
-#    - UnbinnedAnalysis
-#    - skymaps
+test:
+  imports:
+    - py_facilities
+    - pyLikelihood
+    - UnbinnedAnalysis
+    - skymaps
 
   requires:
     - fermitools-test-scripts-data
