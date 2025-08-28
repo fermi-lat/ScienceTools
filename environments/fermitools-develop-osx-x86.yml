@@ -2,7 +2,6 @@ name: fermi-develop-osx
 channels:
   - conda-forge
   - fermi
-conda-remove-defaults: true
 dependencies:
   - python=3.11.*
   - anaconda-client

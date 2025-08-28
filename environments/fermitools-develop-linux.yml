@@ -2,7 +2,6 @@ name: fermi-develop-linux
 channels:
   - conda-forge
   - fermi
-conda-remove-defaults: true
 dependencies:
   - anaconda-client
   - cmake
