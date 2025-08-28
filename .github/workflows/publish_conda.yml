@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: master
+    branches: master_testing
 jobs:
   conda_deployment:
     name: Conda deployment
@@ -32,7 +32,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: master
+          ref: master_testing
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
