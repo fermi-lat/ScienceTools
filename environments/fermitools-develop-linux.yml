@@ -6,3 +6,4 @@ dependencies:
   - anaconda-client
   - cmake
   - conda-build
+conda-remove-defaults: true

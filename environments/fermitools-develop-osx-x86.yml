@@ -8,3 +8,4 @@ dependencies:
   - conda-build
   - cfitsio
   - cmake
+conda-remove-defaults: true

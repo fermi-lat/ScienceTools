@@ -29,6 +29,10 @@ jobs:
             env_target_file: "fermitools-develop-osx-arm64.yml"
             packages: llvm cfitsio swig
     steps:
+      - name: Get job context
+        id: context-extractor
+        uses: qoomon/actions--context@v4.0.3
+
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
@@ -37,7 +41,7 @@ jobs:
           fetch-depth: 0 # Fetches full history
           
       - name: Conda environment creation and activation
-        uses: conda-incubator/setup-miniconda@v3
+        uses: conda-incubator/setup-miniconda@v3.2.0
         with:
           python-version: 3.11
           environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
