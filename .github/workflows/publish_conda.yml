@@ -72,15 +72,15 @@ jobs:
           label: dev
           upload: false
           
-      - name: Get Conda package name
-        id: get_package_name
-        run: |
-          PACKAGE_NAME=$(yq '.package.name' ${{ github.workspace }}/recipe/meta.yaml)
-          echo "PACKAGE_NAME_CONDA=$PACKAGE_NAME" >> "$GITHUB_ENV"   
+#      - name: Get Conda package name
+#        id: get_package_name
+#        run: |
+#          PACKAGE_NAME=$(yq '.package.name' ${{ github.workspace }}/recipe/meta.yaml)
+#          echo "PACKAGE_NAME_CONDA=$PACKAGE_NAME" >> "$GITHUB_ENV"   
 
-      - name: Upload Conda package
-        run: |
-          echo "Uploaded package: ${{ env.PACKAGE_NAME_CONDA }}"
+#      - name: Upload Conda package
+#        run: |
+#          echo "Uploaded package: ${{ env.PACKAGE_NAME_CONDA }}"
      
       - name: Publish Test Results for Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
