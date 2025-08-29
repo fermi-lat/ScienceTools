@@ -1202,8 +1202,8 @@ unitTestsWithRoot = [
       "name" : "test_microQuasar" },
     { "cmd"  : "test_catalogAccess", # Test catalogAccess package
       "name" : "test_catalogAccess" },
-    #{ "cmd"  : check_test_catalogAccess_output, # Test catalogAccess package
-    #  "name" : "test_catalogAccess: Check output" },
+    { "cmd"  : check_test_catalogAccess_output, # Test catalogAccess package
+      "name" : "test_catalogAccess: Check output" },
     { "cmd"  : "test_evtbin",  # Test evtbin package
       "name" : "test_evtbin" },
     { "cmd"  : check_test_evtbin_output,  # Test evtbin package
@@ -1218,11 +1218,10 @@ unitTestsWithRoot = [
       "name" : "test_map_tools" },
     { "cmd"  : check_test_map_tools_output,  # Test map_tools package
       "name" : "test_map_tools: Check output" },
-# Broken in CONDA Testing 08/28/25 Ubuntu version
-#    { "cmd"  : "test_Likelihood",  # Test Likelihood package
-#      "name" : "test_Likelihood" },
-#    { "cmd"  : check_test_Likelihood_output,  # Test Likelihood package
-#      "name" : "test_Likelihood: Check output" },
+    { "cmd"  : "test_Likelihood",  # Test Likelihood package
+      "name" : "test_Likelihood" },
+    { "cmd"  : check_test_Likelihood_output,  # Test Likelihood package
+      "name" : "test_Likelihood: Check output" },
     { "cmd"  : "test_fitsGen",  # Test fitsGen package
       "name" : "test_fitsGen" },
     { "cmd"  : "test_observationSim",  # Test obsSim package
@@ -1233,11 +1232,10 @@ unitTestsWithRoot = [
       "name" : "test_rspgen" },
     { "cmd"  : check_test_rspgen_output,  # Test rspgen package
       "name" : "test_rspgen: Check output" },
-# Broken in CONDA Testing 08/28/25 OSX version
-#    { "cmd"  : "test_timeSystem",  # Test timeSystem package
-#      "name" : "test_timeSystem" },
-#    { "cmd"  : check_test_timeSystem_output,
-#      "name" : "test_timeSystem: Check output" },
+    { "cmd"  : "test_timeSystem",  # Test timeSystem package
+      "name" : "test_timeSystem" },
+    { "cmd"  : check_test_timeSystem_output,
+      "name" : "test_timeSystem: Check output" },
     { "cmd"  : "test_pulsarDb",  # Test pulsarDb package
       "name" : "test_pulsarDb" },
     { "cmd"  : check_test_pulsarDb_output,  # Test pulsarDb package
@@ -1390,20 +1388,20 @@ unitTestsWithoutRoot = [
       "name" : "test_map_tools" },
     { "cmd"  : check_test_map_tools_output,  # Test map_tools package
       "name" : "test_map_tools: Check output" },
-# Broken with CONDA testing 08/28/25 JSA Ubuntu
-#    { "cmd"  : "test_Likelihood",  # Test Likelihood package
-#      "name" : "test_Likelihood" },
-#    { "cmd"  : check_test_Likelihood_output,  # Test Likelihood package
-#      "name" : "test_Likelihood: Check output" },
+    # Broken with CONDA testing 08/28/25 JSA Ubuntu
+    { "cmd"  : "test_Likelihood",  # Test Likelihood package
+      "name" : "test_Likelihood" },
+    { "cmd"  : check_test_Likelihood_output,  # Test Likelihood package
+      "name" : "test_Likelihood: Check output" },
     { "cmd"  : "test_rspgen",  # Test rspgen package
       "name" : "test_rspgen" },
     { "cmd"  : check_test_rspgen_output,  # Test rspgen package
       "name" : "test_rspgen: Check output" },
-# Broken in CONDA Testing 08/28/25 OSX version
-#    { "cmd"  : "test_timeSystem",  # Test timeSystem package
-#      "name" : "test_timeSystem" },
-#    { "cmd"  : check_test_timeSystem_output,
-#      "name" : "test_timeSystem: Check output" },
+    # Broken in CONDA Testing 08/28/25 OSX version
+    { "cmd"  : "test_timeSystem",  # Test timeSystem package
+      "name" : "test_timeSystem" },
+    { "cmd"  : check_test_timeSystem_output,
+      "name" : "test_timeSystem: Check output" },
     { "cmd"  : "test_pulsarDb",  # Test pulsarDb package
       "name" : "test_pulsarDb" },
     { "cmd"  : check_test_pulsarDb_output,  # Test pulsarDb package
