@@ -75,7 +75,7 @@ jobs:
       - name: Get Conda package name
         id: get_package_name
         run: |
-          PACKAGE_NAME=$(yq '.package.name' recipe/meta.yaml)
+          PACKAGE_NAME=$(yq '.package.name' ${{ github.workspace }}/recipe/meta.yaml)
           echo "PACKAGE_NAME_CONDA=$PACKAGE_NAME" >> "$GITHUB_ENV"   
 
       - name: Upload Conda package
@@ -86,13 +86,13 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
         with:
-          files: test-results/ST-unit-test-Output.xml
+          files: ${{ github.workspace }}/test-results/ST-unit-test-Output.xml
     
       - name: Publish Test Results for Mac
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with: 
-          files: test-results/ST-unit*.xml
+          files: ${{ github.workspace }}/test-results/ST-unit*.xml
 
 # Stop updating SLack with every run 08/26/25 JSA        
 #      - name: Post a Build status in a Slack's fermitools-pipeline channel.
