@@ -125,7 +125,7 @@
 	branch = master
 [submodule "externals/cppunit"]
 	path = externals/cppunit
-	url = git://anongit.freedesktop.org/libreoffice/cppunit
+	url = https://anongit.freedesktop.org/git/libreoffice/cppunit.git
 [submodule "externals/gsl"]
 	path = externals/gsl
 	url = git://git.savannah.gnu.org/gsl.git
@@ -140,7 +140,7 @@
 	url = https://github.com/heasarc/cfitsio.git
 [submodule "externals/cppunit_module/cppunit"]
 	path = externals/cppunit_module/cppunit
-	url = git://anongit.freedesktop.org/libreoffice/cppunit
+	url = https://anongit.freedesktop.org/git/libreoffice/cppunit.git
 [submodule "externals/gsl_module/gsl"]
 	path = externals/gsl_module/gsl
 	url = git://git.savannah.gnu.org/gsl.git
@@ -152,7 +152,7 @@
 	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
 [submodule "externals/cppunit/cppunit"]
 	path = externals/cppunit/cppunit
-	url = git://anongit.freedesktop.org/libreoffice/cppunit
+	url = https://anongit.freedesktop.org/git/libreoffice/cppunit.git
 [submodule "externals/wcslib/wcslib"]
 	path = externals/wcslib/wcslib
 	url = https://github.com/Punzo/wcslib.git
