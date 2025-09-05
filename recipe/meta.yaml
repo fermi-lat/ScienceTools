@@ -81,6 +81,7 @@ test:
     - pyLikelihood
 
   requires:
+    - pytest
     - junit-xml
     - astropy
     - fermitools-test-scripts-data
@@ -89,7 +90,7 @@ test:
     - tests/ST-unit-test
 
   commands:
-    - tests/ST-unit-test -w
+    - pytest --junitxml=tests/ST-unit-test-Output.xml tests/ST-unit-test 
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
