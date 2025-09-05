@@ -82,17 +82,26 @@ jobs:
 #        run: |
 #          echo "Uploaded package: ${{ env.PACKAGE_NAME_CONDA }}"
      
+#  files: ${{ github.workspace }}/tests/ST-unit-test-Output.xml
+
       - name: Publish Test Results for Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
         with:
-          files: ${{ github.workspace }}/tests/ST-unit-test-Output.xml
-    
+          files: | 
+             tests/ST*.xml
+             test-results/ST*.xml
+             test-results/**/ST*.xml   
+ 
       - name: Publish Test Results for Mac
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with: 
-          files: ${{ github.workspace }}/tests/ST-unit*.xml
+          files: |
+             tests/ST-unit*.xml
+             test-results/ST*.xml
+             test-results/**/ST*.xml
+             /tmp/test-results/**/*.xml
 
 # Stop updating SLack with every run 08/26/25 JSA        
 #      - name: Post a Build status in a Slack's fermitools-pipeline channel.
