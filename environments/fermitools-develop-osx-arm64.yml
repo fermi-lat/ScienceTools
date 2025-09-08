@@ -7,3 +7,4 @@ dependencies:
   - conda-build
   - cfitsio
   - cmake
+  - swig=4.0.2
