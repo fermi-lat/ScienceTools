@@ -4,8 +4,6 @@
 
 message(STATUS "Local External Dependency FFTW3")
 
-include(FetchContent)
-
 # Cache original values
 foreach(_var IN ITEMS 
     CMAKE_POSITION_INDEPENDENT_CODE BUILD_SHARED_LIBS TESTS ENABLE_THREADS
@@ -25,15 +23,6 @@ set(ENABLE_SSE ON CACHE BOOL "" FORCE)
 set(ENABLE_SSE2 ON CACHE BOOL "" FORCE)
 set(ENABLE_AVX ON CACHE BOOL "" FORCE)
 #set(ENABLE_AVX2 ON CACHE BOOL "" FORCE)
-
-FetchContent_Declare(fftw
-  URL https://www.fftw.org/fftw-3.3.10.tar.gz
-  URL_HASH SHA256=56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
-  DOWNLOAD_EXTRACT_TIMESTAMP true
-  PATCH_COMMAND patch -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/fftw.patch
-)
-
-FetchContent_MakeAvailable(fftw)
 
 target_include_directories(fftw3 INTERFACE 
     "$<INSTALL_INTERFACE:include>"
