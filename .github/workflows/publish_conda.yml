@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: master
+    branches: checkout_fixes 
   workflow_dispatch:
     inputs:
       logLevel:
@@ -39,7 +39,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: master
+          ref: checkout_fixes
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
@@ -70,7 +70,5 @@ jobs:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
-          label: dev
+          label: branch
           upload: true
-          
-
