@@ -2,7 +2,13 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: 5-gtltcubesun-segmentation-fault
+    branches: master
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
 jobs:
   conda_deployment:
     name: Conda deployment
