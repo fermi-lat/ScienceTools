@@ -9,7 +9,6 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
-
 jobs:
   conda_deployment:
     name: Conda deployment
@@ -39,7 +38,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: master
+          ref: 5-gtltcubesun-segmentation-fault
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
