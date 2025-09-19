@@ -38,7 +38,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: 5-gtltcubesun-segmentation-fault
+          ref: master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
