@@ -62,17 +62,17 @@ requirements:
     - cmake >=3.18
     - make
     - pkg-config
-    - python 3.11.*
+    - python >=3.11
     - swig 4.0.2
 
   host:
     - cfitsio
-    - python 3.11.*
+    - python >=3.11
     - zlib
 
   run:
     - cfitsio
-    - python 3.11.*
+    - python >=3.11
     - fermitools-data
 
 
