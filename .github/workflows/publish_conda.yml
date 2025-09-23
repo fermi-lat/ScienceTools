@@ -2,14 +2,13 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: checkout_fixes 
+    branches: master
   workflow_dispatch:
     inputs:
       logLevel:
         description: 'Log level'
         required: true
         default: 'warning'
-
 jobs:
   conda_deployment:
     name: Conda deployment
@@ -39,7 +38,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: checkout_fixes
+          ref: master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
@@ -48,6 +47,7 @@ jobs:
         with:
           python-version: 3.11
           environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          conda-remove-defaults: true
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
@@ -70,49 +70,5 @@ jobs:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
-          label: jsa
+          label: branch 
           upload: true
-
-
-#  files: ${{ github.workspace }}/tests/ST-unit-test-Output.xml
-#          files: |
-#             tests/ST*.xml
-#             test-results/ST*.xml
-#             test-results/**/ST*.xml
-#          files: |
-#             tests/ST-unit*.xml
-#             test-results/ST*.xml
-#             test-results/**/ST*.xml
-#             /tmp/test-results/**/*.xml
-
-
-      - name: Publish Test Results for Linux
-        uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: runner.os == 'Linux'
-        with:
-          files: ${{ github.workspace }}/tests/ST-*.xml
- 
-      - name: Publish Test Results for Mac
-        uses: EnricoMi/publish-unit-test-result-action/macos@v2
-        if: runner.os == 'macOS'
-        with:
-          files: ${{ github.workspace }}/tests/ST-*.xml 
-
-# Stop updating SLack with every run 08/26/25 JSA        
-#      - name: Post a Build status in a Slack's fermitools-pipeline channel.
-#        if: always()
-#        uses: slackapi/slack-github-action@v2.1.1
-#        with:
-#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-#          webhook-type: incoming-webhook
-#          payload: |
-#            text: "This line is ignored, find a title option..."
-#            blocks:
-#             - type: "header"
-#               text:
-#                 type: "plain_text"
-#                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
-#             - type: "section"
-#               text:
-#                 type: "mrkdwn"
-#                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"
