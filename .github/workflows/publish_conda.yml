@@ -26,7 +26,7 @@ jobs:
           - os: ubuntu-24.04
             arch: x86
             env_target_file: "fermitools-develop-linux.yml"
-          - os: macos-13
+          - os: macos-15-intel
             arch: x86_64 
             env_target_file: "fermitools-develop-osx-x86.yml"
             packages: llvm cfitsio swig
@@ -71,7 +71,7 @@ jobs:
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: branch 
-          upload: true
+          upload: false
 
       - name: make tests dir
         run: mkdir tests/
