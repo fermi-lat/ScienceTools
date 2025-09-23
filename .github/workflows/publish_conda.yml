@@ -78,23 +78,32 @@ jobs:
           label: branch , dev
           upload: false
 
-      - name: Run unit tests
-        ### if: env.CI_ENVIRONMENT_TIER == 'testing'
-        run: |
-          echo "Running unit tests in the testing environment..."
-          cd  test-results/
-          micromamba activate fermi-dev
-          micromamba install fermi::fermitools-test-scripts
-          python3 ../recipe/tests/ST-unit-test
+      # - name: Run unit tests
+      #   ### if: env.CI_ENVIRONMENT_TIER == 'testing'
+      #  run: |
+      #     echo "Running unit tests in the testing environment..."
+      #    cd  test-results
+      #    micromamba activate fermi-dev
+      #    micromamba install fermi::fermitools-test-scripts
+      #    python3 ../recipe/tests/ST-unit-test
 
-      - name: Publish Test Results
+      - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
         with:
-          files: test-results/ST-unit-test-Output.xml
+          files: |
+             test-results/ST-unit-test-Output.xml
+             test_results/ST-*.log
+             tests/ST-unit*.xml
+             tests/ST-report.xml
 
-      - name: Publish Test Results
+
+      - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with:
-          files: test-results/ST-unit*.xml
+          files: |
+             test-results/ST-unit*.xml
+             test_results/ST-*.log
+             tests/ST-unit*.xml
+             tests/ST-report.xml
