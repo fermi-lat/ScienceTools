@@ -58,6 +58,7 @@ build:
 requirements:
   build:
     - libgomp  # [linux]
+    - llvm-openmp # [osx]
     - cfitsio
     - cmake >=3.18
     - make
