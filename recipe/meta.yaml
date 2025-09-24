@@ -66,12 +66,7 @@ requirements:
     - python =3.11
     - swig 4.0.2
 
-  host:
-    - cfitsio
-    - python =3.11
-    - zlib
-
-  run:
+run:
     - cfitsio
     - python >=3.11
     - fermitools-data
