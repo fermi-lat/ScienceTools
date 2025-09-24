@@ -89,7 +89,7 @@ test:
     - tests/ST-unit-test
 
   commands:
-    - tests/ST-unit-test -w --junit-xml=tests/ST-report.xml
+    - tests/ST-unit-test -w --junit-xml=test-results/ST-unit-test-Output.xml
 
 about:
   home: https://github.com/fermi-lat/Sciencetools

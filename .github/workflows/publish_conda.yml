@@ -68,6 +68,7 @@ jobs:
         run: |
           mkdir -p tests
           mkdir -p test_results
+          mkdir -p downloaded-test-results
 
       - name: Build and upload the conda packages
         uses: uibcdf/action-build-and-upload-conda-packages@main
@@ -78,6 +79,14 @@ jobs:
           label: branch , dev
           upload: false
 
+      - name: Upload test results
+        if: always() # This ensures the step runs even if the tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.arch }}
+          path: test_results
+          retention-days: 2
+
       # - name: Run unit tests
       #   ### if: env.CI_ENVIRONMENT_TIER == 'testing'
       #  run: |
@@ -86,6 +95,11 @@ jobs:
       #    micromamba activate fermi-dev
       #    micromamba install fermi::fermitools-test-scripts
       #    python3 ../recipe/tests/ST-unit-test
+
+      - name: Download Test Results Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
@@ -96,7 +110,7 @@ jobs:
              test_results/ST-*.log
              tests/ST-unit*.xml
              tests/ST-report.xml
-
+             artifacts/test-results/*.xml
 
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
@@ -107,3 +121,4 @@ jobs:
              test_results/ST-*.log
              tests/ST-unit*.xml
              tests/ST-report.xml
+             downloaded-test-results/**/*.xml
