@@ -65,11 +65,13 @@ requirements:
     - pkg-config
     - python =3.11
     - swig 4.0.2
+    - zlib # [linux]
 
   run:
     - cfitsio
     - python >=3.11
     - fermitools-data
+    - zlib # [linux]
 
 
 
