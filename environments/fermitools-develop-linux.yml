@@ -7,3 +7,4 @@ dependencies:
   - cfitsio
   - cmake
   - conda-build
+  - python=3.11*
