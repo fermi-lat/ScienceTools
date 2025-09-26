@@ -78,7 +78,7 @@ jobs:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
-          label: jsa,dev
+          label: dev
           upload: true
 
       - name: Re-format output paths
@@ -93,7 +93,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.os }}-${{ matrix.arch }}
-          path: /tmp/artifacts/
+          path: tests/
           retention-days: 2
 
       # - name: Run unit tests
@@ -108,12 +108,12 @@ jobs:
       - name: Display conda paths
         run: |
             echo "Paths ${{steps.reformat-paths.outputs.newline-separated-paths}}"
-            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
+            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}/*
 
-      - name: Download Test Results Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: /tmp/artifacts/
+      # - name: Download Test Results Artifacts
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    path: /tmp/artifacts/
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2

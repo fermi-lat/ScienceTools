@@ -84,10 +84,11 @@ test:
 #    - skymaps
 
   requires:
+    - conda-verify
     - astropy
     - fermi::fermitools-test-scripts-data
     - junit-xml
-# - fermi::fermitools-data
+    - fermi::fermitools-data
 
   files:
     - tests/ST-unit-test
