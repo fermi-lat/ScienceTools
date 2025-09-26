@@ -1,5 +1,6 @@
 name: fermi-develop-osx
 channels:
+  - nodefaults
   - conda-forge
   - fermi
 dependencies:

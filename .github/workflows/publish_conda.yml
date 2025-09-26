@@ -69,22 +69,31 @@ jobs:
           mkdir -p tests
           mkdir -p test_results
           mkdir -p downloaded-test-results
+          mkdir -p /tmp/artifacts
 
       - name: Build and upload the conda packages
+        id: conda-build-and-upload
         uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
-          label: branch , dev
-          upload: false
+          label: jsa, dev, branch
+          upload: true 
+
+      - name: Re-format output paths
+        id: reformat-paths
+        # Needed to have the correct newline-separated files format for the following release step
+        run: |
+            paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
+            echo "newline-separated-paths=$paths" >> "$GITHUB_OUTPUT"
 
       - name: Upload test results
         if: always() # This ensures the step runs even if the tests fail
         uses: actions/upload-artifact@v4
         with:
           name: test-results-${{ matrix.os }}-${{ matrix.arch }}
-          path: test_results
+          path: /tmp/artifacts/
           retention-days: 2
 
       # - name: Run unit tests
@@ -96,10 +105,15 @@ jobs:
       #    micromamba install fermi::fermitools-test-scripts
       #    python3 ../recipe/tests/ST-unit-test
 
+      - name: Display conda paths
+        run: |
+            echo "Paths ${{steps.reformat-paths.outputs.newline-separated-paths}}"
+            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
+
       - name: Download Test Results Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          path: /tmp/artifacts/
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
@@ -120,5 +134,5 @@ jobs:
              test-results/ST-unit*.xml
              test_results/ST-*.log
              tests/ST-unit*.xml
-             tests/ST-report.xml
              downloaded-test-results/**/*.xml
+             artifacts/test-results/*.xml

@@ -1,5 +1,6 @@
 name: fermi-develop-linux
 channels:
+  - nodefaults
   - conda-forge
   - fermi
 dependencies:
