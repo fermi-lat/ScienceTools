@@ -78,8 +78,8 @@ jobs:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
-          label: jsa, dev, branch
-          upload: true 
+          label: jsa,dev
+          upload: true
 
       - name: Re-format output paths
         id: reformat-paths
