@@ -29,10 +29,9 @@ else
     echo "Configuring for Linux"
     cmake -S . \
         -B Release \
-        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
-        -DCMAKE_C_COMPILER="$(which gcc)" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
+        -DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         ${CMAKE_ARGS}
