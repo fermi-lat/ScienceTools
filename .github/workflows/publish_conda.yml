@@ -81,18 +81,27 @@ jobs:
           label: dev
           upload: true
 
+      - name: Re-format output paths
+        id: reformat-paths
+        # Needed to have the correct newline-separated files format for the following release step
+        run: |
+            paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
+            echo "newline-separated-paths=$paths" >> "$GITHUB_OUTPUT"
+
       - name: Display conda paths
         run: |
             pwd
+            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
 
       - name: Run unit tests
         run: |
            echo "Running unit tests in the testing environment..."
+           pwd
            cd  test-results
            conda create --name jsa-testing python=3.11
            conda activate jsa-testing
-           conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts 
-           python3 ../recipe/tests/ST-unit-test
+           conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts ${{steps.reformat-paths.outputs.newline-separated-paths}}
+           python3 ${{ github.workspace }}//recipe/tests/ST-unit-test
            ls -l
 
       - name: Publish Test Results Linux
