@@ -70,6 +70,7 @@ requirements:
     - cfitsio
     - python 3.11.*
     - zlib
+    - conda-verify
 
   run:
     - cfitsio
@@ -84,11 +85,10 @@ test:
 #    - skymaps
 
   requires:
-    - conda-verify
     - astropy
+    - fermi::fermitools-data
     - fermi::fermitools-test-scripts-data
     - junit-xml
-    - fermi::fermitools-data
 
   files:
     - tests/ST-unit-test
