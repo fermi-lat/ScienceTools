@@ -93,15 +93,24 @@ jobs:
             pwd
             ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
 
+      - name: Upload test results
+        if: always() # This ensures the step runs even if the tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}-${{ matrix.arch }}
+          path: ${{steps.reformat-paths.outputs.newline-separated-paths}}
+          retention-days: 7
+
       - name: Run unit tests
         run: |
            echo "Running unit tests in the testing environment..."
            pwd
-           cd  test-results
            conda create --name jsa-testing python=3.11
            conda activate jsa-testing
            conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts ${{steps.reformat-paths.outputs.newline-separated-paths}}
-           python3 ${{ github.workspace }}//recipe/tests/ST-unit-test
+           mkdir ${{ github.workspace }}/test-results
+           cd  ${{ github.workspace }}/test-results
+           python3 ${{ github.workspace }}/recipe/tests/ST-unit-test
            ls -l
 
       - name: Publish Test Results Linux
@@ -111,8 +120,9 @@ jobs:
           files: |
              test-results/ST-unit-test-Output.xml
              test_results/ST-*.log
-             tests/ST-unit*.xml
-             tests/ST-report.xml
+             ${{ github.workspace }}/test-results/ST-unit-test-Output.xml
+             ${{ github.workspace }}/test_results/ST-*.log
+             ${{ github.workspace }}/tests/ST-*.xml
              artifacts/test-results/*.xml
 
       - name: Publish Test Results OSX
@@ -120,8 +130,8 @@ jobs:
         if: runner.os == 'macOS'
         with:
           files: |
-             test-results/ST-unit*.xml
-             test_results/ST-*.log
-             tests/ST-unit*.xml
-             downloaded-test-results/**/*.xml
+             ${{ github.workspace }}/test-results/ST-unit*.xml
+             ${{ github.workspace }}/test_results/ST-*.log
+             ${{ github.workspace }}/tests/ST-unit*.xml
+             ${{ github.workspace }}/downloaded-test-results/**/*.xml
              artifacts/test-results/*.xml
