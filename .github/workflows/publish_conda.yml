@@ -108,7 +108,8 @@ jobs:
       - name: Display conda paths
         run: |
             echo "Paths ${{steps.reformat-paths.outputs.newline-separated-paths}}"
-            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}/*
+            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
+            ls -laR
 
       # - name: Download Test Results Artifacts
       #  uses: actions/download-artifact@v4
