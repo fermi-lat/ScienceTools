@@ -107,7 +107,8 @@ jobs:
            pwd
            conda create --name jsa-testing python=3.11
            conda activate jsa-testing
-           conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts ${{steps.reformat-paths.outputs.newline-separated-paths}}
+           conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts 
+           conda install ${{steps.reformat-paths.outputs.newline-separated-paths}}
            mkdir ${{ github.workspace }}/test-results
            cd  ${{ github.workspace }}/test-results
            python3 ${{ github.workspace }}/recipe/tests/ST-unit-test
