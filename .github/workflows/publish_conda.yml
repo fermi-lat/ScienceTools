@@ -84,7 +84,16 @@ jobs:
       - name: Display conda paths
         run: |
             pwd
-            ls -laR
+
+      - name: Run unit tests
+        run: |
+           echo "Running unit tests in the testing environment..."
+           cd  test-results
+           conda create --name jsa-testing python=3.11
+           conda activate jsa-testing
+           conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts 
+           python3 ../recipe/tests/ST-unit-test
+           ls -l
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
