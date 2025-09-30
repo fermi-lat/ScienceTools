@@ -135,12 +135,18 @@
 [submodule "externals/clhep_module/clhep"]
 	path = externals/clhep_module/clhep
 	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
+[submodule "externals/cfitsio_module/cfitsio"]
+	path = externals/cfitsio_module/cfitsio
+	url = https://github.com/heasarc/cfitsio.git
 [submodule "externals/cppunit_module/cppunit"]
 	path = externals/cppunit_module/cppunit
         url = https://git.libreoffice.org/cppunit 
 [submodule "externals/gsl_module/gsl"]
 	path = externals/gsl_module/gsl
 	url = git://git.savannah.gnu.org/gsl.git
+[submodule "externals/cfitsio/cfitsio"]
+	path = externals/cfitsio/cfitsio
+	url = https://github.com/heasarc/cfitsio.git
 [submodule "externals/clhep/clhep"]
 	path = externals/clhep/clhep
 	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
