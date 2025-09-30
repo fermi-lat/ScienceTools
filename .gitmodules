@@ -126,9 +126,6 @@
 [submodule "externals/gsl"]
 	path = externals/gsl
 	url = git://git.savannah.gnu.org/gsl.git
-[submodule "externals/cfitsio_module/cfitsio"]
-	path = externals/cfitsio_module/cfitsio
-	url = https://github.com/fermi-lat/cfitsio.git
 [submodule "externals/gsl_module/gsl"]
 	path = externals/gsl_module/gsl
 	url = git://git.savannah.gnu.org/gsl.git
