@@ -30,7 +30,7 @@ else
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
+	-DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
 	-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
