@@ -82,6 +82,7 @@ jobs:
           upload: true
 
       - name: Re-format output paths
+        if: always() # This ensures the step runs even if the tests fail
         id: reformat-paths
         # Needed to have the correct newline-separated files format for the following release step
         run: |
@@ -89,6 +90,7 @@ jobs:
             echo "newline-separated-paths=$paths" >> "$GITHUB_OUTPUT"
 
       - name: Display conda paths
+        if: always() # This ensures the step runs even if the tests fail
         run: |
             pwd
             ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
