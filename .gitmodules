@@ -153,3 +153,6 @@
 [submodule "externals/cppunit/cppunit"]
 	path = externals/cppunit/cppunit
 	url = https://github.com/fermi-lat/cppunit.git
+[submodule "resources/clhep/clhep"]
+	path = resources/clhep/clhep
+	url = https://github.com/fermi-lat/CLHEP.git
