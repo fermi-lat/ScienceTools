@@ -150,9 +150,6 @@
 [submodule "externals/clhep"]
 	path = externals/clhep
 	url = https://github.com/fermi-lat/CLHEP.git
-[submodule "externals/clhep/clhep"]
-	path = externals/clhep/clhep
-	url = https://github.com/fermi-lat/CLHEP.git
 [submodule "externals/cppunit/cppunit"]
 	path = externals/cppunit/cppunit
 	url = https://github.com/fermi-lat/cppunit.git
