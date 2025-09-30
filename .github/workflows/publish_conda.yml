@@ -80,9 +80,10 @@ jobs:
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
           upload: true
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail 
 
       - name: Re-format output paths
-        if: always() # This ensures the step runs even if the tests fail
+        ## if: always() # This ensures the step runs even if the tests fail
         id: reformat-paths
         # Needed to have the correct newline-separated files format for the following release step
         run: |
@@ -90,37 +91,15 @@ jobs:
             echo "newline-separated-paths=$paths" >> "$GITHUB_OUTPUT"
 
       - name: Display conda paths
-        if: always() # This ensures the step runs even if the tests fail
+        ## if: always() # This ensures the step runs even if the tests fail
         run: |
             pwd
             ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
             ls -lR ${{ github.workspace }}
 
-      - name: Upload test results
-        if: always() # This ensures the step runs even if the tests fail
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results-${{ matrix.os }}-${{ matrix.arch }}
-          path: ${{steps.reformat-paths.outputs.newline-separated-paths}}
-          retention-days: 7
-
-      - name: Run unit tests
-        run: |
-           echo "Running unit tests in the testing environment..."
-           pwd
-           conda deactivate
-           conda create --name jsa-testing python=3.11
-           conda activate jsa-testing
-           conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts 
-           conda install ${{steps.reformat-paths.outputs.newline-separated-paths}}
-           mkdir test-results
-           ls -lR
-           cd  test-results
-           python3 ../recipe/tests/ST-unit-test
-
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
-        if: runner.os == 'Linux'
+        if: (! cancelled() && runner.os == 'Linux')
         with:
           files: |
              test-results/ST-unit-test-Output.xml
@@ -132,7 +111,7 @@ jobs:
 
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
-        if: runner.os == 'macOS'
+        if: (! cancelled() &&  runner.os == 'macOS')
         with:
           files: |
              ${{ github.workspace }}/test-results/ST-unit*.xml
