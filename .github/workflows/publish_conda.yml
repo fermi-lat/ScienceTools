@@ -38,7 +38,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: master
+          ref: checkout_fixes 
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
@@ -92,6 +92,7 @@ jobs:
         run: |
             pwd
             ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
+            ls -lR ${{ github.workspace }}
 
       - name: Upload test results
         if: always() # This ensures the step runs even if the tests fail
@@ -105,14 +106,15 @@ jobs:
         run: |
            echo "Running unit tests in the testing environment..."
            pwd
+           conda deactivate
            conda create --name jsa-testing python=3.11
            conda activate jsa-testing
            conda install astropy junit-xml fermi::fermitools-data fermi::fermitools-test-scripts 
            conda install ${{steps.reformat-paths.outputs.newline-separated-paths}}
-           mkdir ${{ github.workspace }}/test-results
-           cd  ${{ github.workspace }}/test-results
-           python3 ${{ github.workspace }}/recipe/tests/ST-unit-test
-           ls -l
+           mkdir test-results
+           ls -lR
+           cd  test-results
+           python3 ../recipe/tests/ST-unit-test
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
