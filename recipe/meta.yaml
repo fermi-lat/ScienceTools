@@ -71,6 +71,7 @@ requirements:
     - cfitsio
     - python >=3.11
     - fermitools-data
+    - matplotlib
     - zlib # [linux]
 
 
