@@ -89,7 +89,6 @@ jobs:
 
       - name: Run tests by hand
         id: run_tests_again
-        mkdir -p test_results
         run: |
            echo "run tests jsa"
            pwd
