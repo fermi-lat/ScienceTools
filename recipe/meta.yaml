@@ -93,8 +93,10 @@ test:
   files:
     - tests/ST-unit-test
 
-  commands:
+  commands: |
+    - pwd
     - tests/ST-unit-test -w -d -v
+    - ls -la
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
