@@ -93,6 +93,7 @@ jobs:
            echo "run tests jsa"
            pwd
            ls -l
+           conda install  astropy fermi::fermitools-data fermi::fermitools-test-scripts-data junit-xml
            mkdir -p test_results 
            cd test_results/
            python ../recipe/tests/ST-unit-test -w -d -v
