@@ -65,17 +65,18 @@ requirements:
     - pkg-config
     - python 3.11.*
     - swig 4.0.2
+    - conda-verify
 
   host:
     - cfitsio
     - python 3.11.*
     - zlib
-    - conda-verify
 
   run:
     - cfitsio
     - python 3.11.*
     - fermitools-data
+    - conda-verify
 
 test:
   imports:
@@ -95,7 +96,7 @@ test:
 
   commands: |
     - pwd
-    - tests/ST-unit-test -w -d -v
+    - recipe/tests/ST-unit-test -w -d -v
     - ls -la
 
 about:

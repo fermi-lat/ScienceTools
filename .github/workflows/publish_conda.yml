@@ -92,9 +92,10 @@ jobs:
         run: |
            echo "run tests jsa"
            pwd
+           ls -l
            mkdir -p test_results 
            cd test_results/
-           python ../tests/ST-unit-test -w -d -v
+           python ../recipe/tests/ST-unit-test -w -d -v
            ls -l           
 
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
