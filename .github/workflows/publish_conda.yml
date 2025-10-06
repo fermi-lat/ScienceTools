@@ -51,6 +51,11 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+          # Used for running conda locally on Mact with ACT 
+          # Use a bundled Miniconda and skip initialization to avoid shell changes
+          # use-only-bundled-miniconda: true
+          # Providing a fake condarc path prevents conda init from being called
+          # condarc-file: 'does/not/exist'
 
       - name: Set environment-specific variables
         run: |
@@ -82,6 +87,19 @@ jobs:
           upload: true
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail 
 
+      - name: Run tests by hand
+        id: run_tests_again
+        mkdir -p test_results
+        run: |
+           echo "run tests jsa"
+           pwd
+           mkdir -p test_results 
+           cd test_results/
+           python ../tests/ST-unit-test -w -d -v
+           ls -l           
+
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+
       - name: Re-format output paths
         ## if: always() # This ensures the step runs even if the tests fail
         id: reformat-paths
@@ -93,9 +111,11 @@ jobs:
       - name: Display conda paths
         ## if: always() # This ensures the step runs even if the tests fail
         run: |
-            pwd
+            # pwd
             ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
-            ls -lR ${{ github.workspace }}
+            # ls -lR ${{ github.workspace }}
+
+
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
