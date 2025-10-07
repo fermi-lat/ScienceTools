@@ -1,4 +1,4 @@
-name: Build and upload conda packages
+name: S3DF Build and Upload Conda Packages
 
 on:
   push:
