@@ -20,7 +20,7 @@ jobs:
         shell: bash -el {0}
     steps:
       - name: update git version
-        run: yum -y install git
+        run: yum -y install git jq
     
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
