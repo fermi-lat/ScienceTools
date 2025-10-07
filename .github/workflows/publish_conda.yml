@@ -94,8 +94,8 @@ jobs:
            pwd
            ls -l
            conda install  astropy fermi::fermitools-data fermi::fermitools-test-scripts-data junit-xml
+           source $CONDA_PREFIX/etc/conda/activate.d
            mkdir -p test_results 
-           source scripts/activate.sh Release 
            cd test_results/
            python ../recipe/tests/ST-unit-test -w -d -v
            ls -l           
