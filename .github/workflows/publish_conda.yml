@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: master
+    branches: 54-glibc-fix
   workflow_dispatch:
     inputs:
       logLevel:
@@ -20,10 +20,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04-arm
+          - os: ubuntu-22.04-arm
             arch: arm64
             env_target_file: "fermitools-develop-linux.yml"
-          - os: ubuntu-24.04
+          - os: ubuntu-22.04
             arch: x86
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
@@ -38,7 +38,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: master
+          ref: 54-glibc-fix
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
