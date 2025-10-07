@@ -1,0 +1,58 @@
+name: Build and upload conda packages
+
+on:
+  push:
+    branches: 54-glibc-fix
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+jobs:
+  conda_deployment:
+    name: Conda deployment
+    runs-on: ubuntu-latest
+    container:
+      image: redhat/ubi8:latest 
+    defaults:
+     run:
+        shell: bash -el {0}
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4 # Checkout the repository code
+        with:
+          ref: 54-glibc-fix
+          submodules: 'recursive' # true
+          fetch-depth: 0 # Fetches full history
+          
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+
+      - name: Set environment-specific variables
+        run: |
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          fi
+
+      - name: Increment version number
+        run: |
+          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
+        
+      - name: Build and upload the conda packages
+        uses: uibcdf/action-build-and-upload-conda-packages@main
+        with:
+          meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
+          user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
+          token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
+          label: dev, s3df
+          upload: true
+          
+
