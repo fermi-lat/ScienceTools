@@ -46,7 +46,7 @@ jobs:
 
       - name: Increment version number
         run: |
-          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          source ./ScienceTools/recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
         
       - name: Build and upload the conda packages
