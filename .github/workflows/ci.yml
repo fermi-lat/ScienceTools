@@ -1,7 +1,7 @@
 name: CMake Build arm64 and amd64 for OSX / Linux
 on:
   push:
-    branches: [ 'master' ] # Enter trigger branch here
+    branches: [ '54-glibc-fix' ] # Enter trigger branch here
   workflow_dispatch:
     inputs:
       logLevel:
@@ -22,10 +22,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04-arm
+          - os: ubuntu-22.04-arm
             arch: arm64
             env_target_file: "fermitools-develop-linux.yml"
-          - os: ubuntu-24.04
+          - os: ubuntu-22.04
             arch: x86
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13 # macos-13
@@ -41,7 +41,7 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: master # Add ref branch here
+        ref: 54-glibc-fix # Add ref branch here
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 
