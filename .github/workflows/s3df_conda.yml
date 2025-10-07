@@ -46,6 +46,7 @@ jobs:
 
       - name: Increment version number
         run: |
+          pwd
           source ./ScienceTools/recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
         
