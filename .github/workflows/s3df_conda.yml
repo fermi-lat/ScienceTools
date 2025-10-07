@@ -32,7 +32,7 @@ jobs:
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
-          environment-file: environments/fermitools-s3df-linux/yml    # Replace with the path to your conda environment
+          environment-file: environments/fermitools-s3df-linux.yml    # Replace with the path to your conda environment
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
