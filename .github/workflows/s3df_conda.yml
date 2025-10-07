@@ -20,8 +20,7 @@ jobs:
         shell: bash -el {0}
     steps:
       - name: update git version
-      - run: |
-          yum update git
+      - run: yum update git
     
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
