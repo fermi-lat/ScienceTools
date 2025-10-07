@@ -1,5 +1,5 @@
 {% set name = "fermitools" %}
-{% set version = "2.4.0" %}
+{% set version = "2.4.60" %}
 
 package:
   name: {{ name|lower }}
@@ -57,22 +57,21 @@ build:
 requirements:
   build:
     - libgomp  # [linux]
+    - llvm-openmp # [osx]
     - cfitsio
-    - cmake >=3.18
+    - cmake >=4.0
     - make
     - pkg-config
-    - python 3.11.*
+    - python =3.11
     - swig 4.0.2
-
-  host:
-    - cfitsio
-    - python 3.11.*
-    - zlib
+    - zlib # [linux]
 
   run:
     - cfitsio
-    - python 3.11.*
+    - python >=3.11
     - fermitools-data
+    - matplotlib
+    - zlib # [linux]
 
 
 

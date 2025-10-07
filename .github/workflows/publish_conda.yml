@@ -45,7 +45,6 @@ jobs:
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
-          python-version: 3.11
           environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
           auto-update-conda: false
           auto-activate-base: false
