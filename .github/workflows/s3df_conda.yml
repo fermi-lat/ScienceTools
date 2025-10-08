@@ -48,6 +48,9 @@ jobs:
         run: |
           source recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
+
+      - name: Mark git directory as safe
+        run: git config --global --add safe.directory /__w/ScienceTools/ScienceTools
         
       - name: Build and upload the conda packages
         uses: uibcdf/action-build-and-upload-conda-packages@main
@@ -58,4 +61,3 @@ jobs:
           label: s3df
           upload: true
           
-
