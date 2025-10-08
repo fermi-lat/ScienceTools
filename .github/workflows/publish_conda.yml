@@ -13,6 +13,7 @@ jobs:
   conda_deployment:
     name: Conda deployment
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     defaults:
      run:
         shell: bash -el {0}
@@ -25,6 +26,7 @@ jobs:
             env_target_file: "fermitools-develop-linux.yml"
           - os: ubuntu-22.04
             arch: x86
+            container: redhat/ubi8:latest
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
             arch: x86_64 
@@ -35,6 +37,18 @@ jobs:
             env_target_file: "fermitools-develop-osx-arm64.yml"
             packages: llvm cfitsio swig
     steps:
+    
+      - name: Run environment-specific commands
+        run: |
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          fi
+          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86_64" ]];
+            yum -y install git jq
+            git config --global --add safe.directory /__w/ScienceTools/ScienceTools
+          fi
+          
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
@@ -49,13 +63,6 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
-
-      - name: Set environment-specific variables
-        run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
-            echo "Setting MacOS x86 env var" # debug
-            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-          fi
 
       - name: Increment version number
         run: |
