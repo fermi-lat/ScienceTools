@@ -1,7 +1,7 @@
 name: CMake Build arm64 and amd64 for OSX / Linux
 on:
   push:
-    branches: [ '54-glibc-fix' ] # Enter trigger branch here
+    branches: [ 'master' ] # Enter trigger branch here
   workflow_dispatch:
     inputs:
       logLevel:
@@ -41,7 +41,7 @@ jobs:
     - name: checkout the code
       uses: actions/checkout@v4 # Checkout the repository code
       with:
-        ref: 54-glibc-fix # Add ref branch here
+        ref: master # Add ref branch here
         submodules: 'recursive' # true
         fetch-depth: 0 # Fetches full history
 

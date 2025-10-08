@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: 54-glibc-fix
+    branches: master
   workflow_dispatch:
     inputs:
       logLevel:
@@ -52,7 +52,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: 54-glibc-fix
+          ref: master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
