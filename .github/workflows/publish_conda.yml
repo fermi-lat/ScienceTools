@@ -40,11 +40,11 @@ jobs:
     
       - name: Run environment-specific commands
         run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
-          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
             yum -y install git jq
             git config --global --add safe.directory /__w/ScienceTools/ScienceTools
           fi
