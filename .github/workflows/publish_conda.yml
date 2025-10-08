@@ -13,6 +13,7 @@ jobs:
   conda_deployment:
     name: Conda deployment
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     defaults:
      run:
         shell: bash -el {0}
@@ -20,11 +21,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04-arm
+          - os: ubuntu-22.04-arm
             arch: arm64
             env_target_file: "fermitools-develop-linux.yml"
-          - os: ubuntu-24.04
+          - os: ubuntu-22.04
             arch: x86
+            container: redhat/ubi8:latest
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
             arch: x86_64 
@@ -35,6 +37,18 @@ jobs:
             env_target_file: "fermitools-develop-osx-arm64.yml"
             packages: llvm cfitsio swig
     steps:
+    
+      - name: Run environment-specific commands
+        run: |
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          fi
+          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
+            yum -y install git jq
+            git config --global --add safe.directory /__w/ScienceTools/ScienceTools
+          fi
+          
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
@@ -50,16 +64,9 @@ jobs:
           auto-activate-base: false
           show-channel-urls: true
 
-      - name: Set environment-specific variables
-        run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
-            echo "Setting MacOS x86 env var" # debug
-            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-          fi
-
       - name: Increment version number
         run: |
-          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          source recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
         
       - name: Build and upload the conda packages
