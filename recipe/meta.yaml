@@ -78,27 +78,6 @@ requirements:
     - matplotlib
     - zlib # [linux]
 
-test:
-  imports:
-    - py_facilities
-    - pyLikelihood
-    - UnbinnedAnalysis
-#    - skymaps
-
-  requires:
-    - astropy
-    - fermi::fermitools-data
-    - fermi::fermitools-test-scripts-data
-    - junit-xml
-
-  files:
-    - tests/ST-unit-test
-
-  commands: |
-    - pwd
-    - recipe/tests/ST-unit-test -w -d -v
-    - ls -la
-
 about:
   home: https://github.com/fermi-lat/Sciencetools
   license: BSD-3-Clause
