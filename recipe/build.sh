@@ -38,8 +38,8 @@ else
         ${CMAKE_ARGS}
 fi
 
-#cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
-cmake --build Release --clean-first --target=install --verbose
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+#cmake --build Release --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
 mkdir -p $PREFIX/etc/conda/deactivate.d
