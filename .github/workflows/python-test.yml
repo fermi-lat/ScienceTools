@@ -1,0 +1,51 @@
+name: Build the Conda package
+on:
+  workflow_call:
+    inputs:
+      matrix_json:
+        required: true
+        type: string
+        description: "JSON string representing the matrix"
+      fermitools_pkg:
+        required: true
+        type: string
+        description: "Location of the Fermitools package"
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: ${{ fromJson(inputs.matrix_json) }}
+    steps:
+      - name: Checkout just ScienceTools repo 
+        uses: actions/checkout@v4
+        with:
+          ref: checkout_fixes # master
+
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: 3.11
+          environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          conda-remove-defaults: true
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+
+      - name: Run tests by hand
+        id: run_tests_again
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        run: |
+           echo "run tests jsa"
+           echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
+           echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
+
+           conda install pmw astropy junit-xml fermi::fermitools-data
+           conda install numpy <2.0.0
+           conda install fermi::fermitools-test-scripts-data
+           conda install ${{ inputs.fermitools_pkg }}
+           source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
+           mkdir -p test_results
+           cd test_results/
+           python ../recipe/tests/ST-unit-test -w -d -v
+           ls -l

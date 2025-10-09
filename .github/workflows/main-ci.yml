@@ -1,0 +1,29 @@
+name: CI with Reusable Workflows
+on:
+  push:
+    branches: checkout_fixes
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+
+jobs:
+  generate-matrix-tuple:
+    uses: ./.github/workflows/generate-matrix.yml # Call the matrix-generating workflow
+  
+  build-conda-pkg:
+    needs: generate-matrix-tuple # Ensure matrix generation completes first
+    uses: ./.github/workflows/build-conda-pkg.yml # Call the matrix-generating workflow
+    secrets: inherit
+    with:
+      matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
+
+  run-python-tests:
+    needs: [generate-matrix-tuple, build-conda-pkg] # Ensure matrix generation completes first
+    # needs: [ test-pip, test-conda, test-ui ]
+    uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
+    with:
+      matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
+      fermitools_pkg: ${{ needs.build-conda-pkg.outputs.conda-pkg }}
