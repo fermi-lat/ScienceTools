@@ -5,5 +5,7 @@ channels:
   - fermi
 dependencies:
   - anaconda-client
+  - cfitsio
   - cmake
   - conda-build
+  - python=3.11*
