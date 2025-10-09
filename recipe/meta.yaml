@@ -77,6 +77,14 @@ requirements:
     - fermitools-data
     - matplotlib
     - zlib # [linux]
+    - numpy <2.0.0
+    - PyYAML  
+  
+test: 
+  imports:
+    - py_facilities
+    - pyLikelihood
+    - UnbinnedAnalysis
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
