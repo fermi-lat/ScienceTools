@@ -75,5 +75,3 @@ jobs:
       # job.build-conda.outputs.fermitools-pkg }}
       # jobs.build-conda.conda-build-and-upload.outputs.paths}}
       # steps.build-conda.outputs.fermitools-pkg }}
-    run |
-      echo "Inside job run-python-tests" 
