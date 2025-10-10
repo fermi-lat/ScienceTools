@@ -9,8 +9,6 @@ on:
 jobs:
   generate-matrix:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set_matrix.outputs.matrix }}
     steps:
       - id: set_matrix
         run: |
@@ -20,6 +18,8 @@ jobs:
           ' 
           # echo ut name=matrix-combinations::{\"include\":[$MATRIX_PARAMS_COMBINATIONS]}
           echo "matrix={\"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
 
   matrix-job:
     runs-on: ubuntu-latest
