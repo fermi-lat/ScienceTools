@@ -14,7 +14,7 @@ jobs:
     steps:
       - id: set_matrix
         run: |
-          MATRIX_VALUES='[
+          MATRIX_VALUES='"include":[
             {"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"},
             {"os": "ubuntu-24.04", "arch": "x86", "env_target_file": "fermitools-develop-linux.yml"}
           ]'
