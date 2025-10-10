@@ -36,11 +36,11 @@ jobs:
         id: run_tests_again
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
-           echo "run tests jsa"
+           echo "Run tests jsa"
            echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
 
-           conda install pmw astropy junit-xml fermi::fermitools-data
+           conda install astropy junit-xml fermi::fermitools-data
            conda install numpy <2.0.0
            conda install fermi::fermitools-test-scripts-data
            conda install ${{ inputs.fermitools_pkg }}
