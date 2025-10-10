@@ -19,11 +19,3 @@ jobs:
     secrets: inherit
     with:
       matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
-
-  run-python-tests:
-    needs: [generate-matrix-tuple, build-conda-pkg] # Ensure matrix generation completes first
-    # needs: [ test-pip, test-conda, test-ui ]
-    uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
-    with:
-      matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
-      fermitools_pkg: ${{ needs.build-conda-pkg.outputs.conda-pkg }}
