@@ -4,10 +4,10 @@ on:
     outputs:
       matrix:
         description: "JSON array of matrix values"
-        value: ${{ jobs.generate.outputs.matrix }}
+        value: ${{ jobs.generate-matrix.outputs.matrix }}
 
 jobs:
-  generate:
+  generate-matrix:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
@@ -20,3 +20,15 @@ jobs:
           ' 
           # echo ut name=matrix-combinations::{\"include\":[$MATRIX_PARAMS_COMBINATIONS]}
           echo "matrix={\"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
+
+  matrix-job:
+    runs-on: ubuntu-latest
+    needs: generate-matrix 
+    strategy:
+      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+    steps:
+      - run: |
+          # Prove things are set
+          echo os=${{ matrix.os }}
+          echo arch=${{ matrix.arch }}
+          echo env=${{ matrix.env_target_file }}
