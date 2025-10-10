@@ -66,12 +66,12 @@ jobs:
             paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
             echo "conda-pkg-path=$paths" >> "$GITHUB_OUTPUT"
 
-  run-python-tests:
-    needs: build-conda 
-    uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
-    with:
-      matrix_json: ${{ inputs.matrix_json  }}
-      fermitools_pkg: ${{ needs.build-conda.outputs.fermitools-pkg }}
-      # job.build-conda.outputs.fermitools-pkg }}
-      # jobs.build-conda.conda-build-and-upload.outputs.paths}}
-      # steps.build-conda.outputs.fermitools-pkg }}
+      - name: run-python-tests
+        uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
+        with:
+            matrix_json: ${{ inputs.matrix_json  }}
+            fermitools_pkg: ${{ steps.conda-build-and-upload.outputs.paths }}
+            # needs.build-conda.outputs.fermitools-pkg }}
+            # job.build-conda.outputs.fermitools-pkg }}
+            # jobs.build-conda.conda-build-and-upload.outputs.paths}}
+            # steps.build-conda.outputs.fermitools-pkg }}
