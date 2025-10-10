@@ -26,6 +26,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: 3.11
+          activate-environment: testing-env 
           environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
           conda-remove-defaults: true
           auto-update-conda: false
@@ -41,7 +42,7 @@ jobs:
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
 
            conda install astropy junit-xml fermi::fermitools-data
-           conda install numpy="<2.0"
+           conda install -c conda-forge numpy="<2"
            conda install fermi::fermitools-test-scripts-data
            conda install ${{ inputs.fermitools_pkg }}
            source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
