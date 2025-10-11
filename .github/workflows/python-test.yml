@@ -42,7 +42,7 @@ jobs:
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
 
            conda install astropy junit-xml fermi::fermitools-data
-           conda install -c conda-forge numpy="<2"
+           # conda install -c conda-forge numpy="<2"
            conda install fermi::fermitools-test-scripts-data
            conda install ${{ inputs.fermitools_pkg }}
            source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
