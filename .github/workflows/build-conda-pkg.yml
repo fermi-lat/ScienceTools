@@ -15,7 +15,7 @@ jobs:
   build-conda:
     runs-on: ${{ matrix.os }}
     outputs:
-      fermitools-pkg: ${{ steps.conda-pkg-fullpath.outputs.conda-pkg-path }}
+      fermitools-pkg: ${{ steps.conda-build-and-upload.outputs.conda_package_name  }}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
@@ -72,7 +72,7 @@ jobs:
         if: always() # This ensures the step runs even if the tests fail
         id: verify-pkg-conda
         run: |
-            echo "Step ${{steps.conda-pkg-fullpath.outputs.paths}} "
+            echo "Step ${{ steps.conda-build-and-upload.outputs.conda_package_name }} "
             echo "Env ${{env.conda-pkg-path}} "
  
   run-python-tests:
