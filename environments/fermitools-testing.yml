@@ -1,0 +1,12 @@
+name: fermi-develop-osx
+channels:
+  - nodefaults
+  - conda-forge
+  - fermi
+dependencies:
+  - astropy 
+  - junit-xml 
+  - fermi::fermitools-data
+  - fermi::fermitools-test-scripts-data
+  # - pmw
+  # - numpy="<2.0"

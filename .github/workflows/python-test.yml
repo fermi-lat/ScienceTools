@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: 3.11
           activate-environment: testing-env 
-          # environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          environment-file: environments/fermitools-testing.yml   # Replace with the path to your conda environment
           conda-remove-defaults: true
           auto-update-conda: false
           auto-activate-base: false
@@ -40,11 +40,11 @@ jobs:
            echo "Run tests jsa"
            echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
-
-           conda install astropy junit-xml fermi::fermitools-data
+           # conda install astropy junit-xml fermi::fermitools-data
            # conda install -c conda-forge numpy="<2"
-           conda install fermi::fermitools-test-scripts-data
-           conda install ${{ inputs.fermitools_pkg }}
+           # conda install fermi::fermitools-test-scripts-data
+           echo ${{inputs.fermitools_pkg}}
+           conda install ${{inputs.fermitools_pkg}}
            source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            cd test_results/
