@@ -64,8 +64,8 @@ jobs:
         id: conda-pkg-fullpath
         run: |
             paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
-            echo "Conda pkg $paths"
-            echo "result=$paths" >> "$GITHUB_OUTPUT"
+            echo "Conda pkg $paths ${{steps.conda-build-and-upload.outputs.paths}} "
+            echo "conda_package_name=${{steps.conda-build-and-upload.outputs.paths}}" >> "$GITHUB_OUTPUT"
             echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
 
       - name: verify-conda-package
@@ -73,7 +73,8 @@ jobs:
         id: verify-pkg-conda
         run: |
             echo "Step ${{ steps.conda-build-and-upload.outputs.conda_package_name }} "
-            echo "Env ${{env.conda-pkg-path}} "
+            # echo "Env ${{env.conda-pkg-path}} "
+            
  
   run-python-tests:
     needs: build-conda 
