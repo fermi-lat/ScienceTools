@@ -27,8 +27,9 @@ jobs:
           echo "The input pkg value is: ${{ inputs.fermitools_pkg }}"
           ls -l
           echo "WS ${{ github.workspace }}"
-          echo "CPF $CONDA_PREFIX"
-          ls -l "$CONDA_PREFIX"
+          # CONDA_PREFIX doesn't exist
+          # echo "CPF $CONDA_PREFIX"
+          # ls -l $CONDA_PREFIX"
           ls -l ${{ github.workspace }}/environments/fermitools-testing.yml
 
       - name: Conda environment creation and activation
@@ -37,10 +38,11 @@ jobs:
           conda-remove-defaults: true
           python-version: 3.11
           activate-environment: testing-env 
-          environment-file: ${{ github.workspace }}/environments/fermitools-testing.yml   # Replace with the path to your conda environment
+          environment-file: environments/fermitools-testing.yml   # Replace with the path to your conda environment
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+          # ${{ github.workspace }}/
 
       - name: Run tests by hand
         id: run_tests_again
