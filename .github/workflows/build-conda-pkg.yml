@@ -29,9 +29,9 @@ jobs:
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
+          conda-remove-defaults: true
           python-version: 3.11
           environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
-          conda-remove-defaults: true
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
@@ -64,13 +64,15 @@ jobs:
         id: conda-pkg-fullpath
         run: |
             paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
-            echo "conda-pkg-path=$paths" >> "$GITHUB_OUTPUT"
+            echo "Conda pkg $paths"
+            echo "result=$paths" >> "$GITHUB_OUTPUT"
+            echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
 
       - name: verify-conda-package
         if: always() # This ensures the step runs even if the tests fail
         id: verify-pkg-conda
         run: |
-            echo "Step ${{steps.conda-build-and-upload.outputs.paths}} "
+            echo "Step ${{steps.conda-pkg-fullpath.outputs.paths}} "
             echo "Env ${{env.conda-pkg-path}} "
  
   run-python-tests:
@@ -78,7 +80,11 @@ jobs:
     uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
     with:
       matrix_json: ${{ inputs.matrix_json  }}
-      fermitools_pkg: ${{needs.build-conda.outputs.fermitools-pkg}}
+      fermitools_pkg: ${{needs.build-conda.outputs.fermitools-pkg}} 
+      # ${{needs.conda-pkg-fullpath.outputs.paths}}
+      # ${{steps.conda-pkg-fullpath.outputs.paths}}
+      # Not allowed here env fermitools_pkg: ${{env.conda-pkg-path}}
+      # ${{needs.build-conda.outputs.fermitools-pkg}}
       # ${{ needs.build-conda.outputs.fermitools-pkg }}
       # job.build-conda.outputs.fermitools-pkg }}
       # jobs.build-conda.conda-build-and-upload.outputs.paths}}
