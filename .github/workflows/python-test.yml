@@ -22,6 +22,10 @@ jobs:
         with:
           ref: checkout_fixes # master
 
+      - name: Display fermitools_pkg input variable
+        run: |
+          echo "The input pkg value is: ${{ inputs.fermitools_pkg }}"
+
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -40,11 +44,8 @@ jobs:
            echo "Run tests jsa"
            echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_OUTPUT"
-           # conda install astropy junit-xml fermi::fermitools-data
-           # conda install -c conda-forge numpy="<2"
-           # conda install fermi::fermitools-test-scripts-data
-           echo ${{inputs.fermitools_pkg}}
-           conda install ${{inputs.fermitools_pkg}}
+           echo " Prove ${{ inputs.fermitools_pkg }}"
+           conda install  "${{inputs.fermitools_pkg}}"
            source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            cd test_results/
