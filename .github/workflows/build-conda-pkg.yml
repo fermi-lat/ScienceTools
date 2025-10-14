@@ -67,14 +67,16 @@ jobs:
         run: |
             paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
             echo "Conda pkg $paths  / st  ${{steps.conda-build-and-upload.outputs.paths}} "
-            echo "conda_package_name=$paths" >> "$GITHUB_OUTPUT"
+            package_filename=$(basename "$paths")
+            echo "The extracted filename is: $package_filename" 
+            echo "conda_package_name=$package_filename" >> "$GITHUB_OUTPUT"
             echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
 
-      - name: Upload Conda package as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: "${{ matrix.os }}-fermitools-package"
-          path: ${{env.conda-pkg-path}}
+      # - name: Upload Conda package as artifact
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: "${{ matrix.os }}-fermitools-package"
+      #    path: ${{env.conda-pkg-path}}
 
       - name: verify-conda-package
         if: always() # This ensures the step runs even if the tests fail

@@ -44,23 +44,24 @@ jobs:
           show-channel-urls: true
           # ${{ github.workspace }}/
 
-      - name: Download Conda package artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: "${{ matrix.os }}-fermitools-package"
-          path: downloaded-package # Directory where the artifact will be downloaded
+      # - name: Download Conda package artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: "${{ matrix.os }}-fermitools-package"
+      #    path: downloaded-package # Directory where the artifact will be downloaded
 
       - name: Run tests by hand
         id: run_tests_again
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
-           echo "Run tests jsa"
+           echo "Run tests testing-env"
+           conda activate testing-env
            echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
            # echo " Prove ${{ inputs.fermitools_pkg }}"
-           ls -R downloaded-package
-           conda install downloaded-package/*.conda -y
-           # conda install  "${{inputs.fermitools_pkg}}"
+           # ls -R downloaded-package
+           # conda install downloaded-package/*.conda -y
+           conda install  "${{inputs.fermitools_pkg}}" -y
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            cd test_results/
