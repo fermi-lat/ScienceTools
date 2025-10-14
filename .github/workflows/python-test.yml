@@ -6,6 +6,10 @@ on:
         required: true
         type: string
         description: "JSON string representing the matrix"
+      artifact_key:
+        required: true
+        type: string
+        description: "Used to download the Fermitools conda package artifact"
       fermitools_pkg:
         required: true
         type: string
@@ -44,6 +48,12 @@ jobs:
           show-channel-urls: true
           # ${{ github.workspace }}/
 
+      - name: Download Conda package artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact_key }}"
+          path: downloaded-package # Directory where the artifact will be downloaded
+
       - name: Run tests by hand
         id: run_tests_again
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
@@ -51,9 +61,11 @@ jobs:
            echo "Run tests jsa"
            echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
-           echo " Prove ${{ inputs.fermitools_pkg }}"
-           conda install  "${{inputs.fermitools_pkg}}"
-           source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
+           # echo " Prove ${{ inputs.fermitools_pkg }}"
+           ls -R downloaded-package
+           conda install downloaded-package/*.conda -y
+           # conda install  "${{inputs.fermitools_pkg}}"
+           # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            cd test_results/
            python ../recipe/tests/ST-unit-test -w -d -v
