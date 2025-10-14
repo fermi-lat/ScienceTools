@@ -56,6 +56,8 @@ jobs:
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
+          overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
+          # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
 
