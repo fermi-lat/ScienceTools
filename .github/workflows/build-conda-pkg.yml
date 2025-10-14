@@ -71,7 +71,7 @@ jobs:
       - name: Upload Conda package as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ runner.os }}-fermitools-package
+          name: "${{ matrix.os }}-fermitools-package"
           path: ${{env.conda-pkg-path}}
 
       - name: verify-conda-package
@@ -86,5 +86,4 @@ jobs:
     uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
     with:
       matrix_json: ${{ inputs.matrix_json  }}
-      artifact_key: ${{ runner.os }}-fermitools-package
       fermitools_pkg: ${{needs.build-conda.outputs.fermitools-pkg}}

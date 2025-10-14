@@ -6,10 +6,6 @@ on:
         required: true
         type: string
         description: "JSON string representing the matrix"
-      artifact_key:
-        required: true
-        type: string
-        description: "Used to download the Fermitools conda package artifact"
       fermitools_pkg:
         required: true
         type: string
@@ -51,7 +47,7 @@ jobs:
       - name: Download Conda package artifact
         uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.artifact_key }}"
+          name: "${{ matrix.os }}-fermitools-package"
           path: downloaded-package # Directory where the artifact will be downloaded
 
       - name: Run tests by hand
