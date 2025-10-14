@@ -15,7 +15,7 @@ jobs:
   build-conda:
     runs-on: ${{ matrix.os }}
     outputs:
-      fermitools-pkg: ${{ steps.conda-build-and-upload.outputs.conda_package_name  }}
+      fermitools-pkg: ${{ steps.conda-pkg-fullpath.outputs.conda_package_name  }}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
@@ -56,7 +56,7 @@ jobs:
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
-          upload: true # have to upload? 
+          upload: true # Need to keep upload , or else paths don't work.
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
 
       - name: Re-format output paths
@@ -72,16 +72,17 @@ jobs:
         if: always() # This ensures the step runs even if the tests fail
         id: verify-pkg-conda
         run: |
-            echo "Step ${{ steps.conda-build-and-upload.outputs.conda_package_name }} "
-            # echo "Env ${{env.conda-pkg-path}} "
+            echo "Step ${{ steps.conda-pkg-fullpath.outputs.paths }} "
+            echo "Env ${{env.conda-pkg-path}} "
             
- 
   run-python-tests:
     needs: build-conda 
     uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
     with:
       matrix_json: ${{ inputs.matrix_json  }}
-      fermitools_pkg: ${{needs.build-conda.outputs.fermitools-pkg}} 
+      fermitools_pkg: ${{needs.build-conda.outputs.fermitools-pkg}}
+      # ${{ steps.conda-pkg-fullpath.outputs.paths }}
+      # ${{needs.build-conda.outputs.fermitools-pkg}} 
       # ${{needs.conda-pkg-fullpath.outputs.paths}}
       # ${{steps.conda-pkg-fullpath.outputs.paths}}
       # Not allowed here env fermitools_pkg: ${{env.conda-pkg-path}}
