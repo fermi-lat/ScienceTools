@@ -68,7 +68,7 @@ jobs:
            ft_version=$(awk -F'-' '{print $2;}' <<< "${{inputs.fermitools_pkg}}")
            # Should be a version , NOT the full path.
            echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}}  "
-           conda install "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}"
+           conda install "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" --no-pin -vvv
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            cd test_results/
