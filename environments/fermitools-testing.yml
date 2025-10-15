@@ -1,6 +1,5 @@
 name: fermi-develop-osx
 channels:
-  - nodefaults
   - conda-forge
   - fermi
 dependencies:
@@ -8,5 +7,6 @@ dependencies:
   - junit-xml 
   - fermi::fermitools-data
   - fermi::fermitools-test-scripts-data
+  - python=3.11*
   # - pmw
   # - numpy="<2.0"
