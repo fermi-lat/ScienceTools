@@ -15,7 +15,7 @@ jobs:
   build-conda:
     runs-on: ${{ matrix.os }}
     outputs:
-      fermitools-pkg: ${{env.conda-pkg-path}}  # ${{ steps.conda-pkg-fullpath.outputs.conda_package_name  }}
+      fermitools-pkg: ${{env.FERMITOOLS_VERSION }}  # ${{env.conda-pkg-path}}  ${{ steps.conda-pkg-fullpath.outputs.conda_package_name  }}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
