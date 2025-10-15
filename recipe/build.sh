@@ -30,8 +30,8 @@ else
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
-		#-DCMAKE_C_FLAGS="-g -fPIC -O0" -DCMAKE_CXX_FLAGS="-g -fPIC -O0" \
-        -DCMAKE_CXX_FLAGS="-fPIC" \
+		#-CMAKE_C_FLAGS="-g -fPIC -O0" -CMAKE_CXX_FLAGS="-g -fPIC -O0" \
+        -CMAKE_C_FLAGS="-fPIC" -CMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
