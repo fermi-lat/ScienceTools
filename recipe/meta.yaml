@@ -66,9 +66,6 @@ requirements:
     - pkg-config
     - python =3.11
     - swig 4.0.2
-  host:
-    - cfitsio
-    - python 3.11.*
     - zlib # [linux]
 
   run:
@@ -77,8 +74,6 @@ requirements:
     - fermitools-data
     - matplotlib
     - zlib # [linux]
-    - numpy <2.0.0
-    - PyYAML  
   
 test: 
   imports:
