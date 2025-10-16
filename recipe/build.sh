@@ -33,9 +33,8 @@ else
 	fi
 	
     cmake -S . \
-        -B Debug \
-        -DCMAKE_BUILD_TYPE=Debug \
-		-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
+        -B Release \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS="-g -fPIC -O0" -DCMAKE_CXX_FLAGS="-g -fPIC -O0" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
@@ -47,8 +46,8 @@ echo "IMAGE INFORMATION"
 ldd --version
 cat /etc/os-release
 
-#cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
-cmake --build Debug --clean-first --target=install --verbose
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+#cmake --build Debug --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
 mkdir -p $PREFIX/etc/conda/deactivate.d
