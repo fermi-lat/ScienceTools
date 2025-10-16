@@ -67,6 +67,7 @@ requirements:
     - python =3.11
     - swig 4.0.2
     - zlib # [linux]
+    - xerces-c # [linux]
 
   run:
     - cfitsio
@@ -75,7 +76,8 @@ requirements:
     - matplotlib
     - zlib # [linux]
     - numpy <2.0.0
-    - PyYAML  
+    - PyYAML
+    - xerces-c # [linux]
   
 test: 
   imports:

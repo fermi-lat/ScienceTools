@@ -56,6 +56,7 @@ set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
 if(NOT APPLE)
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
+  option(USE_SYSTEM_XERCES_C    "Use system-installed XercesC instead of package-provided" ON)
 else()
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
 endif()
@@ -69,7 +70,6 @@ option(USE_SYSTEM_FFTW        "Use system-installed fftw instead of package-prov
 option(USE_SYSTEM_GSL         "Use system-installed gsl instead of package-provided" OFF)
 option(USE_SYSTEM_HEALPIX_CXX "Use system-installed healpix_cxx instead of package-provided" OFF)
 option(USE_SYSTEM_WCSLIB      "Use system-installed WCSlib instead of package-provided" OFF)
-option(USE_SYSTEM_XERCES_C    "Use system-installed XercesC instead of package-provided" OFF)
 
 # --------------------------------------------------------------------
 # Helper macro to switch
