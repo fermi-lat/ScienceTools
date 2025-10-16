@@ -27,6 +27,11 @@ if [ "$(uname)" == "Darwin" ]; then
         ${CMAKE_ARGS}
 else
     echo "Configuring for Linux"
+	
+	if [ "$(uname -m)" == "x86_64" ]; then
+		conda update --yes sysroot_linux-64 -c conda-forge
+	fi
+	
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
