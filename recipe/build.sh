@@ -38,6 +38,10 @@ else
         ${CMAKE_ARGS}
 fi
 
+echo "IMAGE INFORMATION"
+ldd --version
+cat /etc/os-release
+
 cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 #cmake --build Release --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
