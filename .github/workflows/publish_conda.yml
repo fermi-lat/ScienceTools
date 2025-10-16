@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: checkout_fixes
+    branches: xerces-segfaults
   workflow_dispatch:
     inputs:
       logLevel:
@@ -52,7 +52,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: checkout_fixes # master
+          ref: xerces-segfaults # master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           

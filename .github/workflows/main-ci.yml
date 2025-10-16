@@ -1,7 +1,7 @@
 name: CI with Reusable Workflows
 on:
   push:
-    branches: checkout_fixes
+    branches: xerces-segfaults
   workflow_dispatch:
     inputs:
       logLevel:
