@@ -29,6 +29,7 @@ else
     echo "Configuring for Linux"
 	
 	if [ "$(uname -m)" == "x86_64" ]; then
+		conda install --yes sysroot_linux-64 -c conda-forge
 		conda update --yes sysroot_linux-64 -c conda-forge
 	fi
 	
