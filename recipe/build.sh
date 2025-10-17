@@ -17,8 +17,8 @@ conda install --yes conda-forge::cxx-compiler
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
-        -B Debug \
-        -DCMAKE_BUILD_TYPE=Debug \
+        -B Release \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -36,7 +36,7 @@ else
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_FLAGS="-g -fPIC -O0" -DCMAKE_CXX_FLAGS="-g -fPIC -O0" \
+        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
