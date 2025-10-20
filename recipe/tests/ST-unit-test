@@ -54,11 +54,11 @@ FAIL = 1
 def exists_mass(files):
     status = OK
     for f in files:
-        print ("Checking for file %s ..." % f,)
+        print("Checking for file %s ..." % f,)
         if exists(f):
-            print ("found.")
+            print("found.")
         else:
-            print ("not found!")
+            print("not found!")
             status = FAIL
     return status
 
@@ -86,12 +86,12 @@ def cmp_mass(files, outref):
     for f in files:
         f1 = f
         f2 = sep.join([outref, f])
-        print ("Using cmp to compare %s to %s ..." % (f1, f2),)
+        print("Using cmp to compare %s to %s ..." % (f1, f2),)
         s = cmp(f1, f2, *files[f])
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     return status
 
@@ -120,11 +120,11 @@ def diff_mass(files, outref):
         f1 = f
         f2 = sep.join([outref, f])
         s = diff(f1, f2, *files[f])
-        print ("Using diff to compare %s to %s ..." % (f1, f2),)
+        print("Using diff to compare %s to %s ..." % (f1, f2),)
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     return status
 
@@ -155,12 +155,12 @@ def ftdiff_mass(fitsFiles, outref):
     for f in fitsFiles: 
         f1 = f
         f2 = sep.join([outref, f])
-        print ("Using ftdiff to compare %s to %s ..." % (f1, f2),)
+        print("Using ftdiff to compare %s to %s ..." % (f1, f2),)
         s = ftdiff(f1, f2, **fitsFiles[f])
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     return status
 
@@ -198,11 +198,11 @@ def compare_text_data_files(f1, f2, tolerance):
             x = min(abs(x1), abs(x2))
             if x != 0:
                 if abs(x1 - x2) / x > tolerance:
-                    print (x1, "(relatively) !=", x2)
+                    print(x1, "(relatively) !=", x2)
                     status = FAIL
             else:
                 if abs(x1 - x2) > tolerance:
-                    print (x1, "(absolutely) !=", x2)
+                    print(x1, "(absolutely) !=", x2)
                     status = FAIL
     return status
 
@@ -216,12 +216,12 @@ def check_environment(options):
     status = OK
     environmentVariableNames = [ "CONDA_PREFIX" ]
     for ev in environmentVariableNames:
-        print ("Checking if environment variable %s is set ..." % ev,)
+        print("Checking if environment variable %s is set ..." % ev,)
         try:
             val = environ[ev]
-            print ("yes, value is:", val)
+            print("yes, value is:", val)
         except KeyError as e:
-            print ("no!")
+            print("no!")
             status = FAIL
     return status
 
@@ -258,24 +258,24 @@ def check_test_tip_output(options):
         status = FAIL
     if cmp_mass(files, outref) != OK:
         status = FAIL
-    print ("Checking that TIPTMPDIR exists ...",)
+    print("Checking that TIPTMPDIR exists ...",)
     if not exists("TIPTMPDIR"):
-        print ("no!")
+        print("no!")
         status = FAIL
     else:
-        print ("it does.")
-    print ("Checking that TIPTMPDIR/ is a directory ...",)
+        print("it does.")
+    print("Checking that TIPTMPDIR/ is a directory ...",)
     if not isdir("TIPTMPDIR"):
-        print ("no!")
+        print("no!")
         status = FAIL
     else:
-        print ("it does.")
-    print ("Checking that TIPTMPDIR/ is empty ...",)
+        print("it does.")
+    print("Checking that TIPTMPDIR/ is empty ...",)
     if len(glob("TIPTMPDIR/*")):
-        print ("no!")
+        print("no!")
         status = FAIL
     else:
-        print ("it is.")
+        print("it is.")
     return status
 
 #------------------------------------------------------------------------------
@@ -400,12 +400,12 @@ def check_test_GRBtemplate_output(options):
     tolerance = 1e-4
     for f1 in textDataFiles:
         f2 = sep.join([outref, f1])
-        print ("Comparing numbers in %s and %s..." % (f1, f2),)
+        print("Comparing numbers in %s and %s..." % (f1, f2),)
         if compare_text_data_files(f1, f2, tolerance) != OK:
-            print ("failed!")
+            print("failed!")
             status = FAIL
         else:
-            print ("passed.")
+            print("passed.")
     return status
 
 #------------------------------------------------------------------------------
@@ -471,24 +471,24 @@ def check_test_map_tools_output(options):
     if exists_mass(fitsFiles.keys()) != OK:
         status = FAIL
     if options.bit64:
-        print ("HACK: Running 64-bit tests.")
+        print("HACK: Running 64-bit tests.")
         f1 = "testCube.fits"
         f2 = sep.join([outref, "testCube_64bit.fits"])
-        print ("Using ftdiff to compare %s to %s ..." % (f1, f2),)
+        print("Using ftdiff to compare %s to %s ..." % (f1, f2),)
         s = ftdiff(f1, f2)
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
         f1 = "testCube2.fits"
         f2 = sep.join([outref, "testCube2_64bit.fits"])
-        print ("Using ftdiff to compare %s to %s ..." % (f1, f2),)
+        print("Using ftdiff to compare %s to %s ..." % (f1, f2),)
         s = ftdiff(f1, f2)
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     else:
         if ftdiff_mass(fitsFiles, outref) != OK:
@@ -656,12 +656,12 @@ def check_test_pulsarDb_output(options):
     if exists_mass(computedFiles_ref) != OK:
         status = FAIL
     for (f1, f2) in zip(computedFiles_out, computedFiles_ref):
-        print ("Using diff to compare %s to %s ..." % (f1, f2),)
+        print("Using diff to compare %s to %s ..." % (f1, f2),)
         s = diff(f1, f2)
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     files = {
         "testdb.txt" : [],
@@ -721,12 +721,12 @@ def check_test_pulsarDb_output(options):
     tolerance = 1e-7
     for f1 in textDataFiles:
         f2 = sep.join([outref, f1])
-        print ("Comparing numbers in %s and %s..." % (f1, f2),)
+        print("Comparing numbers in %s and %s..." % (f1, f2),)
         if compare_text_data_files(f1, f2, tolerance) != OK:
-            print ("failed!")
+            print("failed!")
             status = FAIL
         else:
-            print ("passed.")
+            print("passed.")
     return status
 
 #------------------------------------------------------------------------------
@@ -760,12 +760,12 @@ def check_test_psearch_output(options):
     if exists_mass(computedFiles_ref) != OK:
         status = FAIL
     for (f1, f2) in zip(computedFiles_out, computedFiles_ref):
-        print ("Using diff to compare %s to %s ..." % (f1, f2),)
+        print("Using diff to compare %s to %s ..." % (f1, f2),)
         s = diff(f1, f2)
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     fitsFiles = {
         "artificial-chi-sq.fits" : {},
@@ -797,12 +797,12 @@ def check_test_psearch_output(options):
     tolerance = 1e-4
     for f1 in textDataFiles:
         f2 = sep.join([outref, f1])
-        print ("Comparing numbers in %s and %s..." % (f1, f2),)
+        print("Comparing numbers in %s and %s..." % (f1, f2),)
         if compare_text_data_files(f1, f2, tolerance) != OK:
-            print ("failed!")
+            print("failed!")
             status = FAIL
         else:
-            print ("passed.")
+            print("passed.")
     textDataFiles_existOnly = {
         "testPowerSpectrumApp_par1.log" : [],
         }
@@ -865,12 +865,12 @@ def check_test_pulsePhase_output(options):
     if exists_mass(computedFiles_ref) != OK:
         status = FAIL
     for (f1, f2) in zip(computedFiles_out, computedFiles_ref):
-        print ("Using diff to compare %s to %s ..." % (f1, f2),)
+        print("Using diff to compare %s to %s ..." % (f1, f2),)
         s = diff(f1, f2)
         if s == OK:
-            print ("passed.")
+            print("passed.")
         else:
-            print ("failed!")
+            print("failed!")
             status = FAIL
     fitsFiles = {
         "testOrbitalPhaseApp_par1a.fits" : {},
@@ -1575,10 +1575,10 @@ def ok(testCmd, testName, options):
     nTest += 1
     status = run_test(testCmd, options)
     if status[0] == OK:
-        print ("ok %s - %s" % (nTest, testName))
+        print("ok %s - %s" % (nTest, testName))
         nPass += 1
     else:
-        print ("not ok %s - %s" % (nTest, testName))
+        print("not ok %s - %s" % (nTest, testName))
         nFail += 1
         status[0] = FAIL
     return status
@@ -1591,8 +1591,8 @@ if __name__ == "__main__":
     # Process the command line.
     (options, args) = getCommandLineOptions()
     if options.debug:
-        print ("options = %s" % options)
-        print ("args = %s" % args)
+        print("options = %s" % options)
+        print("args = %s" % args)
 
     #--------------------------------------------------------------------------
 
@@ -1603,7 +1603,7 @@ if __name__ == "__main__":
     
     # Fetch the test start time.
     tStart = times()[4]
-    if options.debug: print ("tStart = %s" % tStart)
+    if options.debug: print("tStart = %s" % tStart)
 
     test_cases = []
     # Run each unit test.
@@ -1631,21 +1631,21 @@ if __name__ == "__main__":
     
     # Fetch the test stop time.
     tStop = times()[4]
-    if options.debug: print ("tStop = %s" % tStop)
+    if options.debug: print("tStop = %s" % tStop)
 
     # Compute the elapsed time for the tests.
     tElapsed = tStop - tStart
-    if options.debug: print ("tElapsed = %s" % tElapsed)
+    if options.debug: print("tElapsed = %s" % tElapsed)
 
     # Fetch the name of the testing machine.
     hostname = node()
-    if options.debug: print ("hostname = %s" % hostname)
+    if options.debug: print("hostname = %s" % hostname)
 
     # Print the test summary.
-    print ("Total run time: %s s on %s" % (tElapsed, hostname))
-    print ("1..%d" % nTest)
+    print("Total run time: %s s on %s" % (tElapsed, hostname))
+    print("1..%d" % nTest)
     if nFail > 0:
-        print ("# Looks like you failed %d %s of %d" % \
+        print("# Looks like you failed %d %s of %d" % \
               (nFail, "test" if nFail == 1 else "tests", nTest))
 
     # Remove tmpFile

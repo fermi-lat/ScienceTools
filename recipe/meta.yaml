@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/fermi-lat/Sciencetools.git
-  git_tag: xerces-segfaults
+  git_tag: checkout_fixes # xerces-segfaults
   git_submodules: true
 
 build:
@@ -67,6 +67,7 @@ requirements:
     - python =3.11
     - swig 4.0.2
     - zlib # [linux]
+    - xerces-c # [linux]
 
   run:
     - cfitsio
@@ -75,7 +76,8 @@ requirements:
     - matplotlib
     - zlib # [linux]
     - numpy <2.0.0
-    - PyYAML  
+    - PyYAML
+    - xerces-c # [linux]
   
 test: 
   imports:
