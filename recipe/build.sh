@@ -6,6 +6,9 @@ if [ "$(uname)" == "Darwin" ]; then
     export CXXFLAGS="-std=c++17 ${CXXFLAGS}" 
     export LDFLAGS="${LDFLAGS}  -lstdc++ -headerpad_max_install_names"
     export TOOLCHAIN_FILE="cmake/macos-toolchain.cmake"
+    brew update
+    brew install llvm
+    brew doctor
     brew install llvm
 else
     export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
