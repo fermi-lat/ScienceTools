@@ -71,6 +71,9 @@ jobs:
            conda install "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" python=3.11.*
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
+           
+           conda install astropy junit-xml
+           conda install fermi::fermitools-data fermi::fermitools-test-scripts-data 
            cd test_results/
            python ../recipe/tests/ST-unit-test -w -d -v
            ls -l
