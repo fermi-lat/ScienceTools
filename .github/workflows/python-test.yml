@@ -66,9 +66,9 @@ jobs:
  
            # local conda install  "${{inputs.fermitools_pkg}}" -y
            ft_version=$(awk -F'-' '{print $2;}' <<< "${{inputs.fermitools_pkg}}")
-           # Should be a version , NOT the full path.
+           # Should be a ft_version , NOT the full path.
            conda install python=3.11.*
-           echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}}  "
+           echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}} / CP $CONDA_PREFIX "
            conda install "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" --no-pin -vvv
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
