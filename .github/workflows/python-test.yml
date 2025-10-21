@@ -83,21 +83,22 @@ jobs:
            conda list
            ../recipe/tests/ST-unit-test -w -d -v
            ls -l
+           pwd
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
         with:
           files: |
-             test-results/ST-unit-test-Output.xml
-             test_results/ST-*.log 
+             ST-unit-test-Output.xml
+             ST-*.log 
     
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with:
           files: |
-             test-results/ST-unit*.xml
+             ST-unit*.xml
 
 # Stop updating SLack with every run 08/26/25 JSA        
 #      - name: Post a Build status in a Slack's fermitools-pipeline channel.
