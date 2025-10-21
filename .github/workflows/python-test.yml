@@ -14,13 +14,16 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
       - name: Checkout just ScienceTools repo 
         uses: actions/checkout@v4
         with:
-          ref: checkout_fixes # master
+          ref: reset_checkout_fixes # checkout_fixes master
 
       - name: Display fermitools_pkg input variable
         run: |
@@ -36,7 +39,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           conda-remove-defaults: true
-          python-version: 3.11
+          python-version: 3.11.*
           activate-environment: testing-env 
           environment-file: environments/fermitools-testing.yml   # Replace with the path to your conda environment
           auto-update-conda: false
@@ -56,8 +59,9 @@ jobs:
         run: |
            echo "Run tests testing-env"
            # conda activate testing-env
-           echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
-           echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
+           # Is this stopping things from finding libraries.
+           #### echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
+           #### echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
            echo " Prove ${{ inputs.fermitools_pkg }}"
            # ls -R downloaded-package
            # conda install downloaded-package/*.conda -y
@@ -66,11 +70,50 @@ jobs:
  
            # local conda install  "${{inputs.fermitools_pkg}}" -y
            ft_version=$(awk -F'-' '{print $2;}' <<< "${{inputs.fermitools_pkg}}")
-           # Should be a version , NOT the full path.
-           echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}}  "
-           conda install "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" --no-pin -vvv
+           # Should be a ft_version , NOT the full path.
+           echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}} / CP $CONDA_PREFIX "
+           conda info --envs
+           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" python=3.11.*
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
+           
+           #### conda install astropy junit-xml
+           ###conda install fermi::fermitools-data fermi::fermitools-test-scripts-data 
            cd test_results/
-           python ../recipe/tests/ST-unit-test -w -d -v
+           conda list
+           ../recipe/tests/ST-unit-test -w -d -v
            ls -l
+
+      - name: Publish Test Results Linux
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: runner.os == 'Linux'
+        with:
+          files: |
+             test-results/ST-unit-test-Output.xml
+             test_results/ST-*.log 
+    
+      - name: Publish Test Results OSX
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: runner.os == 'macOS'
+        with:
+          files: |
+             test-results/ST-unit*.xml
+
+# Stop updating SLack with every run 08/26/25 JSA        
+#      - name: Post a Build status in a Slack's fermitools-pipeline channel.
+#        if: always()
+#        uses: slackapi/slack-github-action@v2.1.1
+#        with:
+#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          webhook-type: incoming-webhook
+#          payload: |
+#            text: "This line is ignored, find a title option..."
+#            blocks:
+#             - type: "header"
+#               text: 
+#                 type: "plain_text"
+#                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
+#             - type: "section" 
+#               text:
+#                 type: "mrkdwn"
+#                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"

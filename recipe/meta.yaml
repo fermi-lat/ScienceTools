@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/fermi-lat/Sciencetools.git
-  git_tag: xerces-segfaults
+  git_tag: reset_checkout_fixes
   git_submodules: true
 
 build:

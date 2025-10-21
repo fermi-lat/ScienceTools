@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: xerces-segfaults
+    branches: reset_checkout_fixes  #xerces-segfaults
   workflow_dispatch:
     inputs:
       logLevel:
@@ -40,11 +40,16 @@ jobs:
     
       - name: Run environment-specific commands
         run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86" ]]; then
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86" ]]; then :
+            # if [[ ${{ startsWith( matrix.os, 'macos-') && matrix.arch == 'x86' }} ]]; then :
+            # if [[ startsWith( ${{matrix.os}} , 'macos-') && ${{matrix.arch}} == 'x86' ]]; then :
+            # if: ${{ startsWith(matrix.os, 'macos-') && matrix.arch == 'x86' }}
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
           if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
+            # if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }}
+            #if [[ ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }} ]] ; then :
             yum -y install git jq python3
             git config --global --add safe.directory /__w/ScienceTools/ScienceTools
           fi
@@ -52,7 +57,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: xerces-segfaults # master
+          ref: reset_checkout_fixes #xerces-segfaults # master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
@@ -100,7 +105,7 @@ jobs:
            pwd
            ls -l
            conda install  astropy fermi::fermitools-data fermi::fermitools-test-scripts-data junit-xml
-           source $CONDA_PREFIX/etc/conda/activate.d/activate.sh
+           source "$CONDA_PREFIX"/etc/conda/activate.d/activate.sh
            mkdir -p test_results 
            cd test_results/
            python ../recipe/tests/ST-unit-test -w -d -v
@@ -123,8 +128,6 @@ jobs:
             ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
             # ls -lR ${{ github.workspace }}
 
-
-
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: (! cancelled() && runner.os == 'Linux')
@@ -132,18 +135,11 @@ jobs:
           files: |
              test-results/ST-unit-test-Output.xml
              test_results/ST-*.log
-             ${{ github.workspace }}/test-results/ST-unit-test-Output.xml
-             ${{ github.workspace }}/test_results/ST-*.log
-             ${{ github.workspace }}/tests/ST-*.xml
-             artifacts/test-results/*.xml
 
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: (! cancelled() &&  runner.os == 'macOS')
         with:
           files: |
-             ${{ github.workspace }}/test-results/ST-unit*.xml
-             ${{ github.workspace }}/test_results/ST-*.log
-             ${{ github.workspace }}/tests/ST-unit*.xml
-             ${{ github.workspace }}/downloaded-test-results/**/*.xml
-             artifacts/test-results/*.xml
+             test-results/ST-unit*.xml
+             test_results/ST-*.log
