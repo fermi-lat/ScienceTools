@@ -55,6 +55,7 @@ jobs:
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
            echo "Run tests testing-env"
+           conda info --envs
            # conda activate testing-env
            echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
            echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
@@ -75,5 +76,6 @@ jobs:
            conda install astropy junit-xml
            conda install fermi::fermitools-data fermi::fermitools-test-scripts-data 
            cd test_results/
-           python ../recipe/tests/ST-unit-test -w -d -v
+           conda list
+           ../recipe/tests/ST-unit-test -w -d -v
            ls -l
