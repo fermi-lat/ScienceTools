@@ -14,6 +14,9 @@ on:
 jobs:
   test:
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
@@ -55,7 +58,6 @@ jobs:
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
            echo "Run tests testing-env"
-           conda info --envs
            # conda activate testing-env
            # Is this stopping things from finding libraries.
            #### echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
@@ -70,7 +72,8 @@ jobs:
            ft_version=$(awk -F'-' '{print $2;}' <<< "${{inputs.fermitools_pkg}}")
            # Should be a ft_version , NOT the full path.
            echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}} / CP $CONDA_PREFIX "
-           conda install "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" python=3.11.*
+           conda info --envs
+           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" python=3.11.*
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            
