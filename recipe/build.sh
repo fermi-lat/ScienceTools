@@ -41,11 +41,12 @@ else
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         ${CMAKE_ARGS}
-fi
 
 echo "IMAGE INFORMATION"
 ldd --version
 cat /etc/os-release
+
+fi
 
 cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 #cmake --build Debug --clean-first --target=install --verbose
