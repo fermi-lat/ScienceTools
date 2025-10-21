@@ -90,15 +90,15 @@ jobs:
         if: runner.os == 'Linux'
         with:
           files: |
-             ST-unit-test-Output.xml
-             ST-*.log 
+             ${{ github.workspace }}/test_results/ST-unit-test-Output.xml
+             ${{ github.workspace }}/test_results/ST-*.log 
     
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with:
           files: |
-             ST-unit*.xml
+             ${{ github.workspace }}/test_results/ST-unit*.xml
 
 # Stop updating SLack with every run 08/26/25 JSA        
 #      - name: Post a Build status in a Slack's fermitools-pipeline channel.
