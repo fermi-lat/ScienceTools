@@ -57,8 +57,9 @@ jobs:
            echo "Run tests testing-env"
            conda info --envs
            # conda activate testing-env
-           echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
-           echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
+           # Is this stopping things from finding libraries.
+           #### echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
+           #### echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
            echo " Prove ${{ inputs.fermitools_pkg }}"
            # ls -R downloaded-package
            # conda install downloaded-package/*.conda -y
@@ -73,8 +74,8 @@ jobs:
            # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
            mkdir -p test_results
            
-           conda install astropy junit-xml
-           conda install fermi::fermitools-data fermi::fermitools-test-scripts-data 
+           #### conda install astropy junit-xml
+           ###conda install fermi::fermitools-data fermi::fermitools-test-scripts-data 
            cd test_results/
            conda list
            ../recipe/tests/ST-unit-test -w -d -v
