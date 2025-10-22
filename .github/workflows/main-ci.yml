@@ -20,10 +20,11 @@ jobs:
     with:
       matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
 
-  display_final_output:
-    needs: build-conda-pkg
-    runs-on: ubuntu-latest
-    steps:
-      - name: Display final output
-        run: |
-          echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.conda-pkg}}"
+  # ref: ${{ github.event.pull_request.head.ref }}
+  #display_final_output:
+  #  needs: build-conda-pkg
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: Display final output
+  #      run: |
+  #        echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.conda-pkg}}"

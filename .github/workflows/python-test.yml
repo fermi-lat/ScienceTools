@@ -6,10 +6,10 @@ on:
         required: true
         type: string
         description: "JSON string representing the matrix"
-      fermitools_pkg:
+      fermitools_pkg_ver:
         required: true
         type: string
-        description: "Location of the Fermitools package"
+        description: "Fermitools package version"
 
 jobs:
   test:
@@ -25,27 +25,16 @@ jobs:
         with:
           ref: reset_checkout_fixes # checkout_fixes master
 
-      - name: Display fermitools_pkg input variable
-        run: |
-          echo "The input pkg value is: ${{ inputs.fermitools_pkg }}"
-          ls -l
-          echo "WS ${{ github.workspace }}"
-          # CONDA_PREFIX doesn't exist
-          # echo "CPF $CONDA_PREFIX"
-          # ls -l $CONDA_PREFIX"
-          ls -l ${{ github.workspace }}/environments/fermitools-testing.yml
-
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
           conda-remove-defaults: true
           python-version: 3.11.*
           activate-environment: testing-env 
-          environment-file: environments/fermitools-testing.yml   # Replace with the path to your conda environment
+          environment-file: environments/fermitools-testing.yml
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
-          # ${{ github.workspace }}/
 
       # - name: Download Conda package artifact
       #  uses: actions/download-artifact@v4
@@ -58,32 +47,20 @@ jobs:
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
            echo "Run tests testing-env"
-           # conda activate testing-env
-           # Is this stopping things from finding libraries.
-           #### echo "LIB_DIR=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
-           #### echo "LD_LIBRARY_PATH=$CONDA_PREFIX/lib" >> "$GITHUB_ENV"
-           echo " Prove ${{ inputs.fermitools_pkg }}"
-           # ls -R downloaded-package
-           # conda install downloaded-package/*.conda -y
-           # echo 'fermitools-2.4.84-py311hfa7a43b_0' | awk -F'-' '{print $2;}' 
-           # conda install fermi/label/dev::fermitools=2.4.86 -y
- 
-           # local conda install  "${{inputs.fermitools_pkg}}" -y
-           ft_version=$(awk -F'-' '{print $2;}' <<< "${{inputs.fermitools_pkg}}")
-           # Should be a ft_version , NOT the full path.
-           echo "Ft version $ft_version / input ${{inputs.fermitools_pkg}} / CP $CONDA_PREFIX "
-           conda info --envs
-           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg}}" python=3.11.*
-           # source "$CONDA_PREFIX/etc/conda/activate.d/activate.sh"
+           echo "TESTING BRANCH JSA ${{ github.ref_name }}"
+           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11.*
            mkdir -p test_results
-           
-           #### conda install astropy junit-xml
-           ###conda install fermi::fermitools-data fermi::fermitools-test-scripts-data 
            cd test_results/
-           conda list
            ../recipe/tests/ST-unit-test -w -d -v
-           ls -l
-           pwd
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+           paths: |
+              ${{ github.workspace }}/test_results/ST-*.xml
+              ST-*.xml
+              test_results/ST-*.xml
+        if: always()
 
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
@@ -91,7 +68,6 @@ jobs:
         with:
           files: |
              ${{ github.workspace }}/test_results/ST-unit-test-Output.xml
-             ${{ github.workspace }}/test_results/ST-*.log 
     
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2

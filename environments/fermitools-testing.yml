@@ -8,5 +8,5 @@ dependencies:
   - fermi::fermitools-data
   - fermi::fermitools-test-scripts-data
   - python=3.11
-  # - pmw
+  - pmw
   # - numpy="<2.0"

@@ -15,7 +15,7 @@ jobs:
   build-conda:
     runs-on: ${{ matrix.os }}
     outputs:
-      fermitools-pkg: ${{env.FERMITOOLS_VERSION }}  # ${{env.conda-pkg-path}}  ${{ steps.conda-pkg-fullpath.outputs.conda_package_name  }}
+      fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
@@ -47,6 +47,8 @@ jobs:
         run: |
           source ${{ github.workspace }}/recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
+          echo "BRANCH JSA  ${{ github.ref_name }}"
+
 
       - name: Build and upload the conda packages
         id: conda-build-and-upload
@@ -61,16 +63,16 @@ jobs:
           upload: true # Need to keep upload , or else paths don't work.
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
 
-      - name: Re-format output paths
-        if: always() # This ensures the step runs even if the tests fail
-        id: conda-pkg-fullpath
-        run: |
-            paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
-            echo "Conda pkg $paths  / st  ${{steps.conda-build-and-upload.outputs.paths}} "
-            package_filename=$(basename "$paths")
-            echo "The extracted filename is: $package_filename" 
-            echo "conda_package_name=$package_filename" >> "$GITHUB_OUTPUT"
-            echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
+      # - name: Re-format output paths
+      #  if: always() # This ensures the step runs even if the tests fail
+      #  id: conda-pkg-fullpath
+      #  run: |
+      #      paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
+      #      echo "Conda pkg $paths  / st  ${{steps.conda-build-and-upload.outputs.paths}} "
+      #      package_filename=$(basename "$paths")
+      #      echo "The extracted filename is: $package_filename" 
+      #      echo "conda_package_name=$package_filename" >> "$GITHUB_OUTPUT"
+      #      echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
 
       # - name: Upload Conda package as artifact
       #  uses: actions/upload-artifact@v4
@@ -78,16 +80,9 @@ jobs:
       #    name: "${{ matrix.os }}-fermitools-package"
       #    path: ${{env.conda-pkg-path}}
 
-      - name: verify-conda-package
-        if: always() # This ensures the step runs even if the tests fail
-        id: verify-pkg-conda
-        run: |
-            echo "Step ${{ steps.conda-pkg-fullpath.outputs.paths }} "
-            echo "Env ${{env.conda-pkg-path}} "
-            
   run-python-tests:
     needs: build-conda 
-    uses: ./.github/workflows/python-test.yml # Call the reusable test workflow
+    uses: ./.github/workflows/python-test.yml
     with:
       matrix_json: ${{ inputs.matrix_json  }}
-      fermitools_pkg: ${{needs.build-conda.outputs.fermitools-pkg}}
+      fermitools_pkg_ver: ${{needs.build-conda.outputs.fermitools-pkg}}
