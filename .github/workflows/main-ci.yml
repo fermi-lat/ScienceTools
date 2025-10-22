@@ -1,7 +1,7 @@
 name: CI with Reusable Workflows
 on:
   push:
-    branches: reset_checkout_fixes # xerces-segfaults
+    branches: reset_checkout_fixes  # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:

@@ -22,7 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: reset_checkout_fixes # checkout_fixes  master
+          ref: ${{ github.ref_name }} # reset_checkout_fixes checkout_fixes  master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
 
@@ -48,7 +48,6 @@ jobs:
           source ${{ github.workspace }}/recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
           echo "BRANCH JSA  ${{ github.ref_name }}"
-
 
       - name: Build and upload the conda packages
         id: conda-build-and-upload
@@ -80,8 +79,10 @@ jobs:
       #    name: "${{ matrix.os }}-fermitools-package"
       #    path: ${{env.conda-pkg-path}}
 
+  # Waits for all builds to complete, before running testing
   run-python-tests:
     needs: build-conda 
+    if: success()
     uses: ./.github/workflows/python-test.yml
     with:
       matrix_json: ${{ inputs.matrix_json  }}
