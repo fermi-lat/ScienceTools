@@ -2,23 +2,22 @@ name: Python Package testing
 on:
   workflow_call:
     inputs:
-      matrix_json:
+      matrix_os:
         required: true
         type: string
-        description: "JSON string representing the matrix"
+        description: "matrix.os to be ran"
       fermitools_pkg_ver:
         required: true
         type: string
         description: "Fermitools package version"
 
+
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ inputs.matrix_os }}
     defaults:
       run:
         shell: bash -l {0}
-    strategy:
-      matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
       - name: Checkout just ScienceTools repo 
         uses: actions/checkout@v4

@@ -38,7 +38,7 @@ jobs:
 
       - name: Set OSX environment-specific variables
         run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86_64" ]]; then
+          if [[ "${{ matrix.os }}"  =~ "macos-" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
@@ -82,8 +82,10 @@ jobs:
   # Waits for all builds to complete, before running testing
   run-python-tests:
     needs: build-conda 
-    if: success()
+    strategy:
+      matrix: ${{ fromJson(inputs.matrix_json) }} 
+    # if: success()
     uses: ./.github/workflows/python-test.yml
     with:
-      matrix_json: ${{ inputs.matrix_json  }}
+      matrix_os: ${{ matrix.os }}
       fermitools_pkg_ver: ${{needs.build-conda.outputs.fermitools-pkg}}
