@@ -14,10 +14,7 @@ jobs:
     steps:
       - id: set_matrix
         run: |
-          MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"}, 
-                         {"os": "ubuntu-24.04", "arch": "x86", "env_target_file": "fermitools-develop-linux.yml"}, 
-                         {"os": "macos-15-intel", "arch": "x86_64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}, 
-                         {"os": "macos-15", "arch": "arm64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}' 
+          MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"}, {"os": "ubuntu-24.04", "arch": "x86", "env_target_file": "fermitools-develop-linux.yml"}, {"os": "macos-15-intel", "arch": "x86_64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}, {"os": "macos-15", "arch": "arm64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}' 
           echo "matrix={\"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
