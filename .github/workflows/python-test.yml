@@ -13,7 +13,7 @@ on:
 
 
 jobs:
-  test-${{ inputs.matrix_os }}:
+  test:
     runs-on: ${{ inputs.matrix_os }}
     defaults:
       run:
