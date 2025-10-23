@@ -27,18 +27,29 @@ if [ "$(uname)" == "Darwin" ]; then
         ${CMAKE_ARGS}
 else
     echo "Configuring for Linux"
+	
+	if [ "$(uname -m)" == "x86_64" ]; then
+		conda install --yes sysroot_linux-64 -c conda-forge
+		conda update --yes sysroot_linux-64 -c conda-forge
+	fi
+	
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
-        -DPython3_EXECUTABLE="$(which python)" \
+        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
+		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         ${CMAKE_ARGS}
+
+echo "IMAGE INFORMATION"
+ldd --version
+cat /etc/os-release
+
 fi
 
-#cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
-cmake --build Release --clean-first --target=install --verbose
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+#cmake --build Debug --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
 mkdir -p $PREFIX/etc/conda/deactivate.d

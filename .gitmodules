@@ -123,42 +123,36 @@
 	url = https://github.com/fermi-lat/Minuit2.git
 [submodule "src/pyBurstAnalysisGUI/"]
 	branch = master
-[submodule "externals/cppunit"]
-	path = externals/cppunit
-        url = https://git.libreoffice.org/cppunit
 [submodule "externals/gsl"]
 	path = externals/gsl
 	url = git://git.savannah.gnu.org/gsl.git
-[submodule "externals/clhep"]
-	path = externals/clhep
-	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
-[submodule "externals/clhep_module/clhep"]
-	path = externals/clhep_module/clhep
-	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
-[submodule "externals/cfitsio_module/cfitsio"]
-	path = externals/cfitsio_module/cfitsio
-	url = https://github.com/heasarc/cfitsio.git
-[submodule "externals/cppunit_module/cppunit"]
-	path = externals/cppunit_module/cppunit
-        url = https://git.libreoffice.org/cppunit 
 [submodule "externals/gsl_module/gsl"]
 	path = externals/gsl_module/gsl
 	url = git://git.savannah.gnu.org/gsl.git
-[submodule "externals/cfitsio/cfitsio"]
-	path = externals/cfitsio/cfitsio
-	url = https://github.com/heasarc/cfitsio.git
-[submodule "externals/clhep/clhep"]
-	path = externals/clhep/clhep
-	url = https://gitlab.cern.ch/CLHEP/CLHEP.git
-[submodule "externals/cppunit/cppunit"]
-	path = externals/cppunit/cppunit
-        url = https://git.libreoffice.org/cppunit
 [submodule "externals/wcslib/wcslib"]
 	path = externals/wcslib/wcslib
-	url = https://github.com/Punzo/wcslib.git
+	url = https://github.com/fermi-lat/wcslib.git
 [submodule "externals/xercesc/xercesc"]
 	path = externals/xercesc/xercesc
-	url = https://github.com/apache/xerces-c.git
+	url = https://github.com/fermi-lat/xerces-c.git
 [submodule "externals/gsl/gsl"]
 	path = externals/gsl/gsl
 	url = https://github.com/fermi-lat/gsl.git
+[submodule "externals/cppunit"]
+	path = externals/cppunit
+	url = https://github.com/fermi-lat/cppunit.git
+[submodule "externals/clhep"]
+	path = externals/clhep
+	url = https://github.com/fermi-lat/CLHEP.git
+[submodule "externals/cppunit/cppunit"]
+	path = externals/cppunit/cppunit
+	url = https://github.com/fermi-lat/cppunit.git
+[submodule "resources/clhep/clhep"]
+	path = resources/clhep/clhep
+	url = https://github.com/fermi-lat/CLHEP.git
+[submodule "externals/cfitsio/cfitsio"]
+	path = externals/cfitsio/cfitsio
+	url = https://github.com/fermi-lat/cfitsio.git
+[submodule "externals/clhep/clhep"]
+	path = externals/clhep/clhep
+	url = https://github.com/fermi-lat/CLHEP.git

@@ -2,7 +2,7 @@ name: Build and upload conda packages
 
 on:
   push:
-    branches: master
+    branches: reset_checkout_fixes  #xerces-segfaults
   workflow_dispatch:
     inputs:
       logLevel:
@@ -40,19 +40,24 @@ jobs:
     
       - name: Run environment-specific commands
         run: |
-          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86" ]]; then
+          if [[ "${{ matrix.os }}" == "macos-"* && "${{ matrix.arch }}" == "x86" ]]; then :
+            # if [[ ${{ startsWith( matrix.os, 'macos-') && matrix.arch == 'x86' }} ]]; then :
+            # if [[ startsWith( ${{matrix.os}} , 'macos-') && ${{matrix.arch}} == 'x86' ]]; then :
+            # if: ${{ startsWith(matrix.os, 'macos-') && matrix.arch == 'x86' }}
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
           if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
-            yum -y install git jq
+            # if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }}
+            #if [[ ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }} ]] ; then :
+            yum -y install git jq python3
             git config --global --add safe.directory /__w/ScienceTools/ScienceTools
           fi
           
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: master
+          ref: reset_checkout_fixes #xerces-segfaults # master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
@@ -60,16 +65,30 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          conda-remove-defaults: true
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+          # Used for running conda locally on Mact with ACT 
+          # Use a bundled Miniconda and skip initialization to avoid shell changes
+          # use-only-bundled-miniconda: true
+          # Providing a fake condarc path prevents conda init from being called
+          # condarc-file: 'does/not/exist'
 
       - name: Increment version number
         run: |
           source recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
-        
+
+      - name: Create test results directory 
+        run: |
+          mkdir -p tests
+          mkdir -p test_results
+          mkdir -p downloaded-test-results
+          mkdir -p /tmp/artifacts
+
       - name: Build and upload the conda packages
+        id: conda-build-and-upload
         uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
           meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
@@ -77,5 +96,50 @@ jobs:
           token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
           label: dev
           upload: true
-          
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail 
 
+      - name: Run tests by hand
+        id: run_tests_again
+        run: |
+           echo "run tests jsa"
+           pwd
+           ls -l
+           conda install  astropy fermi::fermitools-data fermi::fermitools-test-scripts-data junit-xml
+           source "$CONDA_PREFIX"/etc/conda/activate.d/activate.sh
+           mkdir -p test_results 
+           cd test_results/
+           python ../recipe/tests/ST-unit-test -w -d -v
+           ls -l           
+
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+
+      - name: Re-format output paths
+        ## if: always() # This ensures the step runs even if the tests fail
+        id: reformat-paths
+        # Needed to have the correct newline-separated files format for the following release step
+        run: |
+            paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
+            echo "newline-separated-paths=$paths" >> "$GITHUB_OUTPUT"
+
+      - name: Display conda paths
+        ## if: always() # This ensures the step runs even if the tests fail
+        run: |
+            # pwd
+            ls -l ${{steps.reformat-paths.outputs.newline-separated-paths}}
+            # ls -lR ${{ github.workspace }}
+
+      - name: Publish Test Results Linux
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: (! cancelled() && runner.os == 'Linux')
+        with:
+          files: |
+             test-results/ST-unit-test-Output.xml
+             test_results/ST-*.log
+
+      - name: Publish Test Results OSX
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: (! cancelled() &&  runner.os == 'macOS')
+        with:
+          files: |
+             test-results/ST-unit*.xml
+             test_results/ST-*.log

@@ -1,0 +1,95 @@
+name: Python Package testing
+on:
+  workflow_call:
+    inputs:
+      matrix_os:
+        required: true
+        type: string
+        description: "matrix.os to be ran"
+      fermitools_pkg_ver:
+        required: true
+        type: string
+        description: "Fermitools package version"
+
+
+jobs:
+  test:
+    runs-on: ${{ inputs.matrix_os }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout just ScienceTools repo 
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.ref_name}} #reset_checkout_fixes checkout_fixes master
+
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          conda-remove-defaults: true
+          python-version: 3.11.*
+          activate-environment: testing-env 
+          environment-file: environments/fermitools-testing.yml
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+
+      # - name: Download Conda package artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: "${{ matrix.os }}-fermitools-package"
+      #    path: downloaded-package # Directory where the artifact will be downloaded
+
+      - name: Run tests by hand
+        id: run_tests_again
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        run: |
+           echo "Run tests testing-env"
+           echo "TESTING BRANCH JSA ${{ github.ref_name }}"
+           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11.*
+           mkdir -p test_results
+           cd test_results/
+           ../recipe/tests/ST-unit-test -w -d -v
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+           paths: |
+              ${{ github.workspace }}/test_results/ST-*.xml
+              ST-*.xml
+              test_results/ST-*.xml
+        if: always()
+
+      - name: Publish Test Results Linux
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: runner.os == 'Linux'
+        with:
+          files: |
+             ${{ github.workspace }}/test_results/ST-unit-test-Output.xml
+    
+      - name: Publish Test Results OSX
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: runner.os == 'macOS'
+        with:
+          files: |
+             ${{ github.workspace }}/test_results/ST-unit*.xml
+
+# Stop updating SLack with every run 08/26/25 JSA        
+#      - name: Post a Build status in a Slack's fermitools-pipeline channel.
+#        if: always()
+#        uses: slackapi/slack-github-action@v2.1.1
+#        with:
+#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          webhook-type: incoming-webhook
+#          payload: |
+#            text: "This line is ignored, find a title option..."
+#            blocks:
+#             - type: "header"
+#               text: 
+#                 type: "plain_text"
+#                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
+#             - type: "section" 
+#               text:
+#                 type: "mrkdwn"
+#                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"

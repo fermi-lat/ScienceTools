@@ -68,10 +68,10 @@ add_subdirectory(xercesc) # <-- doc, tests, and samples are ignored
 # --------------------------------------------------------------------------
 unset(add_subdirectory)
 
-if(DEFINED _xerces_backup_BUILD_SHARED_LIBS )
-  set(BUILD_SHARED_LIBS "${_xerces_backup_BUILD_SHARED_LIBS}" CACHE BOOL "" FORCE)
-  unset(_xerces_backup_BUILD_SHARED_LIBS)
-endif()
+# if(DEFINED _xerces_backup_BUILD_SHARED_LIBS )
+#   set(BUILD_SHARED_LIBS "${_xerces_backup_BUILD_SHARED_LIBS}" CACHE BOOL "" FORCE)
+#   unset(_xerces_backup_BUILD_SHARED_LIBS)
+# endif()
 if(DEFINED _xerces_backup_network )
   set(network "${_xerces_backup_network}" CACHE BOOL "" FORCE)
   unset(_xerces_backup_network)

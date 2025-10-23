@@ -1,0 +1,91 @@
+name: Build the Conda package
+on:
+  workflow_call:
+    inputs:
+      matrix_json:
+        required: true
+        type: string
+        description: "JSON string representing the matrix"
+    outputs:
+      conda-pkg:
+        description: "Full path location of the Fermitools conda package"
+        value: ${{ jobs.build-conda.outputs.fermitools-pkg }}
+
+jobs:
+  build-conda:
+    runs-on: ${{ matrix.os }}
+    outputs:
+      fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
+    strategy:
+      matrix: ${{ fromJson(inputs.matrix_json) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }} # reset_checkout_fixes checkout_fixes  master
+          submodules: 'recursive' # true
+          fetch-depth: 0 # Fetches full history
+
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          conda-remove-defaults: true
+          python-version: 3.11
+          environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+
+      - name: Set OSX environment-specific variables
+        run: |
+          if [[ "${{ matrix.os }}"  =~ "macos-" && "${{ matrix.arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          fi
+
+      - name: Increment version number
+        run: |
+          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
+          echo "BRANCH JSA  ${{ github.ref_name }}"
+
+      - name: Build and upload the conda packages
+        id: conda-build-and-upload
+        uses: uibcdf/action-build-and-upload-conda-packages@main
+        with:
+          meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
+          user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
+          token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
+          label: dev
+          overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
+          # upload_flags: "--force"
+          upload: true # Need to keep upload , or else paths don't work.
+        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+
+      # - name: Re-format output paths
+      #  if: always() # This ensures the step runs even if the tests fail
+      #  id: conda-pkg-fullpath
+      #  run: |
+      #      paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
+      #      echo "Conda pkg $paths  / st  ${{steps.conda-build-and-upload.outputs.paths}} "
+      #      package_filename=$(basename "$paths")
+      #      echo "The extracted filename is: $package_filename" 
+      #      echo "conda_package_name=$package_filename" >> "$GITHUB_OUTPUT"
+      #      echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
+
+      # - name: Upload Conda package as artifact
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: "${{ matrix.os }}-fermitools-package"
+      #    path: ${{env.conda-pkg-path}}
+
+  # Waits for all builds to complete, before running testing
+  run-python-tests:
+    needs: build-conda 
+    strategy:
+      matrix: ${{ fromJson(inputs.matrix_json) }} 
+    # if: success()
+    uses: ./.github/workflows/python-test.yml
+    with:
+      matrix_os: ${{ matrix.os }}
+      fermitools_pkg_ver: ${{needs.build-conda.outputs.fermitools-pkg}}

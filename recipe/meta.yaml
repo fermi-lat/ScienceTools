@@ -7,7 +7,9 @@ package:
 
 source:
   git_url: https://github.com/fermi-lat/Sciencetools.git
-  git_tag: master
+  git_tag: "{{ environ.get('GITHUB_REF_NAME', 'master') }}" 
+  git_submodules: true
+
 build:
   number: {{ environ.get('BUILD_NUMBER', 0)}}
   skip: true  # [win]
@@ -65,6 +67,7 @@ requirements:
     - python =3.11
     - swig 4.0.2
     - zlib # [linux]
+    - xerces-c # [linux]
 
   run:
     - cfitsio
@@ -72,25 +75,15 @@ requirements:
     - fermitools-data
     - matplotlib
     - zlib # [linux]
-
-
-
-#test:
-#  imports:
-#    - py_facilities
-#    - pyLikelihood
-#    - UnbinnedAnalysis
-#    - skymaps
-
-  requires:
-    - fermitools-test-scripts-data
-    - junit-xml
-
-  files:
-    - tests/ST-unit-test
-
-  commands:
-    - tests/ST-unit-test -w
+    - numpy <2.0.0
+    - PyYAML
+    - xerces-c # [linux]
+  
+test: 
+  imports:
+    - py_facilities
+    - pyLikelihood
+    - UnbinnedAnalysis
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
