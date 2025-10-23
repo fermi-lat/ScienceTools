@@ -1,18 +1,23 @@
-name: CI with Reusable Workflows
+name:  
 on:
   push:
-    branches: reset_checkout_fixes  # ${{github.ref_name}} not allowed here.
+    branches: reset_checkout_fixes  # Can't use  ${{github.ref_name}} to get branch name here, but it is used in the other workflows. So this is the only place the branch name is hard coded.
   workflow_dispatch:
     inputs:
       logLevel:
         description: 'Log level'
         required: true
         default: 'warning'
+  schedule:
+    # Runs every day at midnight UTC
+    - cron: '0 0 * * *' 
 
 jobs:
+  # This workflow returns a JSON matrix that covers the 2 OSes (macos,linux) and 2 architectures (x86,arm64) we currently support. Plus additional variables needed by the other workflows.
   generate-matrix-tuple:
     uses: ./.github/workflows/generate-matrix.yml # Call the matrix-generating workflow
-  
+ 
+   
   build-conda-pkg:
     needs: generate-matrix-tuple # Ensure matrix generation completes first
     uses: ./.github/workflows/build-conda-pkg.yml # Call the matrix-generating workflow
@@ -27,4 +32,4 @@ jobs:
   #  steps:
   #    - name: Display final output
   #      run: |
-  #        echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.conda-pkg}}"
+  #        echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.pkg_ver}}"

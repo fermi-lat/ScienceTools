@@ -7,3 +7,5 @@ conda env create -n fermi-dev -f environments/fermitools-develop-linux.yml
 ```
 
 Or as appropriate with your chosen target architecture.
+
+Currently, the only 2 files actively used are : fermitools-develop-osx.yml and fermitools-develop-linux.yml (for ci/cd and local development) 10/25 
