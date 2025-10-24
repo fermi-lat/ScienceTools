@@ -14,11 +14,26 @@ on:
 jobs:
   build-conda:
     runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
     outputs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
+    
+      - name: Run environment-specific commands
+        run: |
+          if [[ "${{ inputs.os }}" == "macos-"* && "${{ inputs.build-arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          fi
+          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
+            # if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }}
+            #if [[ ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }} ]] ; then :
+            yum -y install git jq python3
+            git config --global --add safe.directory /__w/ScienceTools/ScienceTools
+          fi
+    
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -36,16 +51,9 @@ jobs:
           auto-activate-base: false
           show-channel-urls: true
 
-      - name: Set OSX environment-specific variables
-        run: |
-          if [[ "${{ matrix.os }}"  =~ "macos-" && "${{ matrix.arch }}" == "x86_64" ]]; then
-            echo "Setting MacOS x86 env var" # debug
-            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-          fi
-
       - name: Increment version number
         run: |
-          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          source recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
           echo "BRANCH JSA  ${{ github.ref_name }}"
 
