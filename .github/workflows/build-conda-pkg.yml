@@ -53,7 +53,7 @@ jobs:
 
       - name: Increment version number
         run: |
-          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          source recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
           echo "BRANCH JSA  ${{ github.ref_name }}"
 
