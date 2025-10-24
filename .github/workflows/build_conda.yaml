@@ -25,8 +25,9 @@ on:
 
 jobs:
   build:
-    name: ${{inputs.os}}, ${{inputs.build-arch}},  ${{inputs.build-type}}
+    name: ${{inputs.os}}, ${{inputs.build-arch}},  ${{inputs.build-type}}, ${{inputs.container}}
     runs-on: ${{inputs.os}}
+    container: ${{inputs.container}}
     defaults:
       run:
         shell: bash -el {0}
@@ -35,6 +36,20 @@ jobs:
       # Windows. GH-hosted runners have 3 or 4 CPUs, so just go with 3.
       NPROC: 3
     steps:
+    
+      - name: Run environment-specific commands
+        run: |
+          if [[ "${{ inputs.os }}" == "macos-"* && "${{ inputs.build-arch }}" == "x86_64" ]]; then
+            echo "Setting MacOS x86 env var" # debug
+            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
+          fi
+          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
+            # if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }}
+            #if [[ ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }} ]] ; then :
+            yum -y install git jq python3
+            git config --global --add safe.directory /__w/ScienceTools/ScienceTools
+          fi
+          
       - name: checkout the code
         uses: actions/checkout@v4
         with:
@@ -50,13 +65,6 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
-
-      - name: Set environment-specific variables
-        run: |
-          if [[ "${{ inputs.os }}" == "macos-"* && "${{ inputs.build-arch }}" == "x86_64" ]]; then
-            echo "Setting MacOS x86 env var" # debug
-            echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
-          fi
 
       - name: Increment version number
         run: |
