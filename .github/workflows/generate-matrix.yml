@@ -9,8 +9,10 @@ on:
 jobs:
   generate-matrix:
     runs-on: ubuntu-latest
-    # List of OSes, architecture, file containing Python dependencies, and additional packages needed to be installed.
-    # Both OSes now use only one environment file since the Python dependencies are the same.
+    # Build the liist of OSes, architecture, file containing Python dependencies, and additional packages needed to be installed. 
+    # Return the matrix  as a ouput parameter that other Jobs can input and process as a JSON object.
+    # Each OS only uses one Python dependencies environment file: fermitools-develop-linux.yml and fermitools-develop-osx.yml
+
     steps:
       - id: set_matrix
         run: |

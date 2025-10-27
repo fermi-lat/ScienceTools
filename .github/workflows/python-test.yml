@@ -1,4 +1,5 @@
 name: Python Package testing
+run-name: "Testing ${{ inputs.matrix_os }}"
 on:
   workflow_call:
     inputs:
@@ -11,6 +12,10 @@ on:
         type: string
         description: "Fermitools package version"
 
+# Just check out the Parent ScienceTools repo, we don't need the submodules.
+# Just recipe/tests directory. All testing will be ran from that  directory.
+# ${{github.ref_name}} was used to save updating the branch names in multiple files during development. 
+# New python dependency environment file was creating for testing : environments/fermitools-testing.yml 
 
 jobs:
   test:
@@ -35,32 +40,32 @@ jobs:
           auto-activate-base: false
           show-channel-urls: true
 
+  # Currently, every conda  build package has to be uploaded to Anaconda, so the package name can be passed onto this workflow.
+  # It's a bug on the build actions team to fix. The alternative is to upload it as an artifact to Github server, and pass that reference around instead.
+  # So this code is being kept around , just in case we want to pivot: 
+
       # - name: Download Conda package artifact
       #  uses: actions/download-artifact@v4
       #  with:
       #    name: "${{ matrix.os }}-fermitools-package"
       #    path: downloaded-package # Directory where the artifact will be downloaded
 
+  # Currently,  we only run : ST-unit-test
+  # But the plan is to include Tom's Likelihood tests, Threads testing that Don does manually, and Nestor is creating jupyter notebooks that can be ran as tests too.
+  # BUG: This doesn't handle Tags RC and MAIN, it will only pull from tag dev. 
+
       - name: Run tests by hand
         id: run_tests_again
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
            echo "Run tests testing-env"
-           echo "TESTING BRANCH JSA ${{ github.ref_name }}"
-           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11.*
+           echo "TESTING BRANCH  ${{ github.ref_name }}"
+           conda install --name testing-env  "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
            mkdir -p test_results
            cd test_results/
            ../recipe/tests/ST-unit-test -w -d -v
 
-      - name: Test Summary
-        uses: test-summary/action@v2
-        with:
-           paths: |
-              ${{ github.workspace }}/test_results/ST-*.xml
-              ST-*.xml
-              test_results/ST-*.xml
-        if: always()
-
+      # The layout for this reporting action works. Not sure if there is something better, but it does a good job for us.
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
@@ -75,6 +80,10 @@ jobs:
           files: |
              ${{ github.workspace }}/test_results/ST-unit*.xml
 
+# Updating a Slack channel was a requirement for this new task . This was implemented early in development, but it became annoying since each new build 
+# updated Slack individually.  
+# TODO: Merge the 4 test results into a single Slack update. Artifacts could be used, but concern about blowing the monthly github storage quota is a concern.  
+#
 # Stop updating SLack with every run 08/26/25 JSA        
 #      - name: Post a Build status in a Slack's fermitools-pipeline channel.
 #        if: always()
