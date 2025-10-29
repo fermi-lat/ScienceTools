@@ -23,6 +23,7 @@ jobs:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
       - name: Run environment-specific commands
+        id: get_git_safe_dir
         run: |
           if [[ "${{ matrix.os }}" =~ "macos-" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
@@ -31,6 +32,9 @@ jobs:
           if [[ "${{ matrix.os }}" =~ "ubuntu-" && "${{ matrix.arch }}" == "x86" ]]; then
             yum -y install git jq python3
             git config --global --add safe.directory /__w/ScienceTools/ScienceTools
+            GIT_SAFE_DIRECTORY=$(git config --global --get safe.directory)
+            echo "The global Git safe is: $GIT_SAFE_DIRECTORY"
+            echo "git_safe_dir=$GIT_SAFE_DIRECTORY" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Checkout code
@@ -49,6 +53,20 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+
+      - name: Increment version number
+        run: |
+          if [[ "${{ steps.get_git_safe_dir.outputs.git_safe_dir }}" != ""  ]]; then
+            echo "github.safe.directory exists"
+            source ${{ steps.get_git_safe_dir.outputs.git_safe_dir }}/recipe/increment_fermi_version.sh
+          else
+            echo "github.xyz does not exist"
+            source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+
+          fi 
+          # source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
+
 
       # Reused from Azure build system.
       - name: Increment version number
