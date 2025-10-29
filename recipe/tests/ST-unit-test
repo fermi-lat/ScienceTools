@@ -1389,10 +1389,10 @@ unitTestsWithoutRoot = [
     { "cmd"  : check_test_map_tools_output,  # Test map_tools package
       "name" : "test_map_tools: Check output" },
 #   Likelihood broken? 10/25 JSA
-#    { "cmd"  : "test_Likelihood",  # Test Likelihood package
-#      "name" : "test_Likelihood" },
-#    { "cmd"  : check_test_Likelihood_output,  # Test Likelihood package
-#      "name" : "test_Likelihood: Check output" },
+    { "cmd"  : "test_Likelihood",  # Test Likelihood package
+      "name" : "test_Likelihood" },
+    { "cmd"  : check_test_Likelihood_output,  # Test Likelihood package
+      "name" : "test_Likelihood: Check output" },
     { "cmd"  : "test_rspgen",  # Test rspgen package
       "name" : "test_rspgen" },
     { "cmd"  : check_test_rspgen_output,  # Test rspgen package
