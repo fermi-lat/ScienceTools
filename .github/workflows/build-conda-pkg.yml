@@ -56,6 +56,10 @@ jobs:
 
       - name: Increment version number
         run: |
+          echo "safe "
+          ls -l ${{ steps.get_git_safe_dir.outputs.git_safe_dir }}
+          echo "workspace"
+          ls -l ${{ github.workspace }}
           if [[ "${{ steps.get_git_safe_dir.outputs.git_safe_dir }}" != ""  ]]; then
             echo "github.safe.directory exists"
             source ${{ steps.get_git_safe_dir.outputs.git_safe_dir }}/recipe/increment_fermi_version.sh
