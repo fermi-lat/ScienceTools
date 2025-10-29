@@ -19,6 +19,6 @@ jobs:
           # {"os": "macos-15-intel", "arch": "x86_64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"},
           MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"}, {"os": "ubuntu-22.04", "arch": "x86", "env_target_file": "fermitools-develop-linux.yml", "container": "redhat/ubi8:latest"},{"os": "macos-15", "arch": "arm64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}' 
           #echo "matrix={\"build-type: \['Release'\]\"\"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
-          echo "matrix={\"build-type: \['Release'\]\", \"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
+          echo "matrix={\"build-type: ['Release']\", \"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
