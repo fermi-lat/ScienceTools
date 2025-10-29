@@ -13,7 +13,8 @@ on:
 
 jobs:
   build-conda:
-    name: ${{matrix.os}}, ${{matrix.arch}},  ${{matrix.build-type}}, ${{matrix.container}}
+    # ${{matrix.build-type}}
+    name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     runs-on: ${{ matrix.os }}
     container: ${{matrix.container}}
     outputs:
