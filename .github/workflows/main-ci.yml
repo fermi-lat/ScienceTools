@@ -1,7 +1,7 @@
 name: CI with Reusable Workflows
 on:
   push:
-    branches: missing_fixes  # ${{github.ref_name}} not allowed here.
+    branches: master # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:
