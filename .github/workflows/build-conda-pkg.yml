@@ -65,16 +65,7 @@ jobs:
             ls -l ${{ github.workspace }}
             source ${{ github.workspace }}/recipe/increment_fermi_version.sh
           fi 
-          # source ${{ github.workspace }}/recipe/increment_fermi_version.sh
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
-
-
-      # Reused from Azure build system.
-      - name: Increment version number
-        run: |
-          source ${{ github.workspace }}/recipe/increment_fermi_version.sh
-          echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
-          # echo "BRANCH name  ${{ github.ref_name }}"
 
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
