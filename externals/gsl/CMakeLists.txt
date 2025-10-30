@@ -100,6 +100,9 @@ check_c_source_compiles("#include <stdlib.h> int main() { int x = EXIT_SUCCESS; 
 
 # Compiles the source code, runs the program and sets ${VAR} to 1 if the
 # return value is equal to ${RESULT}.
+set( RUN_RESULT
+     "PLEASE_FILL_OUT-FAILED_TO_RUN"
+     CACHE STRING "Result from try_run" FORCE)
 macro(check_run_result SRC RESULT VAR)
   set(SRC_FILE ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/src.c)
   file(WRITE ${SRC_FILE} "${SRC}")
