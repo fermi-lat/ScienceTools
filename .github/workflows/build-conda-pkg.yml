@@ -99,6 +99,7 @@ jobs:
 
   run-python-tests:
     needs: build-conda 
+    name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }} 
     # if: success()
