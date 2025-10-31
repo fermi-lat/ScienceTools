@@ -11,3 +11,4 @@ dependencies:
   - zlib
   - python=3.11
   - xerces-c
+  - swig
