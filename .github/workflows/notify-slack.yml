@@ -16,6 +16,7 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const core = require('@actions/core');
             const { owner, repo, runId } = context;
             const res = await github.rest.actions.listJobsForWorkflowRun({
               owner,
@@ -24,16 +25,16 @@ jobs:
             });
 
             const matrixJobs = res.data.jobs.filter(job => job.strategy); // Filter for matrix jobs if needed
-            let message = `${{ inputs.message_title }} Pipeline Status:\n\n`;
+            let message = "${{ inputs.message_title }} Pipeline Status:\n\n";
             
             for (const job of matrixJobs) {
               const jobUrl = job.html_url;
               const jobName = job.name;
               const jobStatus = job.conclusion;
-              # const emoji = jobStatus === 'success' ? '✅' : jobStatus === 'failure' ? '❌' : '⚠️';
-              message += ` *${jobName}*: <${jobUrl}|View run> (${jobStatus})\n`;
+              // const emoji = jobStatus === 'success' ? '✅' : jobStatus === 'failure' ? '❌' : '⚠️';
+              message += "*${jobName}*: <${jobUrl}|View run> (${jobStatus})\n";
             }
-            
+            console.log(message); 
             // Set the full message as an output
             core.setOutput('full_message', message);
 
