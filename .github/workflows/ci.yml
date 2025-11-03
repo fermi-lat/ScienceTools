@@ -17,13 +17,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build-type: ['RelWithDebInfo']
+        build-type: ['Release']
         include:
           - os: ubuntu-22.04-arm
             arch: arm64
             env_target_file: "fermitools-develop-linux.yml"
           - os: ubuntu-22.04
             arch: x86
+            container: redhat/ubi8:latest
             env_target_file: "fermitools-develop-linux.yml"
           - os: macos-13
             arch: x86_64

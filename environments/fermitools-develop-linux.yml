@@ -7,4 +7,8 @@ dependencies:
   - cfitsio
   - cmake
   - conda-build
+  - libgomp
+  - zlib
   - python=3.11
+  - xerces-c
+  - swig

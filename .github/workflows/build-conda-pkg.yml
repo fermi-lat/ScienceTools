@@ -16,7 +16,7 @@ jobs:
     # ${{matrix.build-type}}
     name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     runs-on: ${{ matrix.os }}
-    container: ${{matrix.container}}
+    container: ${{ matrix.container }}
     outputs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     strategy:
