@@ -16,7 +16,6 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const core = require('@actions/core');
             const { owner, repo, runId } = context;
             const res = await github.rest.actions.listJobsForWorkflowRun({
               owner,
