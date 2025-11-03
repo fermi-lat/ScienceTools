@@ -16,49 +16,19 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            /**
-            const { owner, repo, runId } = context;
-            console.log(owner, ",",  repo, ",",  runId );
-            const res = await github.rest.actions.listJobsForWorkflowRun({
-              owner,
-              repo,
-              run_id: runId
-            });
-            **/
-            // ...
             console.log(context.repo.owner, ",", context.repo.repo, ",",  context.runId );
             const { data: res}  = await github.rest.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: context.runId,
             });
-
+            let message = "${{ inputs.message_title }} Pipeline Status:\n\n";
             console.log(`Found ${res.jobs.length} jobs.`);
             for (const job of res.jobs) {
                console.log(`Job ID: ${job.id}, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion}`);
                message += "*Job ID: ${job.id}*, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion}";
             }
 
-            /**
-            // You can also find a specific job, for example, the current one
-            const currentJob = res.jobs.find(job => job.name === context.job);
-            if (currentJob) {
-               console.log(`Current Job ID: ${currentJob.id}`);
-               // You could set an output if needed, e.g., core.setOutput('currentJobId', currentJob.id);
-            }
-
-            const matrixJobs = res.jobs.filter(job => job.strategy); // Filter for matrix jobs if needed
-            let message = "${{ inputs.message_title }} Pipeline Status:\n\n";
-
-            console.log(matrixJobs); 
-            for (const job of matrixJobs) {
-              const jobUrl = job.html_url;
-              const jobName = job.name;
-              const jobStatus = job.conclusion;
-              // const emoji = jobStatus === 'success' ? '✅' : jobStatus === 'failure' ? '❌' : '⚠️';
-              message += "*${jobName}*: <${jobUrl}|View run> (${jobStatus})\n";
-            }
-            **/
             console.log(message); 
             // Set the full message as an output
             core.setOutput('full_message', message);
