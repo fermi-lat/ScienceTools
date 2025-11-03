@@ -6,9 +6,6 @@ on:
       message_title:
         required: true
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        required: true
 
 jobs:
   send_notification:
@@ -49,5 +46,5 @@ jobs:
               "text": "${{ steps.format_message.outputs.full_message }}"
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           # The slack action uses this env var for authentication with the webhook
