@@ -38,13 +38,12 @@ jobs:
             core.setOutput('full_message', message);
 
       - name: Send Slack Notification
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
+        uses: slackapi/slack-github-action@v2.1.1
+        with: 
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
           # Use the full message output from the previous step
           payload: |
             {
               "text": "${{ steps.format_message.outputs.full_message }}"
             }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          # The slack action uses this env var for authentication with the webhook
