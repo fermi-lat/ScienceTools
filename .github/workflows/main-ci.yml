@@ -1,7 +1,8 @@
 name:  
 on:
   push:
-    branches: reset_checkout_fixes  # Can't use  ${{github.ref_name}} to get branch name here, but it is used in the other workflows. So this is the only place the branch name is hard coded.
+    branches: master # reset_checkout_fixes  
+    # Can't use  ${{github.ref_name}} to get branch name here, but it is used in the other workflows. So this is the only place the branch name is hard coded.
   workflow_dispatch:
     inputs:
       logLevel:

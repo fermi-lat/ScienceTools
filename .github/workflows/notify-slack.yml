@@ -1,0 +1,53 @@
+name: Notify Slack
+
+on:
+  workflow_call:
+    inputs:
+      message_title:
+        required: true
+        type: string
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch workflow run jobs and format message
+        id: format_message
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo, runId } = context;
+            const res = await github.rest.actions.listJobsForWorkflowRun({
+              owner,
+              repo,
+              run_id: runId
+            });
+
+            const matrixJobs = res.data.jobs.filter(job => job.strategy); // Filter for matrix jobs if needed
+            let message = `${{ inputs.message_title }} Pipeline Status:\n\n`;
+            
+            for (const job of matrixJobs) {
+              const jobUrl = job.html_url;
+              const jobName = job.name;
+              const jobStatus = job.conclusion;
+              # const emoji = jobStatus === 'success' ? '✅' : jobStatus === 'failure' ? '❌' : '⚠️';
+              message += ` *${jobName}*: <${jobUrl}|View run> (${jobStatus})\n`;
+            }
+            
+            // Set the full message as an output
+            core.setOutput('full_message', message);
+
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          # Use the full message output from the previous step
+          payload: |
+            {
+              "text": "${{ steps.format_message.outputs.full_message }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
+          # The slack action uses this env var for authentication with the webhook
