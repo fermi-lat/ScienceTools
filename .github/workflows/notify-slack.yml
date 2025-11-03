@@ -25,7 +25,6 @@ jobs:
               run_id: runId
             });
             **/
-            const { github } = require('@actions/github');
             // ...
             console.log(context.repo.owner, ",", context.repo.repo, ",",  context.runId );
             const jobs = await github.rest.actions.listJobsForWorkflowRun({
