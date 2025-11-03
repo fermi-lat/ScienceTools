@@ -36,3 +36,11 @@ jobs:
   #    - name: Display final output
   #      run: |
   #        echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.pkg_ver}}"
+
+  notify_via_slack:
+    # This job runs after all jobs in the 'run_matrix_tests' job have completed
+    needs: build-conda-pkg
+    uses: ./.github/workflows/notify-slack.yml
+    secrets: inherit
+    with:
+      message_title: "Workflow  #${{ github.run_number }} from *${{ github.repository }}*  branch: *${{ github.ref_name }}* "
