@@ -16,16 +16,28 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const { github } = require('@actions/github');
+            /**
             const { owner, repo, runId } = context;
+            console.log(owner, ",",  repo, ",",  runId );
             const res = await github.rest.actions.listJobsForWorkflowRun({
               owner,
               repo,
               run_id: runId
             });
-
+            **/
+            const { github } = require('@actions/github');
+            // ...
+            console.log(context.repo.owner, ",", context.repo.repo, ",",  context.runId );
+            const jobs = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
             const matrixJobs = res.data.jobs.filter(job => job.strategy); // Filter for matrix jobs if needed
             let message = "${{ inputs.message_title }} Pipeline Status:\n\n";
-            
+           
+            console.log(matrixJobs); 
             for (const job of matrixJobs) {
               const jobUrl = job.html_url;
               const jobName = job.name;
