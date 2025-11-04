@@ -20,6 +20,7 @@ on:
 jobs:
   test:
     runs-on: ${{ inputs.matrix_os }}
+    name: "Testing- ${{ inputs.matrix_os }} " 
     defaults:
       run:
         shell: bash -l {0}
@@ -79,26 +80,3 @@ jobs:
         with:
           files: |
              ${{ github.workspace }}/test_results/ST-unit*.xml
-
-# Updating a Slack channel was a requirement for this new task . This was implemented early in development, but it became annoying since each new build 
-# updated Slack individually.  
-# TODO: Merge the 4 test results into a single Slack update. Artifacts could be used, but concern about blowing the monthly github storage quota is a concern.  
-#
-# Stop updating SLack with every run 08/26/25 JSA        
-#      - name: Post a Build status in a Slack's fermitools-pipeline channel.
-#        if: always()
-#        uses: slackapi/slack-github-action@v2.1.1
-#        with:
-#          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-#          webhook-type: incoming-webhook
-#          payload: |
-#            text: "This line is ignored, find a title option..."
-#            blocks:
-#             - type: "header"
-#               text: 
-#                 type: "plain_text"
-#                 text: "Workflow ${{ env.GITHUB_WORKFLOW }} from ${{ github.repository }} branch ${{ github.ref_name }} run ${{github.run_number}} completed."
-#             - type: "section" 
-#               text:
-#                 type: "mrkdwn"
-#                 text: "*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Architecture*: ${{ matrix.arch }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}"

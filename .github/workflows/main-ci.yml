@@ -18,7 +18,7 @@ jobs:
   generate-matrix-tuple:
     uses: ./.github/workflows/generate-matrix.yml # Call the matrix-generating workflow
  
-   
+  # This job builds the 4 packages, uploads them to Anaconda and runs test(s) against them.  
   build-conda-pkg:
     needs: generate-matrix-tuple # Ensure matrix generation completes first
     uses: ./.github/workflows/build-conda-pkg.yml # Call the matrix-generating workflow
@@ -26,16 +26,13 @@ jobs:
     with:
       matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
 
-  # Debating if the testing job should be moved to this level instead of inside the build stage.
-  # The hope was to to have testing run immediately after a each successful os build.
-  # ref: ${{ github.event.pull_request.head.ref }}
-  #display_final_output:
-  #  needs: build-conda-pkg
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - name: Display final output
-  #      run: |
-  #        echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.pkg_ver}}"
+  # Testing should NOT be moved to this level. JSA 11/25
+  # The Linux x86 is built inside a specific Docker vm, and we don't want have to rebuild that for a separate testing stage 
+  # since we're already doing as part of the build stage
+
+  # This job sends 1 Slack channel update to fermitools-pipeline per workflow run.
+  # It uses Javascript to retrieve Job information via GITHUB's REST interface.
+  # It builds a message with individual links to the various job runners.
 
   notify_via_slack:
     # This job runs after all jobs in the 'run_matrix_tests' job have completed

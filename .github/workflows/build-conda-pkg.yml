@@ -83,7 +83,6 @@ jobs:
           upload: true # Need to keep upload , or else paths don't work.
         continue-on-error: true # Important: Allow the workflow to continue even if tests fail
 
-
   # Keep this code in if pivoting to using artifacts became an option. Monthly github storage quota would also be a concern since 
   # conda packages are 150 mb or more for each build.
       # - name: Upload Conda package as artifact
@@ -94,8 +93,7 @@ jobs:
 
   # Waits till all the builds complete, before running testing.
   # The "needs" keyword forces all of the build runners to complete before any testing can be run.
-  # Longest build is the macos x86: Currently takes 90 minutes to complete (Non Docker version)
-  # TODO: Use the Docker build process for macos x86 to support S3DF's machines. 
+  # Longest build is the macos x86: Currently takes 90 minutes to complete (Docker version)
 
   run-python-tests:
     needs: build-conda 
