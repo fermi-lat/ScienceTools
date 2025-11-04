@@ -34,8 +34,8 @@ else
 	fi
 	
     cmake -S . \
-        -B Release \
-        -DCMAKE_BUILD_TYPE=Release \
+        -B Debug \
+        -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_C_FLAGS="-g -fPIC -O0" -DCMAKE_CXX_FLAGS="-g -fPIC -O0" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
@@ -48,7 +48,7 @@ cat /etc/os-release
 
 fi
 
-cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+cmake --build Debug --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 #cmake --build Debug --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
@@ -61,7 +61,7 @@ cp recipe/activate.csh $PREFIX/etc/conda/activate.d/activate_${condaname}.csh
 cp recipe/deactivate.csh $PREFIX/etc/conda/deactivate.d/deactivate_${condaname}.csh
 
 # Delete the cmake build directory
-rm -rf Release 
+rm -rf Debug
 
 # Determine which conda env we are in. If it's base than we could "exit" conda.
 echo "Conda env $CONDA_PREFIX"
