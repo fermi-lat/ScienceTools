@@ -79,10 +79,18 @@ requirements:
     - PyYAML
     - xerces-c # [linux]
   
-test: 
+test:
+  # Standard modules 
   imports:
+    - AnalysisBase
+    - BinnedAnalysis
+    - CompositeLikelihood
+    - FluxDensity
+    - LikelihoodState
     - py_facilities
+    - pyIrfLoader
     - pyLikelihood
+    - SummedLikelihood
     - UnbinnedAnalysis
 
 about:
