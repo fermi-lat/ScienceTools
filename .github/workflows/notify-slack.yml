@@ -16,17 +16,18 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            // Running Javascript code here to get Job details
             console.log(context.repo.owner, ",", context.repo.repo, ",",  context.runId );
             const { data: res}  = await github.rest.actions.listJobsForWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
               run_id: context.runId,
             });
-            let message = "${{ inputs.message_title }} Pipeline Status:\n\n";
+            let message = "${{ inputs.message_title }} Pipeline Status:\n\n *Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n";
             console.log(`Found ${res.jobs.length} jobs.`);
             for (const job of res.jobs) {
                console.log(`Job ID: ${job.id}, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion}`);
-               message += `*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}\n\n`
+               //  message += `*Status*: ${{ job.status }}\n*OS*: ${{ runner.os }}\n*Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n*Runner Build URL*: ${{ env.GITHUB_JOB_URL }}\n\n`
                message += `*Job ID: ${job.id}*, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion},  \n\n`;
             }
 
