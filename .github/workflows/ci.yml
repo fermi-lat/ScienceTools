@@ -2,7 +2,7 @@ name: Conda CICD
 
 on:
   push:
-    branches: ['master']
+    branches: ['debug-symbols-master']
   workflow_dispatch:
     inputs:
       logLevel:
