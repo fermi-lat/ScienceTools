@@ -27,7 +27,7 @@ jobs:
             console.log(`Found ${res.jobs.length} jobs.`);
             for (const job of res.jobs) {
                console.log(`Job ID: ${job.id}, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion}`);
-               let job_id_link = "[${job.id}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${job.id})"
+               let job_id_link = `[${job.id}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${job.id})`;
                message += `*Job ID: ${job_id_link}*, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion},  \n\n`;
             }
 
