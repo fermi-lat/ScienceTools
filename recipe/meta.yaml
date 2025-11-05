@@ -68,6 +68,7 @@ requirements:
     - swig 4.0.2
     - zlib # [linux]
     - xerces-c # [linux]
+    - conda-verify
 
   run:
     - cfitsio
