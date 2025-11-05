@@ -69,7 +69,6 @@ jobs:
 
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
- 
       - name: Build and upload the conda packages
         id: conda-build-and-upload
         uses: uibcdf/action-build-and-upload-conda-packages@main
@@ -81,7 +80,7 @@ jobs:
           overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
           # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
-        # continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        continue-on-error: true # Important: Allow the workflow to build the other OSes to run even if one os fails fast 
 
   # Keep this code in if pivoting to using artifacts became an option. Monthly github storage quota would also be a concern since 
   # conda packages are 150 mb or more for each build.
