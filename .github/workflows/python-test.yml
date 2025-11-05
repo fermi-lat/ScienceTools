@@ -57,7 +57,7 @@ jobs:
 
       - name: Run tests by hand
         id: run_tests_again
-        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        # continue-on-error: true # Important: Allow the workflow to continue even if tests fail
         run: |
            echo "Run tests testing-env"
            echo "TESTING BRANCH  ${{ github.ref_name }}"

@@ -81,7 +81,7 @@ jobs:
           overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
           # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
-        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        # continue-on-error: true # Important: Allow the workflow to continue even if tests fail
 
   # Keep this code in if pivoting to using artifacts became an option. Monthly github storage quota would also be a concern since 
   # conda packages are 150 mb or more for each build.
