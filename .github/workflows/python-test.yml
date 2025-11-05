@@ -57,7 +57,8 @@ jobs:
 
       - name: Run tests by hand
         id: run_tests_again
-        # continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        # CONTINUE_ON_ERROR is set under GH website / Settings/Actions secrets and variables/Repository variables
+        continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
         run: |
            echo "Run tests testing-env"
            echo "TESTING BRANCH  ${{ github.ref_name }}"
