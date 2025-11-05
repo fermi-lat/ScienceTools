@@ -1,4 +1,4 @@
-name:  
+name: Master CI/CD workflow for Fermitools build 
 on:
   push:
     branches: reset_checkout_fixes  
