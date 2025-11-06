@@ -2,7 +2,7 @@ name: Conda CICD
 
 on:
   push:
-    branches: ['master']
+    branches: ['fe_except_fix']
   workflow_dispatch:
     inputs:
       logLevel:
