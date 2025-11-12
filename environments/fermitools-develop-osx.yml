@@ -9,3 +9,4 @@ dependencies:
   - conda-build
   - python=3.11
   - swig=4.0.2
+  - conda-verify

@@ -10,4 +10,3 @@ dependencies:
   - python=3.11
   - pmw
   - numpy<2.0 # Don't use the latest version 2.3.x, but 1.26 
-  - conda-verify

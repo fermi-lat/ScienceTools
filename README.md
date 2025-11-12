@@ -34,7 +34,7 @@ System specific environment files also exist for just building the tools, but ne
 running nor testing them once built.
 
 ```bash
-conda env create -n fermi-build -f environments/fermitools-build-linux-x86.yml
+conda env create -n fermi-build -f environments/fermitools-build-linux.yml
 conda activate fermi-build
 ```
 </details>
