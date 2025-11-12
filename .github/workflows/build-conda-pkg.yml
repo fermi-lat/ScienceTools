@@ -14,7 +14,7 @@ on:
 jobs:
   build-conda:
     # ${{matrix.build-type}}
-    name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
+    name: "${{matrix.os}} ${{matrix.arch}} ( ${{matrix.container}} ),"
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.container }}
     outputs:
