@@ -72,6 +72,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
         with:
+          check_name: "Test Results ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/ST-unit-test-Output.xml
     
@@ -79,5 +80,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with:
+          check_name: "Test Results ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/ST-unit*.xml
