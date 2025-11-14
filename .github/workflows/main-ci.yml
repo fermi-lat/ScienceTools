@@ -10,8 +10,8 @@ on:
         required: true
         default: 'warning'
   schedule:
-    # Runs every day at midnight UTC
-    - cron: '0 0 * * *' 
+    # Runs every day at 3am EST
+    - cron: '0 6 * * *' 
 
 jobs:
   # This workflow returns a JSON matrix that covers the 2 OSes (macos,linux) and 2 architectures (x86,arm64) we currently support. Plus additional variables needed by the other workflows.
