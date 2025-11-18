@@ -68,7 +68,8 @@ requirements:
     - swig 4.0.2
     - zlib # [linux]
     - xerces-c # [linux]
-
+    - f2c
+    
   run:
     - cfitsio
     - python >=3.11
@@ -78,7 +79,8 @@ requirements:
     - numpy <2.0.0
     - PyYAML
     - xerces-c # [linux]
-  
+    - f2c
+
 test: 
   imports:
     - py_facilities
