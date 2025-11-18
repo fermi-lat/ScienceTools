@@ -1,8 +1,7 @@
 name: Master CI/CD workflow for Fermitools build 
 on:
   push:
-    branches: reset_checkout_fixes  
-    # Can't use  ${{github.ref_name}} to get branch name here, but it is used in the other workflows. So this is the only place the branch name is hard coded.
+    branches: fe_except_fix # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:

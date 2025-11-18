@@ -13,3 +13,4 @@ dependencies:
   - xerces-c
   - swig
   - conda-verify
+  - f2c
