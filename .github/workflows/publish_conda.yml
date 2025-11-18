@@ -57,7 +57,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4 # Checkout the repository code
         with:
-          ref: reset_checkout_fixes #xerces-segfaults # master
+          ref: fe_except_fix #xerces-segfaults # master
           submodules: 'recursive' # true
           fetch-depth: 0 # Fetches full history
           
