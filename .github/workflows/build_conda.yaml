@@ -53,7 +53,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4
         with:
-          ref: fe_except_fix
+          ref: master
           submodules: 'recursive' 
           fetch-depth: 0 # Fetches full history
 
