@@ -1,4 +1,4 @@
-name: CI with Reusable Workflows
+name: Master CI/CD workflow for Fermitools build 
 on:
   push:
     branches: fe_except_fix # ${{github.ref_name}} not allowed here.
@@ -8,11 +8,16 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
+  schedule:
+    # Runs every day at 3am EST
+    - cron: '0 6 * * *' 
 
 jobs:
+  # This workflow returns a JSON matrix that covers the 2 OSes (macos,linux) and 2 architectures (x86,arm64) we currently support. Plus additional variables needed by the other workflows.
   generate-matrix-tuple:
     uses: ./.github/workflows/generate-matrix.yml # Call the matrix-generating workflow
-  
+ 
+  # This job builds the 4 packages, uploads them to Anaconda and runs test(s) against them.  
   build-conda-pkg:
     needs: generate-matrix-tuple # Ensure matrix generation completes first
     uses: ./.github/workflows/build-conda-pkg.yml # Call the matrix-generating workflow
@@ -20,11 +25,19 @@ jobs:
     with:
       matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
 
-  # ref: ${{ github.event.pull_request.head.ref }}
-  #display_final_output:
-  #  needs: build-conda-pkg
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - name: Display final output
-  #      run: |
-  #        echo "The final output from job 3 is: ${{ needs.build-conda-pkg.outputs.conda-pkg}}"
+  # Testing should NOT be moved to this level. JSA 11/25
+  # The Linux x86 is built inside a specific Docker vm, and we don't want have to rebuild that for a separate testing stage 
+  # since we're already doing as part of the build stage
+
+  # This job sends 1 Slack channel update to fermitools-pipeline per workflow run.
+  # It uses Javascript to retrieve Job information via GITHUB's REST interface.
+  # It builds a message with individual links to the various job runners.
+
+  notify_via_slack:
+    # This job runs after all jobs in the 'run_matrix_tests' job have completed
+    if: always() # This ensures the job runs even if 'build-conda-pkg' fails
+    needs: build-conda-pkg
+    uses: ./.github/workflows/notify-slack.yml
+    secrets: inherit
+    with:
+      message_title: "Workflow  #${{ github.run_number }} from *${{ github.repository }}*  branch: *${{ github.ref_name }}* "

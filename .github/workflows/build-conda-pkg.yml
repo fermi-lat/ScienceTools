@@ -7,12 +7,14 @@ on:
         type: string
         description: "JSON string representing the matrix"
     outputs:
-      conda-pkg:
-        description: "Full path location of the Fermitools conda package"
+      pkg_ver:
+        description: "The Fermitools conda package version"
         value: ${{ jobs.build-conda.outputs.fermitools-pkg }}
 
 jobs:
   build-conda:
+    # ${{matrix.build-type}}
+    name: "${{matrix.os}} ${{matrix.arch}} ${{matrix.container}}"
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.container }}
     outputs:
@@ -20,76 +22,82 @@ jobs:
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
-    
       - name: Run environment-specific commands
+        id: get_git_safe_dir
         run: |
-          if [[ "${{ inputs.os }}" == "macos-"* && "${{ inputs.build-arch }}" == "x86_64" ]]; then
+          if [[ "${{ matrix.os }}" =~ "macos-" && "${{ matrix.arch }}" == "x86_64" ]]; then
             echo "Setting MacOS x86 env var" # debug
             echo "MACOS_ARCH=x86" >> "$GITHUB_ENV"
           fi
-          if [[ "${{ matrix.os }}" == "ubuntu-"* && "${{ matrix.arch }}" == "x86" ]]; then
-            # if: ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }}
-            #if [[ ${{ startsWith(matrix.os, 'ubuntu-') && matrix.arch == 'x86' }} ]] ; then :
+          if [[ "${{ matrix.os }}" =~ "ubuntu-" && "${{ matrix.arch }}" == "x86" ]]; then
             yum -y install git jq python3
             git config --global --add safe.directory /__w/ScienceTools/ScienceTools
+            GIT_SAFE_DIRECTORY=$(git config --global --get safe.directory)
+            echo "The global Git safe is: $GIT_SAFE_DIRECTORY"
+            echo "git_safe_dir=$GIT_SAFE_DIRECTORY" >> "$GITHUB_OUTPUT"
           fi
-    
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }} # reset_checkout_fixes checkout_fixes  master
           submodules: 'recursive' # true
-          fetch-depth: 0 # Fetches full history
+        #  fetch-depth: 0 # Fetches full history
 
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
           conda-remove-defaults: true
           python-version: 3.11
-          environment-file: environments/${{matrix.env_target_file}}    # Replace with the path to your conda environment
+          environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
 
       - name: Increment version number
         run: |
-          source recipe/increment_fermi_version.sh
+          if [[ "${{ steps.get_git_safe_dir.outputs.git_safe_dir }}" != ""  ]]; then
+            echo "github.safe.directory exists"
+            ls -l ${{ steps.get_git_safe_dir.outputs.git_safe_dir }}
+            source ${{ steps.get_git_safe_dir.outputs.git_safe_dir }}/recipe/increment_fermi_version.sh
+          else
+            echo "github.xyz does not exist"
+            ls -l ${{ github.workspace }}
+            source ${{ github.workspace }}/recipe/increment_fermi_version.sh
+          fi 
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
-          echo "BRANCH JSA  ${{ github.ref_name }}"
 
+  # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
+  # Bug: Currently only handles dev label, need to handle rc and main tags too.
       - name: Build and upload the conda packages
         id: conda-build-and-upload
         uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
-          meta_yaml_dir: recipe # Replace with the path to your meta.yaml directory
+          meta_yaml_dir: recipe # It's using recipe/meta.yaml for building the package. 
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
-          token: ${{ secrets.ANACONDA_TOKEN }} # Replace with the name of your Anaconda Token secret
+          token: ${{ secrets.ANACONDA_TOKEN }} # Setup under the GITHUB Settings 
           label: dev
           overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
           # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
-        continue-on-error: true # Important: Allow the workflow to continue even if tests fail
+        continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+        # Important: Allow the workflow to build the other OSes to run even if one os fails fast 
 
-      # - name: Re-format output paths
-      #  if: always() # This ensures the step runs even if the tests fail
-      #  id: conda-pkg-fullpath
-      #  run: |
-      #      paths=$(tr ' ' '\n' <<< "${{steps.conda-build-and-upload.outputs.paths}}")
-      #      echo "Conda pkg $paths  / st  ${{steps.conda-build-and-upload.outputs.paths}} "
-      #      package_filename=$(basename "$paths")
-      #      echo "The extracted filename is: $package_filename" 
-      #      echo "conda_package_name=$package_filename" >> "$GITHUB_OUTPUT"
-      #      echo "conda-pkg-path=$paths" >> "$GITHUB_ENV"
-
+  # Keep this code in if pivoting to using artifacts became an option. Monthly github storage quota would also be a concern since 
+  # conda packages are 150 mb or more for each build.
       # - name: Upload Conda package as artifact
       #  uses: actions/upload-artifact@v4
       #  with:
       #    name: "${{ matrix.os }}-fermitools-package"
       #    path: ${{env.conda-pkg-path}}
 
-  # Waits for all builds to complete, before running testing
+  # Waits till all the builds complete, before running testing.
+  # The "needs" keyword forces all of the build runners to complete before any testing can be run.
+  # Longest build is the macos x86: Currently takes 90 minutes to complete (Docker version)
+
   run-python-tests:
     needs: build-conda 
+    name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }} 
     # if: success()

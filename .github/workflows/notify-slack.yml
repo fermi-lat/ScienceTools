@@ -1,0 +1,47 @@
+name: Notify Slack
+
+on:
+  workflow_call:
+    inputs:
+      message_title:
+        required: true
+        type: string
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch workflow run jobs and format message
+        id: format_message
+        uses: actions/github-script@v8
+        with:
+          script: |
+            // Running Javascript code here to get Job details
+            console.log(context.repo.owner, ",", context.repo.repo, ",",  context.runId );
+            const { data: res}  = await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            });
+            let message = "${{ inputs.message_title }} Pipeline Status:\n\n *Parent Build URL*: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n";
+            console.log(`Found ${res.jobs.length} jobs.`);
+            for (const job of res.jobs) {
+               console.log(`Job ID: ${job.id}, Name: ${job.name}, Status: ${job.status}, Conclusion: ${job.conclusion}`);
+               let job_id_link = `<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${job.id}| ${job.id}>`;
+               message += `*Job ID: ${job_id_link}*, *Name*: ${job.name}, *Status*: ${job.status}, *Conclusion*: ${job.conclusion}\n\n`;
+            }
+
+            console.log(message); 
+            // Set the full message as an output
+            core.setOutput('full_message', message);
+
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v2.1.1
+        with: 
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          # Use the full message output from the previous step
+          payload: |
+            {
+              "text": "${{ steps.format_message.outputs.full_message }}"
+            }

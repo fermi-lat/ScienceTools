@@ -79,12 +79,20 @@ requirements:
     - numpy <2.0.0
     - PyYAML
     - xerces-c # [linux]
-    - f2c
-
-test: 
+    -f2c
+  
+test:
+  # Standard modules 
   imports:
+    - AnalysisBase
+    - BinnedAnalysis
+    - CompositeLikelihood
+    - FluxDensity
+    - LikelihoodState
     - py_facilities
+    - pyIrfLoader
     - pyLikelihood
+    - SummedLikelihood
     - UnbinnedAnalysis
 
 about:

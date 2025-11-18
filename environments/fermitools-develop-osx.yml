@@ -3,10 +3,12 @@ channels:
   - conda-forge
   - fermi
 dependencies:
-  - python=3.11.*
   - anaconda-client
-  - conda-build
   - cfitsio
   - cmake
+  - conda-build
+  - python=3.11
   - swig=4.0.2
+  - conda-verify
   - f2c
+
