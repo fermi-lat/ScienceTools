@@ -9,3 +9,4 @@ dependencies:
   - cfitsio
   - cmake
   - swig=4.0.2
+  - f2c

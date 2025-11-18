@@ -12,3 +12,4 @@ dependencies:
   - python=3.11
   - xerces-c
   - swig
+  - f2c
