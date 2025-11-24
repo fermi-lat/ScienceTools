@@ -10,11 +10,13 @@ include(FetchContent)
 
 message(STATUS "Local External Dependency F2C")
 
+set(f2c_patch_command patch < ${CMAKE_CURRENT_SOURCE_DIR}/f2c.patch)
 
 FetchContent_Declare(f2c_src
   URL https://web.archive.org/web/20210322095636/https://netlib.sandia.gov/f2c/libf2c.zip
   URL_HASH SHA256=ca404070e9ce0a9aaa6a71fc7d5489d014ade952c5d6de7efb88de8e24f2e8e0
   DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+  PATCH_COMMAND ${f2c_patch_command}
 )
 
 FetchContent_MakeAvailable(f2c_src)
