@@ -1,0 +1,70 @@
+unchanged:
+--- libf2c/f2c.h0	1999-09-07 13:46:24.000000000 -0400
++++ libf2c/f2c.h0	2022-05-01 13:48:12.000000000 -0400
+@@ -7,15 +7,15 @@
+ #ifndef F2C_INCLUDE
+ #define F2C_INCLUDE
+ 
+-typedef long int integer;
+-typedef unsigned long int uinteger;
++typedef int integer;
++typedef unsigned int uinteger;
+ typedef char *address;
+ typedef short int shortint;
+ typedef float real;
+ typedef double doublereal;
+ typedef struct { real r, i; } complex;
+ typedef struct { doublereal r, i; } doublecomplex;
+-typedef long int logical;
++typedef  int logical;
+ typedef short int shortlogical;
+ typedef char logical1;
+ typedef char integer1;
+@@ -42,9 +42,10 @@
+ typedef short ftnlen;
+ typedef short ftnint;
+ #else
+-typedef long int flag;
+-typedef long int ftnlen;
+-typedef long int ftnint;
++typedef int flag;
++typedef int ftnlen;
++typedef int ftnint;
++typedef long ftnlint;
+ #endif
+ 
+ /*external read, write*/
+unchanged:
+--- libf2c/signal_.c	2000-07-04 22:04:56.000000000 -0400
++++ libf2c/signal_.c	2022-05-01 13:12:34.000000000 -0400
+@@ -4,7 +4,7 @@
+ extern "C" {
+ #endif
+ 
+- ftnint
++ ftnlint
+ #ifdef KR_headers
+ signal_(sigp, proc) integer *sigp; sig_pf proc;
+ #else
+@@ -14,7 +14,7 @@
+ 	int sig;
+ 	sig = (int)*sigp;
+ 
+-	return (ftnint)signal(sig, proc);
++	return (ftnlint)signal(sig, proc);
+ 	}
+ #ifdef __cplusplus
+ }
+only in patch2:
+unchanged:
+--- libf2c/wsfe.c	2001-10-11 22:36:54.000000000 -0400
++++ libf2c/wsfe.c	2022-05-01 13:12:34.000000000 -0400
+@@ -52,7 +52,7 @@
+ 	f__sequential=1;
+ 	f__formatted=1;
+ 	f__external=1;
+-	if(n=c_sfe(a)) return(n);
++	if((n=c_sfe(a))) return(n);
+ 	f__elist=a;
+ 	f__hiwater = f__cursor=f__recpos=0;
+ 	f__nonl = 0;
