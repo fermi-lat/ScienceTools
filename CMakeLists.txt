@@ -65,7 +65,7 @@ endif()
 # Allow user to pick system vs vendored for each library:
 option(USE_SYSTEM_CLHEP       "Use system-installed CLHEP instead of package-provided" OFF)
 option(USE_SYSTEM_CPPUNIT     "Use system-installed CppUnit instead of package-provided" OFF)
-option(USE_SYSTEM_F2C         "Use system-installed f2x instead of package-provided" ON) # Need to fix difference between compiled and downloaded F2C
+option(USE_SYSTEM_F2C         "Use system-installed f2x instead of package-provided" OFF) # Need to fix difference between compiled and downloaded F2C
 option(USE_SYSTEM_FFTW        "Use system-installed fftw instead of package-provided" OFF)
 option(USE_SYSTEM_GSL         "Use system-installed gsl instead of package-provided" OFF)
 option(USE_SYSTEM_HEALPIX_CXX "Use system-installed healpix_cxx instead of package-provided" OFF)
