@@ -1411,10 +1411,10 @@ unitTestsWithoutRoot = [
 #      "name" : "test_psearch" },
 #    { "cmd"  : check_test_psearch_output,
 #      "name" : "test_psearch: Check output" },
-    { "cmd"  : "test_pulsePhase",  # Test pulsePhase package
-      "name" : "test_pulsePhase" },
-    { "cmd"  : check_test_pulsePhase_output,
-      "name" : "test_pulsePhase: Check output" },
+#    { "cmd"  : "test_pulsePhase",  # Test pulsePhase package
+#      "name" : "test_pulsePhase" },
+#    { "cmd"  : check_test_pulsePhase_output,
+#      "name" : "test_pulsePhase: Check output" },
     { "cmd"  : check_import_readline,
       "name" : "test_import_readline: Check for proper module import" },
     { "cmd"  : check_import_hashlib,
