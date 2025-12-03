@@ -1,10 +1,16 @@
-name: Generate Fermitools OS Matrix
+name: Generate Fermitools CICD setup 
 on:
   workflow_call:
     outputs:
       matrix:
         description: "JSON array of matrix values"
         value: ${{ jobs.generate-matrix.outputs.matrix }}
+      baseline_label:
+        description: "Build label used for conda package: dev/rc/main"
+        value: ${{ jobs.generate-matrix.outputs.build_label }}
+
+env:
+  LABEL_FOR_BUILD: ${{ fromJSON(vars.BUILD_LABEL || 'dev') }}
 
 jobs:
   generate-matrix:
@@ -22,3 +28,4 @@ jobs:
 
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
+      build_label: ${{ env.LABEL_FOR_BUILD }}

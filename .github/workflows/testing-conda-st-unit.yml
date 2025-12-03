@@ -16,7 +16,6 @@ on:
         type: string
         description: "Fermitools package build label"
 
-
 # Just check out the Parent ScienceTools repo, we don't need the submodules.
 # Just recipe/tests directory. All testing will be ran from that  directory.
 # ${{github.ref_name}} was used to save updating the branch names in multiple files during development. 
@@ -63,11 +62,12 @@ jobs:
       - name: Run tests by hand
         id: run_tests_again
         # CONTINUE_ON_ERROR is set under GH website / Settings/Actions secrets and variables/Repository variables
-        ## moved to main-ci.yml : continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+        continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
         run: |
            echo "Run tests testing-env"
            echo "TESTING BRANCH  ${{ github.ref_name }}"
-           conda install --name testing-env  "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
+           #  "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}"
+           conda install --name testing-env "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
            mkdir -p test_results
            cd test_results/
            ../recipe/tests/ST-unit-test -w -d -v

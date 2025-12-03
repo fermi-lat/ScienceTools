@@ -24,10 +24,26 @@ jobs:
     secrets: inherit
     with:
       matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
+      build_label: ${{needs.generate-matrix-tuple.outputs.baseline_label }}
 
   # Testing should NOT be moved to this level. JSA 11/25
   # The Linux x86 is built inside a specific Docker vm, and we don't want have to rebuild that for a separate testing stage 
   # since we're already doing as part of the build stage
+
+
+  # This job runs the Fermipy test(s) against the 4 conda fermitools packages.
+  # Only run these tests for labels : rc or main
+  test-conda-fermipy:
+    strategy:
+      matrix: ${{ fromJson(needs.generate-matrix-tuple.outputs.matrix) }}
+    if: ${{ contains(needs.generate-matrix-tuple.outputs.baseline_label,'rc') }}
+    needs: [generate-matrix-tuple , build-conda-pkg] # Ensure matrix generation completes first
+    uses: ./.github/workflows/testing-conda-fermipy.yml # Call the matrix-generating workflow
+    secrets: inherit
+    with:
+      matrix_os: ${{ matrix.os }}
+      fermitools_pkg_ver: ${{ needs.build-conda-pkg.outputs.pkg_ver }}
+      build_label: ${{needs.generate-matrix-tuple.outputs.baseline_label }}
 
   # This job sends 1 Slack channel update to fermitools-pipeline per workflow run.
   # It uses Javascript to retrieve Job information via GITHUB's REST interface.
@@ -36,8 +52,8 @@ jobs:
   notify_via_slack:
     # This job runs after all jobs in the 'run_matrix_tests' job have completed
     if: always() # This ensures the job runs even if 'build-conda-pkg' fails
-    needs: build-conda-pkg
+    needs: [generate-matrix-tuple, build-conda-pkg]
     uses: ./.github/workflows/notify-slack.yml
     secrets: inherit
     with:
-      message_title: "Workflow  #${{ github.run_number }} from *${{ github.repository }}*  branch: *${{ github.ref_name }}* "
+      message_title: "Workflow  #${{ github.run_number }} from *${{ github.repository }}*  branch: *${{ github.ref_name }}*  label:*${{ needs.generate-matrix-tuple.outputs.baseline_label }}*"

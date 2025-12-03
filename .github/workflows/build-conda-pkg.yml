@@ -6,6 +6,10 @@ on:
         required: true
         type: string
         description: "JSON string representing the matrix"
+      build_label:
+        required: true
+        type: string
+        description: "Fermitools package build label"
     outputs:
       pkg_ver:
         description: "The Fermitools conda package version"
@@ -80,7 +84,7 @@ jobs:
           overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
           # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
-        continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+        ## Moving to main-ci : continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
         # Important: Allow the workflow to build the other OSes to run even if one os fails fast 
 
   # Keep this code in if pivoting to using artifacts became an option. Monthly github storage quota would also be a concern since 
@@ -105,3 +109,4 @@ jobs:
     with:
       matrix_os: ${{ matrix.os }}
       fermitools_pkg_ver: ${{needs.build-conda.outputs.fermitools-pkg}}
+      build_label: ${{ inputs.build_label }}
