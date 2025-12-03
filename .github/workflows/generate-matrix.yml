@@ -10,7 +10,8 @@ on:
         value: ${{ jobs.generate-matrix.outputs.build_label }}
 
 env:
-  LABEL_FOR_BUILD: ${{ fromJSON(vars.BUILD_LABEL || 'dev') }}
+  LABEL_FOR_BUILD: ${{ vars.BUILD_LABEL || 'dev' }}
+  # ${{ fromJSON(vars.BUILD_LABEL || 'dev') }} 
 
 jobs:
   generate-matrix:
