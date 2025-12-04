@@ -52,7 +52,7 @@ jobs:
   notify_via_slack:
     # This job runs after all jobs in the 'run_matrix_tests' job have completed
     if: always() # This ensures the job runs even if 'build-conda-pkg' fails
-    needs: [generate-matrix-tuple, build-conda-pkg]
+    needs: [generate-matrix-tuple, build-conda-pkg, test-conda-fermipy]
     uses: ./.github/workflows/notify-slack.yml
     secrets: inherit
     with:

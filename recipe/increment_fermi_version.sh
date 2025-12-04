@@ -14,14 +14,14 @@ echo -e "Fermitools meta.yaml Version: ${META_VERSION}"
 
 export LATEST_DEV_VERSION=$(conda search \
   -c fermi \
-  -c fermi/label/dev \
-  -c fermi/label/dev/osx-64 \
-  -c fermi/label/dev/osx-arm64 \
-  -c fermi/label/dev/linux-aarch64 \
-  -c fermi/label/dev/linux-64 \
+  -c fermi/label/$LABEL_FOR_BUILD \
+  -c fermi/label/$LABEL_FOR_BUILD/osx-64 \
+  -c fermi/label/$LABEL_FOR_BUILD/osx-arm64 \
+  -c fermi/label/$LABEL_FOR_BUILD/linux-aarch64 \
+  -c fermi/label/$LABEL_FOR_BUILD/linux-64 \
   fermitools --info --json | jq -r '.fermitools | .[] | .version ' | sort -V | tail -1)
 
-echo -e "Fermitools latest dev Version: ${LATEST_DEV_VERSION}"
+echo -e "Fermitools latest $LABEL_FOR_BUILD Version: ${LATEST_DEV_VERSION}"
 
 if $(version_less_than_equal ${META_VERSION} ${LATEST_DEV_VERSION}); then
   echo "META_VERSION <= LATEST_DEV_VERSION: Incrementing LATEST_DEV_VERSION patch num."
