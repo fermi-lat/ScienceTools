@@ -148,8 +148,8 @@ list(
   observationSim
   optimizers
   orbitSim
-  pulsarDb
-  pulsePhase
+  #pulsarDb
+  #pulsePhase
   pyBurstAnalysisGUI
   pyExposure
   pyLikelihood
