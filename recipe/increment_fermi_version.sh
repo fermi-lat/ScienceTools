@@ -10,16 +10,19 @@ source $RECIPE_DIR/version_lessthan.sh
 export META_VERSION=$(cat $RECIPE_DIR/meta.yaml | \
   grep '{% set version =' | awk '{ print $5 }' | tr -d \")
 
+
+label_for_build=${LABEL_BUILD:-dev}
+
 echo -e "Fermitools meta.yaml Version: ${META_VERSION}"
-echo -e "label build v2: ${LABEL_FOR_BUILD}"
+echo -e "label build v2: $label_for_build"
 
 export LATEST_DEV_VERSION=$(conda search \
   -c fermi \
-  -c fermi/label/${LABEL_FOR_BUILD} \
-  -c fermi/label/${LABEL_FOR_BUILD}/osx-64 \
-  -c fermi/label/${LABEL_FOR_BUILD}/osx-arm64 \
-  -c fermi/label/${LABEL_FOR_BUILD}/linux-aarch64 \
-  -c fermi/label/${LABEL_FOR_BUILD}/linux-64 \
+  -c fermi/label/$label_for_build \
+  -c fermi/label/$label_for_build/osx-64 \
+  -c fermi/label/$label_for_build/osx-arm64 \
+  -c fermi/label/$label_for_build/linux-aarch64 \
+  -c fermi/label/$label_for_build/linux-64 \
   fermitools --info --json | jq -r '.fermitools | .[] | .version ' | sort -V | tail -1)
 
 echo -e "Fermitools latest $LABEL_FOR_BUILD Version: ${LATEST_DEV_VERSION}"
