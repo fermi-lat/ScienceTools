@@ -1,0 +1,8 @@
+name: fermitools-fermipy-testing
+channels:
+  - conda-forge
+  - fermi
+dependencies:
+  - python=3.11
+  - pytest
+  - junit-xml
