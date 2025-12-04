@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: https://github.com/fermi-lat/Sciencetools.git
-  git_tag: "{{ environ.get('GITHUB_REF_NAME', 'master') }}" 
+  git_tag: "{{ environ.get('GITHUB_REF_NAME', 'pulsephase-deprecation') }}" 
   git_submodules: true
 
 build:
