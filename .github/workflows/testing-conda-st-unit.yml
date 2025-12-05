@@ -71,7 +71,7 @@ jobs:
            mkdir -p test_results
            cd test_results/
            ../recipe/tests/ST-unit-test -w -d -v
-           ../recipe/tests/ST- ST-AGN-thread-test -w -d -v
+           ../recipe/tests/ST-AGN-thread-test -w -d -v
 
       # The layout for this reporting action works. Not sure if there is something better, but it does a good job for us.
       - name: Publish Test Results Linux
