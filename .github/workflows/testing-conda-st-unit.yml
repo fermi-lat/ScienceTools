@@ -1,5 +1,5 @@
 name: Python Package testing
-run-name: "Testing ${{ inputs.matrix_os }}"
+run-name: "Testing Conda Basline - ${{ inputs.matrix_os }}"
 on:
   workflow_call:
     inputs:
@@ -24,7 +24,7 @@ on:
 jobs:
   test:
     runs-on: ${{ inputs.matrix_os }}
-    name: "Testing- ${{ inputs.matrix_os }} " 
+    name: "Testing Conda Baseline - ${{ inputs.matrix_os }} " 
     defaults:
       run:
         shell: bash -l {0}
@@ -38,7 +38,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           conda-remove-defaults: true
-          python-version: 3.11.*
+          python-version: 3.11
           activate-environment: testing-env 
           environment-file: environments/fermitools-testing.yml
           auto-update-conda: false
@@ -71,13 +71,14 @@ jobs:
            mkdir -p test_results
            cd test_results/
            ../recipe/tests/ST-unit-test -w -d -v
+           ../recipe/tests/ST- ST-AGN-thread-test -w -d -v
 
       # The layout for this reporting action works. Not sure if there is something better, but it does a good job for us.
       - name: Publish Test Results Linux
         uses: EnricoMi/publish-unit-test-result-action/linux@v2
         if: runner.os == 'Linux'
         with:
-          check_name: "Test Results ${{ inputs.matrix_os }}"
+          check_name: "Test Results: Conda Baseline ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/ST-unit-test-Output.xml
     
@@ -85,6 +86,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
         if: runner.os == 'macOS'
         with:
-          check_name: "Test Results ${{ inputs.matrix_os }}"
+          check_name: "Test Results: Conda Baseline ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/ST-unit*.xml
