@@ -17,7 +17,7 @@ on:
         description: "Fermitools package build label"
 
 # Just check out the Parent ScienceTools repo, we don't need the submodules.
-# Just recipe/tests directory. All testing will be ran from that  directory.
+# Need recipe/tests directory. All testing will be ran from that  directory.
 # ${{github.ref_name}} was used to save updating the branch names in multiple files during development. 
 # New python dependency environment file was creating for testing : environments/fermitools-testing.yml 
 
@@ -42,7 +42,7 @@ jobs:
           activate-environment: testing-env 
           environment-file: environments/fermitools-testing.yml
           auto-update-conda: false
-          auto-activate-base: false
+          auto-activate: false
           show-channel-urls: true
 
   # Currently, every conda  build package has to be uploaded to Anaconda, so the package name can be passed onto this workflow.
