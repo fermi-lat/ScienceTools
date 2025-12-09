@@ -30,7 +30,7 @@ jobs:
   # The "needs" keyword forces all of the build runners to complete before any testing can be run.
   # Longest build is the macos x86: Currently takes 90 minutes to complete (Docker version)
 
-  run-python-tests:
+  run-baseline-tests:
     needs: [generate-matrix-tuple , build-conda-pkg] # Ensure matrix generation completes first
     name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     strategy:
@@ -63,7 +63,7 @@ jobs:
   notify_via_slack:
     # This job runs after all jobs in the 'run_matrix_tests' job have completed
     if: always() # This ensures the job runs even if 'build-conda-pkg' fails
-    needs: [generate-matrix-tuple, build-conda-pkg, test-conda-fermipy]
+    needs: [generate-matrix-tuple, build-conda-pkg, run-baseline-tests, test-conda-fermipy]
     uses: ./.github/workflows/notify-slack.yml
     secrets: inherit
     with:
