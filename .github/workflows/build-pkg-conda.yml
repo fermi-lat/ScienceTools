@@ -95,19 +95,3 @@ jobs:
       #  with:
       #    name: "${{ matrix.os }}-fermitools-package"
       #    path: ${{env.conda-pkg-path}}
-
-  # Waits till all the builds complete, before running testing.
-  # The "needs" keyword forces all of the build runners to complete before any testing can be run.
-  # Longest build is the macos x86: Currently takes 90 minutes to complete (Docker version)
-
-  run-python-tests:
-    needs: build-conda 
-    name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
-    strategy:
-      matrix: ${{ fromJson(inputs.matrix_json) }} 
-    # if: success()
-    uses: ./.github/workflows/testing-conda-st-unit.yml     #python-test.yml
-    with:
-      matrix_os: ${{ matrix.os }}
-      fermitools_pkg_ver: ${{needs.build-conda.outputs.fermitools-pkg}}
-      build_label: ${{ inputs.build_label }}
