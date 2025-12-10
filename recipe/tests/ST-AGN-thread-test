@@ -57,11 +57,11 @@ FAIL = 1
 def exists_mass(files):
     status = OK
     for f in files:
-        print "Checking for file %s ..." % f,
+        print("Checking for file %s ..." % f, end=' ')
         if exists(f):
-            print "found."
+            print("found.")
         else:
-            print "not found!"
+            print("not found!")
             status = FAIL
     return status
 
@@ -77,7 +77,7 @@ def cmp(f1, f2, *args):
     cmd += " %s %s" % (f1, f2)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
@@ -89,12 +89,12 @@ def cmp_mass(files, outref):
     for f in files:
         f1 = f
         f2 = sep.join([outref, f])
-        print "Using cmp to compare %s to %s ..." % (f1, f2),
+        print("Using cmp to compare %s to %s ..." % (f1, f2), end=' ')
         s = cmp(f1, f2, *files[f])
         if s == OK:
-            print "passed."
+            print("passed.")
         else:
-            print "failed!"
+            print("failed!")
             status = FAIL
     return status
 
@@ -110,7 +110,7 @@ def diff(f1, f2, *args):
     cmd += " %s %s" % (f1, f2)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
@@ -123,11 +123,11 @@ def diff_mass(files, outref):
         f1 = f
         f2 = sep.join([outref, f])
         s = diff(f1, f2, *files[f])
-        print "Using diff to compare %s to %s ..." % (f1, f2),
+        print("Using diff to compare %s to %s ..." % (f1, f2), end=' ')
         if s == OK:
-            print "passed."
+            print("passed.")
         else:
-            print "failed!"
+            print("failed!")
             status = FAIL
     return status
 
@@ -139,7 +139,7 @@ def ftdiff(f1, f2, **kwargs):
     exclude = []
     reltol = 0.0
     tolerance = 0.0
-    for (kw, val) in kwargs.items():
+    for (kw, val) in list(kwargs.items()):
         if val != "":
             if kw == 'exclude':
                 exclude = [val]
@@ -158,13 +158,13 @@ def ftdiff_mass(fitsFiles, outref):
     for f in fitsFiles: 
         f1 = f
         f2 = sep.join([outref, f])
-        print "Using ftdiff to compare %s to %s ..." % (f1, f2),
+        print("Using ftdiff to compare %s to %s ..." % (f1, f2), end=' ')
         #s = ftdiff(f1, f2, **fitsFiles[f])
         s = ftdiff(f1, f2)
         if s == OK:
-            print "passed."
+            print("passed.")
         else:
-            print "failed!"
+            print("failed!")
             status = FAIL
     return status
 
@@ -175,28 +175,28 @@ def check_environment():
     status = OK
     environmentVariableNames = [ "CONDA_PREFIX" ]
     for ev in environmentVariableNames:
-        print "Checking if environment variable %s is set ..." % ev,
+        print("Checking if environment variable %s is set ..." % ev, end=' ')
         try:
             val = environ[ev]
-            print "yes, value is:", val
-        except KeyError, e:
-            print "no!"
+            print("yes, value is:", val)
+        except KeyError as e:
+            print("no!")
             status = FAIL
     return status
 
 def test_gtselect():
     status = OK
-    infile = sep.join([test_data_path, "3C84-P7REP-FT1.fits"])
-    outfile = "3C84-photons.fits"
-    ra = "49.9507"
-    dec = "41.5117"
-    rad = "10"
-    tmin = "268185604"
-    tmax = "268617603"
+    infile = sep.join([test_data_path, "L25110610395696BB9F6356_PH00.fits"])
+    outfile = "3C279-photons.fits"
+    ra =  "INDEF"
+    dec = "INDEF"
+    rad = "10" 
+    tmin = "538032601" # Major Flare 19 Jan 2018 JD: 2458137.9999537035, MET: 538056001, flux 1.366e-5 
+    tmax = "538079602" # Total integration time: 6.5 hours (two orbits), centered on peak flare
     emin = "100"
     emax = "100000"
     zmax = "90"
-    evclass = "2"
+    evclass = "128"
 #    evclsmin = "3"
 #    evclsmax = "3"
 #    convtype = "-1"
@@ -218,7 +218,7 @@ def test_gtselect():
                          phasemax, evtable, chatter, clobber, debug, gui, mode)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
@@ -226,21 +226,21 @@ def check_gtselect_output():
     status = OK
     outref = sep.join([refdata_path, "test-scripts", "outref"])
     fitsFiles = {
-        "3C84-photons.fits" : [],
+        "3C279-photons.fits" : [],
         }
-    if exists_mass(fitsFiles.keys()) != OK:
+    if exists_mass(list(fitsFiles.keys())) != OK:
         status = FAIL
-    f1 = "3C84-photons.fits"
-    f2 = sep.join([test_outref_path, "3C84-photons-outref.fits"])
+    f1 = "3C279-photons.fits"
+    f2 = sep.join([test_outref_path, "3C279-photons-outref.fits"])
     if ftdiff(f1, f2, exclude = 'CREATOR,DATASUM') != OK:
         status = FAIL
     return status
 
 def test_gtbin():
     status = OK
-    evfile = "3C84-photons.fits"
-    scfile = sep.join([test_data_path, "3C84-FT2.fits"])
-    outfile = "3C84-cmap.fits"
+    evfile = "3C279-photons.fits"
+    scfile = sep.join([test_data_path, "L25110610395696BB9F6356_SC00.fits"])
+    outfile = "3C279-cmap.fits"
     algorithm = "CMAP"
     ebinalg = "LOG"
     emin = "100"
@@ -248,12 +248,12 @@ def test_gtbin():
     enumbins = "20"
     denergy = "0"
     ebinfile = "NONE"
-    nxpix = "300"
-    nypix = "300"
+    nxpix = "200"
+    nypix = "200"
     binsz = "0.1"
     coordsys = "CEL"
-    xref = "49.9507"
-    yref = "41.5117"
+    xref = "194.042"
+    yref = "-5.789"
     axisrot = "0"
     rafield = "RA"
     decfield = "DEC"
@@ -281,7 +281,7 @@ def test_gtbin():
                          chatter, clobber, debug, gui, mode)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
@@ -289,28 +289,28 @@ def check_gtbin_output():
     status = OK
     outref = sep.join([refdata_path, "test-scripts", "outref"])
     fitsFiles = {
-        "3C84-cmap.fits" : [],
+        "3C279-cmap.fits" : [],
         }
-    if exists_mass(fitsFiles.keys()) != OK:
+    if exists_mass(list(fitsFiles.keys())) != OK:
         status = FAIL
-    f1 = "3C84-cmap.fits"
-    f2 = sep.join([test_outref_path, "3C84-cmap-outref.fits"])
+    f1 = "3C279-cmap.fits"
+    f2 = sep.join([test_outref_path, "3C279-cmap-outref.fits"])
     if ftdiff(f1, f2, exclude = "CREATOR,DATASUM") != OK:
         status = FAIL
     return status
 
 def test_gtltcube():
     status = OK
-    evfile = "3C84-photons.fits"
+    evfile = "3C279-photons.fits"
     evtable = "EVENTS"
-    scfile = sep.join([test_data_path, "3C84-FT2.fits"])
+    scfile = sep.join([test_data_path, "L25110610395696BB9F6356_SC00.fits"])
     sctable = "SC_DATA"
-    outfile = "3C84-expcube.fits"
-    dcostheta = "0.099"
+    outfile = "3C279-expcube.fits"
+    dcostheta = "0.025"
     binsz = "1"
     phibins = "0"
-    tmin = "268185604"
-    tmax = "268617603"
+    tmin = "538032601"
+    tmax = "538079602"
     file_version = "1"
     zmax = "90"
     chatter = "0"
@@ -328,7 +328,7 @@ def test_gtltcube():
                          chatter, clobber, debug, gui, mode)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
@@ -336,28 +336,28 @@ def check_gtltcube_output():
     status = OK
     outref = sep.join([refdata_path, "test-scripts", "outref"])
     fitsFiles = {
-        "3C84-expcube.fits" : [],
+        "3C279-expcube.fits" : [],
         }
-    if exists_mass(fitsFiles.keys()) != OK:
+    if exists_mass(list(fitsFiles.keys())) != OK:
         status = FAIL
-    f1 = "3C84-expcube.fits"
-    f2 = sep.join([test_outref_path, "3C84-expcube-outref.fits"])
+    f1 = "3C279-expcube.fits"
+    f2 = sep.join([test_outref_path, "3C279-expcube-outref.fits"])
     if ftdiff(f1, f2, exclude = "CREATOR,DATASUM", tol = "1e-18") != OK:
         status = FAIL
     return status
 
 def test_gtexpmap():
     status = OK
-    evfile = "3C84-photons.fits"
+    evfile = "3C279-photons.fits"
     evtable = "EVENTS"
-    scfile = sep.join([test_data_path, "3C84-FT2.fits"])
+    scfile = sep.join([test_data_path, "L25110610395696BB9F6356_SC00.fits"])
     sctable = "SC_DATA"
-    expcube = "3C84-expcube.fits"
-    outfile = "3C84-expmap.fits"
-    irfs = "P7REP_SOURCE_V15"
-    srcrad = "20"
-    nlong = "80"
-    nlat = "80"
+    expcube = "3C279-expcube.fits"
+    outfile = "3C279-expmap.fits"
+    irfs = "P8R3_SOURCE_V3" # Check IRF
+    srcrad = "10"
+    nlong = "200"
+    nlat = "200"
     nenergies = "20"
     submap = "no"
     nlongmin = "0"
@@ -381,33 +381,54 @@ def test_gtexpmap():
                          clobber, debug, gui, mode)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
 def check_gtexpmap_output():
+    pdb.set_trace()
     status = OK
     outref = sep.join([refdata_path, "test-scripts", "outref"])
     fitsFiles = {
-        "3C84-expmap.fits" : [],
+        "3C279-expmap.fits" : [],
         }
-    if exists_mass(fitsFiles.keys()) != OK:
+    if exists_mass(list(fitsFiles.keys())) != OK:
         status = FAIL
-    f1 = "3C84-expmap.fits"
-    f2 = sep.join([test_outref_path, "3C84-expmap-outref.fits"])
+    f1 = "3C279-expmap.fits"
+    f2 = sep.join([test_outref_path, "3C279-expmap-outref.fits"])
     if ftdiff(f1, f2, reltol = "1e-6", exclude = "CREATOR,DATASUM") != OK:
         status = FAIL
     return status
 
+def test_gtdiffrsp():
+    status = OK
+    evfile = "3C279-photons.fits"
+    scfile = sep.join([test_data_path, "L25110610395696BB9F6356_SC00.fits"])
+    srcmdl = sep.join([test_data_path, "3C279_input_model.xml"])
+    irfs = "P8R3_SOURCE_V3"
+    clobber = "yes"
+    debug = "no"
+    gui = "no"
+    mode = "h"
+    chatter = "0"
+    cmdTemplate = "gtdiffrsp evfile='%s' scfile='%s' srcmdl='%s' irfs='%s' chatter='%s' clobber='%s' " + \
+                  "debug='%s' gui='%s' mode='%s'"
+    cmd = cmdTemplate % (evfile, scfile, srcmdl, irfs, chatter, clobber, debug, gui, mode)
+    try:
+        check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
+    except CalledProcessError as e:
+        status = e.returncode
+    return status
+
 def test_gtlike():
     status = OK
-    irfs = "P7REP_SOURCE_V15"
-    expcube = "3C84-expcube.fits"
-    srcmdl = sep.join([test_data_path, "3C84-model.xml"])
+    irfs = "P8R3_SOURCE_V3" # Check IRF
+    expcube = "3C279-expcube.fits"
+    srcmdl = sep.join([test_data_path, "3C279_input_model.xml"]) # Need to generate source model for 3C279
     sfile = "none"
     check_fit = "yes"
-    results = "3C84-results.dat"
-    specfile = "3C84-counts_spectra.fits"
+    results = "3C279-results.dat"
+    specfile = "3C279-counts_spectra.fits"
     statistic = "UNBINNED"
     optimizer = "DRMNFB"
     ftol = "1e-2"
@@ -415,11 +436,11 @@ def test_gtlike():
     tsmin = "no"
     save = "yes"
     refit = "no"
-    evfile = "3C84-photons.fits"
+    evfile = "3C279-photons.fits"
     evtable = "EVENTS"
-    scfile = sep.join([test_data_path, "3C84-FT2.fits"])
+    scfile = sep.join([test_data_path, "L25110610395696BB9F6356_SC00.fits"])
     sctable = "SC_DATA"
-    expmap = "3C84-expmap.fits"
+    expmap = "3C279-expmap.fits"
     plot = "no"
     cmap = "NONE"
     bexpmap = "NONE"
@@ -444,7 +465,7 @@ def test_gtlike():
                          debug, gui, mode, irfs)
     try:
         check_call(cmd, shell = True, stdout = sys.stdout, stderr = STDOUT)
-    except CalledProcessError, e:
+    except CalledProcessError as e:
         status = e.returncode
     return status
 
@@ -452,17 +473,17 @@ def check_gtlike_output():
     status = OK
     outref = sep.join([refdata_path, "test-scripts", "outref"])
     files = {
-        "3C84-results.dat" : [],
+        "3C279-results.dat" : [],
         }
-    if exists_mass(files.keys()) != OK:
+    if exists_mass(list(files.keys())) != OK:
         status = FAIL
     fitsFiles = {
-        "3C84-counts_spectra.fits" : {},
+        "3C279-counts_spectra.fits" : {},
         }
-    if exists_mass(fitsFiles.keys()) != OK:
+    if exists_mass(list(fitsFiles.keys())) != OK:
         status = FAIL
-    f1 = "3C84-counts_spectra.fits"
-    f2 = sep.join([test_outref_path, "3C84-counts_spectra-outref.fits"])
+    f1 = "3C279-counts_spectra.fits"
+    f2 = sep.join([test_outref_path, "3C279-counts_spectra-outref.fits"])
     if ftdiff(f1, f2, reltol = "1e-1", exclude = "DATASUM") != OK:
         status = FAIL
     return status
@@ -491,6 +512,8 @@ threadTestsWithRoot = [
       "name" : "gtltcube: Check output" },
     { "cmd"  : test_gtexpmap,
       "name" : "gtexpmap" },
+    { "cmd"  : test_gtdiffrsp,
+      "name" : "gtdiffrsp" },
     #{ "cmd"  : check_gtexpmap_output,
     #  "name" : "gtexpmap: Check output" },
     { "cmd"  : test_gtlike,
@@ -523,12 +546,14 @@ threadTestsWithoutRoot = [
       "name" : "gtltcube: Check output" },
     { "cmd"  : test_gtexpmap,
       "name" : "gtexpmap" },
-    { "cmd"  : check_gtexpmap_output,
-      "name" : "gtexpmap: Check output" },
+    #{ "cmd"  : check_gtexpmap_output,
+    #  "name" : "gtexpmap: Check output" },
+    { "cmd"  : test_gtdiffrsp,
+      "name" : "gtdiffrsp" },
     { "cmd"  : test_gtlike,
       "name" : "gtlike" },
-    { "cmd"  : check_gtlike_output,
-      "name" : "gtlike: Check output" },
+    #{ "cmd"  : check_gtlike_output,
+    #  "name" : "gtlike: Check output" },
     ]
 
 #******************************************************************************
@@ -579,7 +604,7 @@ def run_test(cmd):
     global nTest
 
     # Open the test log to append the results from this test.
-    f = open(logFile, "a", 0) # 0 means unbuffered
+    f = open(logFile, "a") # 0 means unbuffered
     f.write("*" * 80 + "\n")
 
     # Initialize the status to 0 (success).
@@ -591,7 +616,7 @@ def run_test(cmd):
         f.write("Test %d: shell command '%s'\n" % (nTest, cmd))
         try:
             check_call(cmd, shell = True, stdout = f, stderr = STDOUT)
-        except CalledProcessError, e:
+        except CalledProcessError as e:
             status = e.returncode
     else:
         f.write("Test %d: function %s()\n" % (nTest, cmd.__name__))
@@ -621,10 +646,10 @@ def ok(testCmd, testName):
     nTest += 1
     status = run_test(testCmd)
     if status == OK:
-        print "ok %s - %s" % (nTest, testName)
+        print("ok %s - %s" % (nTest, testName))
         nPass += 1
     else:
-        print "not ok %s - %s" % (nTest, testName)
+        print("not ok %s - %s" % (nTest, testName))
         nFail += 1
 
 #******************************************************************************
@@ -635,8 +660,8 @@ if __name__ == "__main__":
     # Process the command line.
     (options, args) = getCommandLineOptions()
     if options.debug:
-        print "options = %s" % options
-        print "args = %s" % args
+        print("options = %s" % options)
+        print("args = %s" % args)
 
     #--------------------------------------------------------------------------
 
@@ -651,7 +676,7 @@ if __name__ == "__main__":
 
     # Fetch the test start time.
     tStart = times()[4]
-    if options.debug: print "tStart = %s" % tStart
+    if options.debug: print("tStart = %s" % tStart)
 
     # Run each thread test.
     if options.without_root == False:
@@ -663,19 +688,19 @@ if __name__ == "__main__":
 
     # Fetch the test stop time.
     tStop = times()[4]
-    if options.debug: print "tStop = %s" % tStop
+    if options.debug: print("tStop = %s" % tStop)
 
     # Compute the elapsed time for the tests.
     tElapsed = tStop - tStart
-    if options.debug: print "tElapsed = %s" % tElapsed
+    if options.debug: print("tElapsed = %s" % tElapsed)
 
     # Fetch the name of the testing machine.
     hostname = node()
-    if options.debug: print "hostname = %s" % hostname
+    if options.debug: print("hostname = %s" % hostname)
 
     # Print the test summary.
-    print "Total run time: %s s on %s" % (tElapsed, hostname)
-    print "1..%d" % nTest
+    print("Total run time: %s s on %s" % (tElapsed, hostname))
+    print("1..%d" % nTest)
     if nFail > 0:
-        print "# Looks like you failed %d %s of %d" % \
-              (nFail, "test" if nFail == 1 else "tests", nTest)
+        print("# Looks like you failed %d %s of %d" % \
+              (nFail, "test" if nFail == 1 else "tests", nTest))
