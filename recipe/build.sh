@@ -60,6 +60,11 @@ cp recipe/deactivate.sh $PREFIX/etc/conda/deactivate.d/deactivate_${condaname}.s
 cp recipe/activate.csh $PREFIX/etc/conda/activate.d/activate_${condaname}.csh
 cp recipe/deactivate.csh $PREFIX/etc/conda/deactivate.d/deactivate_${condaname}.csh
 
+# Copy ST-AGN-Thread-Test Data
+cp recipe/tests/data/inputs/* $PREFIX/share/${condaname}/data
+mkdir -p $PREFIX/share/${condaname}/data/outref
+cp recipe/tests/data/outref/* $PREFIX/share/${condaname}/data/outref
+
 # Delete the cmake build directory
 rm -rf Release 
 
