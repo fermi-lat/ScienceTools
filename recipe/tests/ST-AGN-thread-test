@@ -37,7 +37,7 @@ refdata_path = sep.join([environ["CONDA_PREFIX"], "share", "fermitools", "data"]
 
 # Path to test script data.
 #test_data_path = sep.join([refdata_path, "test-scripts"])
-test_data_path = sep.join([abspath(dirname(sys.argv[0])), "data"])
+test_data_path = sep.join([refdata_path])
 # Path to test script output reference data.
 test_outref_path = sep.join([test_data_path, "outref"])
 
