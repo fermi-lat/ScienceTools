@@ -69,10 +69,10 @@ requirements:
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
-    - pip
+    - pip # [linux and arm64]
     
   run:
-    - aplpy
+    - aplpy # [linux and not arm64]
     - astropy
     - cfitsio
     - python >=3.11
