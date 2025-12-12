@@ -57,6 +57,10 @@ build:
     - ObsSim             = {{ name|lower }}.ObsSim:main
 
 requirements:
+  host:
+    - python =3.11
+    - pip # [linux and arm64]
+
   build:
     - libgomp  # [linux]
     - llvm-openmp # [osx]
@@ -69,7 +73,6 @@ requirements:
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
-    - pip # [linux and arm64]
     
   run:
     - aplpy # [linux and x86_64]
