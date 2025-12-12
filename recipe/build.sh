@@ -31,6 +31,8 @@ else
 	if [ "$(uname -m)" == "x86_64" ]; then
 		conda install --yes sysroot_linux-64 -c conda-forge
 		conda update --yes sysroot_linux-64 -c conda-forge
+        else
+                $PYTHON -m pip install --no-deps pyregion
 	fi
 	
     cmake -S . \
@@ -75,5 +77,3 @@ echo "List Conda env"
 conda env list --json
 # Play it safe
 conda deactivate
-
-

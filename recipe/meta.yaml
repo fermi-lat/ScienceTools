@@ -69,6 +69,7 @@ requirements:
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
+    - pip
     
   run:
     - aplpy
