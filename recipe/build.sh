@@ -32,7 +32,8 @@ else
 		conda install --yes sysroot_linux-64 -c conda-forge
 		conda update --yes sysroot_linux-64 -c conda-forge
 	else
-		pip3 install aplpy  https://anaconda.org/jasercion/pyregion/2.3.1.dev7+g501f368/download/pyregion-2.3.1.dev7+g501f368.tar.gz
+		pip3 install https://anaconda.org/jasercion/pyregion/2.3.1.dev7+g501f368/download/pyregion-2.3.1.dev7+g501f368.tar.gz
+                conda install --yes  aplpy -c conda-forge
 		echo "SHOULD Pip install pyregion for Linux"
 	fi
 	
