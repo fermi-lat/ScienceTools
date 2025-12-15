@@ -57,10 +57,6 @@ build:
     - ObsSim             = {{ name|lower }}.ObsSim:main
 
 requirements:
-  host:
-    - python =3.11
-    - pip # [linux and arm64]
-
   build:
     - libgomp  # [linux]
     - llvm-openmp # [osx]
@@ -68,18 +64,15 @@ requirements:
     - cmake >=4.0
     - make
     - pkg-config
-    - python =3.11
+    - python =3.13
     - swig 4.0.2
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
     
   run:
-    - aplpy # [linux and (x86_64)]
-    - aplpy # [osx]
-    - astropy
     - cfitsio
-    - python >=3.11
+    - python >=3.13
     - fermitools-data
     - matplotlib
     - zlib # [linux]
