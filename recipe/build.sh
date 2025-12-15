@@ -75,3 +75,5 @@ echo "List Conda env"
 conda env list --json
 # Play it safe
 conda deactivate
+
+
