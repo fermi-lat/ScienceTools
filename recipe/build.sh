@@ -26,13 +26,13 @@ if [ "$(uname)" == "Darwin" ]; then
         -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
         ${CMAKE_ARGS}
 else
-    echo "Configuring for Linux"
+    echo "Configuring for Linux $(uname -m)"
 	
 	if [ "$(uname -m)" == "x86_64" ]; then
 		conda install --yes sysroot_linux-64 -c conda-forge
 		conda update --yes sysroot_linux-64 -c conda-forge
 	else
-		pip install --no-deps pyregion
+		pip3 install aplpy  https://anaconda.org/jasercion/pyregion/2.3.1.dev7+g501f368/download/pyregion-2.3.1.dev7+g501f368.tar.gz
 		echo "SHOULD Pip install pyregion for Linux"
 	fi
 	
