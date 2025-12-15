@@ -32,7 +32,8 @@ else
 		conda install --yes sysroot_linux-64 -c conda-forge
 		conda update --yes sysroot_linux-64 -c conda-forge
         else
-                pip install --no-deps pyregion
+                # pip install --no-deps pyregion
+                echo "SHOULD Pip install pyregion for Linux"
 	fi
 	
     cmake -S . \
