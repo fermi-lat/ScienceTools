@@ -1,5 +1,5 @@
 {% set name = "fermitools" %}
-{% set version = "2.4.60" %}
+{% set version = "2.4.66" %}
 
 package:
   name: {{ name|lower }}
@@ -57,6 +57,10 @@ build:
     - ObsSim             = {{ name|lower }}.ObsSim:main
 
 requirements:
+  host:
+    - python =3.11
+    - pip # [linux and arm64]
+
   build:
     - libgomp  # [linux]
     - llvm-openmp # [osx]
@@ -71,6 +75,9 @@ requirements:
     - f2c
     
   run:
+    - aplpy # [linux and (x86_64)]
+    - aplpy # [osx]
+    - astropy
     - cfitsio
     - python >=3.11
     - fermitools-data
