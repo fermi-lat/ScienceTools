@@ -64,7 +64,7 @@ requirements:
     - cmake >=4.0
     - make
     - pkg-config
-    - python =3.13
+    - python =3.11
     - swig 4.0.2
     - zlib # [linux]
     - xerces-c # [linux]
@@ -72,7 +72,7 @@ requirements:
     
   run:
     - cfitsio
-    - python >=3.13
+    - python >=3.11
     - fermitools-data
     - matplotlib
     - zlib # [linux]
