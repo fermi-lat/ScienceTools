@@ -26,11 +26,13 @@ if [ "$(uname)" == "Darwin" ]; then
         -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
         ${CMAKE_ARGS}
 else
-    echo "Configuring for Linux"
+    echo "Configuring for Linux $(uname -m)"
 	
 	if [ "$(uname -m)" == "x86_64" ]; then
 		conda install --yes sysroot_linux-64 -c conda-forge
 		conda update --yes sysroot_linux-64 -c conda-forge
+	else
+		echo "Pip install pyregion for Linux messes with cfitsio"
 	fi
 	
     cmake -S . \
