@@ -62,7 +62,7 @@ jobs:
       - name: Run tests by hand
         id: run_tests_again
         # CONTINUE_ON_ERROR is set under GH website / Settings/Actions secrets and variables/Repository variables
-        continue-on-error: true  # Default false is to fail at first error
+        # continue-on-error: true  # Default false is to fail at first error
         run: |
            echo "Run tests testing-env vars.CONTINUE_ON_ERROR "
            echo "TESTING BRANCH  ${{ github.ref_name }}"
