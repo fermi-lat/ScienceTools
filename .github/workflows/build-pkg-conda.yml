@@ -22,6 +22,7 @@ jobs:
     container: ${{ matrix.container }}
     outputs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
+    continue-on-error: true # Default false is to fail at first error
     strategy:
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
