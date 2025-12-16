@@ -69,6 +69,7 @@ jobs:
             source ${{ github.workspace }}/recipe/increment_fermi_version.sh
           fi 
           echo "FERMITOOLS_VERSION=$FERMITOOLS_VERSION" >> "$GITHUB_ENV"
+          echo " COE ${{vars.CONTINUE_ON_ERROR }} "
         env:
            LABEL_BUILD: ${{ inputs.build_label }} # dev
 
@@ -82,10 +83,11 @@ jobs:
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Setup under the GITHUB Settings 
           label: ${{ inputs.build_label }} # dev
+          continue-on-error: false # Default is to fail at first error
           overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
           # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
-          continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+          # continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
         # Important: Allow the workflow to build the other OSes to run even if one os fails fast 
 
   # Keep this code in if pivoting to using artifacts became an option. Monthly github storage quota would also be a concern since 

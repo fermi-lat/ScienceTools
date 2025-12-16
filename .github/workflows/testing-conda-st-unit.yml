@@ -62,9 +62,9 @@ jobs:
       - name: Run tests by hand
         id: run_tests_again
         # CONTINUE_ON_ERROR is set under GH website / Settings/Actions secrets and variables/Repository variables
-        continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+        continue-on-error: false  # Default is to fail at first error
         run: |
-           echo "Run tests testing-env"
+           echo "Run tests testing-env vars.CONTINUE_ON_ERROR "
            echo "TESTING BRANCH  ${{ github.ref_name }}"
            #  "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}"
            conda install --name testing-env "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
