@@ -83,7 +83,7 @@ jobs:
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Setup under the GITHUB Settings 
           label: ${{ inputs.build_label }} # dev
-          continue-on-error: false # Default is to fail at first error
+          continue-on-error: true # Default false is to fail at first error
           overwrite: true # Do not abort the uploading if a package with the same name is already present in the Anaconda channel.
           # upload_flags: "--force"
           upload: true # Need to keep upload , or else paths don't work.
