@@ -57,9 +57,6 @@ build:
     - ObsSim             = {{ name|lower }}.ObsSim:main
 
 requirements:
-  host:
-    - python =3.11
-    - pip # [linux and arm64]
 
   build:
     - libgomp  # [linux]
