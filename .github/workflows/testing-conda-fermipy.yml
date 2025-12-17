@@ -38,7 +38,7 @@ jobs:
           activate-environment: test_fermipy 
           environment-file: environments/fermitools-fermipy.yml
           auto-update-conda: false
-          auto-activate: false
+          auto-activate-base: false
           show-channel-urls: true
 
   # Currently, every conda  build package has to be uploaded to Anaconda, so the package name can be passed onto this workflow.
@@ -63,8 +63,11 @@ jobs:
           # "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}" "fermi/label/dev::fermitools"
           conda install --name test_fermipy  "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
 
-          # Install the latest Fermipy and pytest
+          # This currently installs Fermipy 1.1 (not v1.4)  and pytest
           conda install --name test_fermipy -c conda-forge fermipy pytest
+
+          # This gives us the latest Fermipy
+          conda update --name test_fermipy -c conda-forge fermipy  
 
           # Run Fermipy's tests and save them so they can be reported on the dashboard.
           pytest --junitxml=test_results/fermipy_results.xml -vv --pyargs fermipy

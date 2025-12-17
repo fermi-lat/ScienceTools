@@ -42,7 +42,7 @@ jobs:
           activate-environment: testing-env 
           environment-file: environments/fermitools-testing.yml
           auto-update-conda: false
-          auto-activate: false
+          auto-activate-base: false
           show-channel-urls: true
 
   # Currently, every conda  build package has to be uploaded to Anaconda, so the package name can be passed onto this workflow.
