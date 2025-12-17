@@ -55,7 +55,7 @@ jobs:
 
       - name: Test fermipy with latest Fermitools conda pkg.
         id: test_fermipy
-        continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+        # continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
         run: |
           echo "Run fermipy tests on branch ${{ github.ref_name }}"
 
