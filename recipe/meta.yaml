@@ -72,7 +72,6 @@ requirements:
     - f2c
     
   run:
-    - astropy
     - cfitsio
     - python >=3.11
     - fermitools-data
@@ -82,6 +81,7 @@ requirements:
     - pyyaml
     - xerces-c # [linux]
     - f2c
+    - aplpy # [osx or x86_64]
   
 test:
   # Standard modules 
