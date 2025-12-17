@@ -82,7 +82,6 @@ requirements:
     - pyyaml
     - xerces-c # [linux]
     - f2c
-    - aplpy # [osx or x86_64]
   
 test:
   # Standard modules 
