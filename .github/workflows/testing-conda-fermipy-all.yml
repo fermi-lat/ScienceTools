@@ -1,0 +1,93 @@
+name: Fermipy testing
+run-name: "Testing Conda Fermipy - ${{ inputs.matrix_os }}"
+on:
+  workflow_call:
+    inputs:
+      matrix_os:
+        required: true
+        type: string
+        description: "matrix.os to be ran"
+      fermitools_pkg_ver:
+        required: true
+        type: string
+        description: "Fermitools package version"
+      build_label:
+        required: true
+        type: string
+        description: "Fermitools package build label"
+
+
+jobs:
+  test:
+    runs-on: ${{ inputs.matrix_os }}
+    name: "Testing Conda Fermipy - ${{ inputs.matrix_os }} " 
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout Fermitools  repo 
+        uses: actions/checkout@v4
+        with:
+          ref: ${{github.ref_name}} #reset_checkout_fixes checkout_fixes master
+
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          conda-remove-defaults: true
+          python-version: 3.11
+          activate-environment: test_fermipy 
+          environment-file: environments/fermitools-fermipy.yml
+          auto-update-conda: false
+          auto-activate-base: false
+          show-channel-urls: true
+
+  # Currently, every conda  build package has to be uploaded to Anaconda, so the package name can be passed onto this workflow.
+  # It's a bug on the build actions team to fix. The alternative is to upload it as an artifact to Github server, and pass that reference around instead.
+  # So this code is being kept around , just in case we want to pivot: 
+
+      # - name: Download Conda package artifact
+      #  uses: actions/download-artifact@v4
+      #  with:
+      #    name: "${{ matrix.os }}-fermitools-package"
+      #    path: downloaded-package # Directory where the artifact will be downloaded
+
+  # BUG: This doesn't handle Tags RC and MAIN, it will only pull from tag dev. 
+
+      - name: Test fermipy with latest Fermitools conda pkg.
+        id: test_fermipy
+        # continue-on-error: ${{ fromJSON(vars.CONTINUE_ON_ERROR || 'false') }}  # Default is to fail at first error
+        run: |
+          echo "Run fermipy tests on branch ${{ github.ref_name }}"
+
+          # Use the LATEST version, not a specific version.
+          # "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}" "fermi/label/dev::fermitools"
+          conda install --name test_fermipy  "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
+
+          # This currently installs Fermipy 1.1 (not v1.4)  and pytest
+          conda install --name test_fermipy -c conda-forge fermipy pytest
+
+          # This gives us the latest Fermipy
+          conda update --name test_fermipy -c conda-forge fermipy  
+
+          # Run Fermipy's tests and save them so they can be reported on the dashboard.
+          pytest --junitxml=test_results/fermipy_results.xml -vv --pyargs fermipy
+          cd test_results/
+          ../recipe/tests/ST-unit-test -w -d -v
+          ../recipe/tests/ST-AGN-thread-test -w -d -v
+
+      # The layout for this reporting action works. Not sure if there is something better, but it does a good job for us.
+      - name: Publish Test Results Linux
+        uses: EnricoMi/publish-unit-test-result-action/linux@v2
+        if: runner.os == 'Linux'
+        with:
+          check_name: "Test Results: Fermipy ${{ inputs.matrix_os }}"
+          files: |
+             ${{ github.workspace }}/test_results/*.xml
+    
+      - name: Publish Test Results OSX
+        uses: EnricoMi/publish-unit-test-result-action/macos@v2
+        if: runner.os == 'macOS'
+        with:
+          check_name: "Test Results: Fermipy ${{ inputs.matrix_os }}"
+          files: |
+             ${{ github.workspace }}/test_results/*.xml
