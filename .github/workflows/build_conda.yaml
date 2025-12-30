@@ -53,7 +53,7 @@ jobs:
       - name: checkout the code
         uses: actions/checkout@v4
         with:
-          ref: master
+          ref: macos-cfitsio-fix
           submodules: 'recursive' 
           fetch-depth: 0 # Fetches full history
 
