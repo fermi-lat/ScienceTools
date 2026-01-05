@@ -1,7 +1,7 @@
 name: Master CI/CD workflow for Fermitools build 
 on:
   push:
-    branches: macos-cfitsio-fix # ${{github.ref_name}} not allowed here.
+    branches: master # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:
