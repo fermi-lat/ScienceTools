@@ -1,0 +1,17 @@
+name: Clear GitHub Actions Caches
+
+on:
+  workflow_dispatch: # Allows manual trigger
+  schedule:
+    # Runs every Sunday at 00:00 UTC (adjust cron for your needs)
+    - cron: '0 0 * * 0'
+
+jobs:
+  clear_all_caches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear all caches for the repository
+        # Uses a community action to simplify API interaction
+        uses: jaketomlinson/clear-actions-cache@v2
+        with:
+          token: ${{ secrets.PAT_FOR_CACHE_DELETION }}
