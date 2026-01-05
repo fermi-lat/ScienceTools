@@ -1,17 +1,21 @@
-name: Clear GitHub Actions Caches
-
+name: Cleanup GHA Caches
 on:
   workflow_dispatch: # Allows manual trigger
   schedule:
-    # Runs every Sunday at 00:00 UTC (adjust cron for your needs)
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight
 
 jobs:
-  clear_all_caches:
+  cleanup:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write # Required to delete caches
+      contents: read
     steps:
-      - name: Clear all caches for the repository
-        # Uses a community action to simplify API interaction
-        uses: jaketomlinson/clear-actions-cache@v2
-        with:
-          token: ${{ secrets.PAT_FOR_CACHE_DELETION }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Delete all caches
+        run: |
+          gh cache delete --all
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
