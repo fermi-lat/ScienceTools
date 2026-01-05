@@ -15,18 +15,18 @@ set(CMAKE_C_COMPILER "${BREW_PATH}/opt/llvm/bin/clang" CACHE FILEPATH "C compile
 set(CMAKE_CXX_COMPILER "${BREW_PATH}/opt/llvm/bin/clang++" CACHE FILEPATH "C++ compiler")
 
 # Use the macOS SDK path explicitly (instead of relying on $SDKROOT)
-#execute_process(
-#  COMMAND xcrun --sdk macosx --show-sdk-path
-#  OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
-#  OUTPUT_STRIP_TRAILING_WHITESPACE
-#)
+execute_process(
+  COMMAND xcrun --sdk macosx --show-sdk-path
+  OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+)
 set(CMAKE_SYSROOT "${CMAKE_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
 
 # Explicitly use libc++ headers and ensure they take precedence
 set(CMAKE_CXX_FLAGS_INIT "-isystem ${BREW_PATH}/opt/llvm/include/c++/v1" CACHE STRING "")
 
 # # Also ensure the linker uses the correct libc++ runtime
-# set(CMAKE_EXE_LINKER_FLAGS_INIT "-L${BREW_PATH}/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
+#set(CMAKE_EXE_LINKER_FLAGS_INIT "-L${BREW_PATH}/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
 
 # Invoke with
 # cmake -S . -B DebugBrewLLVM -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=osx-toolchain.cmake -DPython3_EXECUTABLE=$(which python)
