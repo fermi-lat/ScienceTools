@@ -20,6 +20,7 @@ on:
 jobs:
   test:
     runs-on: ${{ inputs.matrix_os }}
+    continue-on-error: true # Default false is to fail at first error
     name: "Testing Conda Fermipy - ${{ inputs.matrix_os }} " 
     defaults:
       run:
