@@ -83,6 +83,7 @@ jobs:
           check_name: "Test Results: Fermipy ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/*.xml
+             !${{ github.workspace }}/test_results/myDoc.xml
     
       - name: Publish Test Results OSX
         uses: EnricoMi/publish-unit-test-result-action/macos@v2
@@ -91,3 +92,4 @@ jobs:
           check_name: "Test Results: Fermipy ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/*.xml
+             !${{ github.workspace }}/test_results/myDoc.xml
