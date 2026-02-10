@@ -11,6 +11,6 @@ dependencies:
   - zlib
   - python=3.11
   - xerces-c
-  - swig
+  - swig 4.0.2
   - conda-verify
   - f2c
