@@ -49,7 +49,7 @@ jobs:
           # fetch-depth: 0 # Fetches full history
 
       - name: Conda environment creation and activation
-        uses: conda-incubator/setup-miniconda@v3.3
+        uses: conda-incubator/setup-miniconda@v3
         with:
           conda-remove-defaults: true
           python-version: 3.12
