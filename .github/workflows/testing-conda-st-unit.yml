@@ -30,15 +30,15 @@ jobs:
         shell: bash -l {0}
     steps:
       - name: Checkout just ScienceTools repo 
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{github.ref_name}} #reset_checkout_fixes checkout_fixes master
 
       - name: Conda environment creation and activation
-        uses: conda-incubator/setup-miniconda@v3
+        uses: conda-incubator/setup-miniconda@v3.3
         with:
           conda-remove-defaults: true
-          python-version: 3.11
+          python-version: 3.12
           activate-environment: testing-env 
           environment-file: environments/fermitools-testing.yml
           auto-update-conda: false
@@ -67,7 +67,7 @@ jobs:
            echo "Run tests testing-env vars.CONTINUE_ON_ERROR "
            echo "TESTING BRANCH  ${{ github.ref_name }}"
            #  "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" "fermi/label/dev::fermitools=${{inputs.fermitools_pkg_ver}}"
-           conda install --name testing-env "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.11
+           conda install --name testing-env "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.12
            mkdir -p test_results
            cd test_results/
            ../recipe/tests/ST-unit-test -w -d -v
