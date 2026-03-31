@@ -12,5 +12,6 @@ dependencies:
   - python=3.12
   - xerces-c
   - swig 4.0.2
-  - conda-verify
   - f2c
+  - "liblzma-devel<6.0"
+  # - conda-verify
