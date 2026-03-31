@@ -9,7 +9,7 @@ dependencies:
   - conda-build
   - libgomp
   - zlib
-  - python=3.11
+  - python=3.12
   - xerces-c
   - swig 4.0.2
   - conda-verify

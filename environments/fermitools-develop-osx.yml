@@ -7,7 +7,7 @@ dependencies:
   - cfitsio
   - cmake
   - conda-build
-  - python=3.11
+  - python=3.12
   - swig=4.0.2
   - conda-verify
   - f2c
