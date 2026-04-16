@@ -63,7 +63,6 @@ requirements:
     - llvm-openmp # [osx]
     - cfitsio
     - cmake >=4.0
-    - gsl
     - make
     - pkg-config
     - python 3.12
