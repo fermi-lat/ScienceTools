@@ -8,7 +8,7 @@ dependencies:
   - cmake
   - conda-build
   - python=3.12
-  - swig
+  - swig=4.0.2
   - f2c
   # - "liblzma-devel<6.0"
   # - conda-verify
