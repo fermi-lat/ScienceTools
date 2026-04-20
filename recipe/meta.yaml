@@ -84,19 +84,19 @@ requirements:
     - f2c
     - aplpy # [osx or x86_64]
   
- test:
-   # Standard modules 
-   imports:
-     - AnalysisBase
-     - BinnedAnalysis
-     - CompositeLikelihood
-     - FluxDensity
-     - LikelihoodState
-     - py_facilities
-     - pyIrfLoader
-     - pyLikelihood
-     - SummedLikelihood
-     - UnbinnedAnalysis
+test:
+  # Standard modules 
+  imports:
+    - AnalysisBase
+    - BinnedAnalysis
+    - CompositeLikelihood
+    - FluxDensity
+    - LikelihoodState
+    - py_facilities
+    - pyIrfLoader
+    - pyLikelihood
+    - SummedLikelihood
+    - UnbinnedAnalysis
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
