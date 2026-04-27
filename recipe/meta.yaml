@@ -86,17 +86,17 @@ requirements:
   
 test:
   # Standard modules 
-   imports:
-     - AnalysisBase
-     - BinnedAnalysis
-     - CompositeLikelihood
-     - FluxDensity
-     - LikelihoodState
-     - py_facilities
-     - pyIrfLoader
-     - pyLikelihood
-     - SummedLikelihood
-     - UnbinnedAnalysis
+  imports:
+    - AnalysisBase
+    - BinnedAnalysis
+    - CompositeLikelihood
+    - FluxDensity
+    - LikelihoodState
+    - py_facilities
+    - pyIrfLoader
+    - pyLikelihood
+    - SummedLikelihood
+    - UnbinnedAnalysis
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
