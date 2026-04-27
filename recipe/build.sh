@@ -18,8 +18,8 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
         -B Release \
+		-DCMAKE_BUILD_TYPE=Release \
 	    -DCMAKE_C_FLAGS="-g -O0" -DCMAKE_CXX_FLAGS="-g -O0" \  
-        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
