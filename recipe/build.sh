@@ -18,9 +18,8 @@ if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
         -B Release \
-		-DCMAKE_BUILD_TYPE=Release \
-		-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
-	    -DCMAKE_C_FLAGS="-g -O0" -DCMAKE_CXX_FLAGS="-g -O0" \  
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         -DPython3_EXECUTABLE="${BUILD_PREFIX}/bin/python3" \
@@ -39,7 +38,7 @@ else
     cmake -S . \
         -B Release \
         -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_FLAGS="-g -O0 -fPIC" -DCMAKE_CXX_FLAGS="-g -O0 -fPIC" \
+        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -69,7 +68,7 @@ mkdir -p $PREFIX/share/${condaname}/data/outref
 cp recipe/tests/data/outref/* $PREFIX/share/${condaname}/data/outref
 
 # Delete the cmake build directory
-rm -rf Release
+rm -rf Release 
 
 # Determine which conda env we are in. If it's base than we could "exit" conda.
 echo "Conda env $CONDA_PREFIX"
@@ -78,5 +77,4 @@ echo "List Conda env"
 conda env list --json
 # Play it safe
 conda deactivate
-
 
