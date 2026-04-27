@@ -86,7 +86,7 @@ requirements:
   
 test:
   # Standard modules 
-  # imports:
+   imports:
      - AnalysisBase
      - BinnedAnalysis
      - CompositeLikelihood
