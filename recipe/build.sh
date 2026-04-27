@@ -17,7 +17,7 @@ conda install --yes conda-forge::cxx-compiler
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
-        -B Debug \
+        -B Release \
 	    -DCMAKE_C_FLAGS_DEBUG="-g -O0" -DCMAKE_CXX_FLAGS_DEBUG="-g -O0" \  
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
@@ -37,7 +37,7 @@ else
 	fi
 	
     cmake -S . \
-        -B Debug \
+        -B Release \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_C_FLAGS="-g -O0 -fPIC" -DCMAKE_CXX_FLAGS="-g -O0 -fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
@@ -51,7 +51,7 @@ cat /etc/os-release
 
 fi
 
-cmake --build Debug --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 #cmake --build Debug --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
@@ -69,7 +69,7 @@ mkdir -p $PREFIX/share/${condaname}/data/outref
 cp recipe/tests/data/outref/* $PREFIX/share/${condaname}/data/outref
 
 # Delete the cmake build directory
-rm -rf Debug
+rm -rf Release
 
 # Determine which conda env we are in. If it's base than we could "exit" conda.
 echo "Conda env $CONDA_PREFIX"
