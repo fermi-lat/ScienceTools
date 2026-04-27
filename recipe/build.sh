@@ -19,7 +19,7 @@ if [ "$(uname)" == "Darwin" ]; then
     cmake -S . \
         -B Release \
 	    -DCMAKE_C_FLAGS="-g -O0" -DCMAKE_CXX_FLAGS="-g -O0" \  
-        -DCMAKE_BUILD_TYPE=Debug \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -38,7 +38,7 @@ else
 	
     cmake -S . \
         -B Release \
-        -DCMAKE_BUILD_TYPE=Debug \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
         -DCMAKE_C_FLAGS="-g -O0 -fPIC" -DCMAKE_CXX_FLAGS="-g -O0 -fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
