@@ -88,7 +88,7 @@ test:
   # Standard modules 
   imports:
     - AnalysisBase
-#    - BinnedAnalysis
+    - BinnedAnalysis
     - CompositeLikelihood
     - FluxDensity
     - LikelihoodState
