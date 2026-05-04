@@ -78,7 +78,8 @@ jobs:
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
       - name: Build and upload the conda packages
         id: conda-build-and-upload
-        uses: uibcdf/action-build-and-upload-conda-packages@main
+        #  @main
+        uses: uibcdf/action-build-and-upload-conda-packages@v1.5
         with:
           meta_yaml_dir: recipe # It's using recipe/meta.yaml for building the package. 
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
