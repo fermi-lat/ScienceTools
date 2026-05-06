@@ -20,6 +20,9 @@ jobs:
     name: "${{matrix.os}} ${{matrix.arch}} ${{matrix.container}}"
     runs-on: ${{ matrix.os }}
     container: ${{ matrix.container }}
+    defaults:
+      run:
+        shell: bash -el {0}
     outputs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     continue-on-error: true # Default false is to fail at first error
@@ -49,12 +52,12 @@ jobs:
           # fetch-depth: 0 # Fetches full history
 
       - name: Conda environment creation and activation
-        uses: conda-incubator/setup-miniconda@v3
+        uses: conda-incubator/setup-miniconda@v4
         with:
           conda-remove-defaults: true
           python-version: 3.12
           environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
-          auto-update-conda: false
+          auto-update-conda: true
           auto-activate-base: false
           show-channel-urls: true
 
@@ -79,7 +82,7 @@ jobs:
       - name: Build and upload the conda packages
         id: conda-build-and-upload
         #  @main Feb 26 1.5.0
-        uses: uibcdf/action-build-and-upload-conda-packages@v1.4.0
+        uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
           meta_yaml_dir: recipe # It's using recipe/meta.yaml for building the package. 
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
