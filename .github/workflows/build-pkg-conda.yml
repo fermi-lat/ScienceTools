@@ -81,7 +81,7 @@ jobs:
       - name: Build and upload the conda packages
         id: conda-build-and-upload
         # Runs the action with the following inputs or defaults if not specified.
-        uses: cascode-labs/build-conda-action/action.yml@v0
+        uses: cascode-labs/build-conda-action@v0.1.4
         with:
           recipe_path: recipe
           build_options: ' -c conda-forge -c fermi'
