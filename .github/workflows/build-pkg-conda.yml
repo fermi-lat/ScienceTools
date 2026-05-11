@@ -81,7 +81,8 @@ jobs:
            LABEL_BUILD: ${{ inputs.build_label }} # dev
 
       - name: Install conda-build again
-        run: conda install -c conda-forge conda-build
+        run: mamba install -c conda-forge conda-build boa 
+        # conda install -c conda-forge conda-build
 
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
