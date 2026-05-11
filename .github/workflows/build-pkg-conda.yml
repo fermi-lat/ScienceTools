@@ -54,6 +54,8 @@ jobs:
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v4
         with:
+          miniforge-version: "latest"
+          use-mamba: true # Recommended for speed
           conda-remove-defaults: true
           python-version: 3.12
           environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
