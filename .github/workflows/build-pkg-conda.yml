@@ -27,6 +27,7 @@ jobs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     continue-on-error: true # Default false is to fail at first error
     strategy:
+      fail-fast: false
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
       - name: Run environment-specific commands
