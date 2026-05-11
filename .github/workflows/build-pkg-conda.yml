@@ -79,6 +79,9 @@ jobs:
         env:
            LABEL_BUILD: ${{ inputs.build_label }} # dev
 
+      - name: Install conda-build again
+        run: conda install -c conda-forge conda-build
+
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
       - name: Build and upload the conda packages
@@ -86,6 +89,7 @@ jobs:
         #  @main Feb 26 1.5.0
         uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
+          mambabuild: true
           meta_yaml_dir: recipe # It's using recipe/meta.yaml for building the package. 
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Setup under the GITHUB Settings 
