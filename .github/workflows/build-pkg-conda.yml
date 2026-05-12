@@ -57,6 +57,7 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+          activate-environment: base
 
       - name: Increment version number
         run: |
