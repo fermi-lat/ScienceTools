@@ -78,6 +78,7 @@ jobs:
       - name: Debug Outputs
         run: |
           echo "Activate test environment"
+          conda init
           conda activate test
           echo "Activated Environment Name:"
           echo $CONDA_DEFAULT_ENV
