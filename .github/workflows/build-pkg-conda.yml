@@ -19,6 +19,9 @@ jobs:
   build-conda:
     name: "${{matrix.os}} ${{matrix.arch}} ${{matrix.container}}"
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -el {0}
     container: ${{ matrix.container }}
     outputs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
@@ -57,7 +60,6 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
-          activate-environment: base
 
       - name: Increment version number
         run: |
