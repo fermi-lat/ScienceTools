@@ -62,6 +62,7 @@ requirements:
     - libgomp  # [linux]
     - llvm-openmp # [osx]
     - cfitsio
+    - conda-build
     - cmake >=4.0
     - make
     - pkg-config
