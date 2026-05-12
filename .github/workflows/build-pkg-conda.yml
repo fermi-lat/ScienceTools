@@ -85,6 +85,7 @@ jobs:
           echo $CONDA_PREFIX
           echo "Installed Packages:"
           conda list
+          which conda
           conda build
 
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
