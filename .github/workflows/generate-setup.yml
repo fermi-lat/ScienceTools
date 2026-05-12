@@ -5,17 +5,19 @@ on:
       matrix:
         description: "JSON array of matrix values"
         value: ${{ jobs.generate-matrix.outputs.matrix }}
+        
       baseline_label:
         description: "Build label used for conda package: dev/rc/main"
         value: ${{ jobs.generate-matrix.outputs.build_label }}
 
 env:
   LABEL_FOR_BUILD: ${{ vars.BUILD_LABEL || 'dev' }}
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: True
 
 jobs:
   generate-matrix:
     runs-on: ubuntu-latest
-
+      
     steps:
       - id: set_matrix
         run: |
