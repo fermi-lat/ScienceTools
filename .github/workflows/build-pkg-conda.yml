@@ -79,6 +79,8 @@ jobs:
         run: |
           echo "Activated Environment Name:"
           echo $CONDA_DEFAULT_ENV
+          echo "Conda path:"
+          echo $CONDA_PREFIX
           echo "Installed Packages:"
           conda list
 
