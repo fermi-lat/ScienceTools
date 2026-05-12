@@ -55,8 +55,7 @@ jobs:
           python-version: 3.12
           environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
           auto-update-conda: false
-          auto-activate-base: true
-          #activate-environment: test
+          auto-activate-base: false
           show-channel-urls: true
 
       - name: Increment version number
