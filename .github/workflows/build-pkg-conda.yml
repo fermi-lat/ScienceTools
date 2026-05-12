@@ -75,7 +75,6 @@ jobs:
            LABEL_BUILD: ${{ inputs.build_label }} # dev
 
       - name: Debug Outputs
-        shell: bash -el {0}
         run: |
           echo "Activated Environment Name:"
           echo $CONDA_DEFAULT_ENV
@@ -83,6 +82,7 @@ jobs:
           echo $CONDA_PREFIX
           echo "Installed Packages:"
           conda list
+          conda install conda-build -y 
 
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
