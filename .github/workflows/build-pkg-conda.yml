@@ -80,7 +80,7 @@ jobs:
         run: |
           echo "Activate test environment"
           #conda init
-          conda activate test
+          # conda activate test
           echo "Activated Environment Name:"
           echo $CONDA_DEFAULT_ENV
           echo "Conda path:"
