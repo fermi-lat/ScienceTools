@@ -76,10 +76,11 @@ jobs:
            LABEL_BUILD: ${{ inputs.build_label }} # dev
 
       - name: Debug Outputs
+        shell: bash -el {0}
         run: |
-          #echo "Activate test environment"
+          echo "Activate test environment"
           #conda init
-          #conda activate test
+          conda activate test
           echo "Activated Environment Name:"
           echo $CONDA_DEFAULT_ENV
           echo "Conda path:"
