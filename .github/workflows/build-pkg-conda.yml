@@ -22,7 +22,7 @@ jobs:
     container: ${{ matrix.container }}
     defaults:
       run:
-        shell: bash -el {0}
+        shell: bash -l {0}
     outputs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     continue-on-error: true # Default false is to fail at first error
