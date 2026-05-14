@@ -24,7 +24,6 @@ jobs:
       fermitools-pkg: ${{env.FERMITOOLS_VERSION }}
     continue-on-error: true # Default false is to fail at first error
     strategy:
-      fail-fast: false
       matrix: ${{ fromJson(inputs.matrix_json) }}
     steps:
       - name: Run environment-specific commands
@@ -50,15 +49,13 @@ jobs:
           # fetch-depth: 0 # Fetches full history
 
       - name: Conda environment creation and activation
-        uses: conda-incubator/setup-miniconda@v4
+        uses: conda-incubator/setup-miniconda@main
         with:
-          miniforge-version: "latest"
-          use-mamba: true # Recommended for speed
           conda-remove-defaults: true
           python-version: 3.12
           environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
-          auto-update-conda: true
-          auto-activate-base: false
+          auto-update-conda: false
+          auto-activate-base: true
           show-channel-urls: true
 
       - name: Increment version number
@@ -77,10 +74,6 @@ jobs:
         env:
            LABEL_BUILD: ${{ inputs.build_label }} # dev
 
-      - name: Install conda-build again
-        run: mamba install -c conda-forge conda-build boa 
-        # conda install -c conda-forge conda-build
-
       - name: Debug Outputs
         run: |
           echo "Activated Environment Name:"
@@ -91,15 +84,13 @@ jobs:
           conda list
           which conda
           conda install conda-build -y 
-          
+
   # Bug: Package need to be uploaded for the conda package name to be accessible by other jobs. Bug in action code.
   # Bug: Currently only handles dev label, need to handle rc and main tags too.
       - name: Build and upload the conda packages
         id: conda-build-and-upload
-        #  @main Feb 26 1.5.0
         uses: uibcdf/action-build-and-upload-conda-packages@main
         with:
-          mambabuild: true
           meta_yaml_dir: recipe # It's using recipe/meta.yaml for building the package. 
           user: fermi # Replace with your Anaconda username (or an Anaconda organization username)
           token: ${{ secrets.ANACONDA_TOKEN }} # Setup under the GITHUB Settings 
