@@ -34,6 +34,8 @@ jobs:
     needs: [generate-matrix-tuple , build-conda-pkg] # Ensure matrix generation completes first
     name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     strategy:
+      # Run tests on all packages
+      fail-fast: false
       matrix: ${{ fromJson(needs.generate-matrix-tuple.outputs.matrix) }}
     uses: ./.github/workflows/testing-conda-st-unit.yml     #python-test.yml
     with:
