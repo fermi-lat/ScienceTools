@@ -32,8 +32,8 @@ jobs:
     needs: [generate-matrix-tuple , build-conda-pkg] # Ensure matrix generation completes first    
     name: Cleanup Failed Package Version
     if: failure()
-    #uses: actions/delete-package-versions@v5
-    uses: actions/delete-package-versions/.github/workflows/delete-package-versions.yml@v5
+    uses: actions/delete-package-versions@v5 
+    # actions/delete-package-versions/.github/workflows/delete-package-versions.yml@v5
     secrets: inherit
     with:
       # The name of the package you want to target
