@@ -78,7 +78,7 @@ requirements:
     - fermitools-data
     - matplotlib
     - zlib # [linux]
-    - numpy <2.0.0
+    - numpy >2.0.0
     - pyyaml
     - xerces-c # [linux]
     - f2c
