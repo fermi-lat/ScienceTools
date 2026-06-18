@@ -82,15 +82,9 @@
 [submodule "fermitools-fhelp"]
 	path = src/fermitools-fhelp
 	url = https://github.com/fermi-lat/fermitools-fhelp.git
-[submodule "pulsarDb"]
-	path = src/pulsarDb
-	url = https://github.com/fermi-lat/pulsarDb.git
 [submodule "burstFit"]
 	path = src/burstFit
 	url = https://github.com/fermi-lat/burstFit.git
-[submodule "pulsePhase"]
-	path = src/pulsePhase
-	url = https://github.com/fermi-lat/pulsePhase.git
 [submodule "pyBurstAnalysisGUI"]
 	path = src/pyBurstAnalysisGUI
 	url = https://github.com/fermi-lat/pyBurstAnalysisGUI.git
