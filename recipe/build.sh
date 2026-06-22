@@ -17,8 +17,8 @@ conda install --yes conda-forge::cxx-compiler
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
-        -B Release \
-        -DCMAKE_BUILD_TYPE=Release \
+        -B Debug \
+        -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -36,9 +36,9 @@ else
 	fi
 	
     cmake -S . \
-        -B Release \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
+        -B Debug \
+        -DCMAKE_BUILD_TYPE=Debug \
+        -DCMAKE_C_FLAGS="-g -O0 -fPIC" -DCMAKE_CXX_FLAGS="-g -O0 -fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -50,7 +50,7 @@ cat /etc/os-release
 
 fi
 
-cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+cmake --build Debug --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 #cmake --build Debug --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
