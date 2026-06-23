@@ -19,6 +19,7 @@ jobs:
   run-fermipy-tests:
     needs: generate-matrix-tuple # Ensure matrix generation completes first
     strategy:
+      fail-fast: false
       matrix: ${{ fromJson(needs.generate-matrix-tuple.outputs.matrix) }}
     uses: ./.github/workflows/testing-conda-fermipy-all.yml # Call the matrix-generating workflow
     secrets: inherit
