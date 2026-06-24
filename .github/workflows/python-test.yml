@@ -88,7 +88,3 @@ jobs:
           check_name: "Test Results ${{ inputs.matrix_os }}"
           files: |
              ${{ github.workspace }}/test_results/ST-unit*.xml
-
-      - name: Display Results
-        run:
-          cat ST-unit-test.log
