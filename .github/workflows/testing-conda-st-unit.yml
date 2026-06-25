@@ -70,8 +70,12 @@ jobs:
            conda install --name testing-env "fermi/label/${{inputs.build_label}}::fermitools=${{inputs.fermitools_pkg_ver}}" python=3.12
            mkdir -p test_results
            cd test_results/
+           echo "Starting Unit Tests"
            ../recipe/tests/ST-unit-test -w -d -v
+           echo "Unit Tests Complete"
+           echo "Starting AGN Thread Tests"
            ../recipe/tests/ST-AGN-thread-test -w -d -v
+           echo "AGN Thread Tests Complete"
 
       # The layout for this reporting action works. Not sure if there is something better, but it does a good job for us.
       - name: Publish Test Results Linux

@@ -1,5 +1,5 @@
 {% set name = "fermitools" %}
-{% set version = "2.5.0" %}
+{% set version = "2.5.1" %}
 
 package:
   name: {{ name|lower }}
@@ -66,7 +66,7 @@ requirements:
     - make
     - pkg-config
     - python 3.12
-    - swig 4.0.2
+    - swig>=4.1
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
@@ -75,7 +75,7 @@ requirements:
     - astropy
     - cfitsio
     - python >=3.12
-    - fermitools-data
+    - fermitools-data=0.19
     - matplotlib
     - zlib # [linux]
     - numpy <2.0.0
