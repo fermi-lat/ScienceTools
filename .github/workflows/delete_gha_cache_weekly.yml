@@ -16,6 +16,7 @@ jobs:
 
       - name: Delete all caches
         run: |
-          gh cache delete --all
+          # Max 30 items: gh cache delete --all
+          gh cache list --limit 1000 --json id --jq '.[] | .id' | xargs -I {} gh cache delete {}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
