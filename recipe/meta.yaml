@@ -75,7 +75,7 @@ requirements:
     - astropy
     - cfitsio
     - python >=3.12
-    - fermitools-data=0.19
+    - fermitools-data=0.18
     - matplotlib
     - zlib # [linux]
     - numpy >2.0.0
