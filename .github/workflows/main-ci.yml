@@ -1,7 +1,7 @@
 name: Master CI/CD workflow for Fermitools build 
 on:
   push:
-    branches: master # ${{github.ref_name}} not allowed here.
+    branches: numpy-update # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:
@@ -26,12 +26,28 @@ jobs:
       matrix_json: ${{ needs.generate-matrix-tuple.outputs.matrix }}
       build_label: ${{needs.generate-matrix-tuple.outputs.baseline_label }}
 
+  # This cleanup step will ONLY run if the build step fails
+  # Should fix the issue when a build doesn't produce all packages.
+  # cleanup-packages:
+  #  needs: [generate-matrix-tuple , build-conda-pkg] # Ensure matrix generation completes first    
+  #  name: Cleanup Failed Package Version
+  #  if: failure()
+  #  uses: actions/delete-package-versions@v5 
+  #  # actions/delete-package-versions/.github/workflows/delete-package-versions.yml@v5
+  #  secrets: inherit
+  #  with:
+  #    # The name of the package you want to target
+  #    package-name: ${{needs.generate-matrix-tuple.outputs.baseline_label }}
+  #    # Targets the version mapped to the failed run
+  #    package-version-ids: ${{ needs.build-conda-pkg.outputs.pkg_ver }} 
+          
+
   # Waits till all the builds complete, before running testing.
   # The "needs" keyword forces all of the build runners to complete before any testing can be run.
   # Longest build is the macos x86: Currently takes 90 minutes to complete (Docker version)
 
   run-baseline-tests:
-    needs: [generate-matrix-tuple , build-conda-pkg] # Ensure matrix generation completes first
+    needs: [generate-matrix-tuple , build-conda-pkg ] # Ensure matrix generation completes first
     name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
     strategy:
       # Run tests on all packages
