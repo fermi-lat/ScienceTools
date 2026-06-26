@@ -28,17 +28,6 @@ conda env create -n fermi-dev -f environments/fermitools-develop-linux.yml
 conda activate fermi-dev
 ```
 
-<details>
-<summary> Build-only dependencies. </summary>
-System specific environment files also exist for just building the tools, but neither
-running nor testing them once built.
-
-```bash
-conda env create -n fermi-build -f environments/fermitools-build-linux.yml
-conda activate fermi-build
-```
-</details>
-
 **MacOS:** If you are building the Fermitools on a MacOS machine you will need to install llvm via Homebrew if you have not done so already with the command
 
 ```bash

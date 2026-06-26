@@ -55,8 +55,7 @@ find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
 if(NOT APPLE)
-  option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
-  option(USE_SYSTEM_XERCES_C    "Use system-installed XercesC instead of package-provided" ON)
+  option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
 else()
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
 endif()
@@ -91,7 +90,6 @@ add_or_find(fftw         USE_SYSTEM_FFTW         FFTW         FFTW::fftw3)
 add_or_find(gsl          USE_SYSTEM_GSL          GSL          GSL::gsl)
 add_or_find(healpix_cxx  USE_SYSTEM_HEALPIX_CXX  healpix_cxx  healpix_cxx::healpix_cxx)
 add_or_find(wcslib       USE_SYSTEM_WCSLIB       WCSlib       WCSlib::WCSlib)
-add_or_find(xercesc      USE_SYSTEM_XERCES_C     XercesC      XercesC::XercesC)
 # -------------------------------------------------------------------------------------
 
 # Handle root.
