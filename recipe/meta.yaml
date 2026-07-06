@@ -72,7 +72,9 @@ requirements:
     - f2c
     
   run:
-    - astropy >7.0.0
+    - astropy <8.0.0
+    - scipy <1.18 
+    - regions <0.12
     - cfitsio
     - python >=3.12
     - fermitools-data=0.18

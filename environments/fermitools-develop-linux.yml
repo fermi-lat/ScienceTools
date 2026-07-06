@@ -13,5 +13,8 @@ dependencies:
   - xerces-c
   - swig>=4.1
   - f2c
+  - astropy <8.0.0
+  - scipy <1.18
+  - regions <0.12
   # - "liblzma-devel<6.0"
   # - conda-verify

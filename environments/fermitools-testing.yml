@@ -3,10 +3,12 @@ channels:
   - conda-forge
   - fermi
 dependencies:
-  - astropy 
   - junit-xml 
   - fermi::fermitools-data
   - fermi::fermitools-test-scripts-data
   - python=3.12
   - pmw
   - numpy>2.0 # Update numpy from 1.26 to 2.x 
+  - astropy <8.0.0
+  - scipy <1.18
+  - regions <0.12

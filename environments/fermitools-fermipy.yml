@@ -7,3 +7,6 @@ dependencies:
   - pytest
   - junit-xml
   - pmw
+  - astropy <8.0.0
+  - scipy <1.18
+  - regions <0.12
