@@ -11,7 +11,7 @@ dependencies:
   - zlib
   - python=3.12
   - xerces-c
-  - swig>=4.1
+  - swig==4.2.1
   - f2c
   - astropy <8.0.0
   - scipy <1.18

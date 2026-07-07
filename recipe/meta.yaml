@@ -66,10 +66,11 @@ requirements:
     - make
     - pkg-config
     - python 3.12
-    - swig>=4.1
+    - swig==4.2.1
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
+    - regions <0.12
     
   run:
     - astropy <8.0.0
