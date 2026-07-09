@@ -1,0 +1,39 @@
+name: Cleanup Anaconda Cloud Packages when build failure
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+
+      - name: Install Anaconda Client
+        run: conda install -y anaconda-client
+
+      - name: Authenticate Anaconda
+        run: anaconda login --username ${{ secrets.ANACONDA_USER }} --password ${{ secrets.ANACONDA_PASSWORD }}
+
+      - name: Delete Old Packages
+        # Example using a custom script or anaconda-client to prune builds
+        # anaconda remove -y your-channel/your-package/$version
+        run: |
+          # Replace 'your-channel/your-package' with your exact entity
+          # This script example removes versions beyond the latest 5
+          anaconda show fermi/fermitools | grep -oE 'version: [0-9.]+' | tail -n +6 | while read -r ver; do
+            version=$(echo "$ver" | awk '{print "$2"}')
+            echo "$version"
+          done
+
+      - name: Logout Anaconda
+        run: anaconda logout
+
