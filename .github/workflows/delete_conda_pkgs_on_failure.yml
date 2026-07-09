@@ -12,10 +12,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v3
+      - name: Conda environment creation and activation
+        uses: conda-incubator/setup-miniconda@main
         with:
-          auto-update-conda: true
+          conda-remove-defaults: true
+          python-version: 3.12
+          # environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
+          auto-update-conda: false
+          auto-activate-base: true
+          show-channel-urls: true
 
       - name: Install Anaconda Client
         run: conda install -y anaconda-client
