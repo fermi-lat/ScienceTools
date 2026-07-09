@@ -16,8 +16,10 @@ jobs:
         uses: conda-incubator/setup-miniconda@main
         with:
           conda-remove-defaults: true
+          # activate-environment: conda-clean
           python-version: 3.12
           # environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
+          channels: conda-forge
           auto-update-conda: false
           auto-activate-base: true
           show-channel-urls: true
@@ -26,7 +28,8 @@ jobs:
         run: conda install -y anaconda-client
 
       - name: Authenticate Anaconda
-        run: anaconda login --username ${{ secrets.ANACONDA_USER }} --password ${{ secrets.ANACONDA_PASSWORD }}
+        run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
+        # anaconda login --username ${{ secrets.ANACONDA_USER }} --password ${{ secrets.ANACONDA_PASSWORD }}
 
       - name: Delete Old Packages
         # Example using a custom script or anaconda-client to prune builds
