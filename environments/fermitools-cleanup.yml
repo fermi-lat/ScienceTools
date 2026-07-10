@@ -1,0 +1,7 @@
+name: fermitools-cleanup
+channels:
+  - conda-forge
+  - fermi
+dependencies:
+  - anaconda-client
+  - python=3.12
