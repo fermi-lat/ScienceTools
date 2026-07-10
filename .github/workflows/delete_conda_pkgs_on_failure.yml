@@ -25,7 +25,7 @@ jobs:
           show-channel-urls: true
 
       - name: Install Anaconda Client
-        run: conda install -y anaconda-client conda-verify
+        run: conda install -y anaconda-client 
 
       # - name: Authenticate Anaconda
         # run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
