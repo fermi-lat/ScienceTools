@@ -35,6 +35,8 @@ jobs:
           ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
         run: |
           # The anaconda client automatically reads ANACONDA_API_TOKEN for authentication
+          anaconda token install ${{ secrets.ANACONDA_TOKEN }}
+          anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
           anaconda whoami
           
           # Optional: Use anaconda upload to publish your package
