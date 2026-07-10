@@ -1,4 +1,4 @@
-name: Cleanup Anaconda Cloud Packages when build failure
+name: Build Cleanup of Anaconda Cloud Packages on Failure
 
 on:
   schedule:
@@ -21,15 +21,25 @@ jobs:
           # environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
           channels: conda-forge
           auto-update-conda: false
-          auto-activate-base: true
+          auto-activate-base: false
           show-channel-urls: true
 
       - name: Install Anaconda Client
-        run: conda install -y anaconda-client
+        run: conda install -y anaconda-client conda-verify
 
-      - name: Authenticate Anaconda
-        run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
+      # - name: Authenticate Anaconda
+        # run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
         # anaconda login --username ${{ secrets.ANACONDA_USER }} --password ${{ secrets.ANACONDA_PASSWORD }}
+
+      - name: Anaconda Login and Upload
+        env:
+          ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
+        run: |
+          # The anaconda client automatically reads ANACONDA_API_TOKEN for authentication
+          anaconda whoami
+          
+          # Optional: Use anaconda upload to publish your package
+          # anaconda upload <path-to-package.tar.bz2>
 
       - name: Delete Old Packages
         # Example using a custom script or anaconda-client to prune builds
