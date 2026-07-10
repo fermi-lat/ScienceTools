@@ -10,22 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@main
         with:
           conda-remove-defaults: true
-          # activate-environment: conda-clean
           python-version: 3.12
-          # environment-file: environments/${{matrix.env_target_file}}    # environments/fermitools-develop-osx.yml or fermitools-develop-linux.yml
-          channels: conda-forge
+          activate-environment: fermitools-cleanup
+          environment-file: environments/fermitools-cleanup.yml
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
 
-      - name: Install Anaconda Client
-        run: conda install -y anaconda-client 
+      # - name: Install Anaconda Client
+      #   run: conda install -y anaconda-client 
 
       # - name: Authenticate Anaconda
         # run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
