@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup Anaconda CLI
-        uses: anaconda/actions/setup-anaconda-cli@v0
+        uses: anaconda/actions/setup-anaconda-cli@main
         with:
           version: latest
-          token: ${{ secrets.ANACONDA_TOKEN }}
+          # token: ${{ secrets.ANACONDA_TOKEN }}
 
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@main
