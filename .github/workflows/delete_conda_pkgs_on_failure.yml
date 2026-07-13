@@ -19,12 +19,17 @@ jobs:
           python-version: 3.12
           activate-environment: fermitools-cleanup
           environment-file: environments/fermitools-cleanup.yml
-          auto-update-conda: false
+          auto-update-conda: true
           auto-activate-base: false
           show-channel-urls: true
 
-      # - name: Install Anaconda Client
-      #   run: conda install -y anaconda-client 
+        #- name: Install Anaconda Client
+        #  run: curl -fsSL https://anaconda.sh/install.sh | bash 
+
+      - name: Setup Anaconda CLI
+        uses: anaconda/actions/setup-anaconda-cli@v0
+        with:
+          token: ${{ secrets.ANACONDA_TOKEN }}
 
       # - name: Authenticate Anaconda
         # run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
@@ -34,9 +39,10 @@ jobs:
         env:
           ANACONDA_API_TOKEN: ${{ secrets.ANACONDA_TOKEN }}
         run: |
+          conda list anaconda-client
           # The anaconda client automatically reads ANACONDA_API_TOKEN for authentication
-          anaconda token install ${{ secrets.ANACONDA_TOKEN }}
-          anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
+          # anaconda token install ${{ secrets.ANACONDA_TOKEN }}
+          # anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
           anaconda whoami
           
           # Optional: Use anaconda upload to publish your package
@@ -48,6 +54,7 @@ jobs:
         run: |
           # Replace 'your-channel/your-package' with your exact entity
           # This script example removes versions beyond the latest 5
+          # anaconda show fermi/fermitools | grep -oE 'version: [0-9.]+' | tail -n +6 | while read -r ver; do
           anaconda show fermi/fermitools | grep -oE 'version: [0-9.]+' | tail -n +6 | while read -r ver; do
             version=$(echo "$ver" | awk '{print "$2"}')
             echo "$version"
