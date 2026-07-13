@@ -14,6 +14,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
+# Vendored externals (healpix_cxx, wcslib, ...) are static libraries that get
+# linked into shared libraries (libastro.so, SWIG python modules). Build every
+# target position-independent so the static archives can be linked into .so's.
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # Optional: forcibly propagate to all targets
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
 
@@ -56,6 +61,7 @@ set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
 if(NOT APPLE)
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
+  option(USE_SYSTEM_XERCES_C    "Use system-installed XercesC instead of package-provided" ON)
 else()
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
 endif()
@@ -90,6 +96,7 @@ add_or_find(fftw         USE_SYSTEM_FFTW         FFTW         FFTW::fftw3)
 add_or_find(gsl          USE_SYSTEM_GSL          GSL          GSL::gsl)
 add_or_find(healpix_cxx  USE_SYSTEM_HEALPIX_CXX  healpix_cxx  healpix_cxx::healpix_cxx)
 add_or_find(wcslib       USE_SYSTEM_WCSLIB       WCSlib       WCSlib::WCSlib)
+add_or_find(xercesc      USE_SYSTEM_XERCES_C     XercesC      XercesC::XercesC)
 # -------------------------------------------------------------------------------------
 
 # Handle root.
