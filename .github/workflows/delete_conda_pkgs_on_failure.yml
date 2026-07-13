@@ -12,6 +12,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v6
 
+      - name: Setup Anaconda CLI
+        uses: anaconda/actions/setup-anaconda-cli@v0
+        with:
+          version: latest
+          token: ${{ secrets.ANACONDA_TOKEN }}
+
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@main
         with:
@@ -26,10 +32,6 @@ jobs:
         #- name: Install Anaconda Client
         #  run: curl -fsSL https://anaconda.sh/install.sh | bash 
 
-      - name: Setup Anaconda CLI
-        uses: anaconda/actions/setup-anaconda-cli@v0
-        with:
-          token: ${{ secrets.ANACONDA_TOKEN }}
 
       # - name: Authenticate Anaconda
         # run: anaconda login --token ${{ secrets.ANACONDA_TOKEN }}
