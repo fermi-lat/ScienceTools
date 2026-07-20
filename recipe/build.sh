@@ -67,6 +67,10 @@ cp recipe/tests/data/inputs/* $PREFIX/share/${condaname}/data
 mkdir -p $PREFIX/share/${condaname}/data/outref
 cp recipe/tests/data/outref/* $PREFIX/share/${condaname}/data/outref
 
+# Copy utils helper script directory
+mkdir -p $PREFIX/share/${condaname}/utils
+cp utils/* $PREFIX/share/${condaname}/utils
+
 # Delete the cmake build directory
 rm -rf Release 
 
