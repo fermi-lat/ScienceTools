@@ -12,8 +12,9 @@ custom scripts that call the Fermitools' pyLikelihood interface
 to comply with new changes included within the Fermitools 2.5.X
 release on 27 July 2026.
 
-Usage: python pylike-compatibility.py --target=<script name or path> --replace
+Usage: python pylike-compatibility.py
 
+Optional Flags:
 --target:
 File to update.  List of files can be provided using the @<listname> format
 
