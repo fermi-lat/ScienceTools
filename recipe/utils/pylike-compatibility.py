@@ -39,8 +39,8 @@ calls = {'AppHelpers_checkExposureMap':'AppHelpers.checkExposureMap',
          'Util_resolveFitsFiles':'Util.resolveFitsFiles',
          'SourceFactory_funcFactory':'SourceFactory.funcFactory'}
 
-def parse_version(fermitools-version):
-    return tuple(int(x) for x in fermitools-version.split("."))
+def parse_version(fermitoolsversion):
+    return tuple(int(x) for x in fermitoolsversion.split("."))
 
 if __name__ == "__main__":
 
@@ -49,6 +49,8 @@ if __name__ == "__main__":
     parser.add_argument("-t", "--target", type=str, help="Script to update")
     parser.add_argument("-r", "--replace", action="store_true", help="Enable replacement of target script")
 
+    args = parser.parse_args()
+    
     if args.target == None:
         target = input("Target Script: ")
     else:
@@ -64,10 +66,10 @@ if __name__ == "__main__":
         filelist = [target]
 
     # Check Fermitools version
-    fermitools-version = subprocess.run(["conda list fermitools --full-name | awk '!/^#/ {print $2}'"], capture_output=True, text=True).strip()
-    print("Fermitools Version Detected: ", fermitools-version.stdout)
-    if parse_version("2.5.2") > parse_version(fermitools-version):
-        sys.exit(f"Installed Fermitools {fermitools-version} < 2.5.2.  Terminating script.")
+    fermitoolsversion = subprocess.run(["conda list fermitools --full-name | awk '!/^#/ {print $2}'"], capture_output=True, text=True, shell=True).stdout.strip()
+    print("Fermitools Version Detected: ", fermitoolsversion)
+    if parse_version("2.5.2") > parse_version(fermitoolsversion):
+        sys.exit(f"Installed Fermitools {fermitoolsversion} < 2.5.2.  Terminating script.")
 
     replace = args.replace
 
@@ -81,19 +83,21 @@ if __name__ == "__main__":
             backupext = ".bak"
         else:
             backupext = ''
+
+        print(f"Updating {filename}...")
+        print('*' * (len(filename)+12))
+            
         with fileinput.FileInput(filename, inplace=True, backup=backupext) as file:
-            print(f"Updating {filename}...")
-            print('*' * (len(filename)+12))
             for line_number, line in enumerate(file, start=1):
                 original_line = line
-                for old_case, new_case in cases.items():
+                for old_case, new_case in calls.items():
                     line = line.replace(old_case, new_case)
                 if original_line != line:
                     filechanged = 1
                     numchanges+=1
-                    print(f"line: {line_number}")
+                    print(f"line: {line_number}", file=sys.stderr)
                     diff = difflib.ndiff(original_line.splitlines(), line.splitlines())
-                    print('     '+'\n     '.join(diff))
+                    print('     '+'\n     '.join(diff), file=sys.stderr)
                 print(line, end="")
         if filechanged == 1:
             numfiles += 1
