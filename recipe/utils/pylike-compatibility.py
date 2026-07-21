@@ -2,7 +2,7 @@
 #
 # This script finds and replaces specific object calls
 # within a provided script in order to allow compatibility
-# with Fermitools release 2.5.X (released 27 July 2026).
+# with Fermitools release 2.5.2 (released 27 July 2026).
 #
 # The script checks for the version of the Fermitools installed
 # within the conda environment it is run in and will apply updates
@@ -15,7 +15,7 @@
 #
 # A text list of files can be provided using the @<listname> format.
 #
-# Usage: python pylike-compatibility.py --target=<script name or path> --replace
+# Usage: python pylike-compatibility.py
 #
 # J. Asercion 20 July 2026
 # FSSC
@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     # Load files into list
     filelist = []
-    if args.target[0] == "@":
+    if target[0] == "@":
         # Filelist provided
         with open(target[1:], "r") as file:
             filelist = [line.rstrip() for line in file]
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     print("pyLikelihood 2.5.x compatibility updates complete.")
     if replace == False:
         print("File backups saved as <filename>.bak")
-    print(f"{numchanges} made in {numfiles} files.")
+    print(f"{numchanges} changes made in {numfiles} files.")
     
         
     
