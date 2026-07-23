@@ -38,7 +38,7 @@ else
     cmake -S . \
         -B Debug \
         -DCMAKE_BUILD_TYPE=Debug \
-        -DCMAKE_C_FLAGS="-g -O0 -fPIC" -DCMAKE_CXX_FLAGS="-g -O0 -fPIC" \
+        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
