@@ -2,7 +2,7 @@
 #
 # This script finds and replaces specific object calls
 # within a provided script in order to allow compatibility
-# with Fermitools release 2.5.2 (released 27 July 2026).
+# with Fermitools release 2.5.2 (released 29 July 2026).
 #
 # The script checks for the version of the Fermitools installed
 # within the conda environment it is run in and will apply updates

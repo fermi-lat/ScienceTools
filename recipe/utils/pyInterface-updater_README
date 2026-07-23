@@ -10,7 +10,7 @@
 The pyInterface-updater.py script updates third party and
 custom scripts that call the Fermitools' pyLikelihood interface
 to comply with new changes included within the Fermitools 2.5.2
-release on 27 July 2026.
+release on 29 July 2026.
 
 Usage: python pyInterface-updater.py
 
