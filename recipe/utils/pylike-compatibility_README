@@ -1,0 +1,27 @@
+######################################################
+#                                                    #
+# pyLikelihood Interface Compatibility Update Script #
+#                                                    #
+# J. Asercion 20 July 2026                           #
+# FSSC                                               #
+#                                                    #
+######################################################
+
+The pylike-compatibility.py script updates third party and
+custom scripts that call the Fermitools' pyLikelihood interface
+to comply with new changes included within the Fermitools 2.5.2
+release on 27 July 2026.
+
+Usage: python pylike-compatibility.py
+
+Optional Flags:
+--target:
+File to update.  List of files can be provided using the @<listname> format
+
+--replace:
+Replace the original target file when the list is run.  If this flag is not
+included, an unmodified copy of the file will be created before the changes are made
+with the filename <filename>.bak
+
+The script will check the version of the Fermitools installed within the environment
+it is being run in and will exit if the Fermitools version is 2.5.1 or below.

@@ -38,7 +38,7 @@ else
     cmake -S . \
         -B Debug \
         -DCMAKE_BUILD_TYPE=Debug \
-        -DCMAKE_C_FLAGS="-g -O0 -fPIC" -DCMAKE_CXX_FLAGS="-g -O0 -fPIC" \
+        -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -66,6 +66,10 @@ cp recipe/deactivate.csh $PREFIX/etc/conda/deactivate.d/deactivate_${condaname}.
 cp recipe/tests/data/inputs/* $PREFIX/share/${condaname}/data
 mkdir -p $PREFIX/share/${condaname}/data/outref
 cp recipe/tests/data/outref/* $PREFIX/share/${condaname}/data/outref
+
+# Copy utils helper script directory
+mkdir -p $PREFIX/share/${condaname}/utils
+cp recipe/utils/* $PREFIX/share/${condaname}/utils
 
 # Delete the cmake build directory
 rm -rf Release 
