@@ -215,7 +215,6 @@ jobs:
             - `ventura` - macOS x86_64 (Intel)
         env:
           GITHUB_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
-	  
   run-baseline-tests:
     needs: [generate-matrix-tuple , build-conda-pkg ] # Ensure matrix generation completes first
     name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
