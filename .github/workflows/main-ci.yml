@@ -81,10 +81,10 @@ jobs:
       - name: Install Homebrew dependencies
         run: |
           # Install build dependencies (mapped from conda meta.yaml)
-          brew install cmake pkg-config swig python@3.12
+          brew install cmake pkg-config swig python@3.12 
           
           # Install runtime/build dependencies
-          brew install cfitsio gsl fftw healpix_cxx wcslib readline boost
+          brew install cfitsio gsl fftw healpix wcslib readline boost
           brew install llvm libomp  # For OpenMP support
           
           # Platform-specific dependencies
