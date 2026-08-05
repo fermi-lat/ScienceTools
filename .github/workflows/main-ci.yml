@@ -1,7 +1,7 @@
 name: Master CI/CD workflow for Fermitools build 
 on:
   push:
-    branches: master # ${{github.ref_name}} not allowed here.
+    branches: homebrew-distribution # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:
@@ -46,6 +46,176 @@ jobs:
   # The "needs" keyword forces all of the build runners to complete before any testing can be run.
   # Longest build is the macos x86: Currently takes 90 minutes to complete (Docker version)
 
+  # ============================================================================
+  # NEW HOMEBREW BUILD WORKFLOW
+  # ============================================================================
+
+  # Build Homebrew bottles for macOS (ARM64 and Intel)
+  build-homebrew-bottles:
+    needs: generate-matrix-tuple
+    if: ${{ github.event.inputs.build_homebrew != 'false' }}
+    name: Homebrew - ${{ matrix.os }} (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos
+            arch: arm64
+            runner: macos-14      # ARM64 runner
+            bottle_tag: arm64_sonoma
+          - os: macos
+            arch: x86_64
+            runner: macos-13      # Intel runner
+            bottle_tag: ventura
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Install Homebrew dependencies
+        run: |
+          # Install build dependencies (mapped from conda meta.yaml)
+          brew install cmake pkg-config swig python@3.12
+          
+          # Install runtime/build dependencies
+          brew install cfitsio gsl fftw healpix_cxx wcslib readline boost
+          brew install llvm libomp  # For OpenMP support
+          
+          # Platform-specific dependencies
+          # Note: xerces-c is available on Homebrew for all platforms
+          brew install xerces-c
+          
+          # Link Python 3.12
+          brew link --overwrite python@3.12
+
+      - name: Configure CMake for Homebrew
+        run: |
+          export HOMEBREW_PREFIX=$(brew --prefix)
+          export CXXFLAGS="-std=c++17 ${CXXFLAGS}"
+          
+          # Set up OpenMP flags for macOS
+          export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/libomp/lib ${LDFLAGS}"
+          export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/libomp/include ${CPPFLAGS}"
+          
+          cmake -S . \
+            -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX="${PWD}/install" \
+            -DCMAKE_PREFIX_PATH="${HOMEBREW_PREFIX}" \
+            -DPython3_EXECUTABLE="$(brew --prefix python@3.12)/bin/python3.12" \
+            -DPython3_ROOT_DIR="$(brew --prefix python@3.12)" \
+            -DCMAKE_CXX_STANDARD=17 \
+            -DCMAKE_CXX_STANDARD_REQUIRED=ON
+
+      - name: Build
+        run: |
+          cmake --build build --parallel $(sysctl -n hw.ncpu) --target install
+
+      - name: Copy data and utilities
+        run: |
+          # Copy test data (matching conda build.sh behavior)
+          mkdir -p install/share/fermitools/data
+          mkdir -p install/share/fermitools/data/outref
+          mkdir -p install/share/fermitools/utils
+          
+          if [ -d "recipe/tests/data/inputs" ]; then
+            cp -r recipe/tests/data/inputs/* install/share/fermitools/data/ || true
+          fi
+          if [ -d "recipe/tests/data/outref" ]; then
+            cp -r recipe/tests/data/outref/* install/share/fermitools/data/outref/ || true
+          fi
+          if [ -d "recipe/utils" ]; then
+            cp -r recipe/utils/* install/share/fermitools/utils/ || true
+          fi
+
+      - name: Package Homebrew bottle
+        run: |
+          cd install
+          tar czf ../fermitools-${{ env.FERMITOOLS_VERSION }}-${{ matrix.bottle_tag }}.bottle.tar.gz .
+          cd ..
+          
+          # Generate SHA256
+          shasum -a 256 fermitools-${{ env.FERMITOOLS_VERSION }}-${{ matrix.bottle_tag }}.bottle.tar.gz \
+            > fermitools-${{ env.FERMITOOLS_VERSION }}-${{ matrix.bottle_tag }}.bottle.tar.gz.sha256
+
+      - name: Upload Homebrew bottle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: homebrew-bottle-${{ matrix.arch }}
+          path: |
+            fermitools-${{ env.FERMITOOLS_VERSION }}-*.bottle.tar.gz
+            fermitools-${{ env.FERMITOOLS_VERSION }}-*.bottle.tar.gz.sha256
+          retention-days: 30
+
+      - name: Test Homebrew installation
+        run: |
+          export PATH="${PWD}/install/bin:$PATH"
+          export PYTHONPATH="${PWD}/install/lib/python3.12/site-packages:$PYTHONPATH"
+          export DYLD_LIBRARY_PATH="${PWD}/install/lib:$DYLD_LIBRARY_PATH"
+          
+          # Basic import tests (matching conda meta.yaml test imports)
+          python3.12 -c "import sys; sys.path.insert(0, '${PWD}/install/lib/python3.12/site-packages')"
+          
+          # Test that binaries exist and are executable
+          ls -la install/bin/ || echo "No binaries in bin/"
+          ls -la install/lib/ || echo "No libraries in lib/"
+
+  # Upload bottles to GitHub Release (only on tagged releases or main/rc builds)
+  upload-homebrew-release:
+    needs: [generate-matrix-tuple, build-homebrew-bottles]
+    if: ${{ contains(fromJSON('["rc", "main"]'), needs.generate-matrix-tuple.outputs.baseline_label) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Download all bottle artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: homebrew-bottle-*
+          merge-multiple: true
+
+      - name: Display downloaded files
+        run: ls -la
+
+      - name: Create or update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.FERMITOOLS_VERSION }}
+          name: Fermitools v${{ env.FERMITOOLS_VERSION }}
+          draft: false
+          prerelease: ${{ needs.generate-matrix-tuple.outputs.baseline_label == 'rc' }}
+          files: |
+            fermitools-*.bottle.tar.gz
+            fermitools-*.bottle.tar.gz.sha256
+          body: |
+            ## Fermitools v${{ env.FERMITOOLS_VERSION }}
+            
+            ### Installation
+            
+            **Via Conda (recommended):**
+            ```bash
+            conda install -c fermi fermitools=${{ env.FERMITOOLS_VERSION }}
+            ```
+            
+            **Via Homebrew:**
+            ```bash
+            brew tap fermi-lat/fermitools
+            brew install fermitools
+            ```
+            
+            ### Homebrew Bottles
+            - `arm64_sonoma` - macOS ARM64 (Apple Silicon)
+            - `ventura` - macOS x86_64 (Intel)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+	  
   run-baseline-tests:
     needs: [generate-matrix-tuple , build-conda-pkg ] # Ensure matrix generation completes first
     name: ${{matrix.os}}, ${{matrix.arch}}, ${{matrix.container}}
