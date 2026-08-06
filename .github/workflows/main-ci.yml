@@ -102,6 +102,20 @@ jobs:
           # Set up OpenMP flags for macOS
           export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/libomp/lib ${LDFLAGS}"
           export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/libomp/include ${CPPFLAGS}"
+          # ============================================================
+          # OpenMP Configuration for macOS
+          # ============================================================
+          export LIBOMP_PREFIX=$(brew --prefix libomp)
+          export LLVM_PREFIX=$(brew --prefix llvm)
+          
+          # Set OpenMP flags explicitly for CMake
+          export OpenMP_ROOT="${LIBOMP_PREFIX}"
+          
+          # Compiler and linker flags for OpenMP
+          export CXXFLAGS="-std=c++17 -Xclang -fopenmp -I${LIBOMP_PREFIX}/include ${CXXFLAGS}"
+          export CFLAGS="-Xclang -fopenmp -I${LIBOMP_PREFIX}/include ${CFLAGS}"
+          export LDFLAGS="-L${LIBOMP_PREFIX}/lib -lomp ${LDFLAGS}"
+          export CPPFLAGS="-I${LIBOMP_PREFIX}/include ${CPPFLAGS}"
           
           cmake -S . \
             -B build \
