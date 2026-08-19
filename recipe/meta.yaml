@@ -59,6 +59,8 @@ build:
 requirements:
 
   build:
+    - {{ compiler('c') }}      # Add C compiler
+    - {{ compiler('cxx') }}    # Add C++ compiler
     - libgomp  # [linux]
     - llvm-openmp # [osx]
     - cfitsio
