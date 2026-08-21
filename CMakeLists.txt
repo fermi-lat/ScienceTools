@@ -13,8 +13,8 @@ set(CMAKE_CXX_STANDARD 17 CACHE STRING "Override C++ standard" FORCE)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
-# On is crashing Linux builds 08/26
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Optional: forcibly propagate to all targets
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
