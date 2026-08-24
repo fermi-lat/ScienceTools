@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/CMakeFiles/healpix_cxx_src-populate"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/CMakeFiles/healpix_cxx_src-populate.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/CMakeFiles/healpix_cxx_src-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-build.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-download.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-install.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-test.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/healpix_cxx_src-subbuild/healpix_cxx_src-populate-prefix/src/healpix_cxx_src-populate-stamp/healpix_cxx_src-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"healpix_cxx_src-populate"
+		],
+		"name" : "healpix_cxx_src-populate"
+	}
+}

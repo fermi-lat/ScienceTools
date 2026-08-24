@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libcatalogAccess.a CMakeFiles/catalogAccess.dir/src/catalog.cxx.o CMakeFiles/catalogAccess.dir/src/catalog_io.cxx.o CMakeFiles/catalogAccess.dir/src/catalog_ioText.cxx.o CMakeFiles/catalogAccess.dir/src/catalog_sel.cxx.o CMakeFiles/catalogAccess.dir/src/quantity.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libcatalogAccess.a

@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libeblAtten.a CMakeFiles/eblAtten.dir/src/AsciiTableModel.cxx.o CMakeFiles/eblAtten.dir/src/EblAtten.cxx.o CMakeFiles/eblAtten.dir/src/IRB_routines.cxx.o CMakeFiles/eblAtten.dir/src/Primack05.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libeblAtten.a

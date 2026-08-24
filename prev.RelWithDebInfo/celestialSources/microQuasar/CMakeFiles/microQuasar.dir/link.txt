@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libmicroQuasar.a CMakeFiles/microQuasar.dir/src/microQuasar.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libmicroQuasar.a

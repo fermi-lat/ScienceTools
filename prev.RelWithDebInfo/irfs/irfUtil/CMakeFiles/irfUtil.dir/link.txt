@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libirfUtil.a CMakeFiles/irfUtil.dir/src/EventTypeMapper.cxx.o CMakeFiles/irfUtil.dir/src/HdCaldb.cxx.o CMakeFiles/irfUtil.dir/src/HDgtcalf.c.o CMakeFiles/irfUtil.dir/src/HDgtcalf_internal.c.o CMakeFiles/irfUtil.dir/src/HDgtcalf_standalone.c.o CMakeFiles/irfUtil.dir/src/IrfHdus.cxx.o CMakeFiles/irfUtil.dir/src/Util.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libirfUtil.a

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/CMakeFiles/fftw-populate"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/CMakeFiles/fftw-populate.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/CMakeFiles/fftw-populate-complete.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-build.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-configure.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-download.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-install.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-mkdir.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-patch.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-test.rule"
+		},
+		{
+			"file" : "/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/fftw-subbuild/fftw-populate-prefix/src/fftw-populate-stamp/fftw-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"fftw-populate"
+		],
+		"name" : "fftw-populate"
+	}
+}

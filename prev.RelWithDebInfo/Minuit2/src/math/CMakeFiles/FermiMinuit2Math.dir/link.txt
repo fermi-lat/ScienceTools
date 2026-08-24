@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libFermiMinuit2Math.a CMakeFiles/FermiMinuit2Math.dir/GenAlgoOptions.cxx.o CMakeFiles/FermiMinuit2Math.dir/MinimizerOptions.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libFermiMinuit2Math.a

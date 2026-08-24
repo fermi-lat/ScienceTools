@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc librspgen.a CMakeFiles/rspgen.dir/src/CircularWindow.cxx.o CMakeFiles/rspgen.dir/src/CosineBinner.cxx.o CMakeFiles/rspgen.dir/src/GrbResponse.cxx.o CMakeFiles/rspgen.dir/src/IResponse.cxx.o CMakeFiles/rspgen.dir/src/PointResponse.cxx.o CMakeFiles/rspgen.dir/src/RspGenApp.cxx.o CMakeFiles/rspgen.dir/src/SpaceCraftCalculator.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib librspgen.a

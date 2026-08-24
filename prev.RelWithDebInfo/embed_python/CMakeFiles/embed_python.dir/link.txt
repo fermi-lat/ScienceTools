@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libembed_python.a CMakeFiles/embed_python.dir/src/Module.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libembed_python.a

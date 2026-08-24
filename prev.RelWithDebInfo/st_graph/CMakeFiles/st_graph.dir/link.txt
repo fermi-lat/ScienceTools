@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libst_graph.a CMakeFiles/st_graph.dir/src/Axis.cxx.o CMakeFiles/st_graph.dir/src/EmbedPython.cpp.o CMakeFiles/st_graph.dir/src/Engine.cxx.o CMakeFiles/st_graph.dir/src/IPlot.cxx.o CMakeFiles/st_graph.dir/src/MPLEngine.cxx.o CMakeFiles/st_graph.dir/src/MPLFrame.cxx.o CMakeFiles/st_graph.dir/src/MPLPlot.cxx.o CMakeFiles/st_graph.dir/src/MPLPlotFrame.cxx.o CMakeFiles/st_graph.dir/src/MPLTabFolder.cxx.o CMakeFiles/st_graph.dir/src/StGui.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libst_graph.a

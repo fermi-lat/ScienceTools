@@ -1,0 +1,12 @@
+# This is a generated file and its contents are an internal implementation detail.
+# The download step will be re-executed if anything in this file changes.
+# No other meaning or use of this file is supported.
+
+method=url
+command=/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-subbuild/f2c_src-populate-prefix/src/f2c_src-populate-stamp/download-f2c_src-populate.cmake;COMMAND;/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-subbuild/f2c_src-populate-prefix/src/f2c_src-populate-stamp/verify-f2c_src-populate.cmake;COMMAND;/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/cmake;-DCMAKE_MESSAGE_LOG_LEVEL=VERBOSE;-P;/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-subbuild/f2c_src-populate-prefix/src/f2c_src-populate-stamp/extract-f2c_src-populate.cmake
+source_dir=/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-src
+work_dir=/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps
+url(s)=https://web.archive.org/web/20210322095636/https://netlib.sandia.gov/f2c/libf2c.zip
+hash=SHA256=ca404070e9ce0a9aaa6a71fc7d5489d014ade952c5d6de7efb88de8e24f2e8e0
+      no_extract=
+

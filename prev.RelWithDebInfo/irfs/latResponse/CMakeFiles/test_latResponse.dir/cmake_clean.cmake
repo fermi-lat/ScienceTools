@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/test_latResponse.dir/src/test/test.cxx.o"
+  "CMakeFiles/test_latResponse.dir/src/test/test.cxx.o.d"
+  "test_latResponse"
+  "test_latResponse.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/test_latResponse.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

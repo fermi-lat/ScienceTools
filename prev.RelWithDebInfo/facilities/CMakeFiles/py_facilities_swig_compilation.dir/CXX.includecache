@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/src/facilities/src/py_facilities.i
+cstddef
+-
+string
+-
+facilities/commonUtilities.h
+/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/src/facilities/src/facilities/commonUtilities.h
+

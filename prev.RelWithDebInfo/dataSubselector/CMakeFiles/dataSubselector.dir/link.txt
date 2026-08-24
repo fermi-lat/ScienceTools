@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libdataSubselector.a CMakeFiles/dataSubselector.dir/src/BitMaskCut.cxx.o CMakeFiles/dataSubselector.dir/src/CutBase.cxx.o CMakeFiles/dataSubselector.dir/src/Cuts.cxx.o CMakeFiles/dataSubselector.dir/src/Gti.cxx.o CMakeFiles/dataSubselector.dir/src/GtiCut.cxx.o CMakeFiles/dataSubselector.dir/src/RangeCut.cxx.o CMakeFiles/dataSubselector.dir/src/SkyConeCut.cxx.o CMakeFiles/dataSubselector.dir/src/VersionCut.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libdataSubselector.a

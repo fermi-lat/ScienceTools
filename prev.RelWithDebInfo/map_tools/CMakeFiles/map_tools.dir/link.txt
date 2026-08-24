@@ -1,0 +1,2 @@
+/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libmap_tools.a CMakeFiles/map_tools.dir/src/DiffuseFunction.cxx.o CMakeFiles/map_tools.dir/src/Exposure.cxx.o CMakeFiles/map_tools.dir/src/MapParameters.cxx.o CMakeFiles/map_tools.dir/src/Parameters.cxx.o CMakeFiles/map_tools.dir/src/SkyImage.cxx.o
+/opt/homebrew/opt/llvm/bin/llvm-ranlib libmap_tools.a
