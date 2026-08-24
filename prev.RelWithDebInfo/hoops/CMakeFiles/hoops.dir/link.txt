@@ -1,2 +1,0 @@
-/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libhoops.a CMakeFiles/hoops.dir/src/hoops_ape.cxx.o CMakeFiles/hoops.dir/src/hoops_exception.cxx.o CMakeFiles/hoops.dir/src/hoops_group.cxx.o CMakeFiles/hoops.dir/src/hoops_limits.cxx.o CMakeFiles/hoops.dir/src/hoops_par.cxx.o CMakeFiles/hoops.dir/src/hoops_prim.cxx.o CMakeFiles/hoops.dir/src/hoops_prompt_group.cxx.o
-/opt/homebrew/opt/llvm/bin/llvm-ranlib libhoops.a

@@ -1,2 +1,0 @@
-/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libst_app.a CMakeFiles/st_app.dir/src/AppParGroup.cxx.o CMakeFiles/st_app.dir/src/ballistic_main.cxx.o CMakeFiles/st_app.dir/src/StApp.cxx.o CMakeFiles/st_app.dir/src/StAppFactory.cxx.o CMakeFiles/st_app.dir/src/StAppGui.cxx.o
-/opt/homebrew/opt/llvm/bin/llvm-ranlib libst_app.a

@@ -1,3 +1,0 @@
-/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-subbuild/CMakeFiles/f2c_src-populate.dir
-/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-subbuild/CMakeFiles/edit_cache.dir
-/Users/jamrhein/FALL_2026_Builds/0819/ScienceTools/RelWithDebInfo/_deps/f2c_src-subbuild/CMakeFiles/rebuild_cache.dir

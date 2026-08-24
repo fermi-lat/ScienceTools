@@ -1,2 +1,0 @@
-/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc liborbitSim.a CMakeFiles/orbitSim.dir/src/atFunctions.cxx.o CMakeFiles/orbitSim.dir/src/functUtil.cxx.o CMakeFiles/orbitSim.dir/src/GLAST_slew_estimate.cxx.o CMakeFiles/orbitSim.dir/src/OrbSim.cxx.o CMakeFiles/orbitSim.dir/src/read_ephem.cxx.o
-/opt/homebrew/opt/llvm/bin/llvm-ranlib liborbitSim.a

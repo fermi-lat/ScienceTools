@@ -1,2 +1,0 @@
-/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libobservationSim.a CMakeFiles/observationSim.dir/src/ContainerBase.cxx.o CMakeFiles/observationSim.dir/src/EgretSc.cxx.o CMakeFiles/observationSim.dir/src/EventContainer.cxx.o CMakeFiles/observationSim.dir/src/LatSc.cxx.o CMakeFiles/observationSim.dir/src/ScDataContainer.cxx.o CMakeFiles/observationSim.dir/src/Simulator.cxx.o
-/opt/homebrew/opt/llvm/bin/llvm-ranlib libobservationSim.a

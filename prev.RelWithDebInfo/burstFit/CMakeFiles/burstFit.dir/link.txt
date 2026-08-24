@@ -1,2 +1,0 @@
-/Users/jamrhein/miniforge3/envs/fermi-0819master/bin/ar qc libburstFit.a CMakeFiles/burstFit.dir/src/BurstModel.cxx.o CMakeFiles/burstFit.dir/src/NegativeStat.cxx.o
-/opt/homebrew/opt/llvm/bin/llvm-ranlib libburstFit.a
