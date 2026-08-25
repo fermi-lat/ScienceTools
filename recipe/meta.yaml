@@ -62,6 +62,7 @@ requirements:
     - gcc_linux-64=15.2.0 # [linux]
     - libgcc=15.2.0 # [linux]
     - libgcc-ng=15.2.0 # [linux]
+    - libstdcxx=15.2.0 # [linux]
     - libgomp  # [linux]
     - llvm-openmp # [osx]
     - binutils  # missing ar command needed

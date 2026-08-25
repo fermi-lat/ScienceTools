@@ -4,6 +4,7 @@ channels:
   - fermi
 dependencies:
   - gcc_linux-64=15.2.0
+  - libstdcxx=15.2.0
   - anaconda-client
   - cfitsio
   - cmake
