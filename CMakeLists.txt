@@ -19,6 +19,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # turn off strict type
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+set(CMAKE_C_FLAGS="-std=gnu17")
 
 # Optional: forcibly propagate to all targets
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
