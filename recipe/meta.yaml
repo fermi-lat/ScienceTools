@@ -59,6 +59,7 @@ build:
 requirements:
 
   build:
+    - gcc_linux-64=15.2.0 # [linux]
     - libgomp  # [linux]
     - llvm-openmp # [osx]
     - binutils  # missing ar command needed
