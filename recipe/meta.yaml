@@ -59,6 +59,8 @@ build:
 requirements:
 
   build:
+    - gcc_linux-aarch64=15.2.0 # [linux]  # Add this
+    - libstdcxx-ng=15.2.0 # [linux and aarch64]  # Add this
     - gcc_linux-64=15.2.0 # [linux]
     - libgcc=15.2.0 # [linux]
     - libgcc-ng=15.2.0 # [linux]
