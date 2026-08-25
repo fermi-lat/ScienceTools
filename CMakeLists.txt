@@ -17,6 +17,9 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+# turn off strict type
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+
 # Optional: forcibly propagate to all targets
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
 
