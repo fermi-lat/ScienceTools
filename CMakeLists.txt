@@ -15,11 +15,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "Disable extensions" FORCE)
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # turn off strict type
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
-set(CMAKE_C_FLAGS="-std=gnu17")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+# set(CMAKE_C_FLAGS="-std=gnu17")
 
 # Optional: forcibly propagate to all targets
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
