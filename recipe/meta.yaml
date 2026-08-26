@@ -10,16 +10,6 @@ source:
   git_tag: "{{ environ.get('GITHUB_REF_NAME', 'master') }}" 
   git_submodules: true
 
-
-# Add to recipe/build.sh before the build command
-# GSL failures in Linux x86
-export CFLAGS="${CFLAGS} -D_FPU_SINGLE=0x0000 -D_FPU_DOUBLE=0x0300 -D_FPU_EXTENDED=0x0300"
-export CFLAGS="${CFLAGS} -D_FPU_RC_NEAREST=0x0000 -D_FPU_RC_DOWN=0x0400"
-export CFLAGS="${CFLAGS} -D_FPU_RC_UP=0x0800 -D_FPU_RC_ZERO=0x0C00"
-export CFLAGS="${CFLAGS} -D_FPU_MASK_IM=0x0001 -D_FPU_MASK_DM=0x0002"
-export CFLAGS="${CFLAGS} -D_FPU_MASK_ZM=0x0004 -D_FPU_MASK_OM=0x0008"
-export CFLAGS="${CFLAGS} -D_FPU_MASK_UM=0x0010 -D_FPU_MASK_PM=0x0020"
-
 build:
   number: {{ environ.get('BUILD_NUMBER', 0)}}
   skip: true  # [win]
