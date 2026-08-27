@@ -29,6 +29,10 @@ endif()
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
 option(CMAKE_CXX_COMPILER "Specify Compiler" clang)
 
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+   add_compile_options("-Wno-deprecated-non-prototype")
+endif()
+
 # CMake tool support packages. These provide additional funcitons to our Cmake
 # files.
 include(CMakeDependentOption)
