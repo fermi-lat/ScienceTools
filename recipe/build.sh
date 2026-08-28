@@ -38,6 +38,7 @@ else
     cmake -S . \
         -B Debug \
         -DCMAKE_BUILD_TYPE=Debug \
+	-DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_C_FLAGS="-fPIC" -DCMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
