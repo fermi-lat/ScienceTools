@@ -31,7 +31,10 @@ option(CMAKE_CXX_COMPILER "Specify Compiler" clang)
 
 if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
    # add_compile_options("-Wno-deprecated-non-prototype")
-   add_compile_options($<$<COMPILE_LANGUAGE:C>:-Wno-deprecated-non-prototype>)
+   add_compile_options(  
+     $<$<COMPILE_LANGUAGE:C>:-Wno-deprecated-non-prototype>
+     $<$<COMPILE_LANGUAGE:C>:-std=gnu17>
+   )
 endif()
 
 # CMake tool support packages. These provide additional funcitons to our Cmake
