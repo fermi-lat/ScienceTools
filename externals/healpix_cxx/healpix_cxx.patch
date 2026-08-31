@@ -33,13 +33,3 @@
 +#endif
        }
    };
-
---- src/healpix/src/Healpix.cxx
-+++ src/healpix/src/Healpix.cxx
-@@ -15,6 +15,7 @@
- 
- ///< NASA healpix class
- /* Standard Includes */
-+#include <iterator>
- #include <numeric> // for accumulate
- #include <stdexcept>
