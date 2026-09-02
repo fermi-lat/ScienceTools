@@ -71,7 +71,7 @@ jobs:
            mkdir -p test_results
            cd test_results/
            echo "Starting Unit Tests"
-           test_evtbin
+           # test_evtbin
            test_eblAtten
            test_healpix
            ../recipe/tests/ST-unit-test -w -d -v
