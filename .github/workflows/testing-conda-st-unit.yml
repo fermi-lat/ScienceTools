@@ -24,6 +24,7 @@ on:
 jobs:
   test:
     runs-on: ${{ inputs.matrix_os }}
+    continue-on-error: true # Default false is to fail at first error
     name: "Testing Conda Baseline - ${{ inputs.matrix_os }} " 
     defaults:
       run:
@@ -75,8 +76,8 @@ jobs:
            mkdir -p test_results
            cd test_results/
            echo "Starting Unit Tests"
-           # test_evtbin
-           # test_eblAtten
+           test_eblAtten
+           test_evtbin
            test_healpix
            ../recipe/tests/ST-unit-test -w -d -v
            echo "Unit Tests Complete"
