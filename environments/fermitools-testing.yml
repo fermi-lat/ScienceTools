@@ -4,6 +4,7 @@ channels:
   - fermi
 dependencies:
   - astropy 
+  - llvmdev # [osx]
   - llvm-openmp # [osx]
   - junit-xml 
   - fermi::fermitools-data
