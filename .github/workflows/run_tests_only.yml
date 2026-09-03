@@ -37,7 +37,7 @@ jobs:
     secrets: inherit
     with:
       matrix_os: ${{ matrix.os }}
-      fermitools_pkg_ver: "2.4.163"
+      fermitools_pkg_ver: "2.5.12"
       build_label: "dev"
 
   # This job builds the 4 packages, uploads them to Anaconda and runs test(s) against them.
