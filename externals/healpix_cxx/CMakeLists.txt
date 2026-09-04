@@ -8,7 +8,7 @@ message(STATUS "Local External Dependency Healpix_cxx version 3.31")
 
 FetchContent_Declare(
   healpix_cxx_src
-  URL https://downloads.sourceforge.net/project/healpix/Healpix_3.31/Healpix_3.31_2016Aug26.tar.gz
+  URL https://fermi.gsfc.nasa.gov/ssc/data/analysis/scitools/data/SummerSchool/Healpix_3.31_2016Aug26.tar.gz
   URL_HASH
     SHA256=ddf437442b6d5ae7d75c9afaafc4ec43921f903c976e25db3c5ed5185a181542
   DOWNLOAD_EXTRACT_TIMESTAMP TRUE
