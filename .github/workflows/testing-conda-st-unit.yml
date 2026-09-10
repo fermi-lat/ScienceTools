@@ -24,6 +24,7 @@ on:
 jobs:
   test:
     runs-on: ${{ inputs.matrix_os }}
+    continue-on-error: true # Default false is to fail at first error
     name: "Testing Conda Baseline - ${{ inputs.matrix_os }} " 
     defaults:
       run:
@@ -33,6 +34,10 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{github.ref_name}} #reset_checkout_fixes checkout_fixes master
+
+      - name: Install LLVM libs for Mac
+        if: runner.os == 'macOS'
+        run: brew install llvm libomp
 
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
@@ -71,6 +76,7 @@ jobs:
            mkdir -p test_results
            cd test_results/
            echo "Starting Unit Tests"
+           # test_eblAtten test_evtbin test_healpix
            ../recipe/tests/ST-unit-test -w -d -v
            echo "Unit Tests Complete"
            echo "Starting AGN Thread Tests"

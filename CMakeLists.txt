@@ -9,10 +9,14 @@ project(
 cmake_policy(SET CMP0120 NEW)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
 
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "Override C++ standard" FORCE)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Optional: forcibly propagate to all targets
 add_compile_options("$<$<COMPILE_LANGUAGE:CXX>:-std=c++17>")
@@ -26,6 +30,14 @@ endif()
 # Options. Activate at configure time with `-D<OPTION>=ON`
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
 option(CMAKE_CXX_COMPILER "Specify Compiler" clang)
+
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+   # add_compile_options("-Wno-deprecated-non-prototype")
+   add_compile_options(  
+     $<$<COMPILE_LANGUAGE:C>:-Wno-deprecated-non-prototype>
+     $<$<COMPILE_LANGUAGE:C>:-std=gnu17>
+   )
+endif()
 
 # CMake tool support packages. These provide additional funcitons to our Cmake
 # files.

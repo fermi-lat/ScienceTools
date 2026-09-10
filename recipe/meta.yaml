@@ -61,6 +61,7 @@ requirements:
   build:
     - libgomp  # [linux]
     - llvm-openmp # [osx]
+    - binutils  # missing ar command needed
     - cfitsio
     - cmake >=4.0
     - make
