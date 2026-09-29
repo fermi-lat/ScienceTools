@@ -21,7 +21,7 @@ jobs:
     steps:
       - id: set_matrix
         run: |
-          MATRIX_VALUES='{"os": "macos-26-intel", "arch": "x86_64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}, {"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"},{"os": "ubuntu-24.04", "arch": "x86", "container": "redhat/ubi8:latest", "env_target_file": "fermitools-develop-linux.yml"}, {"os": "macos-26", "arch": "arm64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}' 
+          MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"},{"os": "ubuntu-24.04", "arch": "x86", "container": "redhat/ubi8:latest", "env_target_file": "fermitools-develop-linux.yml"}, {"os": "macos-26", "arch": "arm64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}' 
           # MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"}'
           echo "matrix={\"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
 
@@ -29,6 +29,7 @@ jobs:
     # Return the matrix  as a ouput parameter that other Jobs can input and process as a JSON object.
     # Return baseline label used by Anaconda : dev (default) , rc , or main.
     # Each OS uses Python dependency environment file: fermitools-develop-linux.yml or fermitools-develop-osx.yml
+    # {"os": "macos-15-intel", "arch": "x86_64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
       build_label: ${{ env.LABEL_FOR_BUILD }}
