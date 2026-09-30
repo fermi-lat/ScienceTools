@@ -1,7 +1,7 @@
 name: Master CI/CD workflow for Fermitools build 
 on:
   push:
-    branches: master # ${{github.ref_name}} not allowed here.
+    branches: 150-substantial-gtsrcprob-runtime-difference-between-fermitools-251-and-253-conda-environments # ${{github.ref_name}} not allowed here.
   workflow_dispatch:
     inputs:
       logLevel:
