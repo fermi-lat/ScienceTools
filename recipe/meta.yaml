@@ -78,6 +78,8 @@ requirements:
     - fermitools-data=0.19
     - matplotlib
     - numpy >2.0.0
+    - aplpy # [osx or x86_64]
+    - pyyaml
   
 test:
   # Standard modules 
