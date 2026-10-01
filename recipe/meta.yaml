@@ -80,6 +80,7 @@ requirements:
     - numpy >2.0.0
     - aplpy # [osx or x86_64]
     - pyyaml
+    - scipy
   
 test:
   # Standard modules 
