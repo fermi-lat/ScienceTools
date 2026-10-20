@@ -26,7 +26,7 @@ jobs:
           activate-environment: fermitools-cleanup
           environment-file: environments/fermitools-cleanup.yml
           auto-update-conda: true
-          auto-activate-base: false
+          auto-activate: false
           show-channel-urls: true
 
         #- name: Install Anaconda Client
