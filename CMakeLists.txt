@@ -72,7 +72,8 @@ set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 # Python3 External development headers.
 set(Python3_FIND_VIRTUALENV FIRST)
 
-find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
+find_package(Python3 3.8 REQUIRED COMPONENTS Interpreter Development.SABIModule)
+#find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 
 set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
