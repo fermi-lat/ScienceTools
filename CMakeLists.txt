@@ -76,12 +76,12 @@ set(Python3_FIND_VIRTUALENV FIRST)
 
 # Development.SABIModule provides Python3::SABIModule for the stable ABI extension modules.
 # Development.Embed provides Python3::Python for the code that embeds the interpreter.
-find_package(Python3 3.8 REQUIRED COMPONENTS Interpreter Development.Embed Development.SABIModule)
+find_package(Python3 3.10 REQUIRED COMPONENTS Interpreter Development.Embed Development.SABIModule)
 
 set_target_properties(Python3::Python Python3::SABIModule PROPERTIES IMPORTED_GLOBAL TRUE)
 
 # Restrict all code compiled against Python to the stable ABI (limited API) of this minimum version.
-set(FERMI_PYTHON_LIMITED_API "0x03080000" CACHE STRING "Py_LIMITED_API value used for all Python code")
+set(FERMI_PYTHON_LIMITED_API "0x030A0000" CACHE STRING "Py_LIMITED_API value used for all Python code")
 set_property(TARGET Python3::Python Python3::SABIModule APPEND PROPERTY
   INTERFACE_COMPILE_DEFINITIONS Py_LIMITED_API=${FERMI_PYTHON_LIMITED_API})
 
