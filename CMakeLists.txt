@@ -6,6 +6,16 @@ project(
   VERSION 2.4.0
   LANGUAGES CXX C
   DESCRIPTION "Fermi Sciencetools")
+
+# Set release version information
+if(DEFINED ENV{PKG_VERSION})
+  set(FERMITOOLS_RELEASE "$ENV{PKG_VERSION}" CACHE STRING "Version reported by the tools")
+elseif(DEFINED ENV{FERMITOOLS_VERSION})
+  set(FERMITOOLS_RELEASE "$ENV{FERMITOOLS_VERSION}" CACHE STRING "Version reported by the tools")
+else()
+  set(FERMITOOLS_RELEASE "${PROJECT_VERSION}" CACHE STRING "Version reported by the tools")
+endif()
+
 cmake_policy(SET CMP0120 NEW)
 set(CMAKE_POLICY_VERSION_MINIMUM 3.10)
 
