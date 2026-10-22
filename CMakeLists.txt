@@ -85,6 +85,33 @@ set(FERMI_PYTHON_LIMITED_API "0x030A0000" CACHE STRING "Py_LIMITED_API value use
 set_property(TARGET Python3::Python Python3::SABIModule APPEND PROPERTY
   INTERFACE_COMPILE_DEFINITIONS Py_LIMITED_API=${FERMI_PYTHON_LIMITED_API})
 
+# Code that embeds the interpreter links Python3::Python. Make the installed binaries depend on the
+# version-independent libpython3 stub rather than a specific libpython3.X, so they work with any
+# Python of at least the version above. On Linux this is done at install time (see the end of this file).
+option(FERMI_UNVERSIONED_LIBPYTHON "Link embedding code to libpython3 instead of libpython3.X" ON)
+if(FERMI_UNVERSIONED_LIBPYTHON)
+  if(APPLE)
+    # libpython3.dylib re-exports libpython3.X.dylib, so it can be linked directly. It sits next to
+    # libpython3.X.dylib. Check for the file directly: find_library would re-root the search under
+    # CMAKE_SYSROOT (the macOS SDK, set by cmake/macos-toolchain.cmake).
+    list(GET Python3_LIBRARY_DIRS 0 python_library_dir)
+    set(FERMI_LIBPYTHON3 "${python_library_dir}/libpython3.dylib")
+    if(NOT EXISTS "${FERMI_LIBPYTHON3}")
+      message(FATAL_ERROR "libpython3.dylib not found in ${Python3_LIBRARY_DIRS}; "
+                          "set FERMI_UNVERSIONED_LIBPYTHON=OFF to link libpython3.X instead")
+    endif()
+    set_property(TARGET Python3::Python PROPERTY IMPORTED_LOCATION ${FERMI_LIBPYTHON3})
+    get_target_property(python_configs Python3::Python IMPORTED_CONFIGURATIONS)
+    if(python_configs)
+      foreach(config IN LISTS python_configs)
+        set_property(TARGET Python3::Python PROPERTY IMPORTED_LOCATION_${config} ${FERMI_LIBPYTHON3})
+      endforeach()
+    endif()
+  else()
+    find_program(FERMI_PATCHELF patchelf REQUIRED)
+  endif()
+endif()
+
 if(NOT APPLE)
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
 else()
@@ -222,3 +249,9 @@ install(
 )
 install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
         DESTINATION ${PYTHON_SITE_PKGDIR})
+
+# This must stay the last install rule so that every installed binary is in the install manifest.
+if(FERMI_UNVERSIONED_LIBPYTHON AND NOT APPLE)
+  install(CODE "set(FERMI_PATCHELF \"${FERMI_PATCHELF}\")")
+  install(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/cmake/UnlinkVersionedLibpython.cmake)
+endif()
