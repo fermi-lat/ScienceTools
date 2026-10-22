@@ -1,5 +1,6 @@
 # Fermitools CMAKE build system Author: Alexander Reustle (2022)
-cmake_minimum_required(VERSION 3.20)
+# 3.26 is required for the Python3 Development.SABIModule component.
+cmake_minimum_required(VERSION 3.26)
 
 project(
   fermitools
@@ -66,16 +67,23 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(Threads REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 
-find_package(SWIG 3.0.1 REQUIRED COMPONENTS python)
+# 4.2 is required for the -py3-stable-abi option.
+find_package(SWIG 4.2 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
 # Python3 External development headers.
 set(Python3_FIND_VIRTUALENV FIRST)
 
-find_package(Python3 3.8 REQUIRED COMPONENTS Interpreter Development.SABIModule)
-#find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
+# Development.SABIModule provides Python3::SABIModule for the stable ABI extension modules.
+# Development.Embed provides Python3::Python for the code that embeds the interpreter.
+find_package(Python3 3.8 REQUIRED COMPONENTS Interpreter Development.Embed Development.SABIModule)
 
-set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
+set_target_properties(Python3::Python Python3::SABIModule PROPERTIES IMPORTED_GLOBAL TRUE)
+
+# Restrict all code compiled against Python to the stable ABI (limited API) of this minimum version.
+set(FERMI_PYTHON_LIMITED_API "0x03080000" CACHE STRING "Py_LIMITED_API value used for all Python code")
+set_property(TARGET Python3::Python Python3::SABIModule APPEND PROPERTY
+  INTERFACE_COMPILE_DEFINITIONS Py_LIMITED_API=${FERMI_PYTHON_LIMITED_API})
 
 if(NOT APPLE)
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
