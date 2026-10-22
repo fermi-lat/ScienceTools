@@ -67,7 +67,7 @@ list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 find_package(Threads REQUIRED)
 find_package(OpenMP REQUIRED COMPONENTS CXX)
 
-# 4.2 is required for the -py3-stable-abi option.
+# 4.2 is required for wrappers that compile with Py_LIMITED_API (the Python stable ABI).
 find_package(SWIG 4.2 REQUIRED COMPONENTS python)
 set(UseSWIG_TARGET_NAME_PREFERENCE STANDARD)
 
