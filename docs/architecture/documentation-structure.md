@@ -82,6 +82,7 @@ package: <pkg>
 summary: <one line>
 layer: <foundation | io | instrument | analysis | application | python>
 depends_on: [<pkg>, ...]
+test_depends_on: [<pkg>, ...]
 used_by: [<pkg>, ...]
 last_reviewed_commit: <short sha of this package when docs were last verified>
 ---
@@ -115,7 +116,9 @@ run the tests, and any known flaky or slow tests.
 
 ## Invariants and gotchas
 Non-obvious constraints, numerical subtleties, historical quirks, and
-anything that commonly trips up new contributors.
+anything that commonly trips up new contributors. Group entries under bold
+sub-headings by topic (e.g. **Ownership and lifetime**, **Null values**,
+**Performance**) once there are more than a handful.
 
 ## Extension points
 How to add common things: a new spectral function, IRF, application,
@@ -127,11 +130,41 @@ Topic files in this directory, relevant ADRs, papers, and external docs.
 
 ### Front matter notes
 
-- `depends_on` / `used_by` should match the actual CMake dependencies and be
-  reflected in the Level 1 package index.
+- `depends_on` lists what the package's library and applications actually
+  use. `test_depends_on` lists packages needed only by tests (e.g. `tip`
+  links `facilities` solely so its test program can locate data). Omit
+  `test_depends_on` if empty. Together they should account for every
+  `target_link_libraries` entry in the package's `CMakeLists.txt`; if the
+  CMake linkage is broader than actual use, say so in the *Position in the
+  system* section.
+- `used_by` should be derived from actual `#include "<pkg>/..."` usage
+  across `src/`, and be reflected in the Level 1 package index.
 - `last_reviewed_commit` lets readers (and tooling) judge staleness: if the
   package has changed substantially since that commit, treat the docs with
   caution and update them.
+
+## Writing guidance
+
+Lessons from the pilot (`tip`):
+
+- **Verify against the code, not the old docs.** Existing Doxygen mainpages
+  and release notes are often decades old and describe intent rather than
+  behavior (e.g. `tip`'s mainpage promises buffering that is actually
+  cfitsio's). Cite the file (and function) that backs each non-obvious
+  claim.
+- **Distinguish verified from inferred.** If a behavior was determined by
+  reading code but not exercised at runtime, say so inline. This keeps
+  suspected bugs from being read as established fact.
+- **Document suspected bugs as gotchas, don't fix them in a docs change.**
+  Note the symptom and location; fixes belong in their own PR.
+- **"Invariants and gotchas" is usually the most valuable section.** Prefer
+  concrete, silent-failure behaviors (fallbacks, sentinels, stale caches,
+  surprising assignment semantics) over general advice.
+- **Show the idiomatic usage**, especially when the naive usage is slow or
+  wrong.
+- **Record how tests actually run**: whether they are registered with CTest,
+  required environment variables, where test data is resolved from, and
+  where scratch output is written.
 
 ## Cross-references
 
@@ -182,7 +215,9 @@ point here, for example:
 
 1. Land this document on the `doc-updates` branch of ScienceTools.
 2. Pilot the template on one mid-sized package and refine the template based
-   on what was awkward.
+   on what was awkward. *(In progress: `tip`. Feedback so far is folded into
+   the template front matter, the gotchas section guidance, and
+   [Writing guidance](#writing-guidance).)*
 3. Write the Level 1 `README.md` package index and `dependency-layers.md`.
 4. Roll out to remaining packages, prioritizing those under active
    development.
