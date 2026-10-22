@@ -65,6 +65,7 @@ requirements:
     - cfitsio
     - cmake >=4.0
     - make
+    - patchelf  # [linux]
     - pkg-config
     - python 3.12
     - swig>=4.2
