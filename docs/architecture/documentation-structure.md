@@ -80,7 +80,7 @@ considered.
 ---
 package: <pkg>
 summary: <one line>
-layer: <foundation | io | instrument | analysis | application | python>
+layer: <foundation | io | instrument | analysis | python | support>
 depends_on: [<pkg>, ...]
 test_depends_on: [<pkg>, ...]
 used_by: [<pkg>, ...]
@@ -130,6 +130,8 @@ Topic files in this directory, relevant ADRs, papers, and external docs.
 
 ### Front matter notes
 
+- `layer` is one of the tiers defined in
+  [dependency-layers.md](dependency-layers.md#tiers).
 - `depends_on` lists what the package's library and applications actually
   use. `test_depends_on` lists packages needed only by tests (e.g. `tip`
   links `facilities` solely so its test program can locate data). Omit
@@ -219,5 +221,7 @@ point here, for example:
    the template front matter, the gotchas section guidance, and
    [Writing guidance](#writing-guidance).)*
 3. Write the Level 1 `README.md` package index and `dependency-layers.md`.
+   *(Done. As each package doc lands, update its row in the README's
+   package index.)*
 4. Roll out to remaining packages, prioritizing those under active
    development.
