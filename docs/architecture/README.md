@@ -16,6 +16,7 @@ documentation is organized.
 |----------|---------------------------|
 | This file | get oriented, or find the package that owns something |
 | [dependency-layers.md](dependency-layers.md) | understand who depends on whom, where new code belongs, or what a change affects |
+| [known-issues.md](known-issues.md) | triage bugs and gaps: every issue found in the package docs, by package, with severity and evidence |
 | `build-and-release.md` *(planned)* | build, package or release the tools, or move a submodule pin |
 | `externals.md` *(planned)* | change how a third-party library is built or found |
 | [documentation-structure.md](documentation-structure.md) | write or update architecture docs |

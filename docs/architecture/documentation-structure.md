@@ -39,6 +39,7 @@ Covers what no single package owns:
 | `dependency-layers.md` | Package dependency graph and layering (e.g. `facilities`/`st_facilities`/`tip`/`astro` → `irfs`/`optimizers` → `Likelihood` → `pyLikelihood`), and where applications sit. |
 | `build-and-release.md` | CMake build, `cmake/` helpers, conda `recipe/` and `environments/`, submodule pinning workflow, CI/CD. |
 | `externals.md` | How third-party externals (`cfitsio`, `clhep`, `cppunit`, `gsl`, `wcslib`, `fftw`, `f2c`, `healpix_cxx`) are wrapped and built. Integration only — not upstream internals. |
+| `known-issues.md` | Every issue recorded in the package docs, by package, with stable IDs, severity and evidence, for triage. |
 | `documentation-structure.md` | This document. |
 | `decisions/` | System-level architecture decision records (ADRs). |
 
@@ -344,6 +345,8 @@ do.
    as usual; the docs travel with the pin.
 3. If a change alters a package's dependencies, layer, or one-line purpose,
    also update the Level 1 package index in `docs/architecture/README.md`.
+4. When a change fixes or introduces an issue, update both the package doc's
+   gotchas and its row in `docs/architecture/known-issues.md`.
 
 ## Relationship to agent instruction files
 
