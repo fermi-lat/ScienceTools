@@ -250,8 +250,16 @@ install(
 install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
         DESTINATION ${PYTHON_SITE_PKGDIR})
 
-# This must stay the last install rule so that every installed binary is in the install manifest.
+# These must stay the last install rules so that every installed binary is in the install manifest.
+# The libpython rewrite runs first because it works on the manifest paths, before any are moved.
 if(FERMI_UNVERSIONED_LIBPYTHON AND NOT APPLE)
   install(CODE "set(FERMI_PATCHELF \"${FERMI_PATCHELF}\")")
   install(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/cmake/UnlinkVersionedLibpython.cmake)
+endif()
+
+# The Python version independent conda package (recipe/meta.yaml) cannot have compiled programs in
+# bin/, so move them to libexec/fermitools/ and leave wrappers in bin/. Off by default; build.sh sets it.
+option(FERMI_EXECUTABLES_IN_LIBEXEC "Install executables to libexec/fermitools with wrappers in bin" OFF)
+if(FERMI_EXECUTABLES_IN_LIBEXEC)
+  install(SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/cmake/MoveExecutablesToLibexec.cmake)
 endif()
