@@ -39,7 +39,7 @@ Covers what no single package owns:
 | `dependency-layers.md` | Package dependency graph and layering (e.g. `facilities`/`st_facilities`/`tip`/`astro` → `irfs`/`optimizers` → `Likelihood` → `pyLikelihood`), and where applications sit. |
 | `build-and-release.md` | CMake build, `cmake/` helpers, conda `recipe/` and `environments/`, submodule pinning workflow, CI/CD. |
 | `externals.md` | How third-party externals (`cfitsio`, `clhep`, `cppunit`, `gsl`, `wcslib`, `fftw`, `f2c`, `healpix_cxx`) are wrapped and built. Integration only — not upstream internals. |
-| `known-issues.md` | Every issue recorded in the package docs, by package, with stable IDs, severity and evidence, compiled once for triage. Issues normally live in GitHub; whether this file stays a maintained report is still to be decided, and until then it is kept up to date. |
+| `known-issues.md` | Every issue recorded in the package docs, by package, with stable IDs, severity and evidence, kept up to date by the doc-update prompt as a report independent of GitHub issues. |
 | `documentation-structure.md` | This document. |
 | `decisions/` | System-level architecture decision records (ADRs). |
 
