@@ -55,7 +55,9 @@ else
 endif
 
 # Temporary change to address a permissions issue with pyburstanalysisgui (GtBurst)
-chmod u+x $CONDA_PREFIX/lib/python3.12/site-packages/fermitools/GtBurst/gtapps_mp/*.py >& /dev/null
+# python3.* rather than a fixed version: the package installs into whichever Python the env has.
+# Run the glob in sh, since an unmatched glob is an error in csh.
+sh -c 'chmod u+x "$0"/lib/python3.*/site-packages/fermitools/GtBurst/gtapps_mp/*.py' "$CONDA_PREFIX" >& /dev/null
 
 # Issue warnings if PYTHONPATH, LD_LIBRARY_PATH, or DYLD_LIBRARY_PATH are set
 # if ($?DYLD_LIBRARY_PATH) then 

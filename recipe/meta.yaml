@@ -13,6 +13,11 @@ source:
 build:
   number: {{ environ.get('BUILD_NUMBER', 0)}}
   skip: true  # [win]
+  # One package for every Python >= the version in host (CEP 20). The compiled code uses only the
+  # Python stable ABI, and conda installs site-packages/ into whichever Python the environment has.
+  # conda-build rejects compiled programs in bin/ for such packages, so build.sh moves them to
+  # libexec/fermitools/ and leaves wrappers in bin/.
+  python_version_independent: true
   script_env:
     - MACOS_ARCH # [osx]
   run_exports:
@@ -24,7 +29,6 @@ build:
     - {{ pin_compatible('gsl', max_pin='x.x') }}
     - {{ pin_compatible('healpix_cxx', max_pin='x.x') }}
     - {{ pin_compatible('numpy', lower_bound='2.0', upper_bound='3') }}
-    - {{ pin_compatible('python', max_pin='x.x') }}
     - {{ pin_compatible('readline', max_pin='x.x') }}
     - {{ pin_compatible('wcslib', max_pin='x.x') }}
     - {{ pin_compatible('xerces-c', max_pin='x.x') }}
@@ -59,20 +63,25 @@ build:
 requirements:
 
   build:
-    - libgomp  # [linux]
-    - llvm-openmp # [osx]
     - binutils  # missing ar command needed
-    - cfitsio
     - cmake >=4.0
     - make
     - patchelf  # [linux]
     - pkg-config
-    - python 3.12
     - swig>=4.2
+
+  # Libraries the build links against, and the minimum Python. python-abi3 sets the run requirement
+  # (cpython >= its version); the Py_LIMITED_API value in CMakeLists.txt must not be newer than it.
+  host:
+    - python 3.12
+    - python-abi3 3.12
+    - libgomp  # [linux]
+    - llvm-openmp # [osx]
+    - cfitsio
     - zlib # [linux]
     - xerces-c # [linux]
     - f2c
-    
+
   run:
     - astropy >7.0.0
     - cfitsio
@@ -99,6 +108,10 @@ test:
     - pyLikelihood
     - SummedLikelihood
     - UnbinnedAnalysis
+  commands:
+    # Compiled tools live in libexec/fermitools; bin/ has shell wrappers that run them.
+    - test -x $PREFIX/libexec/fermitools/gtbin
+    - head -n 1 $PREFIX/bin/gtbin | grep -q '^#!/bin/sh'
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
