@@ -39,7 +39,7 @@ doc in the same change.
 
 ## Summary
 
-**654 issues: 22 High, 206 Medium, 426 Low.**
+**655 issues: 22 High, 207 Medium, 426 Low.**
 
 ### High-severity issues
 
@@ -101,7 +101,7 @@ doc in the same change.
 | [sourceIdentify](#sourceidentify) | 0 | 10 | 10 |
 | [rspgen](#rspgen) | 1 | 6 | 12 |
 | [observationSim](#observationsim) | 1 | 11 | 12 |
-| [Likelihood](#likelihood) | 1 | 19 | 22 |
+| [Likelihood](#likelihood) | 1 | 20 | 22 |
 | [BayesianBlocks](#bayesianblocks) | 0 | 3 | 8 |
 | [SolarSystemTools](#solarsystemtools) | 2 | 7 | 9 |
 | [pyExposure](#pyexposure) | 0 | 6 | 7 |
@@ -855,6 +855,7 @@ Docs: `src/Likelihood/doc/architecture/`
 | Likelihood-40 | Low | `test_Likelihood` reference outputs (`outref`) are not in this repo or installed by its CMake; they come from `fermitools-data` / `fermitools-test-scripts-data` with version-dependent contents (0.6 installs nothing there), making the ST-unit-test comparison fragile. | umbrella `recipe/tests/ST-unit-test`, `environments/fermitools-testing.yml` | code |
 | Likelihood-41 | Low | `Drm_Cache::update` clamps negative measured counts to 0 with a one-time message; the cause is unknown ("Not sure why this can happen"). | `src/Drm.cxx` `Drm_Cache::update` | code |
 | Likelihood-42 | Low | Stale docs: `src/mainpage.h` and `src/tutorial.h` describe DC1/DC2-era tools (`U1`/`O2`), `$(LIKELIHOODDATAPATH)` and prompts that no longer exist; `doc/release.notes` stops in October 2017. | `src/mainpage.h`, `src/tutorial.h`, `doc/release.notes` | code |
+| Likelihood-43 | Medium | Diffuse responses fail for map-based diffuse sources whose template is HEALPix-projected: `Event::computeResponseGQ` calls `MapBase::getDiffRespLimits`, which for HEALPix maps throws `std::runtime_error` ("getDiffRespLimits_healpix doesn't work for HEALPix projections"), but the caller only catches `MapBaseException` (derived from `std::exception`, not `runtime_error`), so the error escapes and `gtdiffrsp`, and on-the-fly responses in `gtlike`/`gtsrcprob`/pyLikelihood unbinned analysis, abort instead of falling back to full-sky limits. The throw happens before the `MAP_BASED_DIFFRSP` branch, so that setting does not avoid it. Workaround: use a WCS (e.g. CAR) template. Not reproduced at runtime. | `src/Event.cxx` `computeResponseGQ`, `src/MapBase.cxx` `getDiffRespLimits_healpix` | code |
 
 ### BayesianBlocks
 
