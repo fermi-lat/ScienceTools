@@ -391,6 +391,6 @@ point here, for example:
    `doc/architecture/` on their `doc-updates` branches, followed by a
    consistency sweep against the final Writing guidance.)*
 5. Still to do: `build-and-release.md` and `externals.md` (listed in the
-   Level 1 table), merging each package's `doc-updates` branch, bumping the
-   submodule pins, and keeping docs current as code changes (update
-   `last_reviewed_commit` and the package index row in the same PR).
+   Level 1 table), and keeping docs current as code changes (update
+   `last_reviewed_commit` and the package index row in the same PR). The
+   package `doc-updates` branches are merged and the submodule pins bumped.
