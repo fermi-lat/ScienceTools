@@ -60,7 +60,7 @@ src/<pkg>/doc/architecture/
 
 - **Small packages** (e.g. `st_stream`, `hoops`, `st_graph`) need only
   `README.md`.
-- **Large packages** (e.g. `Likelihood`, `irfs`, `flux`) split into topic
+- **Large packages** (e.g. `Likelihood`, `irfs`, `celestialSources`) split into topic
   files, with `README.md` serving as their overview and index
   (e.g. `Likelihood/doc/architecture/binned-analysis.md`, `source-maps.md`).
 
@@ -138,9 +138,18 @@ Topic files in this directory, relevant ADRs, papers, and external docs.
   `test_depends_on` if empty. Together they should account for every
   `target_link_libraries` entry in the package's `CMakeLists.txt`; if the
   CMake linkage is broader than actual use, say so in the *Position in the
-  system* section.
-- `used_by` should be derived from actual `#include "<pkg>/..."` usage
-  across `src/`, and be reflected in the Level 1 package index.
+  system* section. Check each **library** link against the library's own
+  sources, not the tests': a test-only link hidden in the library's link
+  list can put a package in the wrong tier (this happened with
+  `optimizers`). Ignore commented-out CMake lines.
+- `used_by` should be derived from actual use across `src/`:
+  `#include "<pkg>/..."`, namespace use (`grep '<pkg>::'`, since PUBLIC
+  links pass headers on and some consumers never include them directly),
+  SWIG `.i` files (`%include`/`#include`), and Python `import`s. In
+  *Position in the system*, distinguish consumers that **use** the package
+  from those that are **link-only**, **include-only** (headers included
+  but no symbols used), or **tests-only**. The front-matter list holds
+  only real users. Reflect the result in the Level 1 package index.
 - `last_reviewed_commit` lets readers (and tooling) judge staleness: if the
   package has changed substantially since that commit, treat the docs with
   caution and update them.
@@ -166,7 +175,138 @@ Lessons from the pilot (`tip`):
   wrong.
 - **Record how tests actually run**: whether they are registered with CTest,
   required environment variables, where test data is resolved from, and
-  where scratch output is written.
+  where scratch output is written. Say which test functions are actually
+  compiled and run: code inside `#if 0` and commented-out test
+  registrations hide large coverage gaps.
+
+Lessons from the foundation and io tiers:
+
+- **List environment variables.** Grep the package for `getenv` and list
+  each variable and its effect under *Public interfaces* (for example
+  `astro` reads `TIMING_DIR`, `IGNORE_IGRF_BOUNDARY` and `ZENITH_FRAME_FIX`).
+  Variables set by conda activation are described once, in
+  [README.md](README.md#runtime-environment); link there rather than
+  repeat them.
+- **Check data with an expiry date** (leap-second tables, geomagnetic
+  models, ephemeris ranges) against the current date, and give the date or
+  MET at which the code stops working. `astro`'s IGRF model stopped at the
+  start of 2025.
+- **Separate generated, vendored and hand-written code.** For f2c
+  translations, vendored upstream code (RapidXML, Minuit2) and generated
+  tests, say which files are generated, which are built and which are
+  reference only. Report the size of what is actually compiled, so unbuilt
+  or generated code doesn't make the package look bigger than it is. Look
+  for duplicate copies of vendored sources in other packages (two
+  `dgaus8.c` copies define the same symbols), and check patches in
+  `externals/` that change types (f2c's `integer` is patched to `int`).
+- **Vendored upstream packages get a lighter README** that covers
+  provenance, Fermi build integration, local changes against upstream and
+  gotchas, not upstream internals (see `Minuit2`, `ape`).
+- **Check install destinations.** `getDataPath(pkg)` looks in
+  `refdata/fermi/<pkg>`; a `data/` directory installed anywhere else won't
+  be found at runtime.
+- **List dead code that ships**: installed headers that no longer compile
+  or have no users, and committed build artifacts.
+- **Look for unmerged fix branches** (`git branch -a`) that change behaviour
+  the doc describes, and mention them.
+- **Framework packages document their error contract** as a table (exit
+  status, what gets printed, debug and GUI differences), because the tool
+  docs and scripts depend on it. See `st_app`.
+
+Lessons from the instrument and analysis tiers:
+
+- **Container packages open with a sub-package table**: CMake target,
+  whether it is built, whether it is reachable (registered, linked, its
+  factory actually referenced), ROOT-only, or dead. "Built but never
+  reachable" is a separate category from "not built". In static-library
+  plugin registries, compiled is not the same as available (see `irfs`,
+  `celestialSources`).
+- **A consumer whose only use is in an unbuilt source file is link-only.**
+  Check that the including file is actually compiled (`add_executable` or
+  `add_library` source list). Likewise, look for tools whose par files are
+  installed but which have no build target.
+- **Diff recent rewrites against the pre-rewrite commit.** When a package
+  has had a replacement or rewrite PR (for example Xerces→RapidXML in
+  `flux`), silently lost defaults and fallbacks are the most valuable
+  gotchas. Name the downstream tool or test that would catch a regression.
+- **Shared file-format contracts get their own topic file** with a table of
+  who reads and who writes them, even in a mid-sized package (see
+  `dataSubselector/doc/architecture/dss-keywords.md`).
+- **Find out how the package is really tested.** Grep
+  `recipe/tests/ST-unit-test` for the package's `test_*` program and any
+  `check_test_<pkg>_output` function, and state which outputs are compared
+  against `outref`, and where that reference data comes from: most of it
+  ships in the runtime `fermitools-data` conda package (from
+  `outrefFiles/<pkg>/` in the `fermitools-data` repository), not in the
+  package (see [README.md](README.md#testing)). To find which conda package
+  really installs a file, check `conda-meta/*.json` in an installed
+  environment rather than inferring it from repository layout. Note test programs installed to `bin/`.
+- **Check that tools signal failure through their exit status.** Tools
+  with C-style status codes that never throw (for example `gtsrcid`) bypass
+  the `st_app` contract and always exit 0.
+- **Look for work done in static initializers and destructors.** A file
+  read in a static initializer (the `irfs` CALDB load) aborts the process
+  before `main` runs. Output written in a destructor turns an exception
+  into `std::terminate` and can lose other outputs (`observationSim`).
+- **Check external data packages, not just code.** When a package depends
+  on data from another package (for example leap seconds and ephemerides
+  from `fermitools-data`), open the installed file and check its last
+  entry. Packages that hand-roll MJD↔MET conversions should be checked for
+  `MJDREFF` and leap-second handling.
+- **Monte Carlo packages document their RNG**: engine, how it is seeded,
+  and what changes the random sequence.
+- **Check the copy semantics** of classes that cache raw pointers into
+  their own members (`map_tools::Exposure`, `irfs` `Edisp3`).
+- **Integer enumerations that users write in XML or par files are an
+  interface.** Flag them as append-only.
+- **Effective compile definitions can come from PUBLIC dependencies** (for
+  example `tip` exports `BUILD_WITHOUT_ROOT`). Check them, not just the
+  package's own CMake file.
+- **Small runtime checks are welcome.** If an installed Fermitools
+  environment is available, a seconds-long run on tiny inputs can confirm
+  or refute a suspected bug. Run it outside the repo and mark the finding
+  "(confirmed at runtime)".
+
+Lessons from the Python and application packages:
+
+- **SWIG packages: separate what is wrapped from what is only included.**
+  Check every `%include` against headers that are only `#include`d, and
+  say which classes Python actually gets. Several docs initially
+  overstated this; `pyLikelihood`'s `swig-interface.md` is the reference.
+  Grep Python code (in the package and its consumers) for flat
+  `Class_method` calls, which SWIG ≥ 4.1 no longer generates.
+- **Check the package's name against its contents.** `pyExposure` has no
+  working Python interface; its tier had been chosen from its name.
+- **The tier reflects the package's role, limited by its dependencies.** A
+  package may sit in a higher tier than its dependencies require (for
+  example `BayesianBlocks`, whose CMake links are all unused, stays in
+  `analysis` as a science algorithm), but never in a lower one.
+- **Run each installed entry point in the reference environment.** Console
+  scripts and run requirements are defined in the umbrella
+  `recipe/meta.yaml` (see [README.md](README.md#packaging)) and can be
+  broken even when the package code is fine. Smoke-test tools at their
+  **default** parameters; several failures appear only with defaults.
+- **Python packages: compare the installed layout with the paths the code
+  computes** (for example `packagePath()` points at `$FERMI_INST_DIR/<pkg>`,
+  but `python/` installs to `site-packages/fermitools`). List installed
+  modules that are dead or fail to import; `fermitools.pth` makes every
+  installed module name top-level.
+- **Check the tool's help text against the code.** Comparing
+  `fermitools-fhelp` with the implementation turned up real conflicts (for
+  example in `SolarSystemTools`).
+- **Signs that `clobber` is ignored:** an unconditional `std::remove(outfile)`
+  or an overwrite of an input file. Say so explicitly.
+- **Tools driven through `sane`'s `GtApp`:** its default mode detects failure
+  by scanning output for "at the top level:", so a crash (exit 134, 136 or
+  139) counts as success. Note this wherever a tool can crash.
+- **Record what changes results without changing code**: environment
+  variables, and process-wide caches or singletons (for example `Likelihood`'s
+  `WcsMapLibrary`, the IRF phi-dependence flag, `CosineBinner`'s static
+  binning). Say which ones can change the numbers a tool produces.
+- **Record network endpoints and self-updating code** in a table: URLs, what
+  they serve, and whether they still respond (see `pyBurstAnalysisGUI`).
+- **Check `install(DIRECTORY)` rules for lost executable permissions** on
+  scripts that are run as programs.
 
 ## Cross-references
 
@@ -217,11 +357,15 @@ point here, for example:
 
 1. Land this document on the `doc-updates` branch of ScienceTools.
 2. Pilot the template on one mid-sized package and refine the template based
-   on what was awkward. *(In progress: `tip`. Feedback so far is folded into
+   on what was awkward. *(Done: `tip`, then `evtbin`. Feedback is folded into
    the template front matter, the gotchas section guidance, and
    [Writing guidance](#writing-guidance).)*
 3. Write the Level 1 `README.md` package index and `dependency-layers.md`.
-   *(Done. As each package doc lands, update its row in the README's
-   package index.)*
-4. Roll out to remaining packages, prioritizing those under active
-   development.
+   *(Done.)*
+4. Roll out to remaining packages. *(Done 2026-10-22: all 38 submodules have
+   `doc/architecture/` on their `doc-updates` branches, followed by a
+   consistency sweep against the final Writing guidance.)*
+5. Still to do: `build-and-release.md` and `externals.md` (listed in the
+   Level 1 table), merging each package's `doc-updates` branch, bumping the
+   submodule pins, and keeping docs current as code changes (update
+   `last_reviewed_commit` and the package index row in the same PR).
