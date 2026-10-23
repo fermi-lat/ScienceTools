@@ -39,7 +39,7 @@ Covers what no single package owns:
 | `dependency-layers.md` | Package dependency graph and layering (e.g. `facilities`/`st_facilities`/`tip`/`astro` → `irfs`/`optimizers` → `Likelihood` → `pyLikelihood`), and where applications sit. |
 | `build-and-release.md` | CMake build, `cmake/` helpers, conda `recipe/` and `environments/`, submodule pinning workflow, CI/CD. |
 | `externals.md` | How third-party externals (`cfitsio`, `clhep`, `cppunit`, `gsl`, `wcslib`, `fftw`, `f2c`, `healpix_cxx`) are wrapped and built. Integration only — not upstream internals. |
-| `known-issues.md` | Every issue recorded in the package docs, by package, with stable IDs, severity and evidence, for triage. |
+| `known-issues.md` | Every issue recorded in the package docs, by package, with stable IDs, severity and evidence, compiled once for triage. Issues normally live in GitHub; whether this file stays a maintained report is still to be decided, and until then it is kept up to date. |
 | `documentation-structure.md` | This document. |
 | `decisions/` | System-level architecture decision records (ADRs). |
 
@@ -347,6 +347,28 @@ do.
    also update the Level 1 package index in `docs/architecture/README.md`.
 4. When a change fixes or introduces an issue, update both the package doc's
    gotchas and its row in `docs/architecture/known-issues.md`.
+
+### Updating the docs with an agent
+
+[`doc-update-prompt.md`](doc-update-prompt.md) is an agent prompt that does
+steps 1, 3 and 4 for you. Run it as the **last step on a branch**, after the
+code changes are finished and before opening the pull request, from the root
+of the repository you changed (a package such as `src/Likelihood`, or the
+ScienceTools umbrella). It works with any agent that can read and edit files
+and run `git`, for example:
+
+```bash
+claude "$(cat <path-to-ScienceTools>/docs/architecture/doc-update-prompt.md)"
+```
+
+or, in an interactive session: *"Update the documentation for this repo by
+following the instructions in `<path-to-ScienceTools>/docs/architecture/doc-update-prompt.md`."*
+
+The agent compares the branch with its merge base (including uncommitted
+work), edits the package's `doc/architecture/` files and, when the
+ScienceTools checkout is available, the system docs here. It does **not**
+commit. Review its edits and its closing report, then commit the doc changes
+with the code. ScienceTools edits belong to a separate repository and PR.
 
 ## Relationship to agent instruction files
 
