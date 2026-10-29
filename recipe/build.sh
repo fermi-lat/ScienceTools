@@ -11,8 +11,11 @@ else
     export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
 fi
 
-echo "Installing conda forge cxx compiler"
-conda install --yes conda-forge::cxx-compiler
+# Install the compiler into the build env, not the host env ($PREFIX).
+# Anything installed into $PREFIX is packaged, including the compiler
+# activate.d scripts that break the conda-build test environment.
+echo "Installing conda forge cxx compiler into BUILD_PREFIX"
+conda install --yes -p "${BUILD_PREFIX}" conda-forge::cxx-compiler
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
