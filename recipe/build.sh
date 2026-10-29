@@ -23,7 +23,7 @@ if [ "$(uname)" == "Darwin" ]; then
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         -DPython3_EXECUTABLE="${PREFIX}/bin/python3" \
-        -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
+        -DPython3_NumPy_INCLUDE_DIR="$("${PREFIX}/bin/python3" -c 'import numpy; print(numpy.get_include())')" \
         ${CMAKE_ARGS}
 else
     echo "Configuring for Linux $(uname -m)"
