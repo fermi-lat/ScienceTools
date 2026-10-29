@@ -11,11 +11,8 @@ else
     export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
 fi
 
-# Install the compiler into the build env, not the host env ($PREFIX).
-# Anything installed into $PREFIX is packaged, including the compiler
-# activate.d scripts that break the conda-build test environment.
-echo "Installing conda forge cxx compiler into BUILD_PREFIX"
-conda install --yes -p "${BUILD_PREFIX}" conda-forge::cxx-compiler
+# The compilers are declared in recipe/meta.yaml (compiler('c'), compiler('cxx'))
+# so they live in $BUILD_PREFIX and are never packaged.
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
@@ -25,19 +22,12 @@ if [ "$(uname)" == "Darwin" ]; then
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-        -DPython3_EXECUTABLE="${BUILD_PREFIX}/bin/python3" \
+        -DPython3_EXECUTABLE="${PREFIX}/bin/python3" \
         -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
         ${CMAKE_ARGS}
 else
     echo "Configuring for Linux $(uname -m)"
-	
-	if [ "$(uname -m)" == "x86_64" ]; then
-		conda install --yes sysroot_linux-64 -c conda-forge
-		conda update --yes sysroot_linux-64 -c conda-forge
-	else
-		echo "Pip install pyregion for Linux messes with cfitsio"
-	fi
-	
+
     cmake -S . \
         -B Debug \
         -DCMAKE_BUILD_TYPE=Debug \
