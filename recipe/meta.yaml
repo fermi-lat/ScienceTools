@@ -98,6 +98,8 @@ test:
     - pyLikelihood
     - SummedLikelihood
     - UnbinnedAnalysis
+  commands:
+    - test -f $PREFIX/etc/conda/activate.d/activate_fermitools.sh  # [unix]
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
