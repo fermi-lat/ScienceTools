@@ -22,8 +22,9 @@ if [ "$(uname)" == "Darwin" ]; then
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-        -DPython3_EXECUTABLE="${PREFIX}/bin/python3" \
-        -DPython3_NumPy_INCLUDE_DIR="$("${PREFIX}/bin/python3" -c 'import numpy; print(numpy.get_include())')" \
+        -DPython3_EXECUTABLE="${PYTHON}" \
+        -DFERMI_EXECUTABLES_IN_LIBEXEC=ON \
+        -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
         ${CMAKE_ARGS}
 else
     echo "Configuring for Linux $(uname -m)"
@@ -32,7 +33,8 @@ else
         -B Debug \
         -DCMAKE_BUILD_TYPE=Debug \
         -DCMAKE_C_FLAGS="-fPIC -std=gnu17" -DCMAKE_CXX_FLAGS="-fPIC" \
-		-DPython3_EXECUTABLE="$(which python)" \
+		-DPython3_EXECUTABLE="${PYTHON}" \
+		-DFERMI_EXECUTABLES_IN_LIBEXEC=ON \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
         ${CMAKE_ARGS}
