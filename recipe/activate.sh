@@ -60,6 +60,16 @@ fi
 # Temporary change to address a permissions issue with pyburstanalysisgui (GtBurst)
 # python3.* rather than a fixed version: the package installs into whichever Python the env has.
 chmod u+x $CONDA_PREFIX/lib/python3.*/site-packages/fermitools/GtBurst/gtapps_mp/*.py > /dev/null 2>&1
+
+# Ensure libpython3.so points to the active Python shared library on Linux
+if [ "$(uname)" != "Darwin" ] && [ ! -f "$CONDA_PREFIX/lib/libpython3.so" ]; then
+    for py_lib in "$CONDA_PREFIX"/lib/libpython3.*.so.1.0 "$CONDA_PREFIX"/lib/libpython3.*.so; do
+        if [ -f "$py_lib" ]; then
+            ln -sf "$(basename "$py_lib")" "$CONDA_PREFIX/lib/libpython3.so"
+            break
+        fi
+    done
+fi
 # # Issue warnings if PYTHONPATH, LD_LIBRARY_PATH, or DYLD_LIBRARY_PATH are set
 # if [ ! -z ${DYLD_LIBRARY_PATH+x} ]; then
 #     echo "You have DYLD_LIBRARY_PATH set. This might interfere with the correct functioning of conda and the Fermitools."

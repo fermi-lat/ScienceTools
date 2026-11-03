@@ -59,6 +59,13 @@ endif
 # Run the glob in sh, since an unmatched glob is an error in csh.
 sh -c 'chmod u+x "$0"/lib/python3.*/site-packages/fermitools/GtBurst/gtapps_mp/*.py' "$CONDA_PREFIX" >& /dev/null
 
+# Ensure libpython3.so points to the active Python shared library on Linux
+if ( `uname` != "Darwin" ) then
+    if ( ! -f "$CONDA_PREFIX/lib/libpython3.so" ) then
+        sh -c 'for f in "$0"/lib/libpython3.*.so.1.0 "$0"/lib/libpython3.*.so; do if [ -f "$f" ]; then ln -sf "$(basename "$f")" "$0/lib/libpython3.so"; break; fi; done' "$CONDA_PREFIX" >& /dev/null
+    endif
+endif
+
 # Issue warnings if PYTHONPATH, LD_LIBRARY_PATH, or DYLD_LIBRARY_PATH are set
 # if ($?DYLD_LIBRARY_PATH) then 
 #     echo "You have DYLD_LIBRARY_PATH set. This might interfere with the correct functioning of conda and the Fermitools."
