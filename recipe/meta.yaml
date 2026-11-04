@@ -115,6 +115,7 @@ test:
     - test -x $PREFIX/libexec/fermitools/gtbin
     - head -n 1 $PREFIX/bin/gtbin | grep -q '^#!/bin/sh'
     - test -f $PREFIX/etc/conda/activate.d/activate_fermitools.sh  # [unix]
+    - test -f $PREFIX/lib/libpython3.so  # [linux]
 
 about:
   home: https://github.com/fermi-lat/Sciencetools
