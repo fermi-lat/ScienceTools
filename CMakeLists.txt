@@ -42,11 +42,13 @@ endif()
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
 option(CMAKE_CXX_COMPILER "Specify Compiler" clang)
 
-if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
    # add_compile_options("-Wno-deprecated-non-prototype")
    add_compile_options(  
      $<$<COMPILE_LANGUAGE:C>:-Wno-deprecated-non-prototype>
      $<$<COMPILE_LANGUAGE:C>:-std=gnu17>
+     $<$<COMPILE_LANGUAGE:C>:-fsigned-char>
+     $<$<COMPILE_LANGUAGE:CXX>:-fsigned-char>
    )
 endif()
 
@@ -156,7 +158,7 @@ if(FERMI_BUILD_ROOT)
   set_target_properties(ROOT::Core PROPERTIES IMPORTED_GLOBAL TRUE)
 endif()
 
-if(NOT APPLE)
+if(NOT APPLE AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "^(aarch64|arm64)")
   add_compile_definitions(TRAP_FPE)
 endif()
 

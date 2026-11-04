@@ -32,7 +32,7 @@ else
     cmake -S . \
         -B Debug \
         -DCMAKE_BUILD_TYPE=Debug \
-        -DCMAKE_C_FLAGS="-fPIC -std=gnu17" -DCMAKE_CXX_FLAGS="-fPIC" \
+        -DCMAKE_C_FLAGS="-fPIC -std=gnu17 -fsigned-char" -DCMAKE_CXX_FLAGS="-fPIC -fsigned-char" \
 		-DPython3_EXECUTABLE="${PYTHON}" \
 		-DFERMI_EXECUTABLES_IN_LIBEXEC=ON \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
