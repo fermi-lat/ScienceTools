@@ -65,6 +65,14 @@ set_property(CACHE FERMI_PACKAGING PROPERTY STRINGS conda brew none)
 if(NOT FERMI_PACKAGING MATCHES "^(conda|brew|none)$")
   message(FATAL_ERROR "FERMI_PACKAGING must be one of: conda, brew, none")
 endif()
+if(FERMI_PACKAGING STREQUAL "brew")
+  set(_FERMI_INSTALL_PY_SCRIPTS_DEFAULT ON)
+else()
+  set(_FERMI_INSTALL_PY_SCRIPTS_DEFAULT OFF)
+endif()
+option(FERMI_INSTALL_PY_SCRIPTS
+       "Install command-line scripts for the Python entry points"
+       ${_FERMI_INSTALL_PY_SCRIPTS_DEFAULT})
 
 if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
    # add_compile_options("-Wno-deprecated-non-prototype")
@@ -238,6 +246,30 @@ install(
 )
 install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
         DESTINATION ${PYTHON_SITE_PKGDIR})
+
+if(FERMI_INSTALL_PY_SCRIPTS)
+  include(FermiEntryPoints)
+  fermi_install_python_entry_points(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/entry_points.txt"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/fermitools-entry-point.py.in"
+    bin)
+endif()
+
+if(FERMI_PACKAGING STREQUAL "brew")
+  configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/fermitools-init.sh.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/fermitools-init.sh"
+    @ONLY)
+  install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/fermitools-init.sh"
+          DESTINATION share/${PROJECT_NAME})
+  install(CODE "
+    file(GLOB _fermitools_gtapps \"\$ENV{DESTDIR}\${CMAKE_INSTALL_PREFIX}/${FERMI_INSTALL_PYTHON}/GtBurst/gtapps_mp/*.py\")
+    foreach(_fermitools_gtapp IN LISTS _fermitools_gtapps)
+      file(CHMOD \"\${_fermitools_gtapp}\"
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+    endforeach()
+  ")
+endif()
 
 install(DIRECTORY recipe/tests/data/inputs/
         DESTINATION ${FERMI_INSTALL_DATADIR}
