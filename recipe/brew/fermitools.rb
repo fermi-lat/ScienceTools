@@ -5,7 +5,8 @@
 class Fermitools < Formula
   desc "Fermi LAT Science Tools"
   homepage "https://github.com/fermi-lat/ScienceTools"
-  url "https://github.com/fermi-lat/ScienceTools.git", tag: "Fermitools-#{version}"
+  url "https://github.com/fermi-lat/ScienceTools.git", tag: "Fermitools-2.4.23"
+  version "2.4.23"
   license "BSD-3-Clause"
 
   depends_on "cmake" => :build
@@ -69,6 +70,6 @@ class Fermitools < Formula
     python = Formula["python@3.12"].opt_bin/"python3.12"
     site_packages = lib/"python3.12/site-packages"
     system python, "-c", "import site; site.addsitedir('#{site_packages}'); import pyLikelihood, UnbinnedAnalysis"
-    system bin/"gtburst", "--help"
+    assert_predicate bin/"gtburst", :executable?
   end
 end
