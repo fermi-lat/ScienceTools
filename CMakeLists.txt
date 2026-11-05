@@ -1,9 +1,23 @@
 # Fermitools CMAKE build system Author: Alexander Reustle (2022)
 cmake_minimum_required(VERSION 3.20)
 
+set(_FERMITOOLS_PROJECT_VERSION "2.4.0")
+set(_FERMITOOLS_META_YAML "${CMAKE_CURRENT_SOURCE_DIR}/recipe/meta.yaml")
+if(EXISTS "${_FERMITOOLS_META_YAML}")
+  file(READ "${_FERMITOOLS_META_YAML}" _FERMITOOLS_META_CONTENT)
+  string(
+    REGEX MATCH
+    "\\{%[ \t]*set[ \t]+version[ \t]*=[ \t]*\"([0-9]+(\\.[0-9]+)*)\"[ \t]*%\\}"
+    _FERMITOOLS_META_VERSION_MATCH
+    "${_FERMITOOLS_META_CONTENT}")
+  if(_FERMITOOLS_META_VERSION_MATCH)
+    set(_FERMITOOLS_PROJECT_VERSION "${CMAKE_MATCH_1}")
+  endif()
+endif()
+
 project(
   fermitools
-  VERSION 2.4.0
+  VERSION ${_FERMITOOLS_PROJECT_VERSION}
   LANGUAGES CXX C
   DESCRIPTION "Fermi Sciencetools")
 
@@ -24,7 +38,13 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17 CACHE STRING "Override C++ standard" FORCE)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+if(NOT DEFINED CMAKE_INSTALL_RPATH)
+  if(APPLE)
+    set(CMAKE_INSTALL_RPATH "@loader_path/../lib;@loader_path")
+  else()
+    set(CMAKE_INSTALL_RPATH "$ORIGIN/../lib;$ORIGIN")
+  endif()
+endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -40,6 +60,11 @@ endif()
 # Options. Activate at configure time with `-D<OPTION>=ON`
 option(FERMI_BUILD_ROOT "Build the CERN ROOT components. Requires ROOT!" OFF)
 option(CMAKE_CXX_COMPILER "Specify Compiler" clang)
+set(FERMI_PACKAGING "conda" CACHE STRING "Packaging target: conda | brew | none")
+set_property(CACHE FERMI_PACKAGING PROPERTY STRINGS conda brew none)
+if(NOT FERMI_PACKAGING MATCHES "^(conda|brew|none)$")
+  message(FATAL_ERROR "FERMI_PACKAGING must be one of: conda, brew, none")
+endif()
 
 if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
    # add_compile_options("-Wno-deprecated-non-prototype")
@@ -213,3 +238,13 @@ install(
 )
 install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pth"
         DESTINATION ${PYTHON_SITE_PKGDIR})
+
+install(DIRECTORY recipe/tests/data/inputs/
+        DESTINATION ${FERMI_INSTALL_DATADIR}
+        USE_SOURCE_PERMISSIONS)
+install(DIRECTORY recipe/tests/data/outref/
+        DESTINATION ${FERMI_INSTALL_DATADIR}/outref
+        USE_SOURCE_PERMISSIONS)
+install(DIRECTORY recipe/utils/
+        DESTINATION share/${PROJECT_NAME}/utils
+        USE_SOURCE_PERMISSIONS)
