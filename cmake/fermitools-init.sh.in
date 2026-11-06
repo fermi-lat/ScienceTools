@@ -1,0 +1,29 @@
+#!/bin/bash
+
+FERMITOOLS_PREFIX="${FERMITOOLS_PREFIX:-@CMAKE_INSTALL_PREFIX@}"
+export INST_DIR="${FERMITOOLS_PREFIX}/share/fermitools"
+export FERMI_DIR="${INST_DIR}"
+export FERMI_INST_DIR="${INST_DIR}"
+export BASE_DIR="${INST_DIR}"
+export EXTFILESSYS="${FERMITOOLS_PREFIX}/share/fermitools/refdata/fermi"
+export GENERICSOURCESDATAPATH="${INST_DIR}/data/genericSources"
+export TIMING_DIR="${FERMITOOLS_PREFIX}/share/fermitools/refdata/fermi/jplephem"
+
+if [ -n "${CALDB:-}" ]; then
+    export CALDB_OLD_PATH="${CALDB}"
+fi
+
+export CALDBALIAS="${FERMI_DIR}/data/caldb/software/tools/alias_config.fits"
+export CALDBCONFIG="${FERMI_DIR}/data/caldb/software/tools/caldb.config"
+export CALDBROOT="${FERMI_DIR}/data/caldb"
+export CALDB="${FERMI_DIR}/data/caldb"
+
+export FERMI_OLD_PFILES="${PFILES:-}"
+if [ -z "${PFILES+x}" ]; then
+    mkdir -p "${HOME}/pfiles"
+    export PFILES=".:${HOME}/pfiles;${INST_DIR}/syspfiles"
+elif [[ "${PFILES}" == *';'* ]]; then
+    export PFILES="${PFILES}:${INST_DIR}/syspfiles"
+else
+    export PFILES="${PFILES};${INST_DIR}/syspfiles"
+fi
