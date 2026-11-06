@@ -10,10 +10,6 @@ on:
         description: "Build label used for conda package: dev/rc/main"
         value: ${{ jobs.generate-matrix.outputs.build_label }}
 
-      brew_matrix:
-        description: "JSON array of macOS Homebrew build matrix values"
-        value: ${{ jobs.generate-matrix.outputs.brew_matrix }}
-
 env:
   LABEL_FOR_BUILD: ${{ vars.BUILD_LABEL || 'dev' }}
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: True
@@ -28,9 +24,6 @@ jobs:
           MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"},{"os": "ubuntu-24.04", "arch": "x86", "container": "redhat/ubi8:latest", "env_target_file": "fermitools-develop-linux.yml"}, {"os": "macos-26", "arch": "arm64", "env_target_file": "fermitools-develop-osx.yml", "packages": "llvm cfitsio swig"}' 
           # MATRIX_VALUES='{"os": "ubuntu-24.04-arm", "arch": "arm64", "env_target_file": "fermitools-develop-linux.yml"}'
           echo "matrix={\"include\":[$MATRIX_VALUES]}" >> "$GITHUB_OUTPUT"
-          BREW_VALUES='{"os": "macos-26", "arch": "arm64"}'
-          # BREW_VALUES='{"os": "macos-26", "arch": "arm64"},{"os": "macos-15-intel", "arch": "x86_64"}'
-          echo "brew_matrix={\"include\":[$BREW_VALUES]}" >> "$GITHUB_OUTPUT"
 
     # Build the list of OSes, architecture, file containing Python dependencies, and additional packages needed to be installed. 
     # Return the matrix  as a ouput parameter that other Jobs can input and process as a JSON object.
@@ -40,4 +33,3 @@ jobs:
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
       build_label: ${{ env.LABEL_FOR_BUILD }}
-      brew_matrix: ${{ steps.set_matrix.outputs.brew_matrix }}
