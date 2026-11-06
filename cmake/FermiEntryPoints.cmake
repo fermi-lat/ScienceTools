@@ -1,0 +1,28 @@
+function(fermi_install_python_entry_points entry_points_file template_file destination)
+  file(STRINGS "${entry_points_file}" _fermi_entry_points)
+  set(_fermi_installed_names)
+  set(_fermi_wrapper_dir "${CMAKE_CURRENT_BINARY_DIR}/fermitools-entry-points")
+  file(MAKE_DIRECTORY "${_fermi_wrapper_dir}")
+
+  foreach(_fermi_entry_point IN LISTS _fermi_entry_points)
+    if(_fermi_entry_point MATCHES "^[ \t]*($|#)")
+      continue()
+    endif()
+
+    if(NOT _fermi_entry_point MATCHES "^[ \t]*([A-Za-z0-9_.-]+)[ \t]*=[ \t]*([A-Za-z0-9_.]+):([A-Za-z0-9_]+)[ \t]*$")
+      message(FATAL_ERROR "Invalid Python entry point: ${_fermi_entry_point}")
+    endif()
+
+    set(FERMI_ENTRY_NAME "${CMAKE_MATCH_1}")
+    set(FERMI_ENTRY_MODULE "${CMAKE_MATCH_2}")
+    set(FERMI_ENTRY_FUNCTION "${CMAKE_MATCH_3}")
+    if(FERMI_ENTRY_NAME IN_LIST _fermi_installed_names)
+      message(FATAL_ERROR "Duplicate Python entry point name: ${FERMI_ENTRY_NAME}")
+    endif()
+    list(APPEND _fermi_installed_names "${FERMI_ENTRY_NAME}")
+
+    set(_fermi_wrapper "${_fermi_wrapper_dir}/${FERMI_ENTRY_NAME}")
+    configure_file("${template_file}" "${_fermi_wrapper}" @ONLY)
+    install(PROGRAMS "${_fermi_wrapper}" DESTINATION "${destination}")
+  endforeach()
+endfunction()

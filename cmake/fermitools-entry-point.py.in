@@ -1,0 +1,17 @@
+#!@Python3_EXECUTABLE@
+import runpy
+import site
+import sys
+from importlib import import_module
+from pathlib import Path
+
+prefix = Path(__file__).resolve().parent.parent
+site_packages = prefix / "lib" / f"python{sys.version_info.major}.{sys.version_info.minor}" / "site-packages"
+site.addsitedir(str(site_packages))
+
+module = "@FERMI_ENTRY_MODULE@"
+entry = "@FERMI_ENTRY_FUNCTION@"
+if entry == "__main__":
+    runpy.run_module(module, run_name="__main__", alter_sys=True)
+else:
+    sys.exit(getattr(import_module(module), entry)())

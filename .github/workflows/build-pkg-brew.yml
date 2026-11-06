@@ -1,0 +1,86 @@
+name: Build the Homebrew package
+on:
+  workflow_call:
+    inputs:
+      matrix_json:
+        required: true
+        type: string
+        description: "JSON string representing the Homebrew build matrix"
+      build_label:
+        required: true
+        type: string
+        description: "Build label associated with this CI run"
+
+jobs:
+  build-brew:
+    name: "Brew ${{ matrix.os }} ${{ matrix.arch }} (${{ inputs.build_label }})"
+    runs-on: ${{ matrix.os }}
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(inputs.matrix_json) }}
+    steps:
+      - name: Check out source and submodules
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Create source archive
+        shell: bash
+        run: |
+          version="$(python3 -c 'import pathlib, re; text = pathlib.Path("recipe/meta.yaml").read_text(); match = re.search(r"(?m)^\{%\s*set\s+version\s*=\s*\"([0-9]+(?:\.[0-9]+)*)\"\s*%\}", text); assert match, "Could not read recipe version"; print(match.group(1))')"
+          archive="$RUNNER_TEMP/fermitools-${version}.tar.gz"
+          git ls-files -z --recurse-submodules > "$RUNNER_TEMP/source-files.list"
+          tar --null -czf "$archive" -T "$RUNNER_TEMP/source-files.list"
+          sha256="$(shasum -a 256 "$archive" | awk '{print $1}')"
+          {
+            echo "FERMITOOLS_VERSION=$version"
+            echo "SOURCE_ARCHIVE=$archive"
+            echo "SOURCE_SHA256=$sha256"
+          } >> "$GITHUB_ENV"
+
+      - name: Build, test, and bottle from a local tap
+        shell: bash
+        run: |
+          brew tap-new --no-git fermi-lat/local
+          formula_path="$(brew --repo fermi-lat/local)/Formula/fermitools.rb"
+          export BREW_FORMULA_PATH="$formula_path"
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          formula = Path("recipe/brew/fermitools.rb").read_text()
+          replacement = (
+              f'  url "file://{os.environ["SOURCE_ARCHIVE"]}"\n'
+              f'  sha256 "{os.environ["SOURCE_SHA256"]}"\n'
+              f'  version "{os.environ["FERMITOOLS_VERSION"]}"'
+          )
+          formula, replacements = re.subn(r"(?m)^  url .+$", replacement, formula, count=1)
+          if replacements != 1:
+              raise SystemExit("Expected exactly one formula URL")
+          formula = formula.replace('  depends_on "fermi-lat/fermitools/fermitools-data"\n', "")
+          Path(os.environ["BREW_FORMULA_PATH"]).write_text(formula)
+          PY
+          brew install --build-bottle --verbose fermi-lat/local/fermitools
+          brew test fermi-lat/local/fermitools
+          brew bottle --json fermi-lat/local/fermitools
+
+      - name: Upload source archive
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brew-source-${{ matrix.os }}
+          path: ${{ runner.temp }}/fermitools-*.tar.gz
+          if-no-files-found: warn
+
+      - name: Upload Homebrew bottle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brew-bottle-${{ matrix.os }}
+          path: "*.bottle.*"
+          if-no-files-found: warn
