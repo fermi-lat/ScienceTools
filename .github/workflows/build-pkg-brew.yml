@@ -23,10 +23,11 @@ jobs:
       - name: Check out source and submodules
         uses: actions/checkout@v6
         with:
+          ref: ${{ github.ref_name }}
           submodules: recursive
 
       - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
 
       - name: Create source archive
         shell: bash
