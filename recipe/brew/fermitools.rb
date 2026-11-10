@@ -78,7 +78,12 @@ class Fermitools < Formula
   test do
     python = Formula["python@3.12"].opt_bin/"python3.12"
     site_packages = lib/"python3.12/site-packages"
-    system python, "-c", "import site; site.addsitedir('#{site_packages}'); import pyLikelihood, UnbinnedAnalysis"
+    caldb_dir = pkgshare/"data/caldb"
+    ENV["CALDB"] = caldb_dir.to_s
+    ENV["CALDBCONFIG"] = (caldb_dir/"software/tools/caldb.config").to_s
+    ENV["CALDBALIAS"] = (caldb_dir/"software/tools/alias_config.fits").to_s
+    ENV["CALDBROOT"] = caldb_dir.to_s
+    system python, "-c", "import os, site; os.environ['CALDB'] = '#{caldb_dir}'; site.addsitedir('#{site_packages}'); import pyLikelihood, UnbinnedAnalysis"
     assert_predicate bin/"gtburst", :executable?
   end
 end

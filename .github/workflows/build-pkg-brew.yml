@@ -19,6 +19,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(inputs.matrix_json) }}
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+      NONINTERACTIVE: "1"
     steps:
       - name: Check out source and submodules
         uses: actions/checkout@v6
@@ -46,6 +50,8 @@ jobs:
       - name: Build, test, and bottle from a local tap
         shell: bash
         run: |
+          brew tap fermi-lat/fermitools
+          brew install fermi-lat/fermitools/fermitools-data
           brew tap-new --no-git fermi-lat/local
           formula_path="$(brew --repo fermi-lat/local)/Formula/fermitools.rb"
           export BREW_FORMULA_PATH="$formula_path"
@@ -63,7 +69,6 @@ jobs:
           formula, replacements = re.subn(r"(?m)^  url .+$", replacement, formula, count=1)
           if replacements != 1:
               raise SystemExit("Expected exactly one formula URL")
-          formula = formula.replace('  depends_on "fermi-lat/fermitools/fermitools-data"\n', "")
           Path(os.environ["BREW_FORMULA_PATH"]).write_text(formula)
           PY
           brew install --build-bottle --verbose fermi-lat/local/fermitools
