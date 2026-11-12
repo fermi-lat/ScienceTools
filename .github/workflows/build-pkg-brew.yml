@@ -66,11 +66,15 @@ jobs:
               f'  sha256 "{os.environ["SOURCE_SHA256"]}"\n'
               f'  version "{os.environ["FERMITOOLS_VERSION"]}"'
           )
-          formula, replacements = re.subn(r"(?m)^  url .+$", replacement, formula, count=1)
+          # Replace the whole url call, including tag:/revision: continuation lines.
+          formula, replacements = re.subn(
+              r'(?m)^  url "[^"]*"(?:,\n\s+\w+:\s+"[^"]*")*',
+              replacement, formula, count=1)
           if replacements != 1:
               raise SystemExit("Expected exactly one formula URL")
           Path(os.environ["BREW_FORMULA_PATH"]).write_text(formula)
           PY
+          ruby -c "$BREW_FORMULA_PATH"
           brew install --build-bottle --verbose fermi-lat/local/fermitools
           brew test fermi-lat/local/fermitools
           brew bottle --json fermi-lat/local/fermitools
