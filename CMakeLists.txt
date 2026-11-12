@@ -256,6 +256,8 @@ if(FERMI_INSTALL_PY_SCRIPTS)
 endif()
 
 if(FERMI_PACKAGING STREQUAL "brew")
+  set(FERMI_RUNTIME_PREFIX "${CMAKE_INSTALL_PREFIX}" CACHE PATH
+      "Prefix fermitools-init.sh uses at runtime (e.g. HOMEBREW_PREFIX)")
   configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/fermitools-init.sh.in"
     "${CMAKE_CURRENT_BINARY_DIR}/fermitools-init.sh"
