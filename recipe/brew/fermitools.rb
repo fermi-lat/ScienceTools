@@ -85,6 +85,7 @@ class Fermitools < Formula
           -DPython3_EXECUTABLE=#{python}
           -DFERMI_PACKAGING=brew
           -DFERMI_INSTALL_PY_SCRIPTS=ON
+          -DFERMI_RUNTIME_PREFIX=#{HOMEBREW_PREFIX}
           -DUSE_SYSTEM_CFITSIO=ON
           -DUSE_SYSTEM_CPPUNIT=ON
           -DUSE_SYSTEM_FFTW=ON
