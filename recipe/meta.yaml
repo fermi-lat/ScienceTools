@@ -1,5 +1,5 @@
 {% set name = "fermitools" %}
-{% set version = "2.5.63" %}
+{% set version = "2.5.67" %}
 
 package:
   name: {{ name|lower }}
