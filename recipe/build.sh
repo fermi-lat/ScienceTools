@@ -11,33 +11,26 @@ else
     export TOOLCHAIN_FILE="cmake/linux-toolchain.cmake"
 fi
 
-echo "Installing conda forge cxx compiler"
-conda install --yes conda-forge::cxx-compiler
+# The compilers are declared in recipe/meta.yaml (compiler('c'), compiler('cxx'))
+# so they live in $BUILD_PREFIX and are never packaged.
 
 if [ "$(uname)" == "Darwin" ]; then
     echo "Configuring for macOS"
     cmake -S . \
-        -B Debug \
-        -DCMAKE_BUILD_TYPE=Debug \
+        -B Release \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_FILE \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
         -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-        -DPython3_EXECUTABLE="${BUILD_PREFIX}/bin/python3" \
-        -DPython3_NumPy_INCLUDE_DIR="${SP_DIR}/numpy/core/include" \
+        -DPython3_EXECUTABLE="${PREFIX}/bin/python3" \
+        -DPython3_NumPy_INCLUDE_DIR="$("${PREFIX}/bin/python3" -c 'import numpy; print(numpy.get_include())')" \
         ${CMAKE_ARGS}
 else
     echo "Configuring for Linux $(uname -m)"
-	
-	if [ "$(uname -m)" == "x86_64" ]; then
-		conda install --yes sysroot_linux-64 -c conda-forge
-		conda update --yes sysroot_linux-64 -c conda-forge
-	else
-		echo "Pip install pyregion for Linux messes with cfitsio"
-	fi
-	
+
     cmake -S . \
-        -B Debug \
-        -DCMAKE_BUILD_TYPE=Debug \
+        -B Release \
+        -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_C_FLAGS="-fPIC -std=gnu17" -DCMAKE_CXX_FLAGS="-fPIC" \
 		-DPython3_EXECUTABLE="$(which python)" \
         -DCMAKE_PREFIX_PATH="${PREFIX}" \
@@ -50,7 +43,7 @@ cat /etc/os-release
 
 fi
 
-cmake --build Debug --clean-first --parallel ${CPU_COUNT:-2} --target=install 
+cmake --build Release --clean-first --parallel ${CPU_COUNT:-2} --target=install 
 #cmake --build Debug --clean-first --target=install --verbose
 # Copy the activate and deactivate scripts
 mkdir -p $PREFIX/etc/conda/activate.d
