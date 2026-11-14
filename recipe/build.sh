@@ -60,6 +60,10 @@ cp recipe/tests/data/inputs/* $PREFIX/share/${condaname}/data
 mkdir -p $PREFIX/share/${condaname}/data/outref
 cp recipe/tests/data/outref/* $PREFIX/share/${condaname}/data/outref
 
+# Copy evtbin test outref data
+mkdir -p $PREFIX/share/${condaname}/data/evtbin
+cp -r src/evtbin/data/outref $PREFIX/share/${condaname}/data/evtbin/
+
 # Copy utils helper script directory
 mkdir -p $PREFIX/share/${condaname}/utils
 cp recipe/utils/* $PREFIX/share/${condaname}/utils
