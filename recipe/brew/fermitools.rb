@@ -80,27 +80,18 @@ class Fermitools < Formula
         f2c_source = Pathname.pwd
         args = std_cmake_args + %W[
           -DCMAKE_BUILD_TYPE=Release
-          -DCMAKE_C_COMPILER=#{formula_opt_bin("llvm")}/clang
-          -DCMAKE_CXX_COMPILER=#{formula_opt_bin("llvm")}/clang++
           -DPython3_EXECUTABLE=#{python}
           -DFERMI_PACKAGING=brew
           -DFERMI_INSTALL_PY_SCRIPTS=ON
           -DFERMI_RUNTIME_PREFIX=#{HOMEBREW_PREFIX}
-          -DUSE_SYSTEM_CFITSIO=ON
-          -DUSE_SYSTEM_CPPUNIT=ON
-          -DUSE_SYSTEM_FFTW=ON
-          -DUSE_SYSTEM_GSL=ON
-          -DUSE_SYSTEM_WCSLIB=ON
+          -DUSE_SYSTEM_DEPS=ON
           -DFETCHCONTENT_SOURCE_DIR_F2C_SRC=#{f2c_source}
           -DFETCHCONTENT_SOURCE_DIR_HEALPIX_CXX_SRC=#{healpix_source}
           -DFETCHCONTENT_FULLY_DISCONNECTED=ON
         ]
         if OS.mac?
           args += %W[
-            -DOpenMP_ROOT=#{formula_opt_prefix("libomp")}
-            -DOpenMP_CXX_LIB_NAMES=omp
-            -DOpenMP_C_LIB_NAMES=omp
-            -DOpenMP_omp_LIBRARY=#{formula_opt_lib("libomp")}/libomp.dylib
+            -DOpenMP_ROOT=#{Formula["libomp"].opt_prefix}
           ]
         end
         cd buildpath do
