@@ -9,7 +9,7 @@ class Fermitools < Formula
   homepage "https://github.com/fermi-lat/ScienceTools"
   url "https://github.com/fermi-lat/ScienceTools.git",
       tag:      "Fermitools-2.5.72",
-      revision: "80282ee2a19369c7e83dea0d242692dcfd150630"
+      revision: "37d16653db726fb5bc0b730d88b10f4350895484"
   license "BSD-3-Clause"
 
   depends_on "cmake" => :build
@@ -91,7 +91,7 @@ class Fermitools < Formula
         ]
         if OS.mac?
           args += %W[
-            -DOpenMP_ROOT=#{Formula["libomp"].opt_prefix}
+            -DOpenMP_ROOT=#{formula_opt_prefix("libomp")}
           ]
         end
         cd buildpath do
