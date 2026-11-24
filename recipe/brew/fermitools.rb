@@ -8,7 +8,7 @@ class Fermitools < Formula
   desc "Fermi LAT Science Tools"
   homepage "https://github.com/fermi-lat/ScienceTools"
   url "https://github.com/fermi-lat/ScienceTools.git",
-      tag:      "Fermitools-2.5.72",
+      tag:      "Fermitools-2.5.4",
       revision: "37d16653db726fb5bc0b730d88b10f4350895484"
   license "BSD-3-Clause"
 
