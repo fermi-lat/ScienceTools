@@ -8,7 +8,8 @@ This file is a compiled index of them.
 
 *Compiled 2026-10-22 from the `doc-updates` branches (each package doc's
 `last_reviewed_commit` gives the code version it describes), plus a section
-for the umbrella repository. Nothing here has been fixed yet.*
+for the umbrella repository. Updated 2026-11-24 for the `ltcube-threading`
+branches: Likelihood-27 fixed and removed, healpix-19 added.*
 
 ## How to read this
 
@@ -39,7 +40,7 @@ doc in the same change.
 
 ## Summary
 
-**655 issues: 22 High, 207 Medium, 426 Low.**
+**655 issues: 22 High, 208 Medium, 425 Low.**
 
 ### High-severity issues
 
@@ -85,7 +86,7 @@ doc in the same change.
 | [st_app](#st_app) | 0 | 3 | 14 |
 | [tip](#tip) | 0 | 2 | 10 |
 | [astro](#astro) | 1 | 5 | 20 |
-| [healpix](#healpix) | 0 | 6 | 12 |
+| [healpix](#healpix) | 0 | 7 | 12 |
 | [st_facilities](#st_facilities) | 0 | 6 | 16 |
 | [fitsGen](#fitsgen) | 0 | 1 | 12 |
 | [timeSystem](#timesystem) | 1 | 2 | 10 |
@@ -101,7 +102,7 @@ doc in the same change.
 | [sourceIdentify](#sourceidentify) | 0 | 10 | 10 |
 | [rspgen](#rspgen) | 1 | 6 | 12 |
 | [observationSim](#observationsim) | 1 | 11 | 12 |
-| [Likelihood](#likelihood) | 1 | 20 | 22 |
+| [Likelihood](#likelihood) | 1 | 20 | 21 |
 | [BayesianBlocks](#bayesianblocks) | 0 | 3 | 8 |
 | [SolarSystemTools](#solarsystemtools) | 2 | 7 | 9 |
 | [pyExposure](#pyexposure) | 0 | 6 | 7 |
@@ -414,6 +415,7 @@ Docs: `src/healpix/doc/architecture/`
 | healpix-16 | Low | `healpix/HeallpixMap.h` (double "l") is a stale, uncompilable duplicate of `HealpixMap.h` with the same include guard, still installed. | `healpix/HeallpixMap.h` | code |
 | healpix-17 | Low | `HealpixRegion.cxx` uses `facilities::Util` but `facilities` is not in `target_link_libraries` (it arrives transitively via `tip`/`astro`). | `CMakeLists.txt`, `src/HealpixRegion.cxx` | code |
 | healpix-18 | Low | Stale legacy files and docs: `src/swig_setup.in` refers to nonexistent `healpix/HealPixMap.h`; `SConscript`, `healpixLib.py`, `.cvsignore` remain; `doc/release.notes` stops in 2017; `src/mainpage.h` is a 2006 stub. | `src/swig_setup.in`, `SConscript`, `src/mainpage.h` | code |
+| healpix-19 | Medium | `CosineBinner::fill(costh, phi, v)` clamps the cos θ index but not the φ index: when `fmod(phi, π/2)` is exactly π/4 (for example a pixel whose instrument-frame x and y components are equal), `phi_index` returns `nphibins` and the bin index is one past the end of the cell, so `at()` throws `std::out_of_range` and `gtltcube` with `phibins > 0` aborts. Rare but reachable. Clamping as for cos θ would change no output the current code produces. | `src/CosineBinner.cxx` `fill`, `phi_index` | code |
 
 ### st_facilities
 
@@ -839,7 +841,6 @@ Docs: `src/Likelihood/doc/architecture/`
 | Likelihood-24 | Low | Binned exposure lookups truncate the 1-based fractional pixel coordinate (`static_cast<int>(pixel − 1)`) instead of rounding, so values can come from the neighbouring pixel. | `src/BinnedExposureBase.cxx` `operator()` / `get_exposures_for_dir` | code |
 | Likelihood-25 | Low | The livetime-fraction efficiency correction is evaluated only at the cube's mid-time `(tstart+tstop)/2`, and `ResponseFunctions::efficiencyFactor()` uses only the first event type's factor for the whole cube. | `src/ExposureCube.cxx` `value`, `src/ResponseFunctions.cxx` `efficiencyFactor` | code |
 | Likelihood-26 | Low | `ScData`: `zAxis`/`xAxis` underflow `size() - 2` with a single FT2 row; the ±60 s read window assumes FT2 intervals ≤ 30 s; the monotonic-time check starts only at the third row. | `src/ScData.cxx` | code |
-| Likelihood-27 | Low | `LikeExposure` stores references to the `timeCuts`/`gtis` vectors passed by `gtltcube`'s `createDataCube` locals; safe only because `load()` runs inside that function. | `src/LikeExposure.cxx` | code |
 | Likelihood-28 | Low | Consistency checks are partial: `checkTimeCuts` only warns on GTI mismatches, and `checkExposureMap` checks only spatial coverage at one energy, so an `edisp_bins`/energy-binning mismatch surfaces later as "The energy … is not available". | `src/AppHelpers.cxx` `checkTimeCuts`/`checkExposureMap` | code |
 | Likelihood-29 | Low | Environment variables (`USE_BL_EDISP`, PSF estimator vars, `USE_SINGLE_PSF`, etc.) are re-read on every `BinnedLikeConfig` construction and silently override explicit arguments; `USE_BINNED_LIKELIHOOD2` now only makes `gtlike` throw. | `src/BinnedConfig.cxx` `get_envars`, `src/likelihood/likelihood.cxx` | code |
 | Likelihood-30 | Low | `LogLike::unset_ebounds()` only clears the flag and recomputes Npred; exposure arrays stay on the narrowed energy grid (pyLikelihood avoids it). | `src/LogLike.cxx` `unset_ebounds` | code |
@@ -851,7 +852,7 @@ Docs: `src/Likelihood/doc/architecture/`
 | Likelihood-36 | Low | Unused/ignored parameters and dead code in tools: `gtlike` `edisp` never read and `wmap` read into an unused member; `gtsrcmaps` dead `if (!copyall) { bool copyall = true; }`; `gtexpcube2` unused local `useEbounds` and no `gui` parameter; `gtltcube` `file_version` not read; `readEventData` BINNED branch is a no-op; `irfs=DC2` special case in `AppHelpers::responseFuncs`. | `src/likelihood/`, `src/gtsrcmaps/`, `src/gtexpcube2/`, `src/makeExposureCube/`, `src/AppHelpers.cxx` | code |
 | Likelihood-37 | Low | Two deprecated `BinnedLikelihood` constructors print a warning and hard-code `edisp_val = 0` and PSF integration settings. | `src/BinnedLikelihood.cxx` | code |
 | Likelihood-38 | Low | Dead code shipped: `WcsMap` and `EventSourceCache.h` compile without users; `src/exposureMap`, `src/gtcntsmap`, `src/old_tests`, SCons files and `azure-pipelines.yml` are unbuilt; `xml/` is installed but only unbuilt `old_tests` read it. | `src/WcsMap.cxx`, `xml/`, `CMakeLists.txt` | code |
-| Likelihood-39 | Low | Link hygiene: OpenMP linked but no OpenMP code, `st_graph` linked/included but unused, Python3 linked PUBLIC to the library though only `gtlike`'s `EasyPlot.cxx` uses it. | `CMakeLists.txt` | code |
+| Likelihood-39 | Low | Link hygiene: `st_graph` linked/included but unused, Python3 linked PUBLIC to the library though only `gtlike`'s `EasyPlot.cxx` uses it. | `CMakeLists.txt` | code |
 | Likelihood-40 | Low | `test_Likelihood` reference outputs (`outref`) are not in this repo or installed by its CMake; they come from `fermitools-data` / `fermitools-test-scripts-data` with version-dependent contents (0.6 installs nothing there), making the ST-unit-test comparison fragile. | umbrella `recipe/tests/ST-unit-test`, `environments/fermitools-testing.yml` | code |
 | Likelihood-41 | Low | `Drm_Cache::update` clamps negative measured counts to 0 with a one-time message; the cause is unknown ("Not sure why this can happen"). | `src/Drm.cxx` `Drm_Cache::update` | code |
 | Likelihood-42 | Low | Stale docs: `src/mainpage.h` and `src/tutorial.h` describe DC1/DC2-era tools (`U1`/`O2`), `$(LIKELIHOODDATAPATH)` and prompts that no longer exist; `doc/release.notes` stops in October 2017. | `src/mainpage.h`, `src/tutorial.h`, `doc/release.notes` | code |
