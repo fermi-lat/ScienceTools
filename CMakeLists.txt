@@ -109,14 +109,14 @@ find_package(Python3 3.7 REQUIRED COMPONENTS Development Interpreter)
 
 set_target_properties(Python3::Python PROPERTIES IMPORTED_GLOBAL TRUE)
 
+# --------------------------------------------------------------------
+# Allow user to pick system vs vendored for each library:
+option(USE_SYSTEM_DEPS        "Default to system-installed dependencies when available" OFF)
 if(NOT APPLE)
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" ON)
 else()
   option(USE_SYSTEM_CFITSIO     "Use system-installed cfitsio instead of package-provided" OFF)
 endif()
-
-# --------------------------------------------------------------------
-# Allow user to pick system vs vendored for each library:
 option(USE_SYSTEM_CLHEP       "Use system-installed CLHEP instead of package-provided" OFF)
 option(USE_SYSTEM_CPPUNIT     "Use system-installed CppUnit instead of package-provided" OFF)
 option(USE_SYSTEM_F2C         "Use system-installed f2x instead of package-provided" OFF) # Need to fix difference between compiled and downloaded F2C
@@ -128,9 +128,13 @@ option(USE_SYSTEM_WCSLIB      "Use system-installed WCSlib instead of package-pr
 # --------------------------------------------------------------------
 # Helper macro to switch
 macro(add_or_find lib_name option_var find_module module_target)
-  if(${option_var})
-    find_package(${find_module} REQUIRED)
-    set_target_properties(${module_target} PROPERTIES IMPORTED_GLOBAL TRUE)
+  if(${option_var} OR USE_SYSTEM_DEPS)
+    find_package(${find_module} QUIET)
+    if(TARGET ${module_target})
+      set_target_properties(${module_target} PROPERTIES IMPORTED_GLOBAL TRUE)
+    else()
+      add_subdirectory(externals/${lib_name})
+    endif()
   else()
     add_subdirectory(externals/${lib_name})
   endif()

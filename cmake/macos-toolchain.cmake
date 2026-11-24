@@ -1,13 +1,28 @@
 # toolchain-clang-libcxx.cmake
 
-set(BREW_PATH "/opt/homebrew")
+# Dynamically determine Homebrew prefix or allow override
+if(NOT DEFINED BREW_PATH)
+  execute_process(
+    COMMAND brew --prefix
+    OUTPUT_VARIABLE BREW_PREFIX
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    ERROR_QUIET
+  )
+  if(BREW_PREFIX)
+    set(BREW_PATH "${BREW_PREFIX}")
+  else()
+    set(BREW_PATH "/opt/homebrew")
+  endif()
+endif()
 
 # Explicitly set x86_64 architecture for macOS
 set(MACOS_ARCH $ENV{MACOS_ARCH})
 if(MACOS_ARCH STREQUAL "x86")
   message("Applying x86 compiler settings...")
   set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE INTERNAL "" FORCE)
-  set(BREW_PATH "/usr/local")
+  if(NOT BREW_PREFIX)
+    set(BREW_PATH "/usr/local")
+  endif()
 endif()
 
 # Explicitly set the compiler paths
@@ -19,11 +34,14 @@ execute_process(
   COMMAND xcrun --sdk macosx --show-sdk-path
   OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
   OUTPUT_STRIP_TRAILING_WHITESPACE
+  ERROR_QUIET
 )
 set(CMAKE_SYSROOT "${CMAKE_OSX_SYSROOT}" CACHE PATH "macOS SDK path")
 
 # Explicitly use libc++ headers and ensure they take precedence
 set(CMAKE_CXX_FLAGS_INIT "-isystem ${BREW_PATH}/opt/llvm/include/c++/v1" CACHE STRING "")
+
+list(APPEND CMAKE_PREFIX_PATH "${BREW_PATH}")
 
 # # Also ensure the linker uses the correct libc++ runtime
 #set(CMAKE_EXE_LINKER_FLAGS_INIT "-L${BREW_PATH}/opt/llvm/lib -lc++ -lc++abi" CACHE STRING "")
