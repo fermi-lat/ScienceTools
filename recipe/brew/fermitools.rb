@@ -8,8 +8,8 @@ class Fermitools < Formula
   desc "Fermi LAT Science Tools"
   homepage "https://github.com/fermi-lat/ScienceTools"
   url "https://github.com/fermi-lat/ScienceTools.git",
-      tag:      "Fermitools-2.5.70",
-      revision: "715644cbc719718ddb5438e936d2f0a9fa25f412"
+      tag:      "Fermitools-2.5.72",
+      revision: "37d16653db726fb5bc0b730d88b10f4350895484"
   license "BSD-3-Clause"
 
   depends_on "cmake" => :build
@@ -19,10 +19,7 @@ class Fermitools < Formula
   depends_on "swig" => :build
 
   depends_on "cfitsio"
-  depends_on "cppunit"
   depends_on "fermi-lat/fermitools/fermitools-data"
-  depends_on "fftw"
-  depends_on "gsl"
   depends_on "libomp"
   depends_on "libyaml"
   depends_on "openblas"
@@ -57,6 +54,11 @@ class Fermitools < Formula
     sha256 "ddf437442b6d5ae7d75c9afaafc4ec43921f903c976e25db3c5ed5185a181542"
   end
 
+  resource "fftw_src" do
+    url "https://www.fftw.org/fftw-3.3.10.tar.gz"
+    sha256 "56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467"
+  end
+
   def install
     venv = virtualenv_create(libexec, "python3.12")
     python = libexec/"bin/python"
@@ -71,42 +73,39 @@ class Fermitools < Formula
     end
     venv.pip_install resource("pyyaml")
 
-    resource("healpix_cxx_src").stage do
-      system "patch", "-p0", "-i", buildpath/"externals/healpix_cxx/healpix_cxx.patch"
-      healpix_source = Pathname.pwd
+    resource("fftw_src").stage do
+      system "patch", "-p1", "-i", buildpath/"externals/fftw/fftw.patch"
+      fftw_source = Pathname.pwd
 
-      resource("f2c_src").stage do
-        system "patch", "-i", buildpath/"externals/f2c/f2c.patch"
-        f2c_source = Pathname.pwd
-        args = std_cmake_args + %W[
-          -DCMAKE_BUILD_TYPE=Release
-          -DCMAKE_C_COMPILER=#{formula_opt_bin("llvm")}/clang
-          -DCMAKE_CXX_COMPILER=#{formula_opt_bin("llvm")}/clang++
-          -DPython3_EXECUTABLE=#{python}
-          -DFERMI_PACKAGING=brew
-          -DFERMI_INSTALL_PY_SCRIPTS=ON
-          -DFERMI_RUNTIME_PREFIX=#{HOMEBREW_PREFIX}
-          -DUSE_SYSTEM_CFITSIO=ON
-          -DUSE_SYSTEM_CPPUNIT=ON
-          -DUSE_SYSTEM_FFTW=ON
-          -DUSE_SYSTEM_GSL=ON
-          -DUSE_SYSTEM_WCSLIB=ON
-          -DFETCHCONTENT_SOURCE_DIR_F2C_SRC=#{f2c_source}
-          -DFETCHCONTENT_SOURCE_DIR_HEALPIX_CXX_SRC=#{healpix_source}
-          -DFETCHCONTENT_FULLY_DISCONNECTED=ON
-        ]
-        if OS.mac?
-          args += %W[
-            -DOpenMP_ROOT=#{formula_opt_prefix("libomp")}
-            -DOpenMP_CXX_LIB_NAMES=omp
-            -DOpenMP_C_LIB_NAMES=omp
-            -DOpenMP_omp_LIBRARY=#{formula_opt_lib("libomp")}/libomp.dylib
+      resource("healpix_cxx_src").stage do
+        system "patch", "-p0", "-i", buildpath/"externals/healpix_cxx/healpix_cxx.patch"
+        healpix_source = Pathname.pwd
+
+        resource("f2c_src").stage do
+          system "patch", "-i", buildpath/"externals/f2c/f2c.patch"
+          f2c_source = Pathname.pwd
+          args = std_cmake_args + %W[
+            -DCMAKE_BUILD_TYPE=Release
+            -DPython3_EXECUTABLE=#{python}
+            -DFERMI_PACKAGING=brew
+            -DFERMI_INSTALL_PY_SCRIPTS=ON
+            -DFERMI_RUNTIME_PREFIX=#{HOMEBREW_PREFIX}
+            -DUSE_SYSTEM_CFITSIO=ON
+            -DFETCHCONTENT_SOURCE_DIR_F2C_SRC=#{f2c_source}
+            -DFETCHCONTENT_SOURCE_DIR_FFTW=#{fftw_source}
+            -DFETCHCONTENT_SOURCE_DIR_HEALPIX_CXX_SRC=#{healpix_source}
+            -DFETCHCONTENT_FULLY_DISCONNECTED=ON
           ]
-        end
-        cd buildpath do
-          system "cmake", "-S", ".", "-B", "build", *args
-          system "cmake", "--build", "build", "--parallel"
-          system "cmake", "--install", "build"
+          if OS.mac?
+            args += %W[
+              -DOpenMP_ROOT=#{formula_opt_prefix("libomp")}
+            ]
+          end
+          cd buildpath do
+            system "cmake", "-S", ".", "-B", "build", *args
+            system "cmake", "--build", "build", "--parallel"
+            system "cmake", "--install", "build"
+          end
         end
       end
     end
